@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+
+# Environment configurations and secrets
+.env
+.env.local
+.env.*.local
+*.env
+
+# Vercel CLI artifact directory
+.vercel
+
+# Runtime logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Uploaded media (must not be committed to Git; stored in cloud storage in production)
+uploads/posters/*
+!uploads/posters/.gitkeep
+uploads/reports/*
+!uploads/reports/.gitkeep
+
+# Temporary files
+data/*.tmp
+data/*.bak
+*.tmp
+
+# OS generated files
+.DS_Store
+Thumbs.db
+Desktop.ini
