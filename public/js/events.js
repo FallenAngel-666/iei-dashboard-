@@ -1,5 +1,5 @@
 /**
- * IEI TVLC Event Management Controller
+ * MGR IEI Chapter Event Management Controller
  * Handles Technical Lectures, Statutory Days, file uploads (posters & reports),
  * filtering, search, and CRUD workflows.
  */
@@ -153,7 +153,7 @@ const Events = {
             ${App.escapeHtml(ev.speakerDesignation || '')} ${ev.speakerOrg ? `• ${App.escapeHtml(ev.speakerOrg)}` : ''}
           </div>
           <div style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px;">
-            📍 <strong>Venue:</strong> ${App.escapeHtml(ev.venue || 'IEI TVLC Auditorium / Virtual Webinar')}
+            📍 <strong>Venue:</strong> ${App.escapeHtml(ev.venue || 'MGR IEI Chapter Auditorium / Virtual Webinar')}
           </div>
         </div>
 
@@ -248,7 +248,7 @@ const Events = {
     try {
       const data = await API.getChapters();
       sel.innerHTML = `
-        <option value="">IEI TVLC Central Headquarters</option>
+        <option value="">MGR IEI Chapter Central Headquarters</option>
         ${data.chapters.map(ch => `
           <option value="${ch.id}">${App.escapeHtml(ch.chapterName)} (${App.escapeHtml(ch.collegeCode || ch.collegeName)})</option>
         `).join('')}

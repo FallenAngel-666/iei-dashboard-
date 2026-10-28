@@ -1,5 +1,5 @@
 /**
- * IEI TVLC Secure Object Storage Adapter
+ * MGR IEI Chapter Secure Object Storage Adapter
  * Supports Supabase Storage (cloud serverless) with fallback to verified local storage.
  * Implements magic-byte verification, anti-double-extension protection, and private signed URLs.
  */
@@ -76,8 +76,8 @@ async function saveUploadedFile(file, fieldname) {
   }
 
   const supabase = getSupabase();
-  const posterBucket = process.env.SUPABASE_POSTERS_BUCKET || 'iei-tvlc-posters';
-  const reportBucket = process.env.SUPABASE_REPORTS_BUCKET || 'iei-tvlc-reports';
+  const posterBucket = process.env.SUPABASE_POSTERS_BUCKET || 'mgr-iei-posters';
+  const reportBucket = process.env.SUPABASE_REPORTS_BUCKET || 'mgr-iei-reports';
 
   if (supabase) {
     const bucket = fieldname === 'poster' ? posterBucket : reportBucket;

@@ -1,7 +1,7 @@
 /**
- * IEI TVLC Portal Database Layer
+ * MGR IEI Students Chapter Portal Database Layer
  * Thread-safe persistent JSON storage with atomic writes, schema validation,
- * and high-performance querying for chapters, events, memberships, and analytics.
+ * and high-performance querying for tasks, weekly reports, events, and community stream.
  */
 
 const fs = require('fs');
@@ -21,6 +21,11 @@ let dbState = {
   newMemberships: [],
   events: [],
   auditLogs: [],
+  tasks: [],
+  weeklyReports: [],
+  communityPosts: [],
+  messages: [],
+  notifications: [],
   meta: {
     initializedAt: null,
     lastModifiedAt: null,
@@ -37,6 +42,9 @@ function ensureDirectories() {
   }
   if (!fs.existsSync(config.REPORTS_DIR)) {
     fs.mkdirSync(config.REPORTS_DIR, { recursive: true });
+  }
+  if (config.ATTACHMENTS_DIR && !fs.existsSync(config.ATTACHMENTS_DIR)) {
+    fs.mkdirSync(config.ATTACHMENTS_DIR, { recursive: true });
   }
 }
 
@@ -81,70 +89,61 @@ async function initDatabase(forceReseed = false) {
       const raw = fs.readFileSync(config.DB_FILE, 'utf-8');
       const parsed = JSON.parse(raw);
       
-      // Check if database needs upgrade to official 2025-2026 report data
-      const hasReportEvents = (parsed.events || []).some(e => e.id === 'ev_act_01' || e.title === 'One-Day Workshop');
-      if (hasReportEvents) {
-        // Ensure new seed users (e.g. coordinator@ieitvlc.org, example@gmail.com) are synced
-        const existingUsers = parsed.users || [];
-        let usersUpdated = false;
-        seedData.seedUsers.forEach(su => {
-          if (!existingUsers.some(u => u.email.toLowerCase() === su.email.toLowerCase())) {
-            existingUsers.push(su);
-            usersUpdated = true;
-          }
-        });
-
+      // Check version strictly for MGR IEI Students Chapter
+      if (parsed.meta && parsed.meta.version === '3.0.0-mgr-iei') {
         dbState = {
-          users: existingUsers,
+          users: parsed.users || [],
           chapters: parsed.chapters || [],
-          membershipSnapshots: parsed.membershipSnapshots || [],
-          newMemberships: parsed.newMemberships || [],
           events: parsed.events || [],
           auditLogs: parsed.auditLogs || [],
-          meta: parsed.meta || {
-            initializedAt: new Date().toISOString(),
-            lastModifiedAt: new Date().toISOString(),
-            version: '2.0.0'
-          }
+          tasks: parsed.tasks || [],
+          weeklyReports: parsed.weeklyReports || [],
+          communityPosts: parsed.communityPosts || [],
+          messages: parsed.messages || [],
+          notifications: parsed.notifications || [],
+          reportingSettings: parsed.reportingSettings || seedData.seedReportingSettings,
+          auditObservations: parsed.auditObservations || seedData.seedAuditObservations,
+          meta: parsed.meta
         };
-
-        if (usersUpdated) {
-          await saveDatabase();
-        }
-        console.log(`[DB] Loaded existing database: ${dbState.chapters.length} chapters, ${dbState.events.length} events.`);
+        console.log(`[DB] Loaded MGR IEI database: ${dbState.tasks.length} tasks, ${dbState.weeklyReports.length} reports, ${dbState.communityPosts.length} posts.`);
         return;
       }
     } catch (err) {
-      console.warn('[DB] Existing database file corrupted or outdated, re-seeding:', err);
+      console.warn('[DB] Existing database file needs migration to MGR IEI Students Chapter schema:', err);
     }
   }
 
-  // Populate from official seed data (Nov 2025 – Oct 2026 Report)
+  // Populate cleanly from MGR IEI Students Chapter seed data
   dbState = {
     users: JSON.parse(JSON.stringify(seedData.seedUsers)),
-    chapters: JSON.parse(JSON.stringify(seedData.seedChapters)),
-    membershipSnapshots: JSON.parse(JSON.stringify(seedData.seedMembershipSnapshots)),
-    newMemberships: JSON.parse(JSON.stringify(seedData.seedNewMemberships)),
+    chapters: JSON.parse(JSON.stringify(seedData.seedChapter)),
     events: JSON.parse(JSON.stringify(seedData.seedEvents)),
+    tasks: JSON.parse(JSON.stringify(seedData.seedTasks || [])),
+    weeklyReports: JSON.parse(JSON.stringify(seedData.seedWeeklyReports || [])),
+    communityPosts: JSON.parse(JSON.stringify(seedData.seedCommunityPosts || [])),
+    messages: JSON.parse(JSON.stringify(seedData.seedMessages || [])),
+    notifications: JSON.parse(JSON.stringify(seedData.seedNotifications || [])),
+    reportingSettings: JSON.parse(JSON.stringify(seedData.seedReportingSettings)),
+    auditObservations: JSON.parse(JSON.stringify(seedData.seedAuditObservations)),
     auditLogs: [
       {
         id: 'log_init',
         action: 'SYSTEM_INITIALIZATION',
         performedBy: 'System Bootstrap',
-        target: 'Institution Database',
-        details: 'Loaded official Annual Activity Report (Nov 2025 – Oct 2026) with 11 events, 1,019 participants, and 1,287 student members gained.',
+        target: 'MGR IEI Students Chapter Database',
+        details: 'Initialized secure database for Dr. M.G.R. Educational and Research Institute Students Chapter with 4 strict roles (Admin/Editor, Chairman, Committee Member, Auditor).',
         timestamp: new Date().toISOString()
       }
     ],
     meta: {
       initializedAt: new Date().toISOString(),
       lastModifiedAt: new Date().toISOString(),
-      version: '2.0.0'
+      version: '3.0.0-mgr-iei'
     }
   };
 
   await saveDatabase();
-  console.log(`[DB] Initialized database with ${dbState.chapters.length} chapters, ${dbState.events.length} events, ${dbState.users.length} users.`);
+  console.log(`[DB] Initialized MGR IEI Students Chapter database with ${dbState.users.length} authorized roles, ${dbState.tasks.length} tasks.`);
 }
 
 // ---------------- Chapter Methods ----------------
@@ -358,7 +357,7 @@ async function createEvent(data, user) {
     eventDate: eventDate,
     eventTime: data.eventTime ? data.eventTime.trim() : '10:00 AM',
     chapterId: data.chapterId || null,
-    collegeOrChapter: data.collegeOrChapter ? data.collegeOrChapter.trim() : 'IEI TVLC Central',
+    collegeOrChapter: data.collegeOrChapter ? data.collegeOrChapter.trim() : 'MGR IEI Student Chapter',
     speakerName: data.speakerName ? data.speakerName.trim() : '',
     speakerDesignation: data.speakerDesignation ? data.speakerDesignation.trim() : '',
     speakerOrg: data.speakerOrg ? data.speakerOrg.trim() : '',
@@ -820,6 +819,290 @@ async function getAnalyticsOverview(selectedYear = null) {
   };
 }
 
+// ========================================================
+// MGR IEI STUDENT CHAPTER EXTENDED MODULES METHODS
+// ========================================================
+
+async function getTasks() {
+  if (isPgActive()) return pgRepo.getTasks();
+  return dbState.tasks || [];
+}
+
+async function createTask(task) {
+  if (isPgActive()) return pgRepo.createTask(task);
+  const newTask = {
+    id: `tsk_${Date.now()}_${Math.random().toString(36).substr(2, 4)}`,
+    title: task.title,
+    description: task.description || '',
+    assignedTo: task.assignedTo || '',
+    assignedToName: task.assignedToName || 'Institutional Officer',
+    status: task.status || 'pending',
+    priority: task.priority || 'normal',
+    dueDate: task.dueDate || new Date().toISOString().split('T')[0],
+    department: task.department || 'Multi-Disciplinary',
+    chapterId: task.chapterId || 'ch_mgr_04',
+    progress: Number(task.progress) || 0,
+    createdAt: new Date().toISOString()
+  };
+  if (!dbState.tasks) dbState.tasks = [];
+  dbState.tasks.push(newTask);
+  await saveDatabase();
+  return newTask;
+}
+
+async function updateTask(id, updates) {
+  if (isPgActive()) return pgRepo.updateTask(id, updates);
+  if (!dbState.tasks) return null;
+  const idx = dbState.tasks.findIndex(t => t.id === id);
+  if (idx === -1) return null;
+  dbState.tasks[idx] = { ...dbState.tasks[idx], ...updates, updatedAt: new Date().toISOString() };
+  await saveDatabase();
+  return dbState.tasks[idx];
+}
+
+async function deleteTask(id) {
+  if (isPgActive()) return pgRepo.deleteTask(id);
+  if (!dbState.tasks) return false;
+  const idx = dbState.tasks.findIndex(t => t.id === id);
+  if (idx === -1) return false;
+  dbState.tasks.splice(idx, 1);
+  await saveDatabase();
+  return true;
+}
+
+async function getWeeklyReports() {
+  if (isPgActive()) return pgRepo.getWeeklyReports();
+  return (dbState.weeklyReports || []).slice().sort((a, b) => b.weekNumber - a.weekNumber);
+}
+
+async function createWeeklyReport(report) {
+  if (isPgActive()) return pgRepo.createWeeklyReport(report);
+  const newReport = {
+    id: `rep_wk_${Date.now()}`,
+    weekNumber: Number(report.weekNumber) || 45,
+    period: report.period || 'Current Week',
+    chapterId: report.chapterId || 'ch_mgr_04',
+    department: report.department || 'All Disciplines',
+    totalEvents: Number(report.totalEvents) || 0,
+    studentHours: Number(report.studentHours) || 0,
+    attendeesCount: Number(report.attendeesCount) || 0,
+    summary: report.summary || '',
+    highlights: report.highlights || '',
+    status: report.status || 'Under Chairman Review',
+    submittedBy: report.submittedBy || 'Committee Lead',
+    submittedByRole: report.submittedByRole || 'Committee Lead',
+    endorsedBy: report.endorsedBy || null,
+    submittedAt: new Date().toISOString()
+  };
+  if (!dbState.weeklyReports) dbState.weeklyReports = [];
+  dbState.weeklyReports.unshift(newReport);
+  await saveDatabase();
+  return newReport;
+}
+
+async function updateWeeklyReport(id, updates) {
+  if (isPgActive()) return pgRepo.updateWeeklyReport(id, updates);
+  if (!dbState.weeklyReports) return null;
+  const idx = dbState.weeklyReports.findIndex(r => r.id === id);
+  if (idx === -1) return null;
+  dbState.weeklyReports[idx] = { ...dbState.weeklyReports[idx], ...updates, updatedAt: new Date().toISOString() };
+  await saveDatabase();
+  return dbState.weeklyReports[idx];
+}
+
+async function getCommunityPosts() {
+  if (isPgActive()) return pgRepo.getCommunityPosts();
+  return (dbState.communityPosts || []).slice().sort((a, b) => (b.isPinned ? 1 : 0) - (a.isPinned ? 1 : 0));
+}
+
+async function createCommunityPost(post) {
+  if (isPgActive()) return pgRepo.createCommunityPost(post);
+  const newPost = {
+    id: `post_${Date.now()}`,
+    title: post.title,
+    category: post.category || 'General IEI Circulars',
+    author: post.author || 'Institutional Member',
+    role: post.role || 'Member',
+    timestamp: new Date().toISOString(),
+    isPinned: Boolean(post.isPinned),
+    likes: 0,
+    commentsCount: 0,
+    content: post.content,
+    tags: Array.isArray(post.tags) ? post.tags : (post.tags ? post.tags.split(',').map(t => t.trim()) : [])
+  };
+  if (!dbState.communityPosts) dbState.communityPosts = [];
+  dbState.communityPosts.unshift(newPost);
+  await saveDatabase();
+  return newPost;
+}
+
+async function likeCommunityPost(id) {
+  if (isPgActive()) return pgRepo.likeCommunityPost(id);
+  if (!dbState.communityPosts) return null;
+  const post = dbState.communityPosts.find(p => p.id === id);
+  if (!post) return null;
+  post.likes = (post.likes || 0) + 1;
+  await saveDatabase();
+  return post;
+}
+
+async function getMessages() {
+  if (isPgActive()) return pgRepo.getMessages();
+  return dbState.messages || [];
+}
+
+async function sendMessage(msg) {
+  if (isPgActive()) return pgRepo.sendMessage(msg);
+  const newMsg = {
+    id: `msg_${Date.now()}`,
+    senderId: msg.senderId,
+    senderName: msg.senderName,
+    senderRole: msg.senderRole,
+    recipientId: msg.recipientId,
+    content: msg.content,
+    timestamp: new Date().toISOString(),
+    read: false
+  };
+  if (!dbState.messages) dbState.messages = [];
+  dbState.messages.push(newMsg);
+  await saveDatabase();
+  return newMsg;
+}
+
+async function getNotifications() {
+  return dbState.notifications || [];
+}
+
+async function markNotificationsRead() {
+  if (dbState.notifications) {
+    dbState.notifications.forEach(n => { n.unread = false; });
+  }
+  await saveDatabase();
+  return true;
+}
+
+async function updateUserProfile(id, updates) {
+  const user = dbState.users.find(u => u.id === id);
+  if (!user) return null;
+  if (updates.name) user.name = updates.name;
+  if (updates.designation) user.designation = updates.designation;
+  if (updates.department) user.department = updates.department;
+  if (updates.phone) user.phone = updates.phone;
+  await saveDatabase();
+  return user;
+}
+
+async function changeUserPassword(id, newHash) {
+  if (isPgActive()) return pgRepo.changeUserPassword(id, newHash);
+  const user = dbState.users.find(u => u.id === id);
+  if (!user) return null;
+  user.passwordHash = newHash;
+  await saveDatabase();
+  return true;
+}
+
+async function addCommunityComment(postId, commentData, user) {
+  if (isPgActive()) return pgRepo.addCommunityComment(postId, commentData, user);
+  if (!dbState.communityPosts) return null;
+  const post = dbState.communityPosts.find(p => p.id === postId);
+  if (!post) return null;
+  if (!post.replies) post.replies = [];
+  const reply = {
+    id: `rep_${Date.now()}`,
+    author: user ? user.name : (commentData.author || 'Member'),
+    role: user ? user.role : (commentData.role || 'committee'),
+    timestamp: new Date().toISOString(),
+    content: commentData.content
+  };
+  post.replies.push(reply);
+  post.commentsCount = post.replies.length;
+  await saveDatabase();
+  return { post, reply };
+}
+
+async function getReportingSettings() {
+  if (isPgActive()) return pgRepo.getReportingSettings();
+  return dbState.reportingSettings || seedData.seedReportingSettings;
+}
+
+async function updateReportingSettings(settings, user) {
+  if (isPgActive()) return pgRepo.updateReportingSettings(settings, user);
+  dbState.reportingSettings = {
+    ...(dbState.reportingSettings || seedData.seedReportingSettings),
+    ...settings,
+    lastUpdatedBy: user ? user.name : 'Chapter Administrator',
+    lastUpdatedAt: new Date().toISOString()
+  };
+  await logAction('REPORTING_SETTINGS_UPDATED', user, 'Governance Settings', `Updated Reporting Cycle Week ${dbState.reportingSettings.activeWeek} configuration`);
+  await saveDatabase();
+  return dbState.reportingSettings;
+}
+
+async function getAuditObservations() {
+  if (isPgActive()) return pgRepo.getAuditObservations();
+  return dbState.auditObservations || [];
+}
+
+async function addAuditObservation(obs, user) {
+  if (isPgActive()) return pgRepo.addAuditObservation(obs, user);
+  const newObs = {
+    id: `obs_${Date.now()}`,
+    title: obs.title,
+    observation: obs.observation,
+    complianceStatus: obs.complianceStatus || 'COMPLIANT',
+    auditorName: user ? user.name : 'Chapter Auditor',
+    authorRole: user ? user.role : 'auditor',
+    timestamp: new Date().toISOString()
+  };
+  if (!dbState.auditObservations) dbState.auditObservations = [];
+  dbState.auditObservations.unshift(newObs);
+  await logAction('AUDIT_OBSERVATION_RECORDED', user, 'Audit Ledger', `Recorded audit observation: ${obs.title}`);
+  await saveDatabase();
+  return newObs;
+}
+
+async function createUser(userData, creator) {
+  if (isPgActive()) return pgRepo.createUser(userData, creator);
+  const bcrypt = require('bcryptjs');
+  const newUser = {
+    id: `usr_${Date.now()}`,
+    name: userData.name,
+    email: userData.email.toLowerCase(),
+    passwordHash: bcrypt.hashSync(userData.password || 'MGR_Member_2026!', 10),
+    role: userData.role || 'committee',
+    designation: userData.designation || 'Student Committee Member',
+    department: userData.department || 'Dr. MGR E&RI',
+    createdAt: new Date().toISOString(),
+    isActive: true
+  };
+  if (!dbState.users) dbState.users = [];
+  dbState.users.push(newUser);
+  await logAction('USER_ENROLLED', creator, 'User Administration', `Created new account for ${newUser.name} (${newUser.email}) with role ${newUser.role}`);
+  await saveDatabase();
+  return newUser;
+}
+
+async function updateUserRole(id, role, updater) {
+  if (isPgActive()) return pgRepo.updateUserRole(id, role, updater);
+  const user = dbState.users.find(u => u.id === id);
+  if (!user) return null;
+  const oldRole = user.role;
+  user.role = role;
+  await logAction('USER_ROLE_CHANGED', updater, 'User Administration', `Changed role of ${user.name} from ${oldRole} to ${role}`);
+  await saveDatabase();
+  return user;
+}
+
+async function toggleUserActive(id, isActive, updater) {
+  if (isPgActive()) return pgRepo.toggleUserActive(id, isActive, updater);
+  const user = dbState.users.find(u => u.id === id);
+  if (!user) return null;
+  user.isActive = Boolean(isActive);
+  await logAction('USER_STATUS_TOGGLED', updater, 'User Administration', `${user.isActive ? 'Activated' : 'Deactivated'} account for ${user.name}`);
+  await saveDatabase();
+  return user;
+}
+
 module.exports = {
   initDatabase,
   saveDatabase,
@@ -842,5 +1125,29 @@ module.exports = {
   getUserById,
   getAuditLogs,
   logAction,
-  getAnalyticsOverview
+  getAnalyticsOverview,
+  getTasks,
+  createTask,
+  updateTask,
+  deleteTask,
+  getWeeklyReports,
+  createWeeklyReport,
+  updateWeeklyReport,
+  getCommunityPosts,
+  createCommunityPost,
+  likeCommunityPost,
+  addCommunityComment,
+  getMessages,
+  sendMessage,
+  getNotifications,
+  markNotificationsRead,
+  updateUserProfile,
+  changeUserPassword,
+  getReportingSettings,
+  updateReportingSettings,
+  getAuditObservations,
+  addAuditObservation,
+  createUser,
+  updateUserRole,
+  toggleUserActive
 };

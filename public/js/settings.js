@@ -1,5 +1,5 @@
 /**
- * IEI TVLC Administration & Security Settings Controller
+ * MGR IEI Chapter Administration & Security Settings Controller
  * Handles user management, security logs, and institutional integration settings.
  */
 
@@ -33,7 +33,7 @@ const Settings = {
     if (!user) {
       box.innerHTML = `
         <div style="padding: 16px; background: var(--bg-surface-alt); border-radius: var(--radius-md);">
-          <p style="color: var(--text-muted); font-size: 13px;">You are currently browsing with <strong>Auditor / Public View</strong> privileges.</p>
+          <p style="color: var(--text-muted); font-size: 13px;">You are currently browsing in read-only mode.</p>
           <button class="btn btn-primary btn-sm" onclick="App.openModal('modal-login')" style="margin-top: 10px;">Sign In with Staff Account</button>
         </div>
       `;

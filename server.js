@@ -1,8 +1,7 @@
 /**
- * The Institution of Engineers (India) - Tiruvallur Local Centre (IEI TVLC)
- * Staff Administration and Analytics Portal
- * 
- * Official Reference: https://ieitvlc.org/
+ * MGR IEI Students Chapter — Student Committee & Staff Portal
+ * Dr. M.G.R. Educational and Research Institute
+ * The Institution of Engineers (India)
  */
 
 const express = require('express');
@@ -21,6 +20,7 @@ const eventRoutes = require('./src/routes/eventRoutes');
 const analyticsRoutes = require('./src/routes/analyticsRoutes');
 const exportRoutes = require('./src/routes/exportRoutes');
 const userRoutes = require('./src/routes/userRoutes');
+const portalRoutes = require('./src/routes/portalRoutes');
 
 // Initialize Database
 db.initDatabase();
@@ -39,7 +39,7 @@ app.use(helmet({
       connectSrc: ["'self'"],
       objectSrc: ["'none'"],
       baseUri: ["'self'"],
-      frameAncestors: ["'self'", "https://ieitvlc.org", "https://www.ieitvlc.org"]
+      frameAncestors: ["'self'"]
     }
   },
   crossOriginEmbedderPolicy: false
@@ -47,8 +47,8 @@ app.use(helmet({
 
 // Hardened CORS policy: Whitelists authorized institutional origins
 const allowedOrigins = [
-  'https://ieitvlc.org',
-  'https://www.ieitvlc.org',
+  'https://mgriei.org',
+  'https://www.mgriei.org',
   'http://localhost:3000',
   'http://127.0.0.1:3000'
 ];
@@ -58,7 +58,7 @@ app.use(cors({
     if (!origin || allowedOrigins.includes(origin) || config.NODE_ENV !== 'production') {
       return callback(null, true);
     }
-    return callback(new Error('Cross-Origin Request Blocked: Origin not authorized by IEI TVLC security policy.'));
+    return callback(new Error('Cross-Origin Request Blocked: Origin not authorized by MGR IEI security policy.'));
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -143,6 +143,37 @@ app.use('/api/events', eventRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/export', exportRoutes);
 app.use('/api/admin', userRoutes);
+app.use('/api/portal', portalRoutes);
+
+// Direct endpoint aliases for portal modules
+app.use('/api/tasks', (req, res, next) => {
+  req.url = '/tasks' + (req.url === '/' ? '' : req.url);
+  portalRoutes(req, res, next);
+});
+app.use('/api/weekly-reports', (req, res, next) => {
+  req.url = '/weekly-reports' + (req.url === '/' ? '' : req.url);
+  portalRoutes(req, res, next);
+});
+app.use('/api/community', (req, res, next) => {
+  req.url = '/community' + (req.url === '/' ? '' : req.url);
+  portalRoutes(req, res, next);
+});
+app.use('/api/messages', (req, res, next) => {
+  req.url = '/messages' + (req.url === '/' ? '' : req.url);
+  portalRoutes(req, res, next);
+});
+app.use('/api/notifications', (req, res, next) => {
+  req.url = '/notifications' + (req.url === '/' ? '' : req.url);
+  portalRoutes(req, res, next);
+});
+app.use('/api/reporting-settings', (req, res, next) => {
+  req.url = '/reporting-settings' + (req.url === '/' ? '' : req.url);
+  portalRoutes(req, res, next);
+});
+app.use('/api/audit-observations', (req, res, next) => {
+  req.url = '/audit-observations' + (req.url === '/' ? '' : req.url);
+  portalRoutes(req, res, next);
+});
 
 // SPA fallback
 app.use((req, res) => {
@@ -164,14 +195,18 @@ app.use((err, req, res, next) => {
 // Start Server if not imported by test runner
 if (require.main === module) {
   const PORT = config.PORT;
-  app.listen(PORT, config.HOST, () => {
+  const server = app.listen(PORT, config.HOST, () => {
     console.log(`=======================================================`);
-    console.log(` IEI TVLC Staff Administration & Analytics Portal`);
+    console.log(` MGR IEI Students Chapter — Management Portal`);
     console.log(` Official Institution: ${config.INSTITUTION.name}`);
-    console.log(` Reference Website:    ${config.INSTITUTION.website}`);
+    console.log(` Chapter Code:         ${config.INSTITUTION.chapterCode}`);
     console.log(` Server Listening on:  http://localhost:${PORT}`);
     console.log(` Environment:          ${config.NODE_ENV}`);
     console.log(`=======================================================`);
+  });
+
+  server.on('error', (err) => {
+    console.error('[Server Listen Error]:', err);
   });
 }
 

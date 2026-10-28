@@ -1,5 +1,5 @@
 /**
- * IEI TVLC Staff Face Interface Controller
+ * MGR IEI Chapter Staff Face Interface Controller
  * Provides focused data entry with standardized drop boxes for staff officers.
  */
 
@@ -43,7 +43,7 @@ const StaffFace = {
           eventChapterSelect.disabled = true;
         } else {
           html = '<option value="">-- Select Host Collegiate Chapter / Centre --</option>';
-          html += '<option value="central_tvlc">Central TVLC (Tiruvallur Local Centre)</option>';
+          html += '<option value="central_tvlc">Central TVLC (Dr. M.G.R. Educational and Research Institute)</option>';
           this.chaptersList.forEach(ch => {
             html += `<option value="${ch.id}">${App.escapeHtml(ch.collegeName)} (${App.escapeHtml(ch.collegeCode || ch.chapterName)})</option>`;
           });
@@ -194,7 +194,7 @@ const StaffFace = {
             formData.append('collegeOrChapter', found.collegeName);
           }
         } else if (chapterId === 'central_tvlc') {
-          formData.append('collegeOrChapter', 'IEI Tiruvallur Local Centre');
+          formData.append('collegeOrChapter', 'IEI Dr. M.G.R. Educational and Research Institute');
         }
       }
 

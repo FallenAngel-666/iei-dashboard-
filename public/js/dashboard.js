@@ -1,5 +1,5 @@
 /**
- * IEI TVLC Dashboard View & Charts Controller
+ * MGR IEI Chapter Dashboard View & Charts Controller
  * Manages KPI summary cards and interactive Chart.js visualizations.
  */
 
@@ -89,12 +89,12 @@ const Dashboard = {
   renderCharts(data) {
     this.destroyCharts();
 
-    // Chart Design Constants
-    const colorNavy = '#002B49';
-    const colorRoyal = '#0E568F';
-    const colorCrimson = '#C2185B';
-    const colorAmber = '#F59E0B';
-    const colorGreen = '#10B981';
+    // Chart Design Tokens — Rolls-Royce White & Institutional Blue System
+    const colorNavy = '#102A43'; // Deep Institutional Navy
+    const colorRoyal = '#2457A7'; // Royal Blue
+    const colorGold = '#B99A5B'; // Champagne Gold Accent
+    const colorSteel = '#627D98'; // Steel Blue
+    const colorCrimson = '#B91C1C'; // Restrained Crimson
 
     // 1. Annual Membership Trends Line Chart
     const ctxTrends = document.getElementById('chart-membership-trends')?.getContext('2d');
@@ -112,7 +112,7 @@ const Dashboard = {
               label: 'Student Members',
               data: studentData,
               borderColor: colorNavy,
-              backgroundColor: 'rgba(0, 43, 73, 0.08)',
+              backgroundColor: 'rgba(16, 42, 67, 0.06)',
               borderWidth: 2.5,
               tension: 0.3,
               fill: true,
@@ -123,12 +123,12 @@ const Dashboard = {
             {
               label: 'Corporate Members',
               data: corporateData,
-              borderColor: colorCrimson,
-              backgroundColor: 'rgba(194, 24, 91, 0.05)',
+              borderColor: colorGold,
+              backgroundColor: 'rgba(185, 154, 91, 0.05)',
               borderWidth: 2.5,
               tension: 0.3,
               fill: true,
-              pointBackgroundColor: colorCrimson,
+              pointBackgroundColor: colorGold,
               pointRadius: 4.5,
               pointHoverRadius: 6.5,
               yAxisID: 'y1'
@@ -206,7 +206,7 @@ const Dashboard = {
             {
               label: 'Workshops & Other',
               data: otherCounts,
-              backgroundColor: colorAmber,
+              backgroundColor: colorSteel,
               borderRadius: 4
             }
           ]
@@ -277,7 +277,7 @@ const Dashboard = {
     if (ctxChapters) {
       // Filter chapters with known counts for clean visualization, and report unknown count
       const knownChapters = data.chapterWiseMembership.filter(c => c.studentMembers !== null);
-      const labels = knownChapters.map(c => c.collegeCode || c.chapterName.replace('IEI TVLC ', '').replace(' Student Chapter', ''));
+      const labels = knownChapters.map(c => c.collegeCode || c.chapterName.replace('MGR IEI Chapter ', '').replace(' Student Chapter', ''));
       const values = knownChapters.map(c => c.studentMembers);
 
       this.charts.chapterMembership = new Chart(ctxChapters, {

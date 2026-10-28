@@ -1,11 +1,11 @@
 /**
- * IEI TVLC API Client
+ * MGR IEI Students Chapter API Client
  * Centralized REST client with dual-transport authentication (Bearer Header + Secure Cookie).
  */
 
 const API = {
-  tokenKey: 'iei_tvlc_token',
-  userKey: 'iei_tvlc_user_profile',
+  tokenKey: 'mgr_iei_token',
+  userKey: 'mgr_iei_user_profile',
 
   getToken() {
     return localStorage.getItem(this.tokenKey) || '';
@@ -96,6 +96,10 @@ const API = {
 
   async getMe() {
     return this.request('/api/auth/me');
+  },
+
+  async getProfile() {
+    return this.getMe();
   },
 
   // Chapters endpoints

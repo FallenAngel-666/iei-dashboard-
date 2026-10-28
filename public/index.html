@@ -3,1260 +3,1273 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IEI TVLC - Staff Administration & Analytics Portal</title>
-  <link rel="icon" type="image/png" href="/assets/iei-emblem.png">
+  <title>MGR IEI Students Chapter — Student Committee &amp; Staff Portal</title>
+  <link rel="icon" type="image/png" href="/assets/iei-official-logo.png">
   
-  <!-- Google Fonts: Inter -->
+  <!-- Refined Typography: Inter for Interface & Cinzel for Institutional Headings -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
-  <!-- Chart.js 4.4 -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-  <!-- Portal Institutional Styles -->
+  <!-- Core Portal Stylesheet -->
   <link rel="stylesheet" href="/css/portal.css">
 </head>
 <body>
 
   <!-- ======================================================== -->
-  <!-- SCREEN 1: STRICT INSTITUTIONAL LOGIN GATEWAY             -->
-  <!-- Visible when unauthenticated; blocks main portal.        -->
+  <!-- SCREEN 1: MANDATORY INSTITUTIONAL LOGIN GATEWAY          -->
+  <!-- Visitor sees ONLY this screen until authenticated        -->
   <!-- ======================================================== -->
   <div id="screen-login" class="screen-login">
     <div class="login-container">
       
-      <!-- Institutional Logo Banner -->
-      <div class="login-brand-header">
-        <div class="login-banner-card">
-          <img src="/assets/iei-tvlc-banner.png" alt="The Institution of Engineers (India) - Tiruvallur Local Center" class="login-banner-logo">
-        </div>
-        <div class="login-inst-badge">Staff Administration & Analytics Gateway</div>
-      </div>
+      <!-- Dual-Logo Institutional Lockup (Injected by Branding Component) -->
+      <div id="branding-login-placeholder"></div>
 
       <!-- Authentication Card -->
       <div class="login-card">
         <div class="login-card-header">
           <h2>Institutional Sign In</h2>
-          <p>Enter your institutional credentials to open your designated interface.</p>
+          <p>Access the private operational portal for student committee members and authorized staff.</p>
         </div>
 
-        <div id="login-error-alert" class="login-alert-error"></div>
+        <div id="login-error-alert" class="login-alert-error" style="display: none;"></div>
 
         <form id="form-gateway-login">
           <div class="form-group">
             <label class="form-label" for="login-gateway-email">Institutional Email Address <span class="required">*</span></label>
-            <input type="email" id="login-gateway-email" class="input-control" required placeholder="example@gmail.com">
+            <input type="email" id="login-gateway-email" class="input-control" required placeholder="name@mgriei.org" autocomplete="email">
           </div>
           <div class="form-group">
             <label class="form-label" for="login-gateway-password">Password <span class="required">*</span></label>
-            <input type="password" id="login-gateway-password" class="input-control" required placeholder="••••••••">
+            <input type="password" id="login-gateway-password" class="input-control" required placeholder="••••••••" autocomplete="current-password">
           </div>
-          <button type="submit" id="btn-gateway-submit" class="btn btn-primary btn-block" style="padding: 12px; font-weight: 700; font-size: 14px; margin-top: 8px;">
-            Sign In to Institutional Portal
+          <button type="submit" id="btn-gateway-submit" class="btn btn-primary btn-block">
+            Sign In to Chapter Portal
           </button>
         </form>
 
+        <!-- 1-Click Quick Access for the Four Authorized Roles -->
+        <div class="quick-roles-section">
+          <div class="quick-roles-title">Authorized Roles — 1-Click Sign In</div>
+          <div class="quick-roles-grid">
+            <button type="button" class="role-quick-btn" onclick="App.quickLogin('admin')">
+              <span class="btn-role-label">🛡️ Admin / Editor</span>
+              <span class="btn-role-sub">Full Governance &amp; Config</span>
+            </button>
+            <button type="button" class="role-quick-btn" onclick="App.quickLogin('chairman')">
+              <span class="btn-role-label">👑 Chairman</span>
+              <span class="btn-role-sub">Executive Oversight &amp; Review</span>
+            </button>
+            <button type="button" class="role-quick-btn" onclick="App.quickLogin('committee')">
+              <span class="btn-role-label">🎓 Committee Member</span>
+              <span class="btn-role-sub">Task &amp; Reporting Terminal</span>
+            </button>
+            <button type="button" class="role-quick-btn" onclick="App.quickLogin('auditor')">
+              <span class="btn-role-label">📋 Auditor</span>
+              <span class="btn-role-sub">Compliance &amp; Observation Log</span>
+            </button>
+          </div>
+        </div>
+
       </div>
 
-      <!-- Institutional Footer -->
-      <div class="login-footer-notes">
-        <div>Established 1920 • Incorporated by Royal Charter 1935 • ISO 9001:2015</div>
-        <div style="margin-top: 4px;">Official Institutional Portal • <a href="https://ieitvlc.org/" target="_blank">ieitvlc.org</a></div>
-      </div>
+      <!-- Institutional Accreditation Footer -->
+      <footer class="login-footer-notes">
+        <div>Dr. M.G.R. Educational and Research Institute • MGR IEI Students Chapter</div>
+        <div>The Institution of Engineers (India) • Estd 1920 • Royal Charter 1935 • ISO 9001:2015 • NAAC A+</div>
+      </footer>
 
     </div>
   </div>
 
 
   <!-- ======================================================== -->
-  <!-- SCREEN 2: AUTHENTICATED PORTAL CONTAINER                -->
-  <!-- Holds the Two Faces: Staff Face & Admin Face             -->
+  <!-- SCREEN 2: AUTHENTICATED CHAPTER MANAGEMENT WORKSPACE     -->
+  <!-- Revealed only after successful authentication             -->
   <!-- ======================================================== -->
   <div id="screen-portal" class="screen-portal" style="display: none;">
 
-    <!-- ====================================================== -->
-    <!-- FACE 1: STAFF FACE INTERFACE                           -->
-    <!-- Dedicated data entry interface with dropdown boxes      -->
-    <!-- ====================================================== -->
-    <div id="face-staff" class="staff-portal-wrapper" style="display: none;">
+    <!-- Mobile Drawer Backdrop Overlay -->
+    <div id="mobile-nav-backdrop" class="mobile-nav-backdrop"></div>
+
+    <!-- Institutional Left Sidebar Navigation -->
+    <aside class="sidebar" id="app-sidebar">
       
-      <!-- Staff Top Header -->
-      <header class="staff-top-header">
-        <div class="staff-header-left">
-          <div class="staff-banner-card">
-            <img src="/assets/iei-tvlc-banner.png" alt="The Institution of Engineers (India) - Tiruvallur Local Center" class="staff-header-banner-img">
-          </div>
-          <div class="staff-terminal-badge">
-            <span>Staff Data Entry Terminal</span>
+      <!-- Reusable Sidebar Branding (Injected by Branding Component) -->
+      <div id="branding-sidebar-placeholder"></div>
+
+      <!-- Approved Sidebar Navigation Links Only -->
+      <nav class="sidebar-nav">
+        
+        <div class="nav-section-title">GENERAL</div>
+        <a href="javascript:void(0)" class="nav-item active" data-view="dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          <span>Dashboard Overview</span>
+        </a>
+
+        <div class="nav-section-title">WORK MANAGEMENT</div>
+        <a href="javascript:void(0)" class="nav-item" data-view="tasks">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+          <span>Task Management</span>
+        </a>
+        <a href="javascript:void(0)" class="nav-item" data-view="weekly-reports">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+          <span>Weekly Reporting</span>
+        </a>
+
+        <div class="nav-section-title">COMMUNICATION</div>
+        <a href="javascript:void(0)" class="nav-item" data-view="community">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+          <span>Shared Community</span>
+        </a>
+        <a href="javascript:void(0)" class="nav-item" data-view="messages">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          <span>Private Messaging</span>
+        </a>
+
+        <!-- Administration Section (Admin/Editor Only) -->
+        <div id="nav-section-admin" class="nav-admin-group">
+          <div class="nav-section-title">ADMINISTRATION</div>
+          <a href="javascript:void(0)" class="nav-item" data-view="users">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <span>User Management</span>
+          </a>
+          <a href="javascript:void(0)" class="nav-item" data-view="events">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            <span>Announcements &amp; Events</span>
+          </a>
+          <a href="javascript:void(0)" class="nav-item" data-view="reporting-settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            <span>Reporting Settings</span>
+          </a>
+          <a href="javascript:void(0)" class="nav-item" data-view="audit-logs">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <span>Audit Logs &amp; Security</span>
+          </a>
+        </div>
+
+      </nav>
+
+      <!-- Sidebar Institutional Footer -->
+      <div class="sidebar-footer">
+        <div class="sf-inst-name">Dr. M.G.R. Educational &amp; Research Institute</div>
+        <div class="sf-meta">MGR IEI Chapter • v3.0.0</div>
+      </div>
+    </aside>
+
+    <!-- Main Application Wrapper -->
+    <div class="main-wrapper">
+
+      <!-- Top Header Navigation Bar -->
+      <header class="app-header">
+        <div class="header-left">
+          <!-- Mobile Drawer Hamburger Toggle Button -->
+          <button id="mobile-nav-toggle" class="mobile-nav-toggle" aria-label="Toggle navigation">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+          
+          <!-- Breadcrumb Navigation -->
+          <div class="header-breadcrumbs">
+            <span class="bc-prefix">MGR IEI Chapter</span>
+            <span class="bc-sep">/</span>
+            <span id="breadcrumb-current" class="bc-current">Dashboard Overview</span>
           </div>
         </div>
 
-        <div class="staff-header-right">
-          <!-- Back to Admin Face (Only visible if admin switched to staff view) -->
-          <button id="btn-staff-back-to-admin" class="btn btn-outline btn-sm" style="display: none; color: #FFFFFF; border-color: rgba(255,255,255,0.4);" onclick="App.switchFace('admin')">
-            ← Return to Admin Face
-          </button>
+        <div class="header-right">
           
-          <div id="staff-user-pill" style="display: flex; align-items: center;">
-            <!-- Injected by app.js -->
+          <!-- Compact Header Dual-Logo Branding Capsule -->
+          <div id="branding-header-placeholder"></div>
+
+          <!-- Instant 4-Role Perspective Switcher -->
+          <div class="header-perspective-wrap" title="Switch viewpoint for demonstration and review">
+            <label for="header-role-switcher" class="perspective-label">Perspective:</label>
+            <select id="header-role-switcher" class="select-perspective" onchange="PortalModules.roleSwitcher.switch(this.value)">
+              <option value="committee">🎓 Committee Member</option>
+              <option value="chairman">👑 Chairman</option>
+              <option value="admin">🛡️ Admin / Editor</option>
+              <option value="auditor">📋 Auditor</option>
+            </select>
           </div>
 
-          <button class="btn btn-outline btn-sm" style="color: #FFFFFF; border-color: rgba(255,255,255,0.4);" onclick="App.handleLogout()">
-            Sign Out
-          </button>
+          <!-- User Container (Notifications Bell, Profile Avatar, Role Badge & Sign Out) -->
+          <div id="header-user-container" class="header-user-container"></div>
         </div>
       </header>
 
-      <!-- Staff Workspace Canvas -->
-      <main class="staff-content-container">
-        
-        <!-- Guidance Banner -->
-        <div class="staff-notice-banner">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink: 0;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-          <div>
-            <strong>Staff Data Entry Terminal:</strong> Select options from the standardized drop boxes below to record events and collegiate student membership intakes. All entries are validated against institutional records and reflected immediately across official reports.
-          </div>
-        </div>
+      <!-- Main Workspace Views -->
+      <main class="main-content">
 
-        <!-- Two Form Cards Side-by-Side -->
-        <div class="staff-forms-grid">
+        <!-- ==================================================== -->
+        <!-- VIEW 1: DASHBOARD OVERVIEW                           -->
+        <!-- ==================================================== -->
+        <div id="view-dashboard" class="view-pane">
           
-          <!-- FORM CARD 1: Event & Activity Entry with Drop Boxes -->
-          <div class="dashboard-card">
-            <div class="card-header" style="background: var(--iei-blue-subtle); border-bottom: 2px solid var(--iei-royal-blue);">
-              <div class="card-title-group">
-                <h3 style="color: var(--iei-navy);">1. Record / Schedule Institutional Event</h3>
-                <p>Technical lectures, statutory observances, workshops, and competitions</p>
-              </div>
+          <!-- Executive Welcome Hero -->
+          <div class="dash-hero-card">
+            <div class="dash-hero-content">
+              <div class="dash-hero-badge">OFFICIAL CHAPTER WORKSPACE</div>
+              <h1 class="dash-hero-title">Welcome back, <span id="dash-greeting-name">Member</span></h1>
+              <p class="dash-hero-sub">
+                Logged in as <strong id="dash-greeting-role">Student Committee Member</strong>. Coordinate engineering activities, submit weekly reports, and monitor task completion for Dr. M.G.R. Educational and Research Institute.
+              </p>
             </div>
-            <div class="card-body">
-              <form id="form-staff-event">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                  
-                  <!-- Drop box 1: Activity Category -->
-                  <div class="form-group" style="grid-column: span 2;">
-                    <span class="form-badge-label">Drop Box 1</span>
-                    <label class="form-label">Activity Category <span class="required">*</span></label>
-                    <select name="category" class="select-control dropbox-control" required>
-                      <option value="Technical Lecture" selected>Technical Lecture (e.g. 49th – 54th Lectures)</option>
-                      <option value="Statutory Day">Statutory Day (Engineers' Day, Energy, Water, Environment)</option>
-                      <option value="Workshop">Workshop (e.g. Design & Development of Drones)</option>
-                      <option value="Workshop/Seminar">Seminar / Conference</option>
-                      <option value="Competition/Hackathon">Competition / Hackathon</option>
-                    </select>
-                  </div>
-
-                  <!-- Drop box 2: Collegiate Chapter -->
-                  <div class="form-group" style="grid-column: span 2;">
-                    <span class="form-badge-label">Drop Box 2</span>
-                    <label class="form-label">Host Student Chapter / Collegiate Institution <span class="required">*</span></label>
-                    <select id="staff-event-chapter" name="chapterId" class="select-control dropbox-control" required>
-                      <option value="">-- Loading Affiliated Collegiate Chapters... --</option>
-                    </select>
-                  </div>
-
-                  <!-- Drop box 3: Venue / Location Type -->
-                  <div class="form-group">
-                    <span class="form-badge-label">Drop Box 3</span>
-                    <label class="form-label">Venue / Platform Platform <span class="required">*</span></label>
-                    <select name="venue" class="select-control dropbox-control" required>
-                      <option value="Online">Online Webinar (MS Teams / Google Meet)</option>
-                      <option value="IEI TNSC Auditorium, Chennai">IEI TNSC Auditorium, Chennai</option>
-                      <option value="Baettr India Pvt Ltd, Sriperumbudur">Baettr India Pvt Ltd, Sriperumbudur</option>
-                      <option value="Tower Park, Anna Nagar, Chennai">Tower Park, Anna Nagar, Chennai</option>
-                      <option value="Dept. of Mech Engg, CAR Lab, Dr. MGR Campus">CAR Lab, Dr. M.G.R. Campus</option>
-                      <option value="Dept. of EEE Seminar Hall, RMKEC Campus">Dept. of EEE Hall, RMKEC Campus</option>
-                      <option value="S.A. Engineering College Campus">S.A. Engineering College Campus</option>
-                      <option value="RMKCET Campus">RMKCET Campus</option>
-                      <option value="Other Campus Auditorium">Other Collegiate Campus Auditorium</option>
-                    </select>
-                  </div>
-
-                  <!-- Drop box 4: Status -->
-                  <div class="form-group">
-                    <span class="form-badge-label">Drop Box 4</span>
-                    <label class="form-label">Activity Status <span class="required">*</span></label>
-                    <select name="status" class="select-control dropbox-control" required>
-                      <option value="Completed" selected>Completed</option>
-                      <option value="Upcoming">Upcoming</option>
-                      <option value="In Progress">In Progress</option>
-                    </select>
-                  </div>
-
-                  <!-- Event Title -->
-                  <div class="form-group" style="grid-column: span 2;">
-                    <label class="form-label">Event / Lecture Title <span class="required">*</span></label>
-                    <input type="text" name="title" class="input-control" required placeholder="e.g. 55th Technical Lecture on Recent Advances in Power Electronics">
-                  </div>
-
-                  <!-- Date & Attendees -->
-                  <div class="form-group">
-                    <label class="form-label">Event Date <span class="required">*</span></label>
-                    <input type="date" name="eventDate" class="input-control" required value="2026-10-27">
-                  </div>
-                  <div class="form-group">
-                    <label class="form-label">Verified Attendees Count <span class="required">*</span></label>
-                    <input type="number" name="attendeesCount" class="input-control" required placeholder="e.g. 85">
-                  </div>
-
-                  <!-- Speaker Details -->
-                  <div class="form-group">
-                    <label class="form-label">Keynote Speaker Name</label>
-                    <input type="text" name="speakerName" class="input-control" placeholder="e.g. Dr. K. Vijayakumar, FIE">
-                  </div>
-                  <div class="form-group">
-                    <label class="form-label">Speaker Designation & Organization</label>
-                    <input type="text" name="speakerDesignation" class="input-control" placeholder="e.g. Professor & Head, Anna University">
-                  </div>
-
-                  <!-- Description -->
-                  <div class="form-group" style="grid-column: span 2;">
-                    <label class="form-label">Programme Description & Topics Outline</label>
-                    <textarea name="description" class="textarea-control" rows="2" placeholder="Brief outline of technical sessions, discussions, and student participation..."></textarea>
-                  </div>
-
-                  <!-- File Attachments -->
-                  <div class="form-group">
-                    <label class="form-label">Event Poster Graphic (PNG/JPG)</label>
-                    <input type="file" name="poster" class="input-control" accept="image/png, image/jpeg, image/webp">
-                  </div>
-                  <div class="form-group">
-                    <label class="form-label">Technical Event Report (PDF)</label>
-                    <input type="file" name="report" class="input-control" accept="application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document">
-                  </div>
-
-                </div>
-
-                <div style="margin-top: 20px; display: flex; justify-content: flex-end;">
-                  <button type="submit" class="btn btn-primary" style="padding: 10px 24px; font-weight: 700;">
-                    Submit Activity Record
-                  </button>
-                </div>
-              </form>
+            <div class="dash-hero-actions">
+              <button class="btn btn-primary" onclick="App.navigate('tasks')">View Active Tasks</button>
+              <button class="btn btn-outline" onclick="App.navigate('weekly-reports')">Weekly Report</button>
             </div>
           </div>
 
-          <!-- FORM CARD 2: Student Membership Intake Entry with Drop Boxes -->
-          <div class="dashboard-card">
-            <div class="card-header" style="background: var(--iei-crimson-subtle); border-bottom: 2px solid var(--iei-crimson);">
-              <div class="card-title-group">
-                <h3 style="color: var(--iei-crimson);">2. Record Student Membership Intake</h3>
-                <p>Annual growth records across collegiate engineering chapters</p>
+          <!-- KPI Metric Cards Grid -->
+          <div class="kpi-grid">
+            <div class="kpi-card" onclick="App.navigate('tasks')">
+              <div class="kpi-icon-wrap kpi-blue">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+              </div>
+              <div class="kpi-details">
+                <div class="kpi-label">Active Tasks</div>
+                <div id="dash-kpi-tasks" class="kpi-value">0</div>
+                <div class="kpi-sub">Assigned &amp; In Progress</div>
               </div>
             </div>
-            <div class="card-body">
-              <form id="form-staff-intake">
-                <div style="display: flex; flex-direction: column; gap: 16px;">
-                  
-                  <!-- Drop box 1: Institution -->
-                  <div class="form-group">
-                    <span class="form-badge-label" style="background: var(--iei-crimson-subtle); color: var(--iei-crimson);">Drop Box 1</span>
-                    <label class="form-label">Collegiate Institution / Student Chapter <span class="required">*</span></label>
-                    <select id="staff-intake-institution" class="select-control dropbox-control" required>
-                      <option value="">-- Loading Affiliated Institutions... --</option>
-                    </select>
-                  </div>
 
-                  <!-- Drop box 2: Academic Year -->
-                  <div class="form-group">
-                    <span class="form-badge-label" style="background: var(--iei-crimson-subtle); color: var(--iei-crimson);">Drop Box 2</span>
-                    <label class="form-label">Reporting Period / Academic Session <span class="required">*</span></label>
-                    <select id="staff-intake-year" class="select-control dropbox-control" required>
-                      <option value="2026" selected>Academic Session 2026 (Nov 2025 – Oct 2026)</option>
-                      <option value="2025">Academic Session 2025</option>
-                      <option value="2024">Academic Session 2024</option>
-                      <option value="2023">Academic Session 2023</option>
-                    </select>
-                  </div>
+            <div class="kpi-card" onclick="App.navigate('tasks')">
+              <div class="kpi-icon-wrap kpi-green">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <div class="kpi-details">
+                <div class="kpi-label">Approved Tasks</div>
+                <div id="dash-kpi-completed" class="kpi-value text-success">0</div>
+                <div class="kpi-sub">Completed &amp; Verified</div>
+              </div>
+            </div>
 
-                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                    <div class="form-group">
-                      <label class="form-label">Student Members Gained <span class="required">*</span></label>
-                      <input type="number" id="staff-intake-students" class="input-control" required placeholder="e.g. 120">
-                      <div class="form-hint">Verified student enrolments.</div>
-                    </div>
-                    <div class="form-group">
-                      <label class="form-label">Corporate Members Gained</label>
-                      <input type="number" id="staff-intake-corporate" class="input-control" value="0" placeholder="e.g. 2">
-                      <div class="form-hint">Faculty & Fellow enrolments.</div>
-                    </div>
-                  </div>
+            <div class="kpi-card" onclick="App.navigate('weekly-reports')">
+              <div class="kpi-icon-wrap kpi-gold">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+              </div>
+              <div class="kpi-details">
+                <div class="kpi-label">Weekly Report Cycle</div>
+                <div id="dash-kpi-report-status" class="kpi-value text-gold">ACTIVE</div>
+                <div class="kpi-sub">Deadline: Mon 11:59 PM</div>
+              </div>
+            </div>
 
-                  <div class="form-group">
-                    <label class="form-label">Verification Notes / Department Breakdown</label>
-                    <input type="text" id="staff-intake-notes" class="input-control" placeholder="e.g. Department of Mechanical & EEE fresh enrolments">
-                  </div>
+            <div class="kpi-card" onclick="App.navigate('community')">
+              <div class="kpi-icon-wrap kpi-purple">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+              </div>
+              <div class="kpi-details">
+                <div class="kpi-label">Community Stream</div>
+                <div id="dash-kpi-discussions" class="kpi-value">0</div>
+                <div class="kpi-sub">Posts &amp; Announcements</div>
+              </div>
+            </div>
+          </div>
 
-                  <div style="margin-top: 12px; display: flex; justify-content: flex-end;">
-                    <button type="submit" class="btn btn-accent" style="padding: 10px 24px; font-weight: 700;">
-                      Save Membership Intake Record
-                    </button>
-                  </div>
-
+          <!-- Two-Column Activity Dashboard Section -->
+          <div class="dash-activity-grid">
+            
+            <!-- Left: Assigned Tasks Spotlight -->
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title-group">
+                  <h3>Assigned Tasks Spotlight</h3>
+                  <p>Current operational tasks requiring your attention</p>
                 </div>
-              </form>
-
-              <!-- Official Reporting Reference Table -->
-              <div style="margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--border-color);">
-                <h4 style="font-size: 13px; font-weight: 700; color: var(--iei-navy); margin-bottom: 10px;">
-                  Official Student Membership Growth (Nov 2025 – Oct 2026)
-                </h4>
-                <div class="table-responsive">
-                  <table class="data-table" style="font-size: 11.5px;">
-                    <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>Institution</th>
-                        <th style="text-align: right;">Gained</th>
-                        <th style="text-align: right;">Corporate</th>
-                      </tr>
-                    </thead>
-                    <tbody id="staff-recent-intake-body">
-                      <!-- Rendered by staff.js -->
-                    </tbody>
-                  </table>
+                <button class="btn btn-outline btn-sm" onclick="App.navigate('tasks')">View All Tasks →</button>
+              </div>
+              <div class="card-body">
+                <div id="dash-task-spotlight" class="spotlight-tasks-list">
+                  <div class="loading-placeholder">Loading assigned tasks...</div>
                 </div>
               </div>
-
             </div>
+
+            <!-- Right: Pinned Chapter Announcements -->
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title-group">
+                  <h3>Chapter Announcements</h3>
+                  <p>Official notices from Chapter Leadership</p>
+                </div>
+                <button class="btn btn-outline btn-sm" onclick="App.navigate('community')">Classroom Stream →</button>
+              </div>
+              <div class="card-body">
+                <div id="dash-announcements-container" class="spotlight-announcements-list">
+                  <div class="loading-placeholder">Loading announcements...</div>
+                </div>
+              </div>
+            </div>
+
           </div>
 
         </div>
 
-        <!-- SECTION 3: Recent Activity Log Table -->
-        <div class="dashboard-card">
-          <div class="card-header">
-            <div class="card-title-group">
-              <h3>Recent Institutional Activities & Programmes Log</h3>
-              <p>Official 11 events and latest staff submissions recorded under TVLC</p>
+
+        <!-- ==================================================== -->
+        <!-- VIEW 2: TASK MANAGEMENT                             -->
+        <!-- ==================================================== -->
+        <div id="view-tasks" class="view-pane" style="display: none;">
+          
+          <div class="view-header-bar">
+            <div>
+              <h2 class="view-title">Task Management</h2>
+              <p class="view-desc">Persistent institutional task lifecycle: Assigned → In Progress → Review → Approved.</p>
             </div>
-            <button class="btn btn-outline btn-sm" onclick="StaffFace.loadRecentActivities()">
-              ↻ Refresh Log
-            </button>
+            
+            <div class="view-actions-group">
+              <div class="btn-group-toggle">
+                <button id="btn-tasks-kanban-toggle" class="btn btn-sm btn-primary" onclick="PortalModules.tasks.setViewMode('kanban')">Kanban Board</button>
+                <button id="btn-tasks-list-toggle" class="btn btn-sm btn-outline" onclick="PortalModules.tasks.setViewMode('list')">List Table</button>
+              </div>
+              <button id="btn-open-create-task" class="btn btn-primary" onclick="PortalModules.tasks.openCreateModal()">
+                + Create New Task
+              </button>
+            </div>
           </div>
-          <div class="card-body" style="padding: 0;">
+
+          <!-- Task Filters Toolbar -->
+          <div class="filter-toolbar card">
+            <div class="filter-controls-row">
+              <div class="search-input-wrap">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="task-search-input" class="input-control" placeholder="Search tasks by title, assignee, or tag...">
+              </div>
+              <div class="select-filter-group">
+                <select id="task-filter-priority" class="select-control">
+                  <option value="all">All Priorities</option>
+                  <option value="urgent">Urgent</option>
+                  <option value="high">High</option>
+                  <option value="medium">Medium</option>
+                  <option value="low">Low</option>
+                </select>
+                <select id="task-filter-category" class="select-control">
+                  <option value="all">All Departments</option>
+                  <option value="Technical">Technical</option>
+                  <option value="Events">Events</option>
+                  <option value="Reporting">Reporting</option>
+                  <option value="Membership">Membership</option>
+                  <option value="Compliance">Compliance</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- View Mode A: 4-Column Kanban Board -->
+          <div id="tasks-kanban-board" class="kanban-board">
+            
+            <!-- Column 1: Assigned -->
+            <div class="kanban-column">
+              <div class="kanban-col-header">
+                <div class="kcol-title-group">
+                  <span class="status-indicator-dot dot-info"></span>
+                  <span class="kcol-title">Assigned</span>
+                </div>
+                <span id="kanban-count-assigned" class="kcol-count-badge">0</span>
+              </div>
+              <div id="kanban-col-assigned" class="kanban-cards-container"></div>
+            </div>
+
+            <!-- Column 2: In Progress -->
+            <div class="kanban-column">
+              <div class="kanban-col-header">
+                <div class="kcol-title-group">
+                  <span class="status-indicator-dot dot-warning"></span>
+                  <span class="kcol-title">In Progress</span>
+                </div>
+                <span id="kanban-count-inprogress" class="kcol-count-badge">0</span>
+              </div>
+              <div id="kanban-col-inprogress" class="kanban-cards-container"></div>
+            </div>
+
+            <!-- Column 3: Under Review -->
+            <div class="kanban-column">
+              <div class="kanban-col-header">
+                <div class="kcol-title-group">
+                  <span class="status-indicator-dot dot-purple"></span>
+                  <span class="kcol-title">Under Review</span>
+                </div>
+                <span id="kanban-count-review" class="kcol-count-badge">0</span>
+              </div>
+              <div id="kanban-col-review" class="kanban-cards-container"></div>
+            </div>
+
+            <!-- Column 4: Approved -->
+            <div class="kanban-column">
+              <div class="kanban-col-header">
+                <div class="kcol-title-group">
+                  <span class="status-indicator-dot dot-success"></span>
+                  <span class="kcol-title">Approved</span>
+                </div>
+                <span id="kanban-count-approved" class="kcol-count-badge">0</span>
+              </div>
+              <div id="kanban-col-approved" class="kanban-cards-container"></div>
+            </div>
+
+          </div>
+
+          <!-- View Mode B: Detailed List Table -->
+          <div id="tasks-list-container" class="card" style="display: none;">
             <div class="table-responsive">
               <table class="data-table">
                 <thead>
                   <tr>
-                    <th>#</th>
-                    <th>Activity Title & Resource Person</th>
-                    <th>Category</th>
-                    <th>Date</th>
-                    <th>Venue / Collegiate Platform</th>
-                    <th style="text-align: right;">Attendees</th>
+                    <th>Task ID</th>
+                    <th>Task Title &amp; Details</th>
+                    <th>Department</th>
+                    <th>Assignee</th>
+                    <th>Priority</th>
+                    <th>Due Date</th>
+                    <th>Progress</th>
+                    <th>Status</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
-                <tbody id="staff-recent-activities-body">
-                  <!-- Rendered by staff.js -->
+                <tbody id="tasks-list-table-body">
+                  <tr><td colspan="9" class="text-center py-4 text-muted">Loading tasks...</td></tr>
                 </tbody>
               </table>
             </div>
           </div>
+
+        </div>
+
+
+        <!-- ==================================================== -->
+        <!-- VIEW 3: WEEKLY REPORTING                            -->
+        <!-- ==================================================== -->
+        <div id="view-weekly-reports" class="view-pane" style="display: none;">
+          
+          <div class="view-header-bar">
+            <div>
+              <h2 class="view-title">Weekly Reporting</h2>
+              <p class="view-desc">Formal chapter reporting cycle: Monday to Sunday (Deadline: Monday 11:59 PM IST).</p>
+            </div>
+            
+            <button id="btn-open-submit-report" class="btn btn-primary" onclick="PortalModules.weeklyReports.openSubmitModal()">
+              + Submit Weekly Report
+            </button>
+          </div>
+
+          <!-- Reporting Cycle Banner Card -->
+          <div class="card reporting-cycle-banner">
+            <div class="rcb-badge">OFFICIAL REPORTING DEADLINE</div>
+            <div class="rcb-details">
+              <h3>Cycle Cycle 45 (03 Nov 2026 – 09 Nov 2026)</h3>
+              <p>Weekly submissions must include verified activity hours, event summaries, and planned next-cycle milestones. Endorsed by Chairman and reviewed by Auditor.</p>
+            </div>
+          </div>
+
+          <!-- Reports Table Card -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title-group">
+                <h3>Chapter Weekly Submissions</h3>
+                <p>Official records submitted by student coordinators and verified by faculty</p>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Week</th>
+                    <th>Reporting Period</th>
+                    <th>Author / Lead</th>
+                    <th>Department</th>
+                    <th>Hours</th>
+                    <th>Attendees</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="weekly-reports-table-body">
+                  <tr><td colspan="8" class="text-center py-4 text-muted">Loading weekly reports...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+
+        <!-- ==================================================== -->
+        <!-- VIEW 4: SHARED COMMUNITY (GOOGLE CLASSROOM STYLE)     -->
+        <!-- ==================================================== -->
+        <div id="view-community" class="view-pane" style="display: none;">
+          
+          <!-- Google Classroom Style Chapter Cover Banner -->
+          <div class="classroom-cover-card">
+            <div class="classroom-cover-text">
+              <h1 class="classroom-cover-title">MGR IEI Students Chapter — Stream</h1>
+              <p class="classroom-cover-sub">Dr. M.G.R. Educational and Research Institute • Academic Year 2026–2027</p>
+              <div class="classroom-meta-strip">
+                <span>Code: <strong>MGR-IEI-SC</strong></span>
+                <span class="sep">•</span>
+                <span>Institution: <strong>The Institution of Engineers (India)</strong></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Classroom Layout: Stream Sidebar + Stream Feed -->
+          <div class="classroom-stream-layout">
+            
+            <!-- Left Info Box: Upcoming Deadlines -->
+            <div class="classroom-side-box">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Upcoming</h4>
+                </div>
+                <div class="card-body side-upcoming-body">
+                  <p class="text-muted" style="margin-bottom: 8px;">Weekly Report Cycle 45</p>
+                  <p style="font-weight: 600; font-size: 14px; margin-bottom: 12px;">Due Monday, 11:59 PM</p>
+                  <a href="javascript:void(0)" onclick="App.navigate('weekly-reports')" class="link-styled">View all reports</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Feed: Composer + Stream Posts -->
+            <div class="classroom-feed">
+              
+              <!-- Stream Post Composer Card -->
+              <div class="card classroom-composer-card">
+                <div class="composer-header">
+                  <div class="composer-avatar">✏️</div>
+                  <div class="composer-header-text">
+                    <strong>Announce something to your chapter</strong>
+                    <p class="text-muted">Post technical resources, event notices, or discussion topics</p>
+                  </div>
+                </div>
+
+                <div class="composer-body">
+                  <div class="form-group">
+                    <input type="text" id="stream-post-title" class="input-control" placeholder="Post title or topic summary...">
+                  </div>
+                  <div class="form-group">
+                    <textarea id="stream-post-content" class="textarea-control" rows="3" placeholder="Share technical notes, meeting agendas, or discussion points with chapter members..."></textarea>
+                  </div>
+                  
+                  <div class="composer-footer-controls">
+                    <div class="composer-options-left">
+                      <select id="stream-post-type" class="select-control" style="width: auto;">
+                        <option value="discussion">Discussion / Question</option>
+                        <option value="announcement">Official Announcement</option>
+                        <option value="resource">Technical Resource</option>
+                      </select>
+
+                      <label class="checkbox-label" style="display: flex; align-items: center; gap: 6px; font-size: 14px;">
+                        <input type="checkbox" id="stream-post-pinned">
+                        <span>Pin to top</span>
+                      </label>
+                    </div>
+
+                    <button id="btn-stream-publish" class="btn btn-primary" onclick="PortalModules.community.createPost()">
+                      Publish to Stream
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Stream Feed Thread Container -->
+              <div id="community-stream-container" class="classroom-posts-thread">
+                <div class="loading-placeholder">Loading chapter stream...</div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ==================================================== -->
+        <!-- VIEW 5: PRIVATE MESSAGING                           -->
+        <!-- ==================================================== -->
+        <div id="view-messages" class="view-pane" style="display: none;">
+          
+          <div class="view-header-bar">
+            <div>
+              <h2 class="view-title">Private Messaging</h2>
+              <p class="view-desc">Direct institutional communication between chapter committee members and staff leadership.</p>
+            </div>
+          </div>
+
+          <!-- Two-Column Messenger Split Layout -->
+          <div class="card messenger-container">
+            
+            <!-- Left Contacts Directory -->
+            <div class="messenger-sidebar">
+              <div class="messenger-sidebar-header">
+                <h4>Chapter Contacts</h4>
+              </div>
+              <div id="msg-contacts-list" class="messenger-contacts-list">
+                <div class="loading-placeholder">Loading contacts...</div>
+              </div>
+            </div>
+
+            <!-- Right Active Thread Pane -->
+            <div class="messenger-chat-pane">
+              <div class="messenger-chat-header">
+                <div>
+                  <h4 id="msg-active-chat-name">Select a chapter member</h4>
+                  <span id="msg-active-chat-role" class="badge badge-info">Private Channel</span>
+                </div>
+              </div>
+
+              <div id="msg-thread-stream" class="messenger-messages-stream">
+                <div class="empty-chat-state">
+                  <p>Select a contact from the list to start a confidential conversation.</p>
+                </div>
+              </div>
+
+              <div class="messenger-composer">
+                <input type="text" id="msg-compose-input" class="input-control" placeholder="Type an institutional message..." autocomplete="off">
+                <button id="btn-msg-send" class="btn btn-primary" onclick="PortalModules.messages.sendMessage()">Send</button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ==================================================== -->
+        <!-- VIEW 6: USER MANAGEMENT (ADMIN / EDITOR ONLY)        -->
+        <!-- ==================================================== -->
+        <div id="view-users" class="view-pane" style="display: none;">
+          
+          <div class="view-header-bar">
+            <div class="view-title-group">
+              <h2 class="view-title">User Account Administration</h2>
+              <p class="view-desc">Manage collegiate committee members, assign designated roles, and maintain account security.</p>
+            </div>
+            
+            <div class="view-actions-group">
+              <button id="btn-open-enroll-member" class="btn btn-primary" onclick="PortalModules.users.openEnrollModal()">
+                + Enroll New Member
+              </button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title-group">
+                <h3>Chapter Personnel Directory</h3>
+                <p>Authorized users with credentialed access to MGR IEI Students Chapter Portal</p>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Member</th>
+                    <th>Email Address</th>
+                    <th>Assigned Role</th>
+                    <th>Department</th>
+                    <th>Designation</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="users-table-body">
+                  <tr><td colspan="7" class="text-center py-4 text-muted">Loading users...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+
+        <!-- ==================================================== -->
+        <!-- VIEW 7: ANNOUNCEMENTS & EVENTS                      -->
+        <!-- ==================================================== -->
+        <div id="view-events" class="view-pane" style="display: none;">
+          
+          <div class="view-header-bar">
+            <div>
+              <h2 class="view-title">Announcements &amp; Technical Events</h2>
+              <p class="view-desc">Schedule and document technical workshops, seminars, industrial visits, and guest lectures.</p>
+            </div>
+            
+            <button class="btn btn-primary" onclick="PortalModules.events.openCreateModal()">
+              + Schedule New Event
+            </button>
+          </div>
+
+          <div id="events-grid-container" class="events-grid">
+            <div class="loading-placeholder">Loading chapter events...</div>
+          </div>
+
+        </div>
+
+
+        <!-- ==================================================== -->
+        <!-- VIEW 8: REPORTING SETTINGS (ADMIN / EDITOR ONLY)     -->
+        <!-- ==================================================== -->
+        <div id="view-reporting-settings" class="view-pane" style="display: none;">
+          
+          <div class="view-header-bar">
+            <div>
+              <h2 class="view-title">Reporting Cycle Settings</h2>
+              <p class="view-desc">Configure deadlines, cycle intervals, and compliance policies for the chapter.</p>
+            </div>
+          </div>
+
+          <div class="card max-w-2xl">
+            <div class="card-header">
+              <div class="card-title-group">
+                <h3>Reporting Cycle Parameters</h3>
+                <p>Governs weekly submission deadlines and notifications</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <form id="form-reporting-settings">
+                <div class="form-group">
+                  <label class="form-label" for="rs-period">Cycle Period Title <span class="required">*</span></label>
+                  <input type="text" id="rs-period" class="input-control" required placeholder="e.g. Cycle 45 (03 Nov 2026 - 09 Nov 2026)">
+                </div>
+
+                <div class="form-grid-2">
+                  <div class="form-group">
+                    <label class="form-label" for="rs-active-week">Active Week Number <span class="required">*</span></label>
+                    <input type="number" id="rs-active-week" class="input-control" required min="1" max="52" value="45">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="rs-deadline-day">Weekly Submission Deadline Day <span class="required">*</span></label>
+                    <select id="rs-deadline-day" class="select-control" required>
+                      <option value="Monday" selected>Monday</option>
+                      <option value="Tuesday">Tuesday</option>
+                      <option value="Wednesday">Wednesday</option>
+                      <option value="Friday">Friday</option>
+                      <option value="Sunday">Sunday</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-grid-2">
+                  <div class="form-group">
+                    <label class="form-label" for="rs-deadline-time">Cut-off Deadline Time <span class="required">*</span></label>
+                    <input type="time" id="rs-deadline-time" class="input-control" required value="23:59">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="rs-timezone">Configured Timezone</label>
+                    <input type="text" id="rs-timezone" class="input-control" readonly value="Asia/Kolkata (IST)">
+                  </div>
+                </div>
+
+                <div class="form-actions-bar">
+                  <button type="submit" class="btn btn-primary">Save Reporting Configuration</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+
+
+        <!-- ==================================================== -->
+        <!-- VIEW 9: AUDIT LOGS & COMPLIANCE OBSERVATIONS         -->
+        <!-- ==================================================== -->
+        <div id="view-audit-logs" class="view-pane" style="display: none;">
+          
+          <div class="view-header-bar">
+            <div>
+              <h2 class="view-title">Audit Logs &amp; Security Compliance</h2>
+              <p class="view-desc">Tamper-evident activity trail and independent compliance observations.</p>
+            </div>
+            
+            <button class="btn btn-primary" onclick="PortalModules.auditLogs.openObservationModal()">
+              + Log Compliance Observation
+            </button>
+          </div>
+
+          <!-- Independent Auditor Observations Section -->
+          <div class="card mb-6">
+            <div class="card-header">
+              <div class="card-title-group">
+                <h3>Independent Auditor Observations</h3>
+                <p>Qualitative findings recorded by the Chapter Council Auditor</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <div id="audit-observations-list" class="observations-list">
+                <div class="loading-placeholder">Loading observations...</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- System Audit Trail Table -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title-group">
+                <h3>System Activity Audit Trail</h3>
+                <p>Immutable record of logins, task updates, reports, and administrative changes</p>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Timestamp</th>
+                    <th>User</th>
+                    <th>Action</th>
+                    <th>Module</th>
+                    <th>Details</th>
+                  </tr>
+                </thead>
+                <tbody id="audit-logs-table-body">
+                  <tr><td colspan="5" class="text-center py-4 text-muted">Loading audit records...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
         </div>
 
       </main>
 
     </div>
 
-
-    <!-- ====================================================== -->
-    <!-- FACE 2: ADMIN FACE INTERFACE                           -->
-    <!-- Full Executive Dashboard, Analytics, Chapters & Events -->
-    <!-- ====================================================== -->
-    <div id="face-admin" class="app-container" style="display: none;">
-      
-      <!-- Collapsible Sidebar -->
-      <aside class="sidebar" id="app-sidebar">
-        <a href="javascript:void(0)" class="sidebar-brand-banner" onclick="App.navigate('dashboard')">
-          <img src="/assets/iei-tvlc-banner.png" alt="The Institution of Engineers (India) - Tiruvallur Local Center" class="sidebar-banner-img">
-        </a>
-
-        <nav class="sidebar-nav">
-          <div class="nav-section-title">Core Management</div>
-          <a href="javascript:void(0)" class="nav-item active" data-view="dashboard">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-            Executive Dashboard
-          </a>
-          <a href="javascript:void(0)" class="nav-item" data-view="chapters">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-            Student Chapters (18)
-          </a>
-          <a href="javascript:void(0)" class="nav-item" data-view="events">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            Event Management
-          </a>
-
-          <div class="nav-section-title">Institutional Analytics</div>
-          <a href="javascript:void(0)" class="nav-item" data-view="membership-analytics">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-            Membership Analytics
-          </a>
-          <a href="javascript:void(0)" class="nav-item" data-view="event-analytics">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-            Event Analytics
-          </a>
-
-          <div class="nav-section-title">Institutional Governance</div>
-          <a href="javascript:void(0)" class="nav-item" data-view="reports">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-            Annual Reports & Exports
-          </a>
-          <a href="javascript:void(0)" class="nav-item" data-view="settings">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-            Audit & Security
-          </a>
-        </nav>
-
-        <div class="sidebar-footer">
-          <div><strong>Institution of Engineers (India)</strong></div>
-          <div>Tiruvallur Local Centre</div>
-          <div style="margin-top: 4px;"><a href="https://ieitvlc.org/" target="_blank">🌐 Official Website</a></div>
-        </div>
-      </aside>
-
-      <!-- Main Wrapper -->
-      <div class="main-wrapper">
-        
-        <!-- Top Application Header -->
-        <header class="app-header">
-          <div class="header-left">
-            <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-            </button>
-            <div class="header-logo-badge">
-              <img src="/assets/iei-tvlc-banner.png" alt="IEI TVLC" class="header-logo-badge-img">
-            </div>
-            <div class="header-breadcrumb">
-              <span>IEI TVLC</span>
-              <span>/</span>
-              <span class="current" id="breadcrumb-current">Executive Dashboard</span>
-            </div>
-          </div>
-
-          <div class="header-right">
-            <!-- Institutional Live Status -->
-            <div class="inst-badge">
-              <span class="dot"></span>
-              <span>TVLC Live Sync</span>
-            </div>
-
-            <!-- Global Year Filter -->
-            <div style="display: flex; align-items: center; gap: 6px;">
-              <label for="global-year-select" style="font-size: 12px; font-weight: 600; color: var(--text-muted);">Year:</label>
-              <select id="global-year-select" class="select-control" style="width: 100px; padding: 5px 8px; font-weight: 600;">
-                <option value="2026" selected>2026</option>
-                <option value="2025">2025</option>
-                <option value="2024">2024</option>
-                <option value="All">All Years</option>
-              </select>
-            </div>
-
-            <!-- User Profile & Action Capsule -->
-            <div id="header-user-container">
-              <!-- Injected by app.js -->
-            </div>
-          </div>
-        </header>
-
-        <!-- Content Canvas -->
-        <main class="content-canvas">
-
-          <!-- ========================================== -->
-          <!-- VIEW 1: EXECUTIVE DASHBOARD               -->
-          <!-- ========================================== -->
-          <section id="view-dashboard" class="view-pane">
-            <div class="page-header-strip">
-              <div class="page-titles">
-                <h1>Administrative Overview & Analytics</h1>
-                <p>Real-time institutional metrics, chapter records, and event intelligence across Tiruvallur Local Centre.</p>
-              </div>
-              <div class="page-actions-group">
-                <button class="btn btn-outline btn-sm" onclick="Reports.exportChaptersCsv()">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                  Export Chapters
-                </button>
-                <button class="btn btn-accent btn-sm auth-required" onclick="Events.openAddModal()">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                  Schedule Event
-                </button>
-              </div>
-            </div>
-
-            <!-- 6 Primary Dashboard KPI Cards -->
-            <div class="kpi-grid">
-              <!-- 1. Total Student Members -->
-              <div class="kpi-card">
-                <div class="kpi-header">
-                  <span class="kpi-title">Total Student Members</span>
-                  <div class="kpi-icon-box">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
-                  </div>
-                </div>
-                <div class="kpi-value-row">
-                  <span class="kpi-value" id="kpi-student-members">0</span>
-                </div>
-                <div class="kpi-subtext" id="kpi-student-sub">Verified reporting census</div>
-              </div>
-
-              <!-- 2. Total Corporate Members -->
-              <div class="kpi-card accent-pink">
-                <div class="kpi-header">
-                  <span class="kpi-title">Total Corporate Members</span>
-                  <div class="kpi-icon-box">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                  </div>
-                </div>
-                <div class="kpi-value-row">
-                  <span class="kpi-value" id="kpi-corporate-members">0</span>
-                </div>
-                <div class="kpi-subtext" id="kpi-corporate-sub">Faculty & Industry Fellows</div>
-              </div>
-
-              <!-- 3. Total Events Conducted -->
-              <div class="kpi-card">
-                <div class="kpi-header">
-                  <span class="kpi-title">Total Events Conducted</span>
-                  <div class="kpi-icon-box">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
-                  </div>
-                </div>
-                <div class="kpi-value-row">
-                  <span class="kpi-value" id="kpi-events-total">0</span>
-                </div>
-                <div class="kpi-subtext">Cumulative centre history</div>
-              </div>
-
-              <!-- 4. Events in Selected Year -->
-              <div class="kpi-card accent-gold">
-                <div class="kpi-header">
-                  <span class="kpi-title">Events in Period</span>
-                  <div class="kpi-icon-box">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line></svg>
-                  </div>
-                </div>
-                <div class="kpi-value-row">
-                  <span class="kpi-value" id="kpi-events-year">0</span>
-                </div>
-                <div class="kpi-subtext" id="kpi-events-year-sub">1,019 verified participants</div>
-              </div>
-
-              <!-- 5. New Memberships in Year -->
-              <div class="kpi-card accent-green">
-                <div class="kpi-header">
-                  <span class="kpi-title">New Memberships Gained</span>
-                  <div class="kpi-icon-box">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                  </div>
-                </div>
-                <div class="kpi-value-row">
-                  <span class="kpi-value" id="kpi-new-members">0</span>
-                </div>
-                <div class="kpi-subtext" id="kpi-new-members-sub">1,287 students across 5 colleges</div>
-              </div>
-
-              <!-- 6. Total Registered Student Chapters -->
-              <div class="kpi-card">
-                <div class="kpi-header">
-                  <span class="kpi-title">Registered Chapters</span>
-                  <div class="kpi-icon-box">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-                  </div>
-                </div>
-                <div class="kpi-value-row">
-                  <span class="kpi-value" id="kpi-total-chapters">18</span>
-                </div>
-                <div class="kpi-subtext" id="kpi-total-chapters-sub">Affiliated engineering colleges</div>
-              </div>
-            </div>
-
-            <!-- Charts Row 1: Annual Membership Trends & Monthly Event Trends -->
-            <div class="charts-grid">
-              <div class="dashboard-card col-8">
-                <div class="card-header">
-                  <div class="card-title-group">
-                    <h3>Annual Membership Trends</h3>
-                    <p>Historical progression of student and corporate memberships across TVLC reporting chapters</p>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="chart-wrapper tall">
-                    <canvas id="chart-membership-trends"></canvas>
-                  </div>
-                </div>
-              </div>
-
-              <div class="dashboard-card col-4">
-                <div class="card-header">
-                  <div class="card-title-group">
-                    <h3>Monthly Event Trends</h3>
-                    <p>Frequency of programmes conducted per month in selected year</p>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="chart-wrapper tall">
-                    <canvas id="chart-monthly-events"></canvas>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Charts Row 2: Annual Comparisons & Chapter Membership -->
-            <div class="charts-grid" style="margin-top: 24px;">
-              <div class="dashboard-card col-6">
-                <div class="card-header">
-                  <div class="card-title-group">
-                    <h3>Annual Event Comparisons</h3>
-                    <p>Historical comparison of Technical Lectures vs Statutory-Day observances</p>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="chart-wrapper">
-                    <canvas id="chart-annual-events"></canvas>
-                  </div>
-                </div>
-              </div>
-
-              <div class="dashboard-card col-6">
-                <div class="card-header">
-                  <div class="card-title-group">
-                    <h3>Chapter-Wise Membership Distribution</h3>
-                    <p>Collegiate ranking by verified student membership enrolment</p>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="chart-wrapper">
-                    <canvas id="chart-chapter-membership"></canvas>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- ========================================== -->
-          <!-- VIEW 2: STUDENT CHAPTER MANAGEMENT        -->
-          <!-- ========================================== -->
-          <section id="view-chapters" class="view-pane" style="display: none;">
-            <div class="page-header-strip">
-              <div class="page-titles">
-                <h1>Student Chapter Management</h1>
-                <p>Official registry of 18 collegiate engineering student chapters under Tiruvallur Local Centre.</p>
-              </div>
-              <div class="page-actions-group">
-                <button class="btn btn-outline btn-sm" onclick="Reports.exportChaptersCsv()">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                  Export CSV
-                </button>
-                <button class="btn btn-accent btn-sm auth-required" onclick="Chapters.openAddModal()">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                  Add Student Chapter
-                </button>
-              </div>
-            </div>
-
-            <!-- Filter Controls Strip -->
-            <div class="filter-card">
-              <div class="filter-group-left">
-                <div class="search-input-wrapper">
-                  <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                  <input type="text" id="chapters-search" class="input-control" placeholder="Search by college name, code, department..." oninput="Chapters.handleSearch(this.value)">
-                </div>
-                <select id="chapters-status-filter" class="select-control" style="width: 160px;" onchange="Chapters.handleStatusFilter(this.value)">
-                  <option value="All">All Statuses</option>
-                  <option value="Active">Active</option>
-                  <option value="Pending Verification">Pending Verification</option>
-                </select>
-              </div>
-              <div style="font-size: 13px; color: var(--text-muted);" id="chapters-count-badge">
-                Showing 18 chapters
-              </div>
-            </div>
-
-            <!-- Data Table Card -->
-            <div class="dashboard-card">
-              <div class="table-responsive">
-                <table class="data-table" id="table-chapters">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Student Chapter Name</th>
-                      <th>Affiliated College</th>
-                      <th>Engineering Departments</th>
-                      <th style="text-align: right;">Student Members</th>
-                      <th style="text-align: right;">Corporate Members</th>
-                      <th>Faculty Advisors</th>
-                      <th>Status</th>
-                      <th style="text-align: right;">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody id="chapters-table-body">
-                    <!-- Populated dynamically by chapters.js -->
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </section>
-
-          <!-- ========================================== -->
-          <!-- VIEW 3: EVENT MANAGEMENT                  -->
-          <!-- ========================================== -->
-          <section id="view-events" class="view-pane" style="display: none;">
-            <div class="page-header-strip">
-              <div class="page-titles">
-                <h1>Centre Event Management</h1>
-                <p>Schedule, filter, and document technical lectures, statutory days, workshops, and competitions.</p>
-              </div>
-              <div class="page-actions-group">
-                <button class="btn btn-outline btn-sm" onclick="Reports.exportEventsCsv()">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                  Export Events
-                </button>
-                <button class="btn btn-accent btn-sm auth-required" onclick="Events.openAddModal()">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                  Schedule Event
-                </button>
-              </div>
-            </div>
-
-            <!-- Event Filters Strip -->
-            <div class="filter-card">
-              <div class="filter-group-left">
-                <div class="search-input-wrapper">
-                  <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                  <input type="text" id="events-search" class="input-control" placeholder="Search by title, speaker, venue..." oninput="Events.handleSearch(this.value)">
-                </div>
-                <select id="events-category-filter" class="select-control" style="width: 180px;" onchange="Events.handleCategoryFilter(this.value)">
-                  <option value="All">All Categories</option>
-                  <option value="Technical Lecture">Technical Lectures</option>
-                  <option value="Statutory Day">Statutory Days</option>
-                  <option value="Workshop/Seminar">Workshops & Seminars</option>
-                  <option value="Competition/Hackathon">Competitions & Hackathons</option>
-                </select>
-                <select id="events-status-filter" class="select-control" style="width: 140px;" onchange="Events.handleStatusFilter(this.value)">
-                  <option value="All">All Statuses</option>
-                  <option value="Completed">Completed</option>
-                  <option value="Upcoming">Upcoming</option>
-                  <option value="In Progress">In Progress</option>
-                  <option value="Cancelled">Cancelled</option>
-                </select>
-              </div>
-              <div style="font-size: 13px; color: var(--text-muted);" id="events-count-badge">
-                Showing events
-              </div>
-            </div>
-
-            <!-- Events Table Card -->
-            <div class="dashboard-card">
-              <div class="table-responsive">
-                <table class="data-table" id="table-events">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Event Title</th>
-                      <th>Category</th>
-                      <th>Event Date</th>
-                      <th>Host Chapter / Venue</th>
-                      <th>Keynote Speaker</th>
-                      <th>Status</th>
-                      <th>Artifacts</th>
-                      <th style="text-align: right;">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody id="events-table-body">
-                    <!-- Populated dynamically by events.js -->
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </section>
-
-          <!-- ========================================== -->
-          <!-- VIEW 4: MEMBERSHIP ANALYTICS              -->
-          <!-- ========================================== -->
-          <section id="view-membership-analytics" class="view-pane" style="display: none;">
-            <div class="page-header-strip">
-              <div class="page-titles">
-                <h1>Membership Analytics & Growth Intelligence</h1>
-                <p>Verified historical census progression, chapter comparisons, and genuine growth calculations.</p>
-              </div>
-              <div class="page-actions-group">
-                <button class="btn btn-outline btn-sm" onclick="Reports.exportMembershipCsv()">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                  Export Membership Data
-                </button>
-              </div>
-            </div>
-
-            <!-- Analytics Visualizations Grid -->
-            <div class="charts-grid">
-              <div class="dashboard-card col-8">
-                <div class="card-header">
-                  <div class="card-title-group">
-                    <h3>Year-Wise Membership Growth Trajectory</h3>
-                    <p>Validated annual snapshots of student and corporate memberships across TVLC</p>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="chart-wrapper tall">
-                    <canvas id="chart-analytics-membership-trends"></canvas>
-                  </div>
-                </div>
-              </div>
-
-              <div class="dashboard-card col-4">
-                <div class="card-header">
-                  <div class="card-title-group">
-                    <h3>Chapter-Wise Membership Share</h3>
-                    <p>Proportion of verified student memberships by affiliated college</p>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="chart-wrapper tall">
-                    <canvas id="chart-analytics-membership-share"></canvas>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Historical Progression Data Table with Mathematical Growth Rates -->
-            <div class="dashboard-card" style="margin-top: 24px;">
-              <div class="card-header">
-                <div class="card-title-group">
-                  <h3>Annual Membership Snapshot Audit & Calculated Growth</h3>
-                  <p>Adheres strictly to Requirement 7: Missing baseline data treated as Unknown rather than fabricated</p>
-                </div>
-              </div>
-              <div class="card-body" style="padding: 0;">
-                <div class="table-responsive">
-                  <table class="data-table">
-                    <thead>
-                      <tr>
-                        <th>Reporting Year</th>
-                        <th style="text-align: right;">Student Members</th>
-                        <th style="text-align: right;">Student Growth Rate (%)</th>
-                        <th style="text-align: right;">Corporate Members</th>
-                        <th style="text-align: right;">Corporate Growth Rate (%)</th>
-                        <th style="text-align: right;">Total Known Members</th>
-                        <th>Reporting Chapters Count</th>
-                        <th>Audit Status</th>
-                      </tr>
-                    </thead>
-                    <tbody id="membership-analytics-table-body">
-                      <!-- Populated dynamically by analytics.js -->
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- ========================================== -->
-          <!-- VIEW 5: EVENT ANALYTICS                   -->
-          <!-- ========================================== -->
-          <section id="view-event-analytics" class="view-pane" style="display: none;">
-            <div class="page-header-strip">
-              <div class="page-titles">
-                <h1>Event & Programme Analytics</h1>
-                <p>Distribution metrics, Technical Lectures vs Statutory Days, and chapter activity volumes.</p>
-              </div>
-            </div>
-
-            <!-- Analytics Visualizations Grid -->
-            <div class="charts-grid">
-              <div class="dashboard-card col-6">
-                <div class="card-header">
-                  <div class="card-title-group">
-                    <h3>Event Categories Breakdown</h3>
-                    <p>Proportion of Technical Lectures, Statutory Days, and Workshops</p>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="chart-wrapper">
-                    <canvas id="chart-analytics-event-categories"></canvas>
-                  </div>
-                </div>
-              </div>
-
-              <div class="dashboard-card col-6">
-                <div class="card-header">
-                  <div class="card-title-group">
-                    <h3>Programme Status Distribution</h3>
-                    <p>Breakdown of completed, upcoming, and scheduled events</p>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="chart-wrapper">
-                    <canvas id="chart-analytics-event-status"></canvas>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Year-Over-Year Event Comparisons Table -->
-            <div class="dashboard-card" style="margin-top: 24px;">
-              <div class="card-header">
-                <div class="card-title-group">
-                  <h3>Year-Over-Year Event Totals & Category Comparisons</h3>
-                  <p>Comprehensive activity audit across reporting sessions</p>
-                </div>
-              </div>
-              <div class="card-body" style="padding: 0;">
-                <div class="table-responsive">
-                  <table class="data-table">
-                    <thead>
-                      <tr>
-                        <th>Year</th>
-                        <th style="text-align: right;">Total Events</th>
-                        <th style="text-align: right;">Technical Lectures</th>
-                        <th style="text-align: right;">Statutory Days</th>
-                        <th style="text-align: right;">Workshops & Seminars</th>
-                        <th style="text-align: right;">Completed</th>
-                        <th style="text-align: right;">Upcoming</th>
-                      </tr>
-                    </thead>
-                    <tbody id="event-analytics-table-body">
-                      <!-- Populated dynamically by analytics.js -->
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- ========================================== -->
-          <!-- VIEW 6: ANNUAL REPORTS & EXPORTS          -->
-          <!-- ========================================== -->
-          <section id="view-reports" class="view-pane" style="display: none;">
-            <div class="page-header-strip">
-              <div class="page-titles">
-                <h1>Institutional Annual Reports & Formal Exports</h1>
-                <p>Print-ready formal documents and standardized data exports for IEI State and Headquarters review.</p>
-              </div>
-              <div class="page-actions-group">
-                <button class="btn btn-primary btn-sm" onclick="Reports.printReport()">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-                  Print Official Report
-                </button>
-                <button class="btn btn-outline btn-sm" onclick="Reports.exportChaptersCsv()">Export Chapters CSV</button>
-                <button class="btn btn-outline btn-sm" onclick="Reports.exportEventsCsv()">Export Events CSV</button>
-                <button class="btn btn-outline btn-sm" onclick="Reports.exportMembershipCsv()">Export Membership CSV</button>
-              </div>
-            </div>
-
-            <!-- Printable Formal Report Document -->
-            <div id="printable-report-container">
-              <!-- Rendered by reports.js -->
-            </div>
-          </section>
-
-          <!-- ========================================== -->
-          <!-- VIEW 7: AUDIT & SETTINGS                  -->
-          <!-- ========================================== -->
-          <section id="view-settings" class="view-pane" style="display: none;">
-            <div class="page-header-strip">
-              <div class="page-titles">
-                <h1>Security Audit Trail & User Directory</h1>
-                <p>Immutable server activity logs and administrative account governance.</p>
-              </div>
-            </div>
-
-            <!-- Current User Profile Card -->
-            <div class="dashboard-card" style="margin-bottom: 24px;">
-              <div class="card-header">
-                <h3>Active Institutional User Session</h3>
-              </div>
-              <div class="card-body" id="settings-user-profile">
-                <!-- Injected by settings.js -->
-              </div>
-            </div>
-
-            <!-- Audit Trail Log Table -->
-            <div class="dashboard-card">
-              <div class="card-header">
-                <div class="card-title-group">
-                  <h3>Administrative Audit Log (Recent Operations)</h3>
-                  <p>Real-time security trail recording login, chapter updates, census modifications, and exports</p>
-                </div>
-                <button class="btn btn-outline btn-sm" onclick="Settings.loadAuditLogs()">↻ Refresh</button>
-              </div>
-              <div class="card-body" style="padding: 0;">
-                <div class="table-responsive">
-                  <table class="data-table">
-                    <thead>
-                      <tr>
-                        <th>Timestamp</th>
-                        <th>Action</th>
-                        <th>Performed By</th>
-                        <th>Target</th>
-                        <th>Details</th>
-                      </tr>
-                    </thead>
-                    <tbody id="settings-audit-body">
-                      <!-- Injected by settings.js -->
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </section>
-
-        </main>
-      </div>
-
-    </div>
-
   </div>
 
 
-  <!-- ========================================== -->
-  <!-- MODALS CONTAINER                           -->
-  <!-- ========================================== -->
+  <!-- ======================================================== -->
+  <!-- MODALS AND DRAWERS                                       -->
+  <!-- ======================================================== -->
 
-  <!-- 1. Student Chapter Form Modal (Add / Edit) -->
-  <div class="modal-backdrop" id="modal-chapter-form">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-header">
-        <h3 id="chapter-modal-title">Register Student Chapter</h3>
-        <button class="modal-close-btn" onclick="App.closeModal('modal-chapter-form')">&times;</button>
-      </div>
-      <form id="form-chapter" onsubmit="Chapters.saveChapter(event)">
-        <input type="hidden" id="chapter-form-id">
-        <div class="modal-body">
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-            <div class="form-group">
-              <label class="form-label">Student Chapter Name <span class="required">*</span></label>
-              <input type="text" id="chapter-form-name" class="input-control" required placeholder="e.g. IEI TVLC RMK Student Chapter">
-            </div>
-            <div class="form-group">
-              <label class="form-label">College / Institution Name <span class="required">*</span></label>
-              <input type="text" id="chapter-form-college" class="input-control" required placeholder="e.g. RMK Engineering College">
-            </div>
-            <div class="form-group">
-              <label class="form-label">College Code / Acronym</label>
-              <input type="text" id="chapter-form-code" class="input-control" placeholder="e.g. RMKEC">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Status</label>
-              <select id="chapter-form-status" class="select-control">
-                <option value="Active">Active</option>
-                <option value="Pending Verification">Pending Verification</option>
-              </select>
-            </div>
-            <div class="form-group" style="grid-column: span 2;">
-              <label class="form-label">Affiliated Engineering Departments (comma-separated)</label>
-              <input type="text" id="chapter-form-depts" class="input-control" placeholder="EEE, EIE, CSE, Mechanical, Civil, IT">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Known Student Members Count</label>
-              <input type="number" id="chapter-form-students" class="input-control" placeholder="Leave empty if Census Pending">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Known Corporate Members Count</label>
-              <input type="number" id="chapter-form-corporate" class="input-control" placeholder="Leave empty if Unknown">
-            </div>
-            <div class="form-group" style="grid-column: span 2;">
-              <label class="form-label">Faculty Advisor(s) (comma-separated)</label>
-              <input type="text" id="chapter-form-advisors" class="input-control" placeholder="e.g. Dr. Sukhi, Dr. Parthibhan">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Established Year</label>
-              <input type="number" id="chapter-form-year" class="input-control" value="2026">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Contact Email</label>
-              <input type="email" id="chapter-form-email" class="input-control" placeholder="iei.chapter@college.edu.in">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Contact Phone</label>
-              <input type="text" id="chapter-form-phone" class="input-control" placeholder="+91 44 2345 6789">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Campus Location</label>
-              <input type="text" id="chapter-form-location" class="input-control" placeholder="e.g. Avadi, Chennai">
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline" onclick="App.closeModal('modal-chapter-form')">Cancel</button>
-          <button type="submit" class="btn btn-primary">Save Chapter Record</button>
-        </div>
-      </form>
+  <!-- Drawer: Notifications -->
+  <div id="notif-drawer-backdrop" class="drawer-backdrop" onclick="PortalModules.notifications.toggleDrawer()"></div>
+  <aside id="notifications-drawer" class="notifications-drawer">
+    <div class="nd-header">
+      <h3>Chapter Notifications</h3>
+      <button class="btn-close" onclick="PortalModules.notifications.toggleDrawer()">✕</button>
     </div>
-  </div>
-
-  <!-- 2. Chapter Details Modal -->
-  <div class="modal-backdrop" id="modal-chapter-details">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-header">
-        <h3>Student Chapter Profile</h3>
-        <button class="modal-close-btn" onclick="App.closeModal('modal-chapter-details')">&times;</button>
-      </div>
-      <div class="modal-body" id="chapter-details-content">
-        <!-- Rendered by chapters.js -->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline" onclick="App.closeModal('modal-chapter-details')">Close</button>
-      </div>
+    <div id="notifications-list" class="nd-list">
+      <p class="text-muted p-4">No unread notifications.</p>
     </div>
-  </div>
+  </aside>
 
-  <!-- 3. Chapter Census Snapshot Modal -->
-  <div class="modal-backdrop" id="modal-census-form">
+  <!-- Modal: Account Profile -->
+  <div id="modal-account-profile" class="modal-backdrop" style="display: none;">
     <div class="modal-dialog">
       <div class="modal-header">
-        <h3>Record Annual Membership Census</h3>
-        <button class="modal-close-btn" onclick="App.closeModal('modal-census-form')">&times;</button>
+        <h3>User Profile &amp; Credentials</h3>
+        <button class="btn-close" onclick="PortalModules.account.closeModal()">✕</button>
       </div>
-      <form onsubmit="Chapters.submitCensus(event)">
-        <input type="hidden" id="census-chapter-id">
-        <div class="modal-body">
-          <div style="font-weight: 600; color: var(--iei-navy); margin-bottom: 12px;" id="census-chapter-name"></div>
-          <div class="form-group">
-            <label class="form-label">Census Reporting Year <span class="required">*</span></label>
-            <input type="number" id="census-year" class="input-control" required value="2026">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Verified Student Member Count</label>
-            <input type="number" id="census-students" class="input-control" placeholder="Leave blank if unknown">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Corporate Professional Member Count</label>
-            <input type="number" id="census-corporate" class="input-control" placeholder="Leave blank if unknown">
-          </div>
+      <div class="modal-body">
+        <div class="profile-details-grid">
+          <div><label class="form-label">Name:</label> <strong id="acc-name">-</strong></div>
+          <div><label class="form-label">Assigned Role:</label> <span id="acc-role" class="badge badge-info">-</span></div>
+          <div><label class="form-label">Email Address:</label> <span id="acc-email">-</span></div>
+          <div><label class="form-label">Department:</label> <span id="acc-department">-</span></div>
+          <div><label class="form-label">Designation:</label> <span id="acc-designation">-</span></div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline" onclick="App.closeModal('modal-census-form')">Cancel</button>
-          <button type="submit" class="btn btn-primary">Save Census Audit</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- 4. Event Form Modal (Add / Edit) -->
-  <div class="modal-backdrop" id="modal-event-form">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-header">
-        <h3 id="event-modal-title">Schedule Centre Programme</h3>
-        <button class="modal-close-btn" onclick="App.closeModal('modal-event-form')">&times;</button>
-      </div>
-      <form id="form-event" onsubmit="Events.saveEvent(event)">
-        <input type="hidden" id="event-form-id" name="id">
-        <div class="modal-body">
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-            <div class="form-group" style="grid-column: span 2;">
-              <label class="form-label">Event / Lecture Title <span class="required">*</span></label>
-              <input type="text" id="event-form-title" name="title" class="input-control" required placeholder="e.g. 54th Technical Lecture on Clean Energy Integration">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Event Category <span class="required">*</span></label>
-              <select id="event-form-category" name="category" class="select-control" required>
-                <option value="Technical Lecture">Technical Lecture</option>
-                <option value="Statutory Day">Statutory Day</option>
-                <option value="Workshop">Workshop</option>
-                <option value="Workshop/Seminar">Workshop / Seminar</option>
-                <option value="Competition/Hackathon">Competition / Hackathon</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Event Date <span class="required">*</span></label>
-              <input type="date" id="event-form-date" name="eventDate" class="input-control" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Event Time</label>
-              <input type="text" id="event-form-time" name="eventTime" class="input-control" placeholder="e.g. 10:00 AM">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Status</label>
-              <select id="event-form-status" name="status" class="select-control">
-                <option value="Upcoming">Upcoming</option>
-                <option value="Completed">Completed</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Cancelled">Cancelled</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Host Student Chapter</label>
-              <select id="event-form-chapter" name="chapterId" class="select-control" onchange="Events.handleChapterSelectChange(this)">
-                <!-- Populated dynamically -->
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Host College / Venue Title</label>
-              <input type="text" id="event-form-college" name="collegeOrChapter" class="input-control" placeholder="e.g. Dr. MGR University Main Auditorium">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Keynote Speaker Name</label>
-              <input type="text" id="event-form-speaker" name="speakerName" class="input-control" placeholder="e.g. Dr. K. Vijayakumar, FIE">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Speaker Designation</label>
-              <input type="text" id="event-form-designation" name="speakerDesignation" class="input-control" placeholder="e.g. Professor & Head">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Speaker Organization</label>
-              <input type="text" id="event-form-org" name="speakerOrg" class="input-control" placeholder="e.g. BHEL / DRDO / TVS Motors">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Venue / Virtual Link</label>
-              <input type="text" id="event-form-venue" name="venue" class="input-control" placeholder="Auditorium 1 or MS Teams Webinar">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Verified Attendees Count</label>
-              <input type="number" id="event-form-attendees" name="attendeesCount" class="input-control" placeholder="e.g. 185">
-            </div>
-            <div class="form-group" style="grid-column: span 2;">
-              <label class="form-label">Programme Description & Topics Covered</label>
-              <textarea id="event-form-desc" name="description" class="textarea-control" rows="3" placeholder="Summary of topics, technical scope, and session outline..."></textarea>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Event Poster Graphic (Upload)</label>
-              <input type="file" name="poster" class="input-control" accept="image/png, image/jpeg, image/webp">
-              <div class="form-hint">Accepted formats: PNG, JPG, WebP. Max 5MB.</div>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Technical Event Report (PDF Upload)</label>
-              <input type="file" name="report" class="input-control" accept="application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document">
-              <div class="form-hint">Accepted formats: PDF, DOCX. Max 15MB.</div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline" onclick="App.closeModal('modal-event-form')">Cancel</button>
-          <button type="submit" class="btn btn-primary">Save Event Record</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- 5. Event Details Modal -->
-  <div class="modal-backdrop" id="modal-event-details">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-header">
-        <h3>Programme Summary & Technical Documentation</h3>
-        <button class="modal-close-btn" onclick="App.closeModal('modal-event-details')">&times;</button>
-      </div>
-      <div class="modal-body" id="event-details-content">
-        <!-- Rendered by events.js -->
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline" onclick="App.closeModal('modal-event-details')">Close</button>
+        <button class="btn btn-outline" onclick="PortalModules.account.closeModal()">Close</button>
       </div>
     </div>
   </div>
 
-  <!-- Toast Notification Capsule -->
-  <div class="toast-container" id="toast-container"></div>
+  <!-- Modal: Create Task -->
+  <div id="modal-create-task" class="modal-backdrop" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Assign Chapter Task</h3>
+        <button class="btn-close" onclick="PortalModules.tasks.closeCreateModal()">✕</button>
+      </div>
+      <form id="form-create-task">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="task-input-title">Task Title <span class="required">*</span></label>
+            <input type="text" id="task-input-title" class="input-control" required placeholder="e.g. Prepare Engineers Day technical paper call">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="task-input-desc">Task Description <span class="required">*</span></label>
+            <textarea id="task-input-desc" class="textarea-control" required rows="3" placeholder="Provide full assignment requirements and deliverables..."></textarea>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="task-input-priority">Priority <span class="required">*</span></label>
+              <select id="task-input-priority" class="select-control" required>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+                <option value="urgent">Urgent</option>
+                <option value="low">Low</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="task-input-dept">Department <span class="required">*</span></label>
+              <select id="task-input-dept" class="select-control" required>
+                <option value="Technical" selected>Technical</option>
+                <option value="Events">Events</option>
+                <option value="Reporting">Reporting</option>
+                <option value="Membership">Membership</option>
+                <option value="Compliance">Compliance</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="task-input-assignee">Assignee <span class="required">*</span></label>
+              <input type="text" id="task-input-assignee" class="input-control" required placeholder="Assignee Name">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="task-input-due">Due Date <span class="required">*</span></label>
+              <input type="date" id="task-input-due" class="input-control" required>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="PortalModules.tasks.closeCreateModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Create Task</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
-  <!-- Client Application Scripts -->
+  <!-- Modal: Task Detail & Review -->
+  <div id="modal-task-detail" class="modal-backdrop" style="display: none;">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <div>
+          <span id="td-id" class="badge badge-outline">TASK</span>
+          <span id="td-status" class="badge badge-info">STATUS</span>
+        </div>
+        <button class="btn-close" onclick="PortalModules.tasks.closeDetailModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <h3 id="td-title" style="margin-bottom: 8px;">Task Title</h3>
+        <p id="td-description" class="text-muted" style="margin-bottom: 16px;">Task description</p>
+        
+        <div class="task-detail-meta-grid">
+          <div><label class="form-label">Assignee:</label> <strong id="td-assignee">-</strong></div>
+          <div><label class="form-label">Department:</label> <span id="td-department">-</span></div>
+          <div><label class="form-label">Due Date:</label> <span id="td-due">-</span></div>
+          <div><label class="form-label">Progress:</label> <strong id="td-progress-text">0%</strong></div>
+        </div>
+
+        <div class="task-progress-bar-wrap mb-4">
+          <div id="td-progress-bar" class="task-progress-fill" style="width: 0%;"></div>
+        </div>
+
+        <!-- Progress update slider for Committee Member -->
+        <div id="td-progress-update-section" class="card p-4 mb-4" style="display: none;">
+          <h4>Update Progress &amp; Submit For Review</h4>
+          <div class="form-group mt-2">
+            <label class="form-label">Progress Percentage: <strong id="td-slider-val">0%</strong></label>
+            <input type="range" id="td-progress-slider" min="0" max="100" step="5" value="0" class="slider-control" oninput="document.getElementById('td-slider-val').textContent = this.value + '%'">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="td-progress-note">Progress Note</label>
+            <input type="text" id="td-progress-note" class="input-control" placeholder="Describe recent milestone or completion...">
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-primary btn-sm" onclick="PortalModules.tasks.saveProgress()">Update Progress</button>
+            <button class="btn btn-accent btn-sm" onclick="PortalModules.tasks.submitForReview()">Submit For Review</button>
+          </div>
+        </div>
+
+        <!-- Reviewer comments & actions for Chairman/Admin -->
+        <div id="td-review-comments-box" class="card p-4 mb-4" style="display: none;">
+          <h4>Review Milestone</h4>
+          <div class="form-group mt-2">
+            <label class="form-label" for="td-review-comments">Review Feedback / Revision Notes</label>
+            <textarea id="td-review-comments" class="textarea-control" rows="2" placeholder="Enter comments or instructions..."></textarea>
+          </div>
+          <div id="td-reviewer-actions" style="display: flex; gap: 8px;">
+            <button class="btn btn-success btn-sm" onclick="PortalModules.tasks.approveTask()">Approve Task</button>
+            <button class="btn btn-danger btn-sm" onclick="PortalModules.tasks.requestRevision()">Request Revision</button>
+          </div>
+        </div>
+
+        <!-- Activity History Timeline -->
+        <div class="task-timeline-section">
+          <h4>Task Activity Timeline</h4>
+          <div id="td-activity-timeline" class="activity-timeline-list"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="PortalModules.tasks.closeDetailModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Submit Weekly Report -->
+  <div id="modal-submit-weekly-report" class="modal-backdrop" style="display: none;">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <h3>Submit Weekly Report</h3>
+        <button class="btn-close" onclick="PortalModules.weeklyReports.closeSubmitModal()">✕</button>
+      </div>
+      <form id="form-submit-weekly-report">
+        <div class="modal-body">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="wr-input-week">Cycle Week Number <span class="required">*</span></label>
+              <input type="number" id="wr-input-week" class="input-control" required min="1" max="52" value="45">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="wr-input-period">Reporting Period <span class="required">*</span></label>
+              <input type="text" id="wr-input-period" class="input-control" required placeholder="03 Nov 2026 - 09 Nov 2026">
+            </div>
+          </div>
+          <div class="form-grid-3">
+            <div class="form-group">
+              <label class="form-label" for="wr-input-dept">Department <span class="required">*</span></label>
+              <select id="wr-input-dept" class="select-control" required>
+                <option value="Technical" selected>Technical</option>
+                <option value="Events">Events</option>
+                <option value="Membership">Membership</option>
+                <option value="Compliance">Compliance</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="wr-input-hours">Operational Hours <span class="required">*</span></label>
+              <input type="number" id="wr-input-hours" class="input-control" required min="1" value="20">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="wr-input-attendees">Event Attendees</label>
+              <input type="number" id="wr-input-attendees" class="input-control" min="0" value="0">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="wr-input-summary">Executive Summary of Activities <span class="required">*</span></label>
+            <textarea id="wr-input-summary" class="textarea-control" required rows="3" placeholder="Summary of initiatives conducted this cycle..."></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="wr-input-events">Events &amp; Programmes Conducted</label>
+            <textarea id="wr-input-events" class="textarea-control" rows="2" placeholder="List workshops, talks, or symposium meetings..."></textarea>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="wr-input-roadblocks">Roadblocks or Challenges</label>
+              <textarea id="wr-input-roadblocks" class="textarea-control" rows="2" placeholder="Any obstacles encountered..."></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="wr-input-nextsteps">Next Cycle Objectives <span class="required">*</span></label>
+              <textarea id="wr-input-nextsteps" class="textarea-control" required rows="2" placeholder="Key goals for the upcoming week..."></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="PortalModules.weeklyReports.closeSubmitModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Submit Report</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: View Weekly Report -->
+  <div id="modal-view-weekly-report" class="modal-backdrop" style="display: none;">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <div>
+          <span id="rep-modal-badge" class="badge badge-primary">WEEK</span>
+          <span id="rep-modal-status" class="badge badge-info">STATUS</span>
+        </div>
+        <button class="btn-close" onclick="PortalModules.weeklyReports.closeViewModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <h3 id="rep-modal-title" style="margin-bottom: 4px;">Weekly Report</h3>
+        <p id="rep-modal-period" class="text-muted" style="margin-bottom: 16px;">Cycle Period</p>
+
+        <div class="task-detail-meta-grid">
+          <div><label class="form-label">Department:</label> <strong id="rep-modal-dept">-</strong></div>
+          <div><label class="form-label">Activity Hours:</label> <span id="rep-modal-hours">0 hrs</span></div>
+          <div><label class="form-label">Attendees:</label> <span id="rep-modal-attendees">0</span></div>
+        </div>
+
+        <div class="report-section mb-3">
+          <h4>Executive Summary</h4>
+          <p id="rep-modal-summary" class="report-content-text">-</p>
+        </div>
+
+        <div class="report-section mb-3">
+          <h4>Events &amp; Programmes</h4>
+          <p id="rep-modal-events" class="report-content-text">-</p>
+        </div>
+
+        <div class="report-section mb-3">
+          <h4>Roadblocks &amp; Mitigation</h4>
+          <p id="rep-modal-roadblocks" class="report-content-text">-</p>
+        </div>
+
+        <div class="report-section mb-3">
+          <h4>Next Cycle Objectives</h4>
+          <p id="rep-modal-nextsteps" class="report-content-text">-</p>
+        </div>
+
+        <!-- Reviewer Comments Box for Chairman/Admin -->
+        <div id="rep-modal-comments-box" class="card p-4 mt-4" style="display: none;">
+          <h4>Endorsement &amp; Review Remarks</h4>
+          <div class="form-group mt-2">
+            <textarea id="rep-modal-comments" class="textarea-control" rows="2" placeholder="Enter review remarks..."></textarea>
+          </div>
+          <div id="rep-reviewer-actions" style="display: flex; gap: 8px;">
+            <button class="btn btn-success btn-sm" onclick="PortalModules.weeklyReports.approveReport()">Endorse Report</button>
+            <button class="btn btn-danger btn-sm" onclick="PortalModules.weeklyReports.requestRevision()">Request Revision</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="PortalModules.weeklyReports.closeViewModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Enroll User -->
+  <div id="modal-enroll-user" class="modal-backdrop" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="enroll-modal-title">Enroll Chapter Member</h3>
+        <button type="button" class="btn-close" onclick="PortalModules.users.closeEnrollModal()">✕</button>
+      </div>
+      <form id="form-enroll-user">
+        <div class="modal-body">
+          <div id="enroll-error-alert" class="login-alert-error" style="display: none; margin-bottom: 16px; padding: 12px 14px; border-radius: 6px; background-color: #FEF2F2; color: #991B1B; border: 1px solid #F87171; font-size: 14px;"></div>
+          <div id="enroll-success-alert" class="login-alert-success" style="display: none; margin-bottom: 16px; padding: 12px 14px; border-radius: 6px; background-color: #F0FDF4; color: #166534; border: 1px solid #86EFAC; font-size: 14px;"></div>
+
+          <div class="form-group">
+            <label class="form-label" for="enroll-name">Full Name <span class="required">*</span></label>
+            <input type="text" id="enroll-name" class="input-control" required placeholder="Member Name">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="enroll-email">Institutional Email <span class="required">*</span></label>
+            <input type="email" id="enroll-email" class="input-control" required placeholder="name@mgriei.org">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="enroll-role">Assigned Role <span class="required">*</span></label>
+            <select id="enroll-role" class="select-control" required>
+              <option value="committee" selected>🎓 Student Committee Member</option>
+              <option value="chairman">👑 Chairman</option>
+              <option value="admin">🛡️ Admin / Editor</option>
+              <option value="auditor">📋 Auditor</option>
+            </select>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="enroll-dept">Department <span class="required">*</span></label>
+              <input type="text" id="enroll-dept" class="input-control" required placeholder="e.g. Computer Science">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="enroll-designation">Designation <span class="required">*</span></label>
+              <input type="text" id="enroll-designation" class="input-control" required placeholder="e.g. Technical Secretary">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="enroll-password">Initial Password <span class="text-muted" style="font-weight: 400; font-size: 13px;">(Optional, default: MGR_Member_2026!)</span></label>
+            <input type="password" id="enroll-password" class="input-control" placeholder="MGR_Member_2026!" autocomplete="new-password">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="PortalModules.users.closeEnrollModal()">Cancel</button>
+          <button type="submit" id="btn-submit-enroll" class="btn btn-primary">Enroll Member</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Add Event -->
+  <div id="modal-add-event" class="modal-backdrop" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Schedule Technical Event</h3>
+        <button class="btn-close" onclick="PortalModules.events.closeCreateModal()">✕</button>
+      </div>
+      <form id="form-add-event">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="event-form-title">Event Title <span class="required">*</span></label>
+            <input type="text" id="event-form-title" class="input-control" required placeholder="e.g. National Seminar on AI in Robotics">
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="event-form-category">Category <span class="required">*</span></label>
+              <select id="event-form-category" class="select-control" required>
+                <option value="Technical Lecture" selected>Technical Lecture</option>
+                <option value="Workshop">Technical Workshop</option>
+                <option value="Seminar">National Seminar</option>
+                <option value="Industrial Visit">Industrial Visit</option>
+                <option value="Statutory Day">Statutory Day</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="event-form-date">Event Date <span class="required">*</span></label>
+              <input type="date" id="event-form-date" class="input-control" required>
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="event-form-venue">Venue <span class="required">*</span></label>
+              <input type="text" id="event-form-venue" class="input-control" required placeholder="Campus Auditorium / Lab">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="event-form-attendees">Target Attendees</label>
+              <input type="number" id="event-form-attendees" class="input-control" min="1" value="100">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="event-form-speaker">Keynote Speaker</label>
+            <input type="text" id="event-form-speaker" class="input-control" placeholder="Guest Speaker / Faculty Lead">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="event-form-desc">Description</label>
+            <textarea id="event-form-desc" class="textarea-control" rows="2" placeholder="Summary of topics covered..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="PortalModules.events.closeCreateModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Publish Event</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Add Audit Observation -->
+  <div id="modal-add-observation" class="modal-backdrop" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Record Compliance Observation</h3>
+        <button class="btn-close" onclick="PortalModules.auditLogs.closeObservationModal()">✕</button>
+      </div>
+      <form id="form-add-observation">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="obs-title">Observation Title <span class="required">*</span></label>
+            <input type="text" id="obs-title" class="input-control" required placeholder="e.g. Task timeline alignment review">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="obs-status">Compliance Status <span class="required">*</span></label>
+            <select id="obs-status" class="select-control" required>
+              <option value="COMPLIANT" selected>COMPLIANT — Meets Standards</option>
+              <option value="OBSERVATION">OBSERVATION — Requires Clarification</option>
+              <option value="CRITICAL">CRITICAL — Immediate Attention Required</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="obs-text">Audit Finding &amp; Recommendation <span class="required">*</span></label>
+            <textarea id="obs-text" class="textarea-control" required rows="4" placeholder="Detail the observed compliance finding, relevant standard, and recommended action..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="PortalModules.auditLogs.closeObservationModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Observation</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="/js/branding.js"></script>
   <script src="/js/api.js"></script>
-  <script src="/js/staff.js"></script>
-  <script src="/js/dashboard.js"></script>
-  <script src="/js/chapters.js"></script>
-  <script src="/js/events.js"></script>
-  <script src="/js/analytics.js"></script>
-  <script src="/js/reports.js"></script>
-  <script src="/js/settings.js"></script>
+  <script src="/js/portal-modules.js"></script>
   <script src="/js/app.js"></script>
 
 </body>

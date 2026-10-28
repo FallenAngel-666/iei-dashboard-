@@ -1,5 +1,5 @@
 /**
- * IEI TVLC Analytics Views Controller
+ * MGR IEI Chapter Analytics Views Controller
  * Manages detailed Membership Analytics and Event Analytics tabs.
  */
 

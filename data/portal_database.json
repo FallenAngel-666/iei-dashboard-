@@ -2,2461 +2,1836 @@
   "users": [
     {
       "id": "usr_admin_01",
-      "name": "IEI TVLC Chief Administrator",
-      "email": "admin@ieitvlc.org",
-      "passwordHash": "$2b$10$S4/Rl89dqpzRLI/Lm.i5DuAc7yWnJ03uW8.XjNhTPeLBLSLTMWgBa",
+      "name": "Chapter Administrator",
+      "email": "admin@mgriei.org",
+      "passwordHash": "$2b$10$3vG25j8RZ7kSukPdb5/zp.8sn0JdmoBfv.ebWaXThOhnf5nWfpm/m",
       "role": "admin",
-      "designation": "Centre Administrator & Systems Officer",
-      "department": "IEI TVLC Secretariat",
-      "createdAt": "2023-01-01T00:00:00.000Z",
+      "designation": "Admin & Technical Editor",
+      "department": "MGR IEI Students Chapter Secretariat",
+      "createdAt": "2025-01-01T00:00:00.000Z",
       "isActive": true
     },
     {
-      "id": "usr_staff_01",
-      "name": "IEI TVLC Staff Officer",
-      "email": "staff@ieitvlc.org",
-      "passwordHash": "$2b$10$oA95q.UH6DgANENGcqT3o.svmxaDNpshnzXGhg9jkyAgMVwoarO.2",
-      "role": "staff",
-      "designation": "Assistant Secretary & Academic Staff",
-      "department": "Student Chapters & Activity Logging",
-      "createdAt": "2023-06-15T00:00:00.000Z",
+      "id": "usr_chair_01",
+      "name": "Chapter Chairman",
+      "email": "chairman@mgriei.org",
+      "passwordHash": "$2b$10$/10T//IWfzwYjJCOSXcYa.WrJ6hvayXrBBQGjL7Q3bHiBuwNTtXFq",
+      "role": "chairman",
+      "designation": "Chairman, Student Executive Committee",
+      "department": "Faculty of Engineering & Technology, Dr. MGR E&RI",
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "isActive": true
+    },
+    {
+      "id": "usr_comm_01",
+      "name": "Committee Member",
+      "email": "committee@mgriei.org",
+      "passwordHash": "$2b$10$hhHFzlw3cOKviS1.3R4UluBudGo/4zPvwJrsVhD57YfbZo6PpVCeW",
+      "role": "committee",
+      "designation": "Committee Member — Technical & Events",
+      "department": "Mechanical & Computing Sciences, Dr. MGR E&RI",
+      "createdAt": "2025-08-01T00:00:00.000Z",
       "isActive": true
     },
     {
       "id": "usr_auditor_01",
-      "name": "IEI Council Auditor",
-      "email": "auditor@ieitvlc.org",
-      "passwordHash": "$2b$10$9XgxEMfinSeIyYve6laqnesWnZ4PghstYiVW9eNzyBvmu/xMLeZFS",
+      "name": "Chapter Auditor",
+      "email": "auditor@mgriei.org",
+      "passwordHash": "$2b$10$pM6JF2BBaDZBM.nL0Ap41eG3d0MxpX7bploLmC5HhG57J1o3iKmbi",
       "role": "auditor",
-      "designation": "Institutional Reviewer (Read Only)",
-      "department": "IEI Council Audit Division",
-      "createdAt": "2024-01-10T00:00:00.000Z",
+      "designation": "Internal Governance & Compliance Reviewer",
+      "department": "Academic Quality & Chapter Audit Committee",
+      "createdAt": "2025-01-10T00:00:00.000Z",
       "isActive": true
     },
     {
-      "id": "usr_example_01",
-      "name": "IEI TVLC Staff Officer",
-      "email": "example@gmail.com",
-      "passwordHash": "$2b$10$ciDIe8r/GzID1vcTFcAYSuNPsxh40WF4KF0WLnhXz4qX/k3OrTx/m",
-      "role": "staff",
-      "designation": "Assistant Secretary & Academic Staff",
-      "department": "Student Chapters & Activity Logging",
-      "createdAt": "2023-06-15T00:00:00.000Z",
+      "id": "usr_1793214176438",
+      "name": "Priya Sundaram",
+      "email": "priya_1793214176440@mgriei.org",
+      "passwordHash": "$2b$10$XumHdGtwgWMvCDr3tZ8Gv.glF5p5hb97WodVv7nUyPHBQZt9xbFNO",
+      "role": "committee",
+      "designation": "Technical Secretary",
+      "department": "Electrical & Electronics",
+      "createdAt": "2026-10-28T19:02:56.518Z",
       "isActive": true
     },
     {
-      "id": "usr_coord_01",
-      "name": "RMK Chapter Coordinator",
-      "email": "coordinator@ieitvlc.org",
-      "passwordHash": "$2b$10$j8.ONUn4XO9aOkP6.F7Eae4zzQWg9G9sYiHvKhy8MvgyL1nrS6lg2",
-      "role": "coordinator",
-      "assignedChapterId": "ch_rmk_01",
-      "designation": "Faculty Advisor & Chapter Coordinator",
-      "department": "Electrical and Electronics Engineering",
-      "createdAt": "2024-03-01T00:00:00.000Z",
+      "id": "usr_1793214369053",
+      "name": "Priya Sundaram",
+      "email": "priya_1793214369053@mgriei.org",
+      "passwordHash": "$2b$10$ATM9BM6fv71r2Y2PCmS8G.meW.RCIs9yq4CBRP1ZrLfnmKOhuQjtu",
+      "role": "committee",
+      "designation": "Technical Secretary",
+      "department": "Electrical & Electronics",
+      "createdAt": "2026-10-28T19:06:09.121Z",
+      "isActive": true
+    },
+    {
+      "id": "usr_1793214484384",
+      "name": "Priya Sundaram",
+      "email": "priya_1793214484380@mgriei.org",
+      "passwordHash": "$2b$10$qdmaRcnsshpeCTLkI2eaOep9krS5LyhGrUyWu6Z699TD9tHiihk5O",
+      "role": "committee",
+      "designation": "Technical Secretary",
+      "department": "Electrical & Electronics",
+      "createdAt": "2026-10-28T19:08:04.586Z",
+      "isActive": true
+    },
+    {
+      "id": "usr_1793216470061",
+      "name": "Priya Sundaram",
+      "email": "priya_1793216470059@mgriei.org",
+      "passwordHash": "$2b$10$9CvKu4SGhSBUryFaCTgPg.J8ndWhydmKo539UseaU/H99CNk7A1a6",
+      "role": "committee",
+      "designation": "Technical Secretary",
+      "department": "Electrical & Electronics",
+      "createdAt": "2026-10-28T19:41:10.263Z",
+      "isActive": true
+    },
+    {
+      "id": "usr_1793216538000",
+      "name": "Student Technical Coordinator",
+      "email": "coordinator_1793216538004@mgriei.org",
+      "passwordHash": "$2b$10$3ylbiNU4/fuI4XHLptXed.oHXFLGJbT590t9mqBppMDnB/LqGmPKm",
+      "role": "auditor",
+      "designation": "Web & Systems Lead",
+      "department": "Computer Science & Engineering",
+      "createdAt": "2026-10-28T19:42:18.185Z",
+      "isActive": true
+    },
+    {
+      "id": "usr_1793216606185",
+      "name": "Student Technical Coordinator",
+      "email": "coordinator_1793216606180@mgriei.org",
+      "passwordHash": "$2b$10$8c00KrRAuwSnTM94jqdD6uXgqb4FkSmOl03ThiTvDd10K.hTJnogq",
+      "role": "auditor",
+      "designation": "Web & Systems Lead",
+      "department": "Computer Science & Engineering",
+      "createdAt": "2026-10-28T19:43:26.376Z",
+      "isActive": true
+    },
+    {
+      "id": "usr_1793216618707",
+      "name": "Priya Sundaram",
+      "email": "priya_1793216618706@mgriei.org",
+      "passwordHash": "$2b$10$1J4.ifCr0A0CQ6JtgpiuLO6QN3qwLoUQ.vK9lCM0gwb2KKpa.Wzl.",
+      "role": "committee",
+      "designation": "Technical Secretary",
+      "department": "Electrical & Electronics",
+      "createdAt": "2026-10-28T19:43:38.907Z",
       "isActive": true
     }
   ],
   "chapters": [
     {
-      "id": "ch_mgr_04",
-      "chapterName": "IEI TVLC MGR Student Chapter",
-      "collegeName": "Dr. M.G.R. Educational & Research Institute",
-      "collegeCode": "MGRERI",
-      "departments": [
-        "Computer Science & Engineering",
-        "Mechanical Engineering",
-        "Civil Engineering",
-        "E&T Foundation"
-      ],
-      "studentMembersCount": 707,
-      "corporateMembersCount": 30,
-      "facultyAdvisors": [
-        "Mr. R. Kalaingnan",
-        "Mr. U. Siddhartha Nambi",
-        "Mr. Ashok Kumar"
-      ],
-      "establishedYear": 2017,
+      "id": "ch_mgr_01",
+      "name": "Dr. M.G.R. Educational and Research Institute Students Chapter",
+      "collegeOrChapter": "Dr. M.G.R. Educational and Research Institute (Deemed to be University)",
+      "chapterCode": "MGR-IEI-SC",
+      "department": "All Engineering & Technology Disciplines",
       "status": "Active",
-      "contactEmail": "iei.chapter@drmgrdu.ac.in",
-      "phone": "+91 44 2378 2176",
-      "location": "Maduravoyal, Chennai",
-      "updatedAt": "2026-10-27T10:00:00.000Z"
-    },
-    {
-      "id": "ch_saec_15",
-      "chapterName": "IEI TVLC S. A. Student Chapter",
-      "collegeName": "S.A. Engineering College",
-      "collegeCode": "SAEC",
-      "departments": [
-        "Mechanical Engineering",
-        "Computer Science & Engineering",
-        "ECE"
-      ],
-      "studentMembersCount": 365,
-      "corporateMembersCount": 6,
-      "facultyAdvisors": [
-        "Mr. Shiva"
-      ],
-      "establishedYear": 2024,
-      "status": "Active",
-      "contactEmail": "saec.iei@saec.ac.in",
-      "phone": "+91 44 2680 1999",
-      "location": "Thiruverkadu, Chennai",
-      "updatedAt": "2026-10-27T10:00:00.000Z"
-    },
-    {
-      "id": "ch_rmkcet_14",
-      "chapterName": "IEI TVLC RMKCET Student Chapter",
-      "collegeName": "R.M.K. College of Engineering and Technology (RMKCET)",
-      "collegeCode": "RMKCET",
-      "departments": [
-        "Mechanical Engineering",
-        "CSE",
-        "ECE"
-      ],
-      "studentMembersCount": null,
-      "corporateMembersCount": null,
-      "facultyAdvisors": [
-        "Dr. C. Arun"
-      ],
-      "establishedYear": 2024,
-      "status": "Active",
-      "contactEmail": "iei.cet@rmkcet.ac.in",
-      "phone": "+91 44 6790 0610",
-      "location": "Pudukuvoyal, Gummidipoondi",
-      "updatedAt": "2026-10-27T10:00:00.000Z"
-    },
-    {
-      "id": "ch_prathyusha_02",
-      "chapterName": "IEI TVLC Prathyusha Student Chapter",
-      "collegeName": "Prathyusha Engineering College",
-      "collegeCode": "PITM",
-      "departments": [
-        "Electronics & Communication Engineering",
-        "EEE",
-        "Civil Engineering",
-        "Mechanical",
-        "CSE",
-        "IT",
-        "Biotech"
-      ],
-      "studentMembersCount": null,
-      "corporateMembersCount": null,
-      "facultyAdvisors": [
-        "Mr. Somasekhar"
-      ],
-      "establishedYear": 2019,
-      "status": "Active",
-      "contactEmail": "iei.pitm@prathyusha.edu.in",
-      "phone": "+91 44 3767 3767",
-      "location": "Aranvoyalkuppam, Poonamallee-Tiruvallur Road",
-      "updatedAt": "2026-10-27T10:00:00.000Z"
-    },
-    {
-      "id": "ch_rmk_01",
-      "chapterName": "IEI TVLC RMK Student Chapter",
-      "collegeName": "RMK Engineering College",
-      "collegeCode": "RMKEC",
-      "departments": [
-        "EEE",
-        "EIE",
-        "CSE",
-        "Mechanical",
-        "Civil",
-        "IT"
-      ],
-      "studentMembersCount": 1350,
-      "corporateMembersCount": 24,
-      "facultyAdvisors": [
-        "Dr. Sukhi"
-      ],
-      "establishedYear": 2018,
-      "status": "Active",
-      "contactEmail": "iei.rmk@rmkec.ac.in",
-      "phone": "+91 44 6790 0679",
-      "location": "Kavaraipettai, Tiruvallur Dist",
-      "updatedAt": "2026-10-27T17:08:09.867Z"
-    },
-    {
-      "id": "ch_jec_03",
-      "chapterName": "IEI TVLC JEC Student Chapter",
-      "collegeName": "Jaya Engineering College",
-      "collegeCode": "JEC",
-      "departments": [
-        "Mechanical Engineering",
-        "Electrical & Electronics",
-        "Civil"
-      ],
-      "studentMembersCount": 450,
-      "corporateMembersCount": 1,
-      "facultyAdvisors": [
-        "Mr. Kumaran"
-      ],
-      "establishedYear": 2019,
-      "status": "Active",
-      "contactEmail": "iei.jec@jaya.edu.in",
-      "phone": "+91 44 2639 0041",
-      "location": "Thiruninravur, Chennai",
-      "updatedAt": "2026-02-18T09:45:00.000Z"
-    },
-    {
-      "id": "ch_stpeters_05",
-      "chapterName": "IEI TVLC St. Peters Student Chapter",
-      "collegeName": "St. Peter’s Engineering College",
-      "collegeCode": "SPEC",
-      "departments": [
-        "Civil Engineering",
-        "Electrical & Electronics Engineering"
-      ],
-      "studentMembersCount": 200,
-      "corporateMembersCount": 15,
-      "facultyAdvisors": [
-        "Dr. Parthibhan"
-      ],
-      "establishedYear": 2020,
-      "status": "Active",
-      "contactEmail": "iei.spec@stpeters.ac.in",
-      "phone": "+91 44 2655 8089",
-      "location": "Avadi, Chennai",
-      "updatedAt": "2026-01-22T16:15:00.000Z"
-    },
-    {
-      "id": "ch_sriram_eng_06",
-      "chapterName": "IEI TVLC Sri Ram Student Chapter",
-      "collegeName": "Sri Ram Engineering College",
-      "collegeCode": "SREC",
-      "departments": [
-        "Mechanical Engineering"
-      ],
-      "studentMembersCount": 190,
-      "corporateMembersCount": 1,
-      "facultyAdvisors": [
-        "Dr. S. Ravi"
-      ],
-      "establishedYear": 2020,
-      "status": "Active",
-      "contactEmail": "sriram.iei@srirangam.edu.in",
-      "phone": "+91 44 2768 9364",
-      "location": "Perumalpattu, Tiruvallur",
-      "updatedAt": "2026-02-10T12:00:00.000Z"
-    },
-    {
-      "id": "ch_skr_07",
-      "chapterName": "IEI TVLC SKR Student Chapter",
-      "collegeName": "SKR Engineering College",
-      "collegeCode": "SKREC",
-      "departments": [
-        "Civil Engineering",
-        "ECE"
-      ],
-      "studentMembersCount": 100,
-      "corporateMembersCount": 10,
-      "facultyAdvisors": [
-        "Mr. Kaliraja"
-      ],
       "establishedYear": 2021,
-      "status": "Active",
-      "contactEmail": "iei.skr@skrec.ac.in",
-      "phone": "+91 44 2627 2008",
-      "location": "Nazarathpet, Poonamallee",
-      "updatedAt": "2026-02-28T15:30:00.000Z"
-    },
-    {
-      "id": "ch_veltech_08",
-      "chapterName": "IEI TVLC Vel Tech Student Chapter",
-      "collegeName": "Vel Tech High Tech Dr. Rangarajan Dr. Sakunthala Engineering College",
-      "collegeCode": "VTHT",
-      "departments": [
-        "Civil Engineering"
-      ],
-      "studentMembersCount": 36,
-      "corporateMembersCount": 2,
+      "studentMembership": 707,
       "facultyAdvisors": [
-        "Dr. D. Shivakumar"
+        "Chapter Faculty Advisor",
+        "Technical Coordinator"
       ],
-      "establishedYear": 2021,
-      "status": "Active",
-      "contactEmail": "iei.veltech@veltechhightech.com",
-      "phone": "+91 44 2684 0605",
-      "location": "Avadi, Chennai",
-      "updatedAt": "2026-03-02T10:10:00.000Z"
-    },
-    {
-      "id": "ch_sriram_09",
-      "chapterName": "IEI Sriram Students Chapter",
-      "collegeName": "Sriram Engineering College",
-      "collegeCode": "SRIRAM",
-      "departments": [
-        "CSE",
-        "Mechanical Engineering"
-      ],
-      "studentMembersCount": 78,
-      "corporateMembersCount": 3,
-      "facultyAdvisors": [
-        "Prof. N. Sankar Ram"
-      ],
-      "establishedYear": 2022,
-      "status": "Active",
-      "contactEmail": "principal@sriramec.edu.in",
-      "phone": "+91 44 2768 9364",
-      "location": "Perumalpattu, Veppampattu RS",
-      "updatedAt": "2026-03-12T11:45:00.000Z"
-    },
-    {
-      "id": "ch_gsbt_10",
-      "chapterName": "IEI GSBT Students Chapter",
-      "collegeName": "Gojan School of Business and Technology",
-      "collegeCode": "GSBT",
-      "departments": [
-        "Various Departments"
-      ],
-      "studentMembersCount": null,
-      "corporateMembersCount": 2,
-      "facultyAdvisors": [
-        "Er. Suresh Kumar"
-      ],
-      "establishedYear": 2022,
-      "status": "Active",
-      "contactEmail": "iei.gsbt@gojaneducation.com",
-      "phone": "+91 44 2631 1045",
-      "location": "Redhills, Chennai",
-      "updatedAt": "2026-01-15T09:00:00.000Z"
-    },
-    {
-      "id": "ch_spiher_11",
-      "chapterName": "IEI SPIHER Student Chapter",
-      "collegeName": "St. Peter's Institute of Higher Education and Research",
-      "collegeCode": "SPIHER",
-      "departments": [
-        "ECE",
-        "Civil Engineering",
-        "EEE"
-      ],
-      "studentMembersCount": null,
-      "corporateMembersCount": null,
-      "facultyAdvisors": [],
-      "establishedYear": 2023,
-      "status": "Pending Verification",
-      "contactEmail": "info@spiher.ac.in",
-      "phone": "+91 44 2655 8080",
-      "location": "Avadi, Chennai",
-      "updatedAt": "2026-01-18T14:00:00.000Z"
-    },
-    {
-      "id": "ch_panimalar_12",
-      "chapterName": "IEI Panimalar Student Chapter",
-      "collegeName": "Panimalar Engineering College",
-      "collegeCode": "PEC",
-      "departments": [
-        "CSE",
-        "Information Technology",
-        "ECE"
-      ],
-      "studentMembersCount": null,
-      "corporateMembersCount": null,
-      "facultyAdvisors": [
-        "Dr. Silas Stephen"
-      ],
-      "establishedYear": 2023,
-      "status": "Active",
-      "contactEmail": "iei.panimalar@panimalar.ac.in",
-      "phone": "+91 44 2649 0404",
-      "location": "Nazarathpet, Poonamallee",
-      "updatedAt": "2026-02-04T10:30:00.000Z"
-    },
-    {
-      "id": "ch_rmd_13",
-      "chapterName": "IEI RMD Student Chapter",
-      "collegeName": "RMD Engineering College",
-      "collegeCode": "RMDEC",
-      "departments": [
-        "CSE",
-        "EEE",
-        "ECE"
-      ],
-      "studentMembersCount": null,
-      "corporateMembersCount": null,
-      "facultyAdvisors": [
-        "Dr. Prasanna"
-      ],
-      "establishedYear": 2023,
-      "status": "Active",
-      "contactEmail": "iei.rmd@rmd.ac.in",
-      "phone": "+91 44 6791 9191",
-      "location": "Kavaraipettai, Gummidipoondi",
-      "updatedAt": "2026-02-11T16:00:00.000Z"
-    },
-    {
-      "id": "ch_tssc_16",
-      "chapterName": "IEI TSSC Student Chapter",
-      "collegeName": "T. S. Srinivasan Centre for Polytechnic College and Advanced Training",
-      "collegeCode": "CPAT-TSSC",
-      "departments": [
-        "Mechanical Engineering",
-        "Automobile Engineering",
-        "Advanced Tool Design"
-      ],
-      "studentMembersCount": null,
-      "corporateMembersCount": null,
-      "facultyAdvisors": [
-        "Mr. Jayavel"
-      ],
-      "establishedYear": 2024,
-      "status": "Active",
-      "contactEmail": "cpat@tvsts.com",
-      "phone": "+91 44 2625 2147",
-      "location": "Vanagaram Road, Ambattur, Chennai",
-      "updatedAt": "2026-01-30T15:00:00.000Z"
-    },
-    {
-      "id": "ch_mgr_et_17",
-      "chapterName": "IEI MGR(E&T) Student Chapter",
-      "collegeName": "Dr. M.G.R Educational and Research Institute (E&T 1st Year)",
-      "collegeCode": "MGR-ET",
-      "departments": [
-        "Engineering & Technology Foundation Division (First Year)"
-      ],
-      "studentMembersCount": null,
-      "corporateMembersCount": null,
-      "facultyAdvisors": [
-        "Dr. Kannan"
-      ],
-      "establishedYear": 2025,
-      "status": "Active",
-      "contactEmail": "firstyear.iei@drmgrdu.ac.in",
-      "phone": "+91 44 2378 2176",
-      "location": "Maduravoyal Campus, Chennai",
-      "updatedAt": "2026-02-05T09:30:00.000Z"
-    },
-    {
-      "id": "ch_velammal_18",
-      "chapterName": "IEI Velamal Student Chapter",
-      "collegeName": "Velammal Engineering College",
-      "collegeCode": "VEC",
-      "departments": [
-        "EEE"
-      ],
-      "studentMembersCount": null,
-      "corporateMembersCount": null,
-      "facultyAdvisors": [
-        "Mr. Rangarajan"
-      ],
-      "establishedYear": 2025,
-      "status": "Active",
-      "contactEmail": "iei.eee@velammal.edu.in",
-      "phone": "+91 44 2659 1842",
-      "location": "Ambattur-Red Hills Road, Surapet, Chennai",
-      "updatedAt": "2026-03-10T14:10:00.000Z"
-    }
-  ],
-  "membershipSnapshots": [
-    {
-      "id": "ms_2024_rmk",
-      "year": 2024,
-      "chapterId": "ch_rmk_01",
-      "studentCount": 1200,
-      "corporateCount": 20,
-      "recordedAt": "2024-10-30T00:00:00.000Z"
-    },
-    {
-      "id": "ms_2024_jec",
-      "year": 2024,
-      "chapterId": "ch_jec_03",
-      "studentCount": 400,
-      "corporateCount": 1,
-      "recordedAt": "2024-10-30T00:00:00.000Z"
-    },
-    {
-      "id": "ms_2024_stpeters",
-      "year": 2024,
-      "chapterId": "ch_stpeters_05",
-      "studentCount": 180,
-      "corporateCount": 12,
-      "recordedAt": "2024-10-30T00:00:00.000Z"
-    },
-    {
-      "id": "ms_2024_srec",
-      "year": 2024,
-      "chapterId": "ch_sriram_eng_06",
-      "studentCount": 170,
-      "corporateCount": 1,
-      "recordedAt": "2024-10-30T00:00:00.000Z"
-    },
-    {
-      "id": "ms_2024_skr",
-      "year": 2024,
-      "chapterId": "ch_skr_07",
-      "studentCount": 90,
-      "corporateCount": 8,
-      "recordedAt": "2024-10-30T00:00:00.000Z"
-    },
-    {
-      "id": "ms_2024_sriram",
-      "year": 2024,
-      "chapterId": "ch_sriram_09",
-      "studentCount": 70,
-      "corporateCount": 2,
-      "recordedAt": "2024-10-30T00:00:00.000Z"
-    },
-    {
-      "id": "ms_2024_veltech",
-      "year": 2024,
-      "chapterId": "ch_veltech_08",
-      "studentCount": 30,
-      "corporateCount": 2,
-      "recordedAt": "2024-10-30T00:00:00.000Z"
-    },
-    {
-      "id": "ms_2025_rmk",
-      "year": 2025,
-      "chapterId": "ch_rmk_01",
-      "studentCount": 1280,
-      "corporateCount": 22,
-      "recordedAt": "2025-10-30T00:00:00.000Z"
-    },
-    {
-      "id": "ms_2025_jec",
-      "year": 2025,
-      "chapterId": "ch_jec_03",
-      "studentCount": 420,
-      "corporateCount": 1,
-      "recordedAt": "2025-10-30T00:00:00.000Z"
-    },
-    {
-      "id": "ms_2025_stpeters",
-      "year": 2025,
-      "chapterId": "ch_stpeters_05",
-      "studentCount": 190,
-      "corporateCount": 14,
-      "recordedAt": "2025-10-30T00:00:00.000Z"
-    },
-    {
-      "id": "ms_2025_srec",
-      "year": 2025,
-      "chapterId": "ch_sriram_eng_06",
-      "studentCount": 180,
-      "corporateCount": 1,
-      "recordedAt": "2025-10-30T00:00:00.000Z"
-    },
-    {
-      "id": "ms_2025_skr",
-      "year": 2025,
-      "chapterId": "ch_skr_07",
-      "studentCount": 95,
-      "corporateCount": 9,
-      "recordedAt": "2025-10-30T00:00:00.000Z"
-    },
-    {
-      "id": "ms_2025_sriram",
-      "year": 2025,
-      "chapterId": "ch_sriram_09",
-      "studentCount": 75,
-      "corporateCount": 3,
-      "recordedAt": "2025-10-30T00:00:00.000Z"
-    },
-    {
-      "id": "ms_2025_veltech",
-      "year": 2025,
-      "chapterId": "ch_veltech_08",
-      "studentCount": 35,
-      "corporateCount": 2,
-      "recordedAt": "2025-10-30T00:00:00.000Z"
-    },
-    {
-      "id": "ms_2026_rmk",
-      "year": 2026,
-      "chapterId": "ch_rmk_01",
-      "studentCount": 1350,
-      "corporateCount": 24,
-      "recordedAt": "2026-10-27T17:08:09.867Z"
-    },
-    {
-      "id": "ms_2026_mgr",
-      "year": 2026,
-      "chapterId": "ch_mgr_04",
-      "studentCount": 707,
-      "corporateCount": 30,
-      "recordedAt": "2026-10-26T00:00:00.000Z"
-    },
-    {
-      "id": "ms_2026_jec",
-      "year": 2026,
-      "chapterId": "ch_jec_03",
-      "studentCount": 450,
-      "corporateCount": 1,
-      "recordedAt": "2026-10-26T00:00:00.000Z"
-    },
-    {
-      "id": "ms_2026_saec",
-      "year": 2026,
-      "chapterId": "ch_saec_15",
-      "studentCount": 365,
-      "corporateCount": 6,
-      "recordedAt": "2026-10-26T00:00:00.000Z"
-    },
-    {
-      "id": "ms_2026_stpeters",
-      "year": 2026,
-      "chapterId": "ch_stpeters_05",
-      "studentCount": 200,
-      "corporateCount": 15,
-      "recordedAt": "2026-10-26T00:00:00.000Z"
-    },
-    {
-      "id": "ms_2026_srec",
-      "year": 2026,
-      "chapterId": "ch_sriram_eng_06",
-      "studentCount": 190,
-      "corporateCount": 1,
-      "recordedAt": "2026-10-26T00:00:00.000Z"
-    },
-    {
-      "id": "ms_2026_skr",
-      "year": 2026,
-      "chapterId": "ch_skr_07",
-      "studentCount": 100,
-      "corporateCount": 10,
-      "recordedAt": "2026-10-26T00:00:00.000Z"
-    },
-    {
-      "id": "ms_2026_sriram",
-      "year": 2026,
-      "chapterId": "ch_sriram_09",
-      "studentCount": 78,
-      "corporateCount": 3,
-      "recordedAt": "2026-10-26T00:00:00.000Z"
-    },
-    {
-      "id": "ms_2026_veltech",
-      "year": 2026,
-      "chapterId": "ch_veltech_08",
-      "studentCount": 36,
-      "corporateCount": 2,
-      "recordedAt": "2026-10-26T00:00:00.000Z"
-    },
-    {
-      "id": "ms_2026_ch_1793115487517_aksnt",
-      "year": 2026,
-      "chapterId": "ch_1793115487517_aksnt",
-      "studentCount": 280,
-      "corporateCount": 6,
-      "recordedAt": "2026-10-27T15:38:07.522Z"
-    },
-    {
-      "id": "ms_2026_ch_1793115871659_uq94v",
-      "year": 2026,
-      "chapterId": "ch_1793115871659_uq94v",
-      "studentCount": 280,
-      "corporateCount": 6,
-      "recordedAt": "2026-10-27T15:44:31.666Z"
-    },
-    {
-      "id": "ms_2026_ch_1793117406024_gmb6t",
-      "year": 2026,
-      "chapterId": "ch_1793117406024_gmb6t",
-      "studentCount": 280,
-      "corporateCount": 6,
-      "recordedAt": "2026-10-27T16:10:06.035Z"
-    },
-    {
-      "id": "ms_2026_ch_1793117766952_fw6eq",
-      "year": 2026,
-      "chapterId": "ch_1793117766952_fw6eq",
-      "studentCount": 280,
-      "corporateCount": 6,
-      "recordedAt": "2026-10-27T16:16:06.964Z"
-    },
-    {
-      "id": "ms_2026_ch_1793118159204_dabc1",
-      "year": 2026,
-      "chapterId": "ch_1793118159204_dabc1",
-      "studentCount": 280,
-      "corporateCount": 6,
-      "recordedAt": "2026-10-27T16:22:39.214Z"
-    },
-    {
-      "id": "ms_2026_ch_1793118813466_lc6x0",
-      "year": 2026,
-      "chapterId": "ch_1793118813466_lc6x0",
-      "studentCount": 280,
-      "corporateCount": 6,
-      "recordedAt": "2026-10-27T16:33:33.477Z"
-    },
-    {
-      "id": "ms_2026_ch_1793119324255_ch9ij",
-      "year": 2026,
-      "chapterId": "ch_1793119324255_ch9ij",
-      "studentCount": 280,
-      "corporateCount": 6,
-      "recordedAt": "2026-10-27T16:42:04.268Z"
-    },
-    {
-      "id": "ms_2026_ch_1793119414959_j7fwi",
-      "year": 2026,
-      "chapterId": "ch_1793119414959_j7fwi",
-      "studentCount": 280,
-      "corporateCount": 6,
-      "recordedAt": "2026-10-27T16:43:34.971Z"
-    },
-    {
-      "id": "ms_2026_ch_1793120623100_xsju8",
-      "year": 2026,
-      "chapterId": "ch_1793120623100_xsju8",
-      "studentCount": 280,
-      "corporateCount": 6,
-      "recordedAt": "2026-10-27T17:03:43.110Z"
-    },
-    {
-      "id": "ms_2026_ch_1793120733589_7wdcm",
-      "year": 2026,
-      "chapterId": "ch_1793120733589_7wdcm",
-      "studentCount": 280,
-      "corporateCount": 6,
-      "recordedAt": "2026-10-27T17:05:33.599Z"
-    },
-    {
-      "id": "ms_2026_ch_1793120889744_lamec",
-      "year": 2026,
-      "chapterId": "ch_1793120889744_lamec",
-      "studentCount": 280,
-      "corporateCount": 6,
-      "recordedAt": "2026-10-27T17:08:09.754Z"
-    }
-  ],
-  "newMemberships": [
-    {
-      "id": "nm_report_01",
-      "year": 2026,
-      "chapterId": "ch_saec_15",
-      "institutionName": "S.A. Engineering College",
-      "studentNew": 365,
-      "corporateNew": 2,
-      "recordedDate": "2026-10-15"
-    },
-    {
-      "id": "nm_report_02",
-      "year": 2026,
-      "chapterId": "ch_rmkcet_14",
-      "institutionName": "R.M.K. College of Engineering and Technology (RMKCET)",
-      "studentNew": 91,
-      "corporateNew": 1,
-      "recordedDate": "2026-10-18"
-    },
-    {
-      "id": "nm_report_03",
-      "year": 2026,
-      "chapterId": null,
-      "institutionName": "T.J.S. Engineering College",
-      "studentNew": 54,
-      "corporateNew": 1,
-      "recordedDate": "2026-10-20"
-    },
-    {
-      "id": "nm_report_04",
-      "year": 2026,
-      "chapterId": "ch_prathyusha_02",
-      "institutionName": "Prathyusha Engineering College",
-      "studentNew": 70,
-      "corporateNew": 0,
-      "recordedDate": "2026-10-22"
-    },
-    {
-      "id": "nm_report_05",
-      "year": 2026,
-      "chapterId": "ch_mgr_04",
-      "institutionName": "Dr. M.G.R. Educational & Research Institute",
-      "studentNew": 707,
-      "corporateNew": 4,
-      "recordedDate": "2026-10-25"
-    },
-    {
-      "id": "nm_2026_1793119324272",
-      "year": 2026,
-      "chapterId": "ch_1793119324255_ch9ij",
-      "institutionName": "National Engineering Institute",
-      "studentNew": 85,
-      "corporateNew": 2,
-      "recordedDate": "2026-10-27"
-    },
-    {
-      "id": "nm_2026_1793119324402",
-      "year": 2026,
-      "chapterId": "ch_rmk_01",
-      "institutionName": "RMK Engineering College",
-      "studentNew": 50,
-      "corporateNew": 1,
-      "recordedDate": "2026-10-27"
+      "address": "EVR Periyar Salai (NH4), Maduravoyal, Chennai - 600095, Tamil Nadu",
+      "createdAt": "2025-01-01T00:00:00.000Z"
     }
   ],
   "events": [
     {
-      "id": "ev_act_01",
-      "eventNumber": 1,
-      "title": "One-Day Workshop",
-      "category": "Workshop",
-      "eventDate": "2025-12-12",
-      "eventTime": "09:30 AM",
-      "chapterId": null,
-      "collegeOrChapter": "IEI TVLC Central (IEI TNSC Auditorium)",
-      "venue": "IEI TNSC Auditorium",
-      "attendeesCount": 45,
-      "speakerName": "Institutional Technical Panel",
-      "speakerDesignation": "Senior Resource Persons",
-      "speakerOrg": "Institution of Engineers (India)",
-      "description": "One-Day Workshop conducted on 12 December 2025 at IEI TNSC Auditorium.",
-      "status": "Completed",
+      "id": "ev_mgr_01",
+      "title": "National Engineering Symposium 2026 — Emerging Horizons in AI & Robotics",
+      "category": "National Symposium",
+      "date": "2026-11-18",
+      "venue": "University Main Auditorium, Dr. M.G.R. Educational & Research Institute",
+      "attendeesCount": 220,
+      "speakerName": "Distinguished Academician & Industry Fellow",
+      "speakerDesignation": "Keynote Speaker & Research Director",
+      "speakerOrg": "National Academy of Engineering",
+      "description": "Flagship technical symposium featuring technical paper presentations, hardware exhibitions, and guest lectures across multiple engineering departments.",
+      "status": "Scheduled",
       "reportingYear": 2026,
       "posterUrl": "/assets/iei-emblem.png",
-      "reportUrl": "",
-      "createdAt": "2025-12-12T10:00:00.000Z"
+      "createdAt": "2026-10-15T10:00:00.000Z"
     },
     {
-      "id": "ev_act_02",
-      "eventNumber": 2,
-      "title": "Energy Conservation Day",
-      "category": "Statutory Day",
-      "eventDate": "2025-12-23",
-      "eventTime": "10:00 AM",
-      "chapterId": "ch_rmk_01",
-      "collegeOrChapter": "RMK Engineering College",
-      "venue": "RMK Engineering College",
-      "attendeesCount": 120,
-      "speakerName": "Energy Audit Specialists",
-      "speakerDesignation": "Chief Energy Consultants",
-      "speakerOrg": "BEE & IEI TVLC",
-      "description": "Statutory Day observance commemorating Energy Conservation Day at RMK Engineering College.",
+      "id": "ev_mgr_02",
+      "title": "Industry 4.0 & Smart Campus IoT Prototyping Workshop",
+      "category": "Technical Workshop",
+      "date": "2026-10-24",
+      "venue": "Embedded Systems Laboratory, Block IV, Dr. MGR Campus",
+      "attendeesCount": 95,
+      "speakerName": "IoT Systems Architect",
+      "speakerDesignation": "Senior Technical Lead",
+      "speakerOrg": "Industrial Automation Lab",
+      "description": "Hands-on practical training on sensor telemetry, cloud gateway interfacing, and embedded controllers for undergraduate engineering students.",
       "status": "Completed",
       "reportingYear": 2026,
       "posterUrl": "/assets/iei-emblem.png",
-      "reportUrl": "",
-      "createdAt": "2025-12-23T10:00:00.000Z"
+      "createdAt": "2026-10-10T09:30:00.000Z"
     },
     {
-      "id": "ev_act_03",
-      "eventNumber": 3,
-      "title": "49th Technical Lecture",
-      "category": "Technical Lecture",
-      "eventDate": "2025-12-29",
-      "eventTime": "02:30 PM",
-      "chapterId": "ch_saec_15",
-      "collegeOrChapter": "S.A. Engineering College",
-      "venue": "SA Engineering College",
-      "attendeesCount": 260,
-      "speakerName": "Distinguished Engineering Fellow",
-      "speakerDesignation": "Professor & Industrial Consultant",
-      "speakerOrg": "Institution of Engineers (India)",
-      "description": "49th Technical Lecture series conducted at SA Engineering College with 260 active student & faculty participants.",
+      "id": "ev_mgr_03",
+      "title": "Engineers’ Day Celebrations & Student Technical Project Exhibition",
+      "category": "Statutory Observance",
+      "date": "2026-09-15",
+      "venue": "University Convention Hall, Dr. MGR Campus",
+      "attendeesCount": 310,
+      "speakerName": "Dean of Engineering & Technology",
+      "speakerDesignation": "Professor & Dean",
+      "speakerOrg": "Dr. M.G.R. Educational and Research Institute",
+      "description": "Statutory celebration commemorating Sir M. Visvesvaraya with project display, innovation challenge awards, and scholarly presentations.",
       "status": "Completed",
       "reportingYear": 2026,
       "posterUrl": "/assets/iei-emblem.png",
-      "reportUrl": "",
-      "createdAt": "2025-12-29T10:00:00.000Z"
-    },
-    {
-      "id": "ev_act_04",
-      "eventNumber": 4,
-      "title": "50th Technical Lecture",
-      "category": "Technical Lecture",
-      "eventDate": "2026-01-29",
-      "eventTime": "03:00 PM",
-      "chapterId": null,
-      "collegeOrChapter": "IEI TVLC Online Platform",
-      "venue": "Online",
-      "attendeesCount": 14,
-      "speakerName": "Keynote Speaker",
-      "speakerDesignation": "Principal Specialist",
-      "speakerOrg": "Engineering Technology Consortium",
-      "description": "Golden Jubilee 50th Technical Lecture conducted via virtual interactive conference.",
-      "status": "Completed",
-      "reportingYear": 2026,
-      "posterUrl": "/assets/iei-emblem.png",
-      "reportUrl": "",
-      "createdAt": "2026-01-29T10:00:00.000Z"
-    },
-    {
-      "id": "ev_act_05",
-      "eventNumber": 5,
-      "title": "51st Technical Lecture",
-      "category": "Technical Lecture",
-      "eventDate": "2026-02-07",
-      "eventTime": "11:00 AM",
-      "chapterId": null,
-      "collegeOrChapter": "Baettr India Pvt. Ltd. (Industrial Centre)",
-      "venue": "Baettr India Pvt. Ltd.",
-      "attendeesCount": 20,
-      "speakerName": "Industrial Technical Director",
-      "speakerDesignation": "Head of Advanced Manufacturing",
-      "speakerOrg": "Baettr India Pvt. Ltd.",
-      "description": "51st Technical Lecture conducted on-site at Baettr India Pvt. Ltd. focusing on heavy wind turbine casting & precision engineering.",
-      "status": "Completed",
-      "reportingYear": 2026,
-      "posterUrl": "/assets/iei-emblem.png",
-      "reportUrl": "",
-      "createdAt": "2026-02-07T10:00:00.000Z"
-    },
-    {
-      "id": "ev_act_06",
-      "eventNumber": 6,
-      "title": "World Water Day",
-      "category": "Statutory Day",
-      "eventDate": "2026-03-20",
-      "eventTime": "10:00 AM",
-      "chapterId": null,
-      "collegeOrChapter": "IEI TVLC Online Platform",
-      "venue": "Online",
-      "attendeesCount": 75,
-      "speakerName": "Water Resources Advisory Panel",
-      "speakerDesignation": "Chief Environmental Engineers",
-      "speakerOrg": "State Water Authority & IEI",
-      "description": "Statutory Day celebration of World Water Day with 75 participants discussing sustainable water architecture and water conservation.",
-      "status": "Completed",
-      "reportingYear": 2026,
-      "posterUrl": "/assets/iei-emblem.png",
-      "reportUrl": "",
-      "createdAt": "2026-03-20T10:00:00.000Z"
-    },
-    {
-      "id": "ev_act_07",
-      "eventNumber": 7,
-      "title": "52nd Technical Lecture",
-      "category": "Technical Lecture",
-      "eventDate": "2026-04-10",
-      "eventTime": "02:00 PM",
-      "chapterId": "ch_mgr_04",
-      "collegeOrChapter": "Dr. M.G.R. Educational & Research Institute",
-      "venue": "CAR Lab, Dr. M.G.R. Educational & Research Institute",
-      "attendeesCount": 25,
-      "speakerName": "Automotive Research Specialist",
-      "speakerDesignation": "Lead Investigator",
-      "speakerOrg": "Centre for Advanced Research (CAR Lab)",
-      "description": "52nd Technical Lecture conducted at CAR Lab, Dr. M.G.R. Educational & Research Institute.",
-      "status": "Completed",
-      "reportingYear": 2026,
-      "posterUrl": "/assets/iei-emblem.png",
-      "reportUrl": "",
-      "createdAt": "2026-04-10T10:00:00.000Z"
-    },
-    {
-      "id": "ev_act_08",
-      "eventNumber": 8,
-      "title": "World Environment Day",
-      "category": "Statutory Day",
-      "eventDate": "2026-06-29",
-      "eventTime": "08:30 AM",
-      "chapterId": null,
-      "collegeOrChapter": "IEI TVLC Field Observance (Tower Park)",
-      "venue": "Tower Park, Anna Nagar",
-      "attendeesCount": 25,
-      "speakerName": "Environmental Ecology Panel",
-      "speakerDesignation": "Senior Fellows",
-      "speakerOrg": "IEI TVLC Environmental Division",
-      "description": "Statutory Day observance of World Environment Day conducted at Tower Park, Anna Nagar.",
-      "status": "Completed",
-      "reportingYear": 2026,
-      "posterUrl": "/assets/iei-emblem.png",
-      "reportUrl": "",
-      "createdAt": "2026-06-29T10:00:00.000Z"
-    },
-    {
-      "id": "ev_act_09",
-      "eventNumber": 9,
-      "title": "53rd Technical Lecture",
-      "category": "Technical Lecture",
-      "eventDate": "2026-07-30",
-      "eventTime": "03:00 PM",
-      "chapterId": null,
-      "collegeOrChapter": "IEI TVLC Online Platform",
-      "venue": "Online",
-      "attendeesCount": 30,
-      "speakerName": "Subject Matter Expert",
-      "speakerDesignation": "Research Lead",
-      "speakerOrg": "Institution of Engineers (India)",
-      "description": "53rd Technical Lecture session conducted online addressing next-gen engineering paradigms.",
-      "status": "Completed",
-      "reportingYear": 2026,
-      "posterUrl": "/assets/iei-emblem.png",
-      "reportUrl": "",
-      "createdAt": "2026-07-30T10:00:00.000Z"
-    },
-    {
-      "id": "ev_act_10",
-      "eventNumber": 10,
-      "title": "54th Technical Lecture",
-      "category": "Technical Lecture",
-      "eventDate": "2026-08-31",
-      "eventTime": "03:00 PM",
-      "chapterId": null,
-      "collegeOrChapter": "IEI TVLC Online Platform",
-      "venue": "Online",
-      "attendeesCount": 55,
-      "speakerName": "Industrial Systems Specialist",
-      "speakerDesignation": "Senior Consulting Engineer",
-      "speakerOrg": "IEI TVLC",
-      "description": "54th Technical Lecture conducted online with 55 attendees.",
-      "status": "Completed",
-      "reportingYear": 2026,
-      "posterUrl": "/assets/iei-emblem.png",
-      "reportUrl": "",
-      "createdAt": "2026-08-31T10:00:00.000Z"
-    },
-    {
-      "id": "ev_act_11",
-      "eventNumber": 11,
-      "title": "59th Engineers’ Day Celebration 2026 (Three-Day Technical Fest)",
-      "category": "Statutory Day",
-      "eventDate": "2026-09-24",
-      "eventTime": "09:00 AM",
-      "chapterId": "ch_mgr_04",
-      "collegeOrChapter": "Multi-Institutional Hub (RMKCET, Amrita, Dr. MGR)",
-      "venue": "RMK College of Engineering and Technology; Amrita Vishwa Vidyapeetham; Dr. M.G.R. Educational & Research Institute",
-      "attendeesCount": 350,
-      "speakerName": "Dr. G. Saravanan, FIE & Dr. G.P. Ramesh, FIE",
-      "speakerDesignation": "Chairman & Honorary Secretary",
-      "speakerOrg": "The Institution of Engineers (India) TVLC",
-      "description": "Grand three-day Engineers’ Day Celebration 2026 & Technical Fest conducted across RMK College of Engineering and Technology, Amrita Vishwa Vidyapeetham, and Dr. M.G.R. Educational & Research Institute. Total 350 delegates participated.",
-      "status": "Completed",
-      "reportingYear": 2026,
-      "posterUrl": "/assets/iei-emblem.png",
-      "reportUrl": "",
-      "createdAt": "2026-09-24T10:00:00.000Z"
+      "createdAt": "2026-09-10T11:00:00.000Z"
     }
   ],
   "auditLogs": [
     {
-      "id": "log_1793120889897_tbbtk",
-      "action": "DELETE_EVENT",
-      "performedBy": "IEI TVLC Chief Administrator",
+      "id": "log_1793216618933_s0bid",
+      "action": "AUDIT_OBSERVATION_RECORDED",
+      "performedBy": "Chapter Auditor",
+      "role": "auditor",
+      "target": "Audit Ledger",
+      "details": "Recorded audit observation: ISO 9001:2015 Operational Documentation Audit",
+      "timestamp": "2026-10-28T19:43:38.933Z"
+    },
+    {
+      "id": "log_1793216618920_xqc9d",
+      "action": "REPORTING_SETTINGS_UPDATED",
+      "performedBy": "Chapter Administrator",
       "role": "admin",
-      "target": "Report Download Test Activity",
-      "details": "Deleted event ID ev_1793120889892_g33i3",
-      "timestamp": "2026-10-27T17:08:09.897Z"
+      "target": "Governance Settings",
+      "details": "Updated Reporting Cycle Week 46 configuration",
+      "timestamp": "2026-10-28T19:43:38.920Z"
     },
     {
-      "id": "log_1793120889892_dq1a8",
-      "action": "CREATE_EVENT",
-      "performedBy": "IEI TVLC Chief Administrator",
+      "id": "log_1793216618907_d6cft",
+      "action": "USER_ENROLLED",
+      "performedBy": "Chapter Administrator",
       "role": "admin",
-      "target": "Report Download Test Activity",
-      "details": "Scheduled new event under Technical Lecture",
-      "timestamp": "2026-10-27T17:08:09.892Z"
+      "target": "User Administration",
+      "details": "Created new account for Priya Sundaram (priya_1793216618706@mgriei.org) with role committee",
+      "timestamp": "2026-10-28T19:43:38.907Z"
     },
     {
-      "id": "log_1793120889881_e5mgv",
-      "action": "RECORD_INTAKE",
-      "performedBy": "RMK Chapter Coordinator",
-      "role": "coordinator",
-      "target": "RMK Engineering College (2026)",
-      "details": "Recorded new membership intake: 50 students, 1 corporate",
-      "timestamp": "2026-10-27T17:08:09.881Z"
+      "id": "log_1793216618654_42jnq",
+      "action": "COMMUNITY_POST_CREATED",
+      "performedBy": "Chapter Chairman",
+      "role": "chairman",
+      "target": "Community",
+      "details": "Published announcement: IEI Council Notice: Technical Paper Competition 2026",
+      "timestamp": "2026-10-28T19:43:38.654Z"
     },
     {
-      "id": "log_1793120889877_1135m",
-      "action": "DELETE_EVENT",
-      "performedBy": "IEI TVLC Chief Administrator",
+      "id": "log_1793216618642_hb3fw",
+      "action": "WEEKLY_REPORT_ENDORSED",
+      "performedBy": "Chapter Chairman",
+      "role": "chairman",
+      "target": "Governance",
+      "details": "Endorsed Weekly Report #45",
+      "timestamp": "2026-10-28T19:43:38.642Z"
+    },
+    {
+      "id": "log_1793216618621_rt21q",
+      "action": "WEEKLY_REPORT_SUBMITTED",
+      "performedBy": "Committee Member",
+      "role": "committee",
+      "target": "Weekly Reporting",
+      "details": "Submitted Activity Report for Week 45 (UNDER_REVIEW)",
+      "timestamp": "2026-10-28T19:43:38.621Z"
+    },
+    {
+      "id": "log_1793216618605_5xtut",
+      "action": "TASK_UPDATED",
+      "performedBy": "Chapter Chairman",
+      "role": "chairman",
+      "target": "Task Management",
+      "details": "Updated task: Automated Test: Prepare National Science Day Technical Workshop -> APPROVED",
+      "timestamp": "2026-10-28T19:43:38.605Z"
+    },
+    {
+      "id": "log_1793216618586_jzj8o",
+      "action": "TASK_UPDATED",
+      "performedBy": "Committee Member",
+      "role": "committee",
+      "target": "Task Management",
+      "details": "Updated task: Automated Test: Prepare National Science Day Technical Workshop -> SUBMITTED_FOR_REVIEW",
+      "timestamp": "2026-10-28T19:43:38.586Z"
+    },
+    {
+      "id": "log_1793216618572_x7yh9",
+      "action": "TASK_UPDATED",
+      "performedBy": "Committee Member",
+      "role": "committee",
+      "target": "Task Management",
+      "details": "Updated task: Automated Test: Prepare National Science Day Technical Workshop -> IN_PROGRESS",
+      "timestamp": "2026-10-28T19:43:38.572Z"
+    },
+    {
+      "id": "log_1793216618562_rfswc",
+      "action": "TASK_CREATED",
+      "performedBy": "Chapter Administrator",
       "role": "admin",
-      "target": "RMK Chapter Technical Workshop",
-      "details": "Deleted event ID ev_1793120889873_tapbq",
-      "timestamp": "2026-10-27T17:08:09.877Z"
+      "target": "Task Management",
+      "details": "Created task: Automated Test: Prepare National Science Day Technical Workshop",
+      "timestamp": "2026-10-28T19:43:38.562Z"
     },
     {
-      "id": "log_1793120889873_uawv7",
-      "action": "CREATE_EVENT",
-      "performedBy": "RMK Chapter Coordinator",
-      "role": "coordinator",
-      "target": "RMK Chapter Technical Workshop",
-      "details": "Scheduled new event under Workshop",
-      "timestamp": "2026-10-27T17:08:09.873Z"
-    },
-    {
-      "id": "log_1793120889867_0rgke",
-      "action": "UPDATE_CHAPTER",
-      "performedBy": "RMK Chapter Coordinator",
-      "role": "coordinator",
-      "target": "IEI TVLC RMK Student Chapter",
-      "details": "Updated student chapter details for ch_rmk_01",
-      "timestamp": "2026-10-27T17:08:09.867Z"
-    },
-    {
-      "id": "log_1793120889867_lz6ot",
+      "id": "log_1793216618334_oiy40",
       "action": "LOGIN",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T17:08:09.867Z"
-    },
-    {
-      "id": "log_1793120889775_u45vd",
-      "action": "DELETE_EVENT",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "61st Technical Lecture: Advanced Agentic Frameworks in Industry",
-      "details": "Deleted event ID ev_1793120889769_40vdb",
-      "timestamp": "2026-10-27T17:08:09.775Z"
-    },
-    {
-      "id": "log_1793120889769_wn4g5",
-      "action": "CREATE_EVENT",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "61st Technical Lecture: Advanced Agentic Frameworks in Industry",
-      "details": "Scheduled new event under Technical Lecture",
-      "timestamp": "2026-10-27T17:08:09.769Z"
-    },
-    {
-      "id": "log_1793120889763_t9pjn",
-      "action": "DELETE_CHAPTER",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Deleted student chapter ID ch_1793120889744_lamec",
-      "timestamp": "2026-10-27T17:08:09.763Z"
-    },
-    {
-      "id": "log_1793120889759_2yq48",
-      "action": "RECORD_INTAKE",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "National Engineering Institute (2026)",
-      "details": "Recorded new membership intake: 85 students, 2 corporate",
-      "timestamp": "2026-10-27T17:08:09.759Z"
-    },
-    {
-      "id": "log_1793120889754_u3mru",
-      "action": "RECORD_SNAPSHOT",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "Chapter ch_1793120889744_lamec (2026)",
-      "details": "Recorded annual membership snapshot",
-      "timestamp": "2026-10-27T17:08:09.754Z"
-    },
-    {
-      "id": "log_1793120889749_ur180",
-      "action": "UPDATE_CHAPTER",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Updated student chapter details for ch_1793120889744_lamec",
-      "timestamp": "2026-10-27T17:08:09.749Z"
-    },
-    {
-      "id": "log_1793120889745_csebn",
-      "action": "CREATE_CHAPTER",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Added new student chapter with ID ch_1793120889744_lamec",
-      "timestamp": "2026-10-27T17:08:09.745Z"
-    },
-    {
-      "id": "log_1793120889743_le1a7",
-      "action": "LOGOUT",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "Portal Auth",
-      "details": "User logged out.",
-      "timestamp": "2026-10-27T17:08:09.743Z"
-    },
-    {
-      "id": "log_1793120889654_s2zwv",
-      "action": "LOGIN",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T17:08:09.654Z"
-    },
-    {
-      "id": "log_1793120889573_hsfyz",
-      "action": "LOGIN",
-      "performedBy": "IEI Council Auditor",
+      "performedBy": "Chapter Auditor",
       "role": "auditor",
       "target": "Portal Auth",
       "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T17:08:09.573Z"
+      "timestamp": "2026-10-28T19:43:38.334Z"
     },
     {
-      "id": "log_1793120889460_w7itg",
+      "id": "log_1793216618128_zyw0k",
       "action": "LOGIN",
-      "performedBy": "RMK Chapter Coordinator",
-      "role": "coordinator",
+      "performedBy": "Committee Member",
+      "role": "committee",
       "target": "Portal Auth",
       "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T17:08:09.460Z"
+      "timestamp": "2026-10-28T19:43:38.128Z"
     },
     {
-      "id": "log_1793120889380_iedmn",
+      "id": "log_1793216617928_qwt9h",
       "action": "LOGIN",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
+      "performedBy": "Chapter Chairman",
+      "role": "chairman",
       "target": "Portal Auth",
       "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T17:08:09.380Z"
+      "timestamp": "2026-10-28T19:43:37.928Z"
     },
     {
-      "id": "log_1793120889299_mi04j",
+      "id": "log_1793216617736_q7zbr",
       "action": "LOGIN",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T17:08:09.299Z"
-    },
-    {
-      "id": "log_1793120733735_a4mty",
-      "action": "RECORD_INTAKE",
-      "performedBy": "RMK Chapter Coordinator",
-      "role": "coordinator",
-      "target": "RMK Engineering College (2026)",
-      "details": "Recorded new membership intake: 50 students, 1 corporate",
-      "timestamp": "2026-10-27T17:05:33.735Z"
-    },
-    {
-      "id": "log_1793120733729_5zia4",
-      "action": "DELETE_EVENT",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "RMK Chapter Technical Workshop",
-      "details": "Deleted event ID ev_1793120733724_30683",
-      "timestamp": "2026-10-27T17:05:33.729Z"
-    },
-    {
-      "id": "log_1793120733724_ovxef",
-      "action": "CREATE_EVENT",
-      "performedBy": "RMK Chapter Coordinator",
-      "role": "coordinator",
-      "target": "RMK Chapter Technical Workshop",
-      "details": "Scheduled new event under Workshop",
-      "timestamp": "2026-10-27T17:05:33.724Z"
-    },
-    {
-      "id": "log_1793120733719_ihujj",
-      "action": "UPDATE_CHAPTER",
-      "performedBy": "RMK Chapter Coordinator",
-      "role": "coordinator",
-      "target": "IEI TVLC RMK Student Chapter",
-      "details": "Updated student chapter details for ch_rmk_01",
-      "timestamp": "2026-10-27T17:05:33.719Z"
-    },
-    {
-      "id": "log_1793120733719_audxk",
-      "action": "LOGIN",
-      "performedBy": "IEI TVLC Chief Administrator",
+      "performedBy": "Chapter Administrator",
       "role": "admin",
       "target": "Portal Auth",
       "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T17:05:33.719Z"
+      "timestamp": "2026-10-28T19:43:37.736Z"
     },
     {
-      "id": "log_1793120733624_iu21f",
-      "action": "DELETE_EVENT",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "61st Technical Lecture: Advanced Agentic Frameworks in Industry",
-      "details": "Deleted event ID ev_1793120733619_ijxnv",
-      "timestamp": "2026-10-27T17:05:33.624Z"
-    },
-    {
-      "id": "log_1793120733619_fasn5",
-      "action": "CREATE_EVENT",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "61st Technical Lecture: Advanced Agentic Frameworks in Industry",
-      "details": "Scheduled new event under Technical Lecture",
-      "timestamp": "2026-10-27T17:05:33.619Z"
-    },
-    {
-      "id": "log_1793120733609_tmbog",
-      "action": "DELETE_CHAPTER",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Deleted student chapter ID ch_1793120733589_7wdcm",
-      "timestamp": "2026-10-27T17:05:33.609Z"
-    },
-    {
-      "id": "log_1793120733604_xvx3t",
-      "action": "RECORD_INTAKE",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "National Engineering Institute (2026)",
-      "details": "Recorded new membership intake: 85 students, 2 corporate",
-      "timestamp": "2026-10-27T17:05:33.604Z"
-    },
-    {
-      "id": "log_1793120733599_rp6sm",
-      "action": "RECORD_SNAPSHOT",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "Chapter ch_1793120733589_7wdcm (2026)",
-      "details": "Recorded annual membership snapshot",
-      "timestamp": "2026-10-27T17:05:33.599Z"
-    },
-    {
-      "id": "log_1793120733594_33kdo",
-      "action": "UPDATE_CHAPTER",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Updated student chapter details for ch_1793120733589_7wdcm",
-      "timestamp": "2026-10-27T17:05:33.594Z"
-    },
-    {
-      "id": "log_1793120733589_5tlod",
-      "action": "CREATE_CHAPTER",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Added new student chapter with ID ch_1793120733589_7wdcm",
-      "timestamp": "2026-10-27T17:05:33.589Z"
-    },
-    {
-      "id": "log_1793120733588_zo2dq",
-      "action": "LOGOUT",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "Portal Auth",
-      "details": "User logged out.",
-      "timestamp": "2026-10-27T17:05:33.588Z"
-    },
-    {
-      "id": "log_1793120733499_0514k",
+      "id": "log_1793216607067_oy31g",
       "action": "LOGIN",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T17:05:33.499Z"
-    },
-    {
-      "id": "log_1793120733412_2ohbe",
-      "action": "LOGIN",
-      "performedBy": "IEI Council Auditor",
+      "performedBy": "Student Technical Coordinator",
       "role": "auditor",
       "target": "Portal Auth",
       "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T17:05:33.412Z"
+      "timestamp": "2026-10-28T19:43:27.067Z"
     },
     {
-      "id": "log_1793120733322_18mb0",
+      "id": "log_1793216606846_mws6a",
+      "action": "PASSWORD_RESET_INITIATED",
+      "performedBy": "Chapter Administrator",
+      "role": "admin",
+      "target": "Security",
+      "details": "Password reset performed for user ID: usr_1793216606185",
+      "timestamp": "2026-10-28T19:43:26.846Z"
+    },
+    {
+      "id": "log_1793216606628_e7jjm",
+      "action": "USER_STATUS_TOGGLED",
+      "performedBy": "Chapter Administrator",
+      "role": "admin",
+      "target": "User Administration",
+      "details": "Activated account for Student Technical Coordinator",
+      "timestamp": "2026-10-28T19:43:26.628Z"
+    },
+    {
+      "id": "log_1793216606610_ow9ze",
+      "action": "USER_STATUS_TOGGLED",
+      "performedBy": "Chapter Administrator",
+      "role": "admin",
+      "target": "User Administration",
+      "details": "Deactivated account for Student Technical Coordinator",
+      "timestamp": "2026-10-28T19:43:26.610Z"
+    },
+    {
+      "id": "log_1793216606593_per3e",
+      "action": "USER_ROLE_CHANGED",
+      "performedBy": "Chapter Administrator",
+      "role": "admin",
+      "target": "User Administration",
+      "details": "Changed role of Student Technical Coordinator from committee to auditor",
+      "timestamp": "2026-10-28T19:43:26.593Z"
+    },
+    {
+      "id": "log_1793216606577_ezad5",
       "action": "LOGIN",
-      "performedBy": "RMK Chapter Coordinator",
-      "role": "coordinator",
+      "performedBy": "Student Technical Coordinator",
+      "role": "committee",
       "target": "Portal Auth",
       "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T17:05:33.322Z"
+      "timestamp": "2026-10-28T19:43:26.577Z"
     },
     {
-      "id": "log_1793120733237_u7kix",
+      "id": "log_1793216606376_qd3vb",
+      "action": "USER_ENROLLED",
+      "performedBy": "Chapter Administrator",
+      "role": "admin",
+      "target": "User Administration",
+      "details": "Created new account for Student Technical Coordinator (coordinator_1793216606180@mgriei.org) with role committee",
+      "timestamp": "2026-10-28T19:43:26.376Z"
+    },
+    {
+      "id": "log_1793216606160_kg7kc",
       "action": "LOGIN",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
+      "performedBy": "Committee Member",
+      "role": "committee",
       "target": "Portal Auth",
       "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T17:05:33.237Z"
+      "timestamp": "2026-10-28T19:43:26.160Z"
     },
     {
-      "id": "log_1793120733154_53hee",
+      "id": "log_1793216605959_uw8b3",
       "action": "LOGIN",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T17:05:33.154Z"
-    },
-    {
-      "id": "log_1793120623241_a5j17",
-      "action": "RECORD_INTAKE",
-      "performedBy": "RMK Chapter Coordinator",
-      "role": "coordinator",
-      "target": "RMK Engineering College (2026)",
-      "details": "Recorded new membership intake: 50 students, 1 corporate",
-      "timestamp": "2026-10-27T17:03:43.241Z"
-    },
-    {
-      "id": "log_1793120623237_3m5ap",
-      "action": "DELETE_EVENT",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "RMK Chapter Technical Workshop",
-      "details": "Deleted event ID ev_1793120623233_legcv",
-      "timestamp": "2026-10-27T17:03:43.237Z"
-    },
-    {
-      "id": "log_1793120623233_tt4mw",
-      "action": "CREATE_EVENT",
-      "performedBy": "RMK Chapter Coordinator",
-      "role": "coordinator",
-      "target": "RMK Chapter Technical Workshop",
-      "details": "Scheduled new event under Workshop",
-      "timestamp": "2026-10-27T17:03:43.233Z"
-    },
-    {
-      "id": "log_1793120623226_2y56o",
-      "action": "UPDATE_CHAPTER",
-      "performedBy": "RMK Chapter Coordinator",
-      "role": "coordinator",
-      "target": "IEI TVLC RMK Student Chapter",
-      "details": "Updated student chapter details for ch_rmk_01",
-      "timestamp": "2026-10-27T17:03:43.226Z"
-    },
-    {
-      "id": "log_1793120623226_txafo",
-      "action": "LOGIN",
-      "performedBy": "IEI TVLC Chief Administrator",
+      "performedBy": "Chapter Administrator",
       "role": "admin",
       "target": "Portal Auth",
       "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T17:03:43.226Z"
+      "timestamp": "2026-10-28T19:43:25.959Z"
     },
     {
-      "id": "log_1793120623134_de5vn",
-      "action": "DELETE_EVENT",
-      "performedBy": "IEI TVLC Chief Administrator",
+      "id": "log_1793216538449_8vjqx",
+      "action": "USER_STATUS_TOGGLED",
+      "performedBy": "Chapter Administrator",
       "role": "admin",
-      "target": "61st Technical Lecture: Advanced Agentic Frameworks in Industry",
-      "details": "Deleted event ID ev_1793120623129_fad9v",
-      "timestamp": "2026-10-27T17:03:43.134Z"
+      "target": "User Administration",
+      "details": "Activated account for Student Technical Coordinator",
+      "timestamp": "2026-10-28T19:42:18.449Z"
     },
     {
-      "id": "log_1793120623129_ebnyr",
-      "action": "CREATE_EVENT",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "61st Technical Lecture: Advanced Agentic Frameworks in Industry",
-      "details": "Scheduled new event under Technical Lecture",
-      "timestamp": "2026-10-27T17:03:43.129Z"
-    },
-    {
-      "id": "log_1793120623122_1xlz4",
-      "action": "DELETE_CHAPTER",
-      "performedBy": "IEI TVLC Chief Administrator",
+      "id": "log_1793216538432_7mqhf",
+      "action": "USER_STATUS_TOGGLED",
+      "performedBy": "Chapter Administrator",
       "role": "admin",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Deleted student chapter ID ch_1793120623100_xsju8",
-      "timestamp": "2026-10-27T17:03:43.122Z"
+      "target": "User Administration",
+      "details": "Deactivated account for Student Technical Coordinator",
+      "timestamp": "2026-10-28T19:42:18.432Z"
     },
     {
-      "id": "log_1793120623117_kfyjk",
-      "action": "RECORD_INTAKE",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "National Engineering Institute (2026)",
-      "details": "Recorded new membership intake: 85 students, 2 corporate",
-      "timestamp": "2026-10-27T17:03:43.117Z"
-    },
-    {
-      "id": "log_1793120623110_bs883",
-      "action": "RECORD_SNAPSHOT",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "Chapter ch_1793120623100_xsju8 (2026)",
-      "details": "Recorded annual membership snapshot",
-      "timestamp": "2026-10-27T17:03:43.110Z"
-    },
-    {
-      "id": "log_1793120623105_s33zp",
-      "action": "UPDATE_CHAPTER",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Updated student chapter details for ch_1793120623100_xsju8",
-      "timestamp": "2026-10-27T17:03:43.105Z"
-    },
-    {
-      "id": "log_1793120623100_l4jaf",
-      "action": "CREATE_CHAPTER",
-      "performedBy": "IEI TVLC Chief Administrator",
+      "id": "log_1793216538416_66jq6",
+      "action": "USER_ROLE_CHANGED",
+      "performedBy": "Chapter Administrator",
       "role": "admin",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Added new student chapter with ID ch_1793120623100_xsju8",
-      "timestamp": "2026-10-27T17:03:43.100Z"
+      "target": "User Administration",
+      "details": "Changed role of Student Technical Coordinator from committee to auditor",
+      "timestamp": "2026-10-28T19:42:18.416Z"
     },
     {
-      "id": "log_1793120623098_zkoeb",
-      "action": "LOGOUT",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "Portal Auth",
-      "details": "User logged out.",
-      "timestamp": "2026-10-27T17:03:43.098Z"
-    },
-    {
-      "id": "log_1793120623011_x24xz",
+      "id": "log_1793216538401_55kjl",
       "action": "LOGIN",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
+      "performedBy": "Student Technical Coordinator",
+      "role": "committee",
       "target": "Portal Auth",
       "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T17:03:43.011Z"
+      "timestamp": "2026-10-28T19:42:18.401Z"
     },
     {
-      "id": "log_1793120622928_j0q1p",
+      "id": "log_1793216538185_fdtox",
+      "action": "USER_ENROLLED",
+      "performedBy": "Chapter Administrator",
+      "role": "admin",
+      "target": "User Administration",
+      "details": "Created new account for Student Technical Coordinator with role committee",
+      "timestamp": "2026-10-28T19:42:18.185Z"
+    },
+    {
+      "id": "log_1793216537985_k8zys",
       "action": "LOGIN",
-      "performedBy": "IEI Council Auditor",
+      "performedBy": "Committee Member",
+      "role": "committee",
+      "target": "Portal Auth",
+      "details": "User signed into staff administration portal.",
+      "timestamp": "2026-10-28T19:42:17.985Z"
+    },
+    {
+      "id": "log_1793216537792_vl76t",
+      "action": "LOGIN",
+      "performedBy": "Chapter Administrator",
+      "role": "admin",
+      "target": "Portal Auth",
+      "details": "User signed into staff administration portal.",
+      "timestamp": "2026-10-28T19:42:17.792Z"
+    },
+    {
+      "id": "log_1793216470373_feqr4",
+      "action": "AUDIT_OBSERVATION_RECORDED",
+      "performedBy": "Chapter Auditor",
+      "role": "auditor",
+      "target": "Audit Ledger",
+      "details": "Recorded audit observation: ISO 9001:2015 Operational Documentation Audit",
+      "timestamp": "2026-10-28T19:41:10.373Z"
+    },
+    {
+      "id": "log_1793216470355_a8sw3",
+      "action": "REPORTING_SETTINGS_UPDATED",
+      "performedBy": "Chapter Administrator",
+      "role": "admin",
+      "target": "Governance Settings",
+      "details": "Updated Reporting Cycle Week 46 configuration",
+      "timestamp": "2026-10-28T19:41:10.355Z"
+    },
+    {
+      "id": "log_1793216470263_23vuv",
+      "action": "USER_ENROLLED",
+      "performedBy": "Chapter Administrator",
+      "role": "admin",
+      "target": "User Administration",
+      "details": "Created new account for Priya Sundaram with role committee",
+      "timestamp": "2026-10-28T19:41:10.263Z"
+    },
+    {
+      "id": "log_1793216470009_dcbty",
+      "action": "COMMUNITY_POST_CREATED",
+      "performedBy": "Chapter Chairman",
+      "role": "chairman",
+      "target": "Community",
+      "details": "Published announcement: IEI Council Notice: Technical Paper Competition 2026",
+      "timestamp": "2026-10-28T19:41:10.009Z"
+    },
+    {
+      "id": "log_1793216469996_wm5lu",
+      "action": "WEEKLY_REPORT_ENDORSED",
+      "performedBy": "Chapter Chairman",
+      "role": "chairman",
+      "target": "Governance",
+      "details": "Endorsed Weekly Report #45",
+      "timestamp": "2026-10-28T19:41:09.996Z"
+    },
+    {
+      "id": "log_1793216469975_y9n0j",
+      "action": "WEEKLY_REPORT_SUBMITTED",
+      "performedBy": "Committee Member",
+      "role": "committee",
+      "target": "Weekly Reporting",
+      "details": "Submitted Activity Report for Week 45 (UNDER_REVIEW)",
+      "timestamp": "2026-10-28T19:41:09.975Z"
+    },
+    {
+      "id": "log_1793216469962_ml8l0",
+      "action": "TASK_UPDATED",
+      "performedBy": "Chapter Chairman",
+      "role": "chairman",
+      "target": "Task Management",
+      "details": "Updated task: Automated Test: Prepare National Science Day Technical Workshop -> APPROVED",
+      "timestamp": "2026-10-28T19:41:09.962Z"
+    },
+    {
+      "id": "log_1793216469942_tjkgy",
+      "action": "TASK_UPDATED",
+      "performedBy": "Committee Member",
+      "role": "committee",
+      "target": "Task Management",
+      "details": "Updated task: Automated Test: Prepare National Science Day Technical Workshop -> SUBMITTED_FOR_REVIEW",
+      "timestamp": "2026-10-28T19:41:09.942Z"
+    },
+    {
+      "id": "log_1793216469928_3kpse",
+      "action": "TASK_UPDATED",
+      "performedBy": "Committee Member",
+      "role": "committee",
+      "target": "Task Management",
+      "details": "Updated task: Automated Test: Prepare National Science Day Technical Workshop -> IN_PROGRESS",
+      "timestamp": "2026-10-28T19:41:09.928Z"
+    },
+    {
+      "id": "log_1793216469915_dbdvt",
+      "action": "TASK_CREATED",
+      "performedBy": "Chapter Administrator",
+      "role": "admin",
+      "target": "Task Management",
+      "details": "Created task: Automated Test: Prepare National Science Day Technical Workshop",
+      "timestamp": "2026-10-28T19:41:09.915Z"
+    },
+    {
+      "id": "log_1793216469677_5b8fd",
+      "action": "LOGIN",
+      "performedBy": "Chapter Auditor",
       "role": "auditor",
       "target": "Portal Auth",
       "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T17:03:42.928Z"
+      "timestamp": "2026-10-28T19:41:09.677Z"
     },
     {
-      "id": "log_1793120622846_ygvdp",
+      "id": "log_1793216469470_uaigl",
       "action": "LOGIN",
-      "performedBy": "RMK Chapter Coordinator",
-      "role": "coordinator",
+      "performedBy": "Committee Member",
+      "role": "committee",
       "target": "Portal Auth",
       "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T17:03:42.846Z"
+      "timestamp": "2026-10-28T19:41:09.470Z"
     },
     {
-      "id": "log_1793120622749_fiuu5",
+      "id": "log_1793216469272_otg11",
       "action": "LOGIN",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
+      "performedBy": "Chapter Chairman",
+      "role": "chairman",
       "target": "Portal Auth",
       "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T17:03:42.750Z"
+      "timestamp": "2026-10-28T19:41:09.272Z"
     },
     {
-      "id": "log_1793120622644_3x7bh",
+      "id": "log_1793216469075_nupqf",
       "action": "LOGIN",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T17:03:42.644Z"
-    },
-    {
-      "id": "log_1793119415105_q0e79",
-      "action": "RECORD_INTAKE",
-      "performedBy": "RMK Chapter Coordinator",
-      "role": "coordinator",
-      "target": "RMK Engineering College (2026)",
-      "details": "Recorded new membership intake: 50 students, 1 corporate",
-      "timestamp": "2026-10-27T16:43:35.105Z"
-    },
-    {
-      "id": "log_1793119415101_d1rck",
-      "action": "DELETE_EVENT",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "RMK Chapter Technical Workshop",
-      "details": "Deleted event ID ev_1793119415096_nwhkd",
-      "timestamp": "2026-10-27T16:43:35.101Z"
-    },
-    {
-      "id": "log_1793119415096_hfwfq",
-      "action": "CREATE_EVENT",
-      "performedBy": "RMK Chapter Coordinator",
-      "role": "coordinator",
-      "target": "RMK Chapter Technical Workshop",
-      "details": "Scheduled new event under Workshop",
-      "timestamp": "2026-10-27T16:43:35.096Z"
-    },
-    {
-      "id": "log_1793119415091_c7cvm",
-      "action": "UPDATE_CHAPTER",
-      "performedBy": "RMK Chapter Coordinator",
-      "role": "coordinator",
-      "target": "IEI TVLC RMK Student Chapter",
-      "details": "Updated student chapter details for ch_rmk_01",
-      "timestamp": "2026-10-27T16:43:35.091Z"
-    },
-    {
-      "id": "log_1793119415091_5g4o6",
-      "action": "LOGIN",
-      "performedBy": "IEI TVLC Chief Administrator",
+      "performedBy": "Chapter Administrator",
       "role": "admin",
       "target": "Portal Auth",
       "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:43:35.091Z"
+      "timestamp": "2026-10-28T19:41:09.076Z"
     },
     {
-      "id": "log_1793119414996_h6ix9",
-      "action": "DELETE_EVENT",
-      "performedBy": "IEI TVLC Chief Administrator",
+      "id": "log_1793214484610_881xq",
+      "action": "AUDIT_OBSERVATION_RECORDED",
+      "performedBy": "Chapter Auditor",
+      "role": "auditor",
+      "target": "Audit Ledger",
+      "details": "Recorded audit observation: ISO 9001:2015 Operational Documentation Audit",
+      "timestamp": "2026-10-28T19:08:04.610Z"
+    },
+    {
+      "id": "log_1793214484599_rnqu1",
+      "action": "REPORTING_SETTINGS_UPDATED",
+      "performedBy": "Chapter Administrator",
       "role": "admin",
-      "target": "61st Technical Lecture: Advanced Agentic Frameworks in Industry",
-      "details": "Deleted event ID ev_1793119414991_m5xxe",
-      "timestamp": "2026-10-27T16:43:34.996Z"
+      "target": "Governance Settings",
+      "details": "Updated Reporting Cycle Week 46 configuration",
+      "timestamp": "2026-10-28T19:08:04.599Z"
     },
     {
-      "id": "log_1793119414991_4ptbg",
-      "action": "CREATE_EVENT",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "61st Technical Lecture: Advanced Agentic Frameworks in Industry",
-      "details": "Scheduled new event under Technical Lecture",
-      "timestamp": "2026-10-27T16:43:34.991Z"
-    },
-    {
-      "id": "log_1793119414983_iydt4",
-      "action": "DELETE_CHAPTER",
-      "performedBy": "IEI TVLC Chief Administrator",
+      "id": "log_1793214484586_14e30",
+      "action": "USER_ENROLLED",
+      "performedBy": "Chapter Administrator",
       "role": "admin",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Deleted student chapter ID ch_1793119414959_j7fwi",
-      "timestamp": "2026-10-27T16:43:34.983Z"
+      "target": "User Administration",
+      "details": "Created new account for Priya Sundaram with role committee",
+      "timestamp": "2026-10-28T19:08:04.586Z"
     },
     {
-      "id": "log_1793119414978_0r9u9",
-      "action": "RECORD_INTAKE",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "National Engineering Institute (2026)",
-      "details": "Recorded new membership intake: 85 students, 2 corporate",
-      "timestamp": "2026-10-27T16:43:34.978Z"
+      "id": "log_1793214484318_ee3cm",
+      "action": "COMMUNITY_POST_CREATED",
+      "performedBy": "Chapter Chairman",
+      "role": "chairman",
+      "target": "Community",
+      "details": "Published announcement: IEI Council Notice: Technical Paper Competition 2026",
+      "timestamp": "2026-10-28T19:08:04.319Z"
     },
     {
-      "id": "log_1793119414971_v7fa2",
-      "action": "RECORD_SNAPSHOT",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "Chapter ch_1793119414959_j7fwi (2026)",
-      "details": "Recorded annual membership snapshot",
-      "timestamp": "2026-10-27T16:43:34.971Z"
+      "id": "log_1793214484308_ozqjh",
+      "action": "WEEKLY_REPORT_ENDORSED",
+      "performedBy": "Chapter Chairman",
+      "role": "chairman",
+      "target": "Governance",
+      "details": "Endorsed Weekly Report #45",
+      "timestamp": "2026-10-28T19:08:04.308Z"
     },
     {
-      "id": "log_1793119414964_vh1b6",
-      "action": "UPDATE_CHAPTER",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Updated student chapter details for ch_1793119414959_j7fwi",
-      "timestamp": "2026-10-27T16:43:34.964Z"
+      "id": "log_1793214484285_b337l",
+      "action": "WEEKLY_REPORT_SUBMITTED",
+      "performedBy": "Committee Member",
+      "role": "committee",
+      "target": "Weekly Reporting",
+      "details": "Submitted Activity Report for Week 45 (UNDER_REVIEW)",
+      "timestamp": "2026-10-28T19:08:04.285Z"
     },
     {
-      "id": "log_1793119414959_nayxj",
-      "action": "CREATE_CHAPTER",
-      "performedBy": "IEI TVLC Chief Administrator",
+      "id": "log_1793214484272_d8iho",
+      "action": "TASK_UPDATED",
+      "performedBy": "Chapter Chairman",
+      "role": "chairman",
+      "target": "Task Management",
+      "details": "Updated task: Automated Test: Prepare National Science Day Technical Workshop -> APPROVED",
+      "timestamp": "2026-10-28T19:08:04.272Z"
+    },
+    {
+      "id": "log_1793214484250_85623",
+      "action": "TASK_UPDATED",
+      "performedBy": "Committee Member",
+      "role": "committee",
+      "target": "Task Management",
+      "details": "Updated task: Automated Test: Prepare National Science Day Technical Workshop -> SUBMITTED_FOR_REVIEW",
+      "timestamp": "2026-10-28T19:08:04.250Z"
+    },
+    {
+      "id": "log_1793214484239_thbzh",
+      "action": "TASK_UPDATED",
+      "performedBy": "Committee Member",
+      "role": "committee",
+      "target": "Task Management",
+      "details": "Updated task: Automated Test: Prepare National Science Day Technical Workshop -> IN_PROGRESS",
+      "timestamp": "2026-10-28T19:08:04.239Z"
+    },
+    {
+      "id": "log_1793214484226_8u29r",
+      "action": "TASK_CREATED",
+      "performedBy": "Chapter Administrator",
       "role": "admin",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Added new student chapter with ID ch_1793119414959_j7fwi",
-      "timestamp": "2026-10-27T16:43:34.959Z"
+      "target": "Task Management",
+      "details": "Created task: Automated Test: Prepare National Science Day Technical Workshop",
+      "timestamp": "2026-10-28T19:08:04.226Z"
     },
     {
-      "id": "log_1793119414957_uhazh",
-      "action": "LOGOUT",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "Portal Auth",
-      "details": "User logged out.",
-      "timestamp": "2026-10-27T16:43:34.957Z"
-    },
-    {
-      "id": "log_1793119414858_awf73",
+      "id": "log_1793214483998_dw1db",
       "action": "LOGIN",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:43:34.858Z"
-    },
-    {
-      "id": "log_1793119414776_08mev",
-      "action": "LOGIN",
-      "performedBy": "IEI Council Auditor",
+      "performedBy": "Chapter Auditor",
       "role": "auditor",
       "target": "Portal Auth",
       "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:43:34.776Z"
+      "timestamp": "2026-10-28T19:08:03.998Z"
     },
     {
-      "id": "log_1793119414690_6bn3k",
+      "id": "log_1793214483808_an4o1",
       "action": "LOGIN",
-      "performedBy": "RMK Chapter Coordinator",
-      "role": "coordinator",
+      "performedBy": "Committee Member",
+      "role": "committee",
       "target": "Portal Auth",
       "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:43:34.690Z"
+      "timestamp": "2026-10-28T19:08:03.808Z"
     },
     {
-      "id": "log_1793119414608_dmj2r",
+      "id": "log_1793214483618_7x5j0",
       "action": "LOGIN",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
+      "performedBy": "Chapter Chairman",
+      "role": "chairman",
       "target": "Portal Auth",
       "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:43:34.608Z"
+      "timestamp": "2026-10-28T19:08:03.618Z"
     },
     {
-      "id": "log_1793119414525_eylip",
+      "id": "log_1793214483421_hqaz0",
       "action": "LOGIN",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:43:34.525Z"
-    },
-    {
-      "id": "log_1793119324402_kco3q",
-      "action": "RECORD_INTAKE",
-      "performedBy": "RMK Chapter Coordinator",
-      "role": "coordinator",
-      "target": "RMK Engineering College (2026)",
-      "details": "Recorded new membership intake: 50 students, 1 corporate",
-      "timestamp": "2026-10-27T16:42:04.402Z"
-    },
-    {
-      "id": "log_1793119324398_wxeu3",
-      "action": "DELETE_EVENT",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "RMK Chapter Technical Workshop",
-      "details": "Deleted event ID ev_1793119324393_i6ydq",
-      "timestamp": "2026-10-27T16:42:04.398Z"
-    },
-    {
-      "id": "log_1793119324393_ni4zz",
-      "action": "CREATE_EVENT",
-      "performedBy": "RMK Chapter Coordinator",
-      "role": "coordinator",
-      "target": "RMK Chapter Technical Workshop",
-      "details": "Scheduled new event under Workshop",
-      "timestamp": "2026-10-27T16:42:04.393Z"
-    },
-    {
-      "id": "log_1793119324387_lxnkl",
-      "action": "UPDATE_CHAPTER",
-      "performedBy": "RMK Chapter Coordinator",
-      "role": "coordinator",
-      "target": "IEI TVLC RMK Student Chapter",
-      "details": "Updated student chapter details for ch_rmk_01",
-      "timestamp": "2026-10-27T16:42:04.387Z"
-    },
-    {
-      "id": "log_1793119324387_sop3m",
-      "action": "LOGIN",
-      "performedBy": "IEI TVLC Chief Administrator",
+      "performedBy": "Chapter Administrator",
       "role": "admin",
       "target": "Portal Auth",
       "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:42:04.387Z"
+      "timestamp": "2026-10-28T19:08:03.422Z"
     },
     {
-      "id": "log_1793119324292_wqlbv",
-      "action": "DELETE_EVENT",
-      "performedBy": "IEI TVLC Chief Administrator",
+      "id": "log_1793214369130_kx7zh",
+      "action": "AUDIT_OBSERVATION_RECORDED",
+      "performedBy": "Chapter Auditor",
+      "role": "auditor",
+      "target": "Audit Ledger",
+      "details": "Recorded audit observation: ISO 9001:2015 Operational Documentation Audit",
+      "timestamp": "2026-10-28T19:06:09.130Z"
+    },
+    {
+      "id": "log_1793214369126_t1h8i",
+      "action": "REPORTING_SETTINGS_UPDATED",
+      "performedBy": "Chapter Administrator",
       "role": "admin",
-      "target": "61st Technical Lecture: Advanced Agentic Frameworks in Industry",
-      "details": "Deleted event ID ev_1793119324286_53crt",
-      "timestamp": "2026-10-27T16:42:04.292Z"
+      "target": "Governance Settings",
+      "details": "Updated Reporting Cycle Week 46 configuration",
+      "timestamp": "2026-10-28T19:06:09.126Z"
     },
     {
-      "id": "log_1793119324286_ny9fs",
-      "action": "CREATE_EVENT",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "61st Technical Lecture: Advanced Agentic Frameworks in Industry",
-      "details": "Scheduled new event under Technical Lecture",
-      "timestamp": "2026-10-27T16:42:04.286Z"
-    },
-    {
-      "id": "log_1793119324277_js4mz",
-      "action": "DELETE_CHAPTER",
-      "performedBy": "IEI TVLC Chief Administrator",
+      "id": "log_1793214369121_6fj3c",
+      "action": "USER_ENROLLED",
+      "performedBy": "Chapter Administrator",
       "role": "admin",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Deleted student chapter ID ch_1793119324255_ch9ij",
-      "timestamp": "2026-10-27T16:42:04.277Z"
+      "target": "User Administration",
+      "details": "Created new account for Priya Sundaram with role committee",
+      "timestamp": "2026-10-28T19:06:09.121Z"
     },
     {
-      "id": "log_1793119324272_blhvw",
-      "action": "RECORD_INTAKE",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "National Engineering Institute (2026)",
-      "details": "Recorded new membership intake: 85 students, 2 corporate",
-      "timestamp": "2026-10-27T16:42:04.272Z"
+      "id": "log_1793214369038_e7yr8",
+      "action": "COMMUNITY_POST_CREATED",
+      "performedBy": "Chapter Chairman",
+      "role": "chairman",
+      "target": "Community",
+      "details": "Published announcement: IEI Council Notice: Technical Paper Competition 2026",
+      "timestamp": "2026-10-28T19:06:09.038Z"
     },
     {
-      "id": "log_1793119324268_y44it",
-      "action": "RECORD_SNAPSHOT",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "Chapter ch_1793119324255_ch9ij (2026)",
-      "details": "Recorded annual membership snapshot",
-      "timestamp": "2026-10-27T16:42:04.268Z"
+      "id": "log_1793214369035_s9617",
+      "action": "WEEKLY_REPORT_ENDORSED",
+      "performedBy": "Chapter Chairman",
+      "role": "chairman",
+      "target": "Governance",
+      "details": "Endorsed Weekly Report #45",
+      "timestamp": "2026-10-28T19:06:09.035Z"
     },
     {
-      "id": "log_1793119324262_lthia",
-      "action": "UPDATE_CHAPTER",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Updated student chapter details for ch_1793119324255_ch9ij",
-      "timestamp": "2026-10-27T16:42:04.262Z"
+      "id": "log_1793214369028_ucm4y",
+      "action": "WEEKLY_REPORT_SUBMITTED",
+      "performedBy": "Committee Member",
+      "role": "committee",
+      "target": "Weekly Reporting",
+      "details": "Submitted Activity Report for Week 45 (UNDER_REVIEW)",
+      "timestamp": "2026-10-28T19:06:09.028Z"
     },
     {
-      "id": "log_1793119324255_gaahq",
-      "action": "CREATE_CHAPTER",
-      "performedBy": "IEI TVLC Chief Administrator",
+      "id": "log_1793214369023_r53x8",
+      "action": "TASK_UPDATED",
+      "performedBy": "Chapter Chairman",
+      "role": "chairman",
+      "target": "Task Management",
+      "details": "Updated task: Automated Test: Prepare National Science Day Technical Workshop -> APPROVED",
+      "timestamp": "2026-10-28T19:06:09.023Z"
+    },
+    {
+      "id": "log_1793214369018_bz0km",
+      "action": "TASK_UPDATED",
+      "performedBy": "Committee Member",
+      "role": "committee",
+      "target": "Task Management",
+      "details": "Updated task: Automated Test: Prepare National Science Day Technical Workshop -> SUBMITTED_FOR_REVIEW",
+      "timestamp": "2026-10-28T19:06:09.018Z"
+    },
+    {
+      "id": "log_1793214369014_gm88q",
+      "action": "TASK_UPDATED",
+      "performedBy": "Committee Member",
+      "role": "committee",
+      "target": "Task Management",
+      "details": "Updated task: Automated Test: Prepare National Science Day Technical Workshop -> IN_PROGRESS",
+      "timestamp": "2026-10-28T19:06:09.014Z"
+    },
+    {
+      "id": "log_1793214369009_t3llc",
+      "action": "TASK_CREATED",
+      "performedBy": "Chapter Administrator",
       "role": "admin",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Added new student chapter with ID ch_1793119324255_ch9ij",
-      "timestamp": "2026-10-27T16:42:04.255Z"
+      "target": "Task Management",
+      "details": "Created task: Automated Test: Prepare National Science Day Technical Workshop",
+      "timestamp": "2026-10-28T19:06:09.009Z"
     },
     {
-      "id": "log_1793119324254_k4meo",
-      "action": "LOGOUT",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "Portal Auth",
-      "details": "User logged out.",
-      "timestamp": "2026-10-27T16:42:04.254Z"
-    },
-    {
-      "id": "log_1793119324160_yner9",
+      "id": "log_1793214368930_8hzgu",
       "action": "LOGIN",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:42:04.160Z"
-    },
-    {
-      "id": "log_1793119324079_5jb9t",
-      "action": "LOGIN",
-      "performedBy": "IEI Council Auditor",
+      "performedBy": "Chapter Auditor",
       "role": "auditor",
       "target": "Portal Auth",
       "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:42:04.079Z"
+      "timestamp": "2026-10-28T19:06:08.930Z"
     },
     {
-      "id": "log_1793119323994_mu6qo",
+      "id": "log_1793214368861_9qty8",
       "action": "LOGIN",
-      "performedBy": "RMK Chapter Coordinator",
-      "role": "coordinator",
+      "performedBy": "Committee Member",
+      "role": "committee",
       "target": "Portal Auth",
       "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:42:03.994Z"
+      "timestamp": "2026-10-28T19:06:08.861Z"
     },
     {
-      "id": "log_1793119323912_trg98",
+      "id": "log_1793214368792_mtmw8",
       "action": "LOGIN",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
+      "performedBy": "Chapter Chairman",
+      "role": "chairman",
       "target": "Portal Auth",
       "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:42:03.912Z"
+      "timestamp": "2026-10-28T19:06:08.792Z"
     },
     {
-      "id": "log_1793119323831_8pkij",
+      "id": "log_1793214368722_yhw63",
       "action": "LOGIN",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:42:03.831Z"
-    },
-    {
-      "id": "log_1793118813597_biamj",
-      "action": "UPDATE_CHAPTER",
-      "performedBy": "RMK Chapter Coordinator",
-      "role": "staff",
-      "target": "IEI TVLC RMK Student Chapter",
-      "details": "Updated student chapter details for ch_rmk_01",
-      "timestamp": "2026-10-27T16:33:33.597Z"
-    },
-    {
-      "id": "log_1793118813594_u01yi",
-      "action": "LOGIN",
-      "performedBy": "IEI TVLC Chief Administrator",
+      "performedBy": "Chapter Administrator",
       "role": "admin",
       "target": "Portal Auth",
       "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:33:33.594Z"
+      "timestamp": "2026-10-28T19:06:08.722Z"
     },
     {
-      "id": "log_1793118813499_8cul3",
-      "action": "DELETE_EVENT",
-      "performedBy": "IEI TVLC Chief Administrator",
+      "id": "log_1793214176522_u2jc4",
+      "action": "REPORTING_SETTINGS_UPDATED",
+      "performedBy": "Chapter Administrator",
       "role": "admin",
-      "target": "61st Technical Lecture: Automated Agentic Frameworks in Industry",
-      "details": "Deleted event ID ev_1793118813495_n6wcx",
-      "timestamp": "2026-10-27T16:33:33.499Z"
+      "target": "Governance Settings",
+      "details": "Updated Reporting Cycle Week 46 configuration",
+      "timestamp": "2026-10-28T19:02:56.522Z"
     },
     {
-      "id": "log_1793118813495_8ehq4",
-      "action": "CREATE_EVENT",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "61st Technical Lecture: Automated Agentic Frameworks in Industry",
-      "details": "Scheduled new event under Technical Lecture",
-      "timestamp": "2026-10-27T16:33:33.495Z"
-    },
-    {
-      "id": "log_1793118813482_aj8y7",
-      "action": "DELETE_CHAPTER",
-      "performedBy": "IEI TVLC Chief Administrator",
+      "id": "log_1793214176518_4rud5",
+      "action": "USER_ENROLLED",
+      "performedBy": "Chapter Administrator",
       "role": "admin",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Deleted student chapter ID ch_1793118813466_lc6x0",
-      "timestamp": "2026-10-27T16:33:33.482Z"
+      "target": "User Administration",
+      "details": "Created new account for Priya Sundaram with role committee",
+      "timestamp": "2026-10-28T19:02:56.518Z"
     },
     {
-      "id": "log_1793118813477_aovdz",
-      "action": "RECORD_SNAPSHOT",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "Chapter ch_1793118813466_lc6x0 (2026)",
-      "details": "Recorded annual membership snapshot",
-      "timestamp": "2026-10-27T16:33:33.477Z"
+      "id": "log_1793214176419_9iz51",
+      "action": "COMMUNITY_POST_CREATED",
+      "performedBy": "Chapter Chairman",
+      "role": "chairman",
+      "target": "Community",
+      "details": "Published announcement: IEI Council Notice: Technical Paper Competition 2026",
+      "timestamp": "2026-10-28T19:02:56.419Z"
     },
     {
-      "id": "log_1793118813471_b1wfd",
-      "action": "UPDATE_CHAPTER",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Updated student chapter details for ch_1793118813466_lc6x0",
-      "timestamp": "2026-10-27T16:33:33.471Z"
+      "id": "log_1793214176399_icduk",
+      "action": "WEEKLY_REPORT_SUBMITTED",
+      "performedBy": "Committee Member",
+      "role": "committee",
+      "target": "Weekly Reporting",
+      "details": "Submitted Activity Report for Week 45 (UNDER_REVIEW)",
+      "timestamp": "2026-10-28T19:02:56.399Z"
     },
     {
-      "id": "log_1793118813466_1a2uj",
-      "action": "CREATE_CHAPTER",
-      "performedBy": "IEI TVLC Chief Administrator",
+      "id": "log_1793214176383_qza7j",
+      "action": "TASK_CREATED",
+      "performedBy": "Chapter Administrator",
       "role": "admin",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Added new student chapter with ID ch_1793118813466_lc6x0",
-      "timestamp": "2026-10-27T16:33:33.466Z"
+      "target": "Task Management",
+      "details": "Created task: Automated Test: Prepare National Science Day Technical Workshop",
+      "timestamp": "2026-10-28T19:02:56.383Z"
     },
     {
-      "id": "log_1793118813375_hqbse",
+      "id": "log_1793214176281_s7w0w",
       "action": "LOGIN",
-      "performedBy": "IEI Council Auditor",
+      "performedBy": "Chapter Auditor",
       "role": "auditor",
       "target": "Portal Auth",
       "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:33:33.375Z"
+      "timestamp": "2026-10-28T19:02:56.281Z"
     },
     {
-      "id": "log_1793118813296_9hnlc",
+      "id": "log_1793214176186_ksdfg",
       "action": "LOGIN",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
+      "performedBy": "Committee Member",
+      "role": "committee",
       "target": "Portal Auth",
       "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:33:33.296Z"
+      "timestamp": "2026-10-28T19:02:56.186Z"
     },
     {
-      "id": "log_1793118813190_kfg2b",
+      "id": "log_1793214176103_xnlfz",
       "action": "LOGIN",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
+      "performedBy": "Chapter Chairman",
+      "role": "chairman",
       "target": "Portal Auth",
       "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:33:33.190Z"
+      "timestamp": "2026-10-28T19:02:56.103Z"
     },
     {
-      "id": "log_1793118159340_o55ug",
-      "action": "UPDATE_CHAPTER",
-      "performedBy": "RMK Chapter Coordinator",
-      "role": "staff",
-      "target": "IEI TVLC RMK Student Chapter",
-      "details": "Updated student chapter details for ch_rmk_01",
-      "timestamp": "2026-10-27T16:22:39.340Z"
-    },
-    {
-      "id": "log_1793118159338_i6wtx",
+      "id": "log_1793214176019_uopqt",
       "action": "LOGIN",
-      "performedBy": "IEI TVLC Chief Administrator",
+      "performedBy": "Chapter Administrator",
       "role": "admin",
       "target": "Portal Auth",
       "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:22:39.338Z"
-    },
-    {
-      "id": "log_1793118159240_rajta",
-      "action": "DELETE_EVENT",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "61st Technical Lecture: Automated Agentic Frameworks in Industry",
-      "details": "Deleted event ID ev_1793118159236_s8eiz",
-      "timestamp": "2026-10-27T16:22:39.240Z"
-    },
-    {
-      "id": "log_1793118159236_eserl",
-      "action": "CREATE_EVENT",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "61st Technical Lecture: Automated Agentic Frameworks in Industry",
-      "details": "Scheduled new event under Technical Lecture",
-      "timestamp": "2026-10-27T16:22:39.236Z"
-    },
-    {
-      "id": "log_1793118159219_draf7",
-      "action": "DELETE_CHAPTER",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Deleted student chapter ID ch_1793118159204_dabc1",
-      "timestamp": "2026-10-27T16:22:39.219Z"
-    },
-    {
-      "id": "log_1793118159214_si9ie",
-      "action": "RECORD_SNAPSHOT",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "Chapter ch_1793118159204_dabc1 (2026)",
-      "details": "Recorded annual membership snapshot",
-      "timestamp": "2026-10-27T16:22:39.214Z"
-    },
-    {
-      "id": "log_1793118159208_i5qwd",
-      "action": "UPDATE_CHAPTER",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Updated student chapter details for ch_1793118159204_dabc1",
-      "timestamp": "2026-10-27T16:22:39.208Z"
-    },
-    {
-      "id": "log_1793118159204_8g2j0",
-      "action": "CREATE_CHAPTER",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Added new student chapter with ID ch_1793118159204_dabc1",
-      "timestamp": "2026-10-27T16:22:39.204Z"
-    },
-    {
-      "id": "log_1793118159108_mqx3q",
-      "action": "LOGIN",
-      "performedBy": "IEI Council Auditor",
-      "role": "auditor",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:22:39.108Z"
-    },
-    {
-      "id": "log_1793118159028_nq73s",
-      "action": "LOGIN",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:22:39.028Z"
-    },
-    {
-      "id": "log_1793118158944_hcf5a",
-      "action": "LOGIN",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:22:38.944Z"
-    },
-    {
-      "id": "log_1793117767081_iviua",
-      "action": "UPDATE_CHAPTER",
-      "performedBy": "RMK Chapter Coordinator",
-      "role": "staff",
-      "target": "IEI TVLC RMK Student Chapter",
-      "details": "Updated student chapter details for ch_rmk_01",
-      "timestamp": "2026-10-27T16:16:07.081Z"
-    },
-    {
-      "id": "log_1793117767077_vmwgr",
-      "action": "LOGIN",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:16:07.077Z"
-    },
-    {
-      "id": "log_1793117766981_e472j",
-      "action": "DELETE_EVENT",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "61st Technical Lecture: Automated Agentic Frameworks in Industry",
-      "details": "Deleted event ID ev_1793117766977_kqiaf",
-      "timestamp": "2026-10-27T16:16:06.981Z"
-    },
-    {
-      "id": "log_1793117766977_g2mix",
-      "action": "CREATE_EVENT",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "61st Technical Lecture: Automated Agentic Frameworks in Industry",
-      "details": "Scheduled new event under Technical Lecture",
-      "timestamp": "2026-10-27T16:16:06.977Z"
-    },
-    {
-      "id": "log_1793117766968_a4exp",
-      "action": "DELETE_CHAPTER",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Deleted student chapter ID ch_1793117766952_fw6eq",
-      "timestamp": "2026-10-27T16:16:06.968Z"
-    },
-    {
-      "id": "log_1793117766964_x60li",
-      "action": "RECORD_SNAPSHOT",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "Chapter ch_1793117766952_fw6eq (2026)",
-      "details": "Recorded annual membership snapshot",
-      "timestamp": "2026-10-27T16:16:06.964Z"
-    },
-    {
-      "id": "log_1793117766958_j1yfs",
-      "action": "UPDATE_CHAPTER",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Updated student chapter details for ch_1793117766952_fw6eq",
-      "timestamp": "2026-10-27T16:16:06.958Z"
-    },
-    {
-      "id": "log_1793117766952_j66pm",
-      "action": "CREATE_CHAPTER",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Added new student chapter with ID ch_1793117766952_fw6eq",
-      "timestamp": "2026-10-27T16:16:06.952Z"
-    },
-    {
-      "id": "log_1793117766866_6gcxy",
-      "action": "LOGIN",
-      "performedBy": "IEI Council Auditor",
-      "role": "auditor",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:16:06.866Z"
-    },
-    {
-      "id": "log_1793117766784_jrw6w",
-      "action": "LOGIN",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:16:06.784Z"
-    },
-    {
-      "id": "log_1793117766697_5r4m3",
-      "action": "LOGIN",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:16:06.697Z"
-    },
-    {
-      "id": "log_1793117406161_xqvyd",
-      "action": "UPDATE_CHAPTER",
-      "performedBy": "RMK Chapter Coordinator",
-      "role": "staff",
-      "target": "IEI TVLC RMK Student Chapter",
-      "details": "Updated student chapter details for ch_rmk_01",
-      "timestamp": "2026-10-27T16:10:06.161Z"
-    },
-    {
-      "id": "log_1793117406158_fcmix",
-      "action": "LOGIN",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:10:06.158Z"
-    },
-    {
-      "id": "log_1793117406057_86xvj",
-      "action": "DELETE_EVENT",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "61st Technical Lecture: Automated Agentic Frameworks in Industry",
-      "details": "Deleted event ID ev_1793117406053_zgnzh",
-      "timestamp": "2026-10-27T16:10:06.057Z"
-    },
-    {
-      "id": "log_1793117406053_vmruo",
-      "action": "CREATE_EVENT",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "61st Technical Lecture: Automated Agentic Frameworks in Industry",
-      "details": "Scheduled new event under Technical Lecture",
-      "timestamp": "2026-10-27T16:10:06.053Z"
-    },
-    {
-      "id": "log_1793117406039_dsnd5",
-      "action": "DELETE_CHAPTER",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Deleted student chapter ID ch_1793117406024_gmb6t",
-      "timestamp": "2026-10-27T16:10:06.039Z"
-    },
-    {
-      "id": "log_1793117406035_75x89",
-      "action": "RECORD_SNAPSHOT",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "Chapter ch_1793117406024_gmb6t (2026)",
-      "details": "Recorded annual membership snapshot",
-      "timestamp": "2026-10-27T16:10:06.036Z"
-    },
-    {
-      "id": "log_1793117406031_paqqj",
-      "action": "UPDATE_CHAPTER",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Updated student chapter details for ch_1793117406024_gmb6t",
-      "timestamp": "2026-10-27T16:10:06.031Z"
-    },
-    {
-      "id": "log_1793117406024_qw1w0",
-      "action": "CREATE_CHAPTER",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Added new student chapter with ID ch_1793117406024_gmb6t",
-      "timestamp": "2026-10-27T16:10:06.024Z"
-    },
-    {
-      "id": "log_1793117405886_540sf",
-      "action": "LOGIN",
-      "performedBy": "IEI Council Auditor",
-      "role": "auditor",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:10:05.886Z"
-    },
-    {
-      "id": "log_1793117405794_3b830",
-      "action": "LOGIN",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:10:05.794Z"
-    },
-    {
-      "id": "log_1793117405703_400rd",
-      "action": "LOGIN",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T16:10:05.703Z"
-    },
-    {
-      "id": "log_1793115871769_44xnc",
-      "action": "UPDATE_CHAPTER",
-      "performedBy": "RMK Chapter Coordinator",
-      "role": "staff",
-      "target": "IEI TVLC RMK Student Chapter",
-      "details": "Updated student chapter details for ch_rmk_01",
-      "timestamp": "2026-10-27T15:44:31.769Z"
-    },
-    {
-      "id": "log_1793115871766_avpfq",
-      "action": "LOGIN",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T15:44:31.766Z"
-    },
-    {
-      "id": "log_1793115871676_2o9tg",
-      "action": "DELETE_EVENT",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "61st Technical Lecture: Automated Agentic Frameworks in Industry",
-      "details": "Deleted event ID ev_1793115871673_7rlic",
-      "timestamp": "2026-10-27T15:44:31.676Z"
-    },
-    {
-      "id": "log_1793115871673_li5hm",
-      "action": "CREATE_EVENT",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "61st Technical Lecture: Automated Agentic Frameworks in Industry",
-      "details": "Scheduled new event under Technical Lecture",
-      "timestamp": "2026-10-27T15:44:31.673Z"
-    },
-    {
-      "id": "log_1793115871669_pb4vp",
-      "action": "DELETE_CHAPTER",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Deleted student chapter ID ch_1793115871659_uq94v",
-      "timestamp": "2026-10-27T15:44:31.669Z"
-    },
-    {
-      "id": "log_1793115871666_sn3wh",
-      "action": "RECORD_SNAPSHOT",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "Chapter ch_1793115871659_uq94v (2026)",
-      "details": "Recorded annual membership snapshot",
-      "timestamp": "2026-10-27T15:44:31.666Z"
-    },
-    {
-      "id": "log_1793115871663_6haz4",
-      "action": "UPDATE_CHAPTER",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Updated student chapter details for ch_1793115871659_uq94v",
-      "timestamp": "2026-10-27T15:44:31.663Z"
-    },
-    {
-      "id": "log_1793115871659_jjkcr",
-      "action": "CREATE_CHAPTER",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Added new student chapter with ID ch_1793115871659_uq94v",
-      "timestamp": "2026-10-27T15:44:31.659Z"
-    },
-    {
-      "id": "log_1793115871590_vmld1",
-      "action": "LOGIN",
-      "performedBy": "IEI Council Auditor",
-      "role": "auditor",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T15:44:31.590Z"
-    },
-    {
-      "id": "log_1793115871519_3y323",
-      "action": "LOGIN",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T15:44:31.519Z"
-    },
-    {
-      "id": "log_1793115871453_bagvx",
-      "action": "LOGIN",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T15:44:31.453Z"
-    },
-    {
-      "id": "log_1793115487597_h4hfc",
-      "action": "UPDATE_CHAPTER",
-      "performedBy": "RMK Chapter Coordinator",
-      "role": "staff",
-      "target": "IEI TVLC RMK Student Chapter",
-      "details": "Updated student chapter details for ch_rmk_01",
-      "timestamp": "2026-10-27T15:38:07.597Z"
-    },
-    {
-      "id": "log_1793115487596_imbtu",
-      "action": "LOGIN",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T15:38:07.596Z"
-    },
-    {
-      "id": "log_1793115487530_y4zst",
-      "action": "DELETE_EVENT",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "61st Technical Lecture: Automated Agentic Frameworks in Industry",
-      "details": "Deleted event ID ev_1793115487528_93f24",
-      "timestamp": "2026-10-27T15:38:07.530Z"
-    },
-    {
-      "id": "log_1793115487528_ebifv",
-      "action": "CREATE_EVENT",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "61st Technical Lecture: Automated Agentic Frameworks in Industry",
-      "details": "Scheduled new event under Technical Lecture",
-      "timestamp": "2026-10-27T15:38:07.528Z"
-    },
-    {
-      "id": "log_1793115487524_l6m5i",
-      "action": "DELETE_CHAPTER",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Deleted student chapter ID ch_1793115487517_aksnt",
-      "timestamp": "2026-10-27T15:38:07.524Z"
-    },
-    {
-      "id": "log_1793115487522_9qx55",
-      "action": "RECORD_SNAPSHOT",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "Chapter ch_1793115487517_aksnt (2026)",
-      "details": "Recorded annual membership snapshot",
-      "timestamp": "2026-10-27T15:38:07.522Z"
-    },
-    {
-      "id": "log_1793115487520_8tcc2",
-      "action": "UPDATE_CHAPTER",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Updated student chapter details for ch_1793115487517_aksnt",
-      "timestamp": "2026-10-27T15:38:07.520Z"
-    },
-    {
-      "id": "log_1793115487517_gzo88",
-      "action": "CREATE_CHAPTER",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "IEI TVLC Test Innovation Chapter",
-      "details": "Added new student chapter with ID ch_1793115487517_aksnt",
-      "timestamp": "2026-10-27T15:38:07.517Z"
-    },
-    {
-      "id": "log_1793115487453_lglq6",
-      "action": "LOGIN",
-      "performedBy": "IEI Council Auditor",
-      "role": "auditor",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T15:38:07.453Z"
-    },
-    {
-      "id": "log_1793115487395_upo88",
-      "action": "LOGIN",
-      "performedBy": "IEI TVLC Staff Officer",
-      "role": "staff",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T15:38:07.395Z"
-    },
-    {
-      "id": "log_1793115487336_gvwfo",
-      "action": "LOGIN",
-      "performedBy": "IEI TVLC Chief Administrator",
-      "role": "admin",
-      "target": "Portal Auth",
-      "details": "User signed into staff administration portal.",
-      "timestamp": "2026-10-27T15:38:07.336Z"
+      "timestamp": "2026-10-28T19:02:56.019Z"
     },
     {
       "id": "log_init",
       "action": "SYSTEM_INITIALIZATION",
       "performedBy": "System Bootstrap",
-      "target": "Institution Database",
-      "details": "Loaded official Annual Activity Report (Nov 2025 – Oct 2026) with 11 events, 1,019 participants, and 1,287 student members gained.",
-      "timestamp": "2026-10-27T15:38:07.236Z"
+      "target": "MGR IEI Students Chapter Database",
+      "details": "Initialized secure database for Dr. M.G.R. Educational and Research Institute Students Chapter with 4 strict roles (Admin/Editor, Chairman, Committee Member, Auditor).",
+      "timestamp": "2026-10-28T18:35:13.220Z"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "tsk_01",
+      "title": "Finalize National Symposium Technical Track Schedules & Speaker Liaison",
+      "description": "Review submitted paper abstracts, finalize track chairs, and confirm audio-visual requirements for the main auditorium.",
+      "assignedTo": "usr_comm_01",
+      "assignedToName": "Committee Member",
+      "status": "IN_PROGRESS",
+      "priority": "urgent",
+      "dueDate": "2026-11-05",
+      "department": "Computer Science & Engineering",
+      "progress": 65,
+      "reviewComments": "",
+      "history": [
+        {
+          "timestamp": "2026-10-20T10:00:00.000Z",
+          "action": "ASSIGNED",
+          "actor": "Chapter Chairman",
+          "note": "Task created and assigned to Committee Member."
+        },
+        {
+          "timestamp": "2026-10-25T14:30:00.000Z",
+          "action": "IN_PROGRESS",
+          "actor": "Committee Member",
+          "note": "Progress updated to 65%. 18 abstract submissions processed."
+        }
+      ],
+      "createdAt": "2026-10-20T10:00:00.000Z"
+    },
+    {
+      "id": "tsk_02",
+      "title": "Industry 4.0 Lab Kit & Sensor Inventory Verification",
+      "description": "Inspect received microcontroller kits, test telemetry breadboards, and catalog component count for workshop attendees.",
+      "assignedTo": "usr_comm_01",
+      "assignedToName": "Committee Member",
+      "status": "SUBMITTED_FOR_REVIEW",
+      "priority": "high",
+      "dueDate": "2026-11-08",
+      "department": "Mechanical Engineering",
+      "progress": 90,
+      "reviewComments": "Awaiting final sign-off from Chairman on component return policy.",
+      "history": [
+        {
+          "timestamp": "2026-10-22T09:00:00.000Z",
+          "action": "ASSIGNED",
+          "actor": "Chapter Chairman",
+          "note": "Task initialized."
+        },
+        {
+          "timestamp": "2026-10-26T17:00:00.000Z",
+          "action": "SUBMITTED_FOR_REVIEW",
+          "actor": "Committee Member",
+          "note": "All 30 lab kits verified and submitted for Chairman review."
+        }
+      ],
+      "createdAt": "2026-10-22T09:00:00.000Z"
+    },
+    {
+      "id": "tsk_03",
+      "title": "Smart Campus 24-Hour Innovation Hackathon Guidelines & Rubric",
+      "description": "Draft problem statements covering energy efficiency, campus mobility, and digital waste management; prepare judging rubric.",
+      "assignedTo": "usr_chair_01",
+      "assignedToName": "Chapter Chairman",
+      "status": "ASSIGNED",
+      "priority": "normal",
+      "dueDate": "2026-11-15",
+      "department": "Faculty of Engineering",
+      "progress": 20,
+      "reviewComments": "",
+      "history": [
+        {
+          "timestamp": "2026-10-24T11:00:00.000Z",
+          "action": "ASSIGNED",
+          "actor": "Chapter Administrator",
+          "note": "Task scheduled under Chapter Annual Plan."
+        }
+      ],
+      "createdAt": "2026-10-24T11:00:00.000Z"
+    },
+    {
+      "id": "tsk_04",
+      "title": "Engineers’ Day 2026 Post-Event Report & Photographic Documentation",
+      "description": "Compile event attendance records, photographic evidence, and participant feedback for Chapter archive.",
+      "assignedTo": "usr_comm_01",
+      "assignedToName": "Committee Member",
+      "status": "APPROVED",
+      "priority": "high",
+      "dueDate": "2026-10-24",
+      "department": "Secretariat & Media Committee",
+      "progress": 100,
+      "reviewComments": "Excellent compilation. Approved for archival and audit ledger.",
+      "history": [
+        {
+          "timestamp": "2026-09-18T10:00:00.000Z",
+          "action": "ASSIGNED",
+          "actor": "Chapter Chairman",
+          "note": "Documentation task created."
+        },
+        {
+          "timestamp": "2026-09-24T16:00:00.000Z",
+          "action": "SUBMITTED_FOR_REVIEW",
+          "actor": "Committee Member",
+          "note": "Report uploaded."
+        },
+        {
+          "timestamp": "2026-09-26T12:00:00.000Z",
+          "action": "APPROVED",
+          "actor": "Chapter Chairman",
+          "note": "Documentation approved."
+        }
+      ],
+      "createdAt": "2026-09-18T10:00:00.000Z"
+    },
+    {
+      "id": "tsk_05",
+      "title": "Chapter Member Directory Reconciliation & Identity Card Dispatch",
+      "description": "Cross-check active student chapter membership registrations against University department rolls and prepare digital verification badges.",
+      "assignedTo": "usr_comm_01",
+      "assignedToName": "Committee Member",
+      "status": "REVISION_REQUESTED",
+      "priority": "urgent",
+      "dueDate": "2026-11-10",
+      "department": "All Engineering Departments",
+      "progress": 75,
+      "reviewComments": "Please recheck Section B roll numbers for 3rd year ECE students before final approval.",
+      "history": [
+        {
+          "timestamp": "2026-10-18T10:00:00.000Z",
+          "action": "ASSIGNED",
+          "actor": "Chapter Administrator",
+          "note": "Annual reconciliation task created."
+        },
+        {
+          "timestamp": "2026-10-27T15:00:00.000Z",
+          "action": "SUBMITTED_FOR_REVIEW",
+          "actor": "Committee Member",
+          "note": "First draft submitted."
+        },
+        {
+          "timestamp": "2026-10-28T11:30:00.000Z",
+          "action": "REVISION_REQUESTED",
+          "actor": "Chapter Chairman",
+          "note": "Revision requested for Section B roll numbers."
+        }
+      ],
+      "createdAt": "2026-10-18T10:00:00.000Z"
+    },
+    {
+      "id": "tsk_1793214176380_gr1b",
+      "title": "Automated Test: Prepare National Science Day Technical Workshop",
+      "description": "Coordinate laboratory venue, student registration desk, and certificates.",
+      "assignedTo": "usr_comm_01",
+      "assignedToName": "Chapter Administrator",
+      "status": "ASSIGNED",
+      "priority": "high",
+      "dueDate": "2026-11-20",
+      "department": "Technical",
+      "chapterId": "ch_mgr_04",
+      "progress": 0,
+      "createdAt": "2026-10-28T19:02:56.380Z"
+    },
+    {
+      "id": "tsk_1793214369006_ss31",
+      "title": "Automated Test: Prepare National Science Day Technical Workshop",
+      "description": "Coordinate laboratory venue, student registration desk, and certificates.",
+      "assignedTo": "usr_comm_01",
+      "assignedToName": "Chapter Administrator",
+      "status": "APPROVED",
+      "priority": "high",
+      "dueDate": "2026-11-20",
+      "department": "Technical",
+      "chapterId": "ch_mgr_04",
+      "progress": 100,
+      "createdAt": "2026-10-28T19:06:09.006Z",
+      "history": [
+        {
+          "timestamp": "2026-10-28T19:06:09.012Z",
+          "action": "IN_PROGRESS",
+          "actor": "Committee Member",
+          "note": "Laboratory hall reserved and equipment checklist finalized."
+        },
+        {
+          "timestamp": "2026-10-28T19:06:09.016Z",
+          "action": "SUBMITTED_FOR_REVIEW",
+          "actor": "Committee Member",
+          "note": "All deliverables prepared. Ready for executive review."
+        },
+        {
+          "timestamp": "2026-10-28T19:06:09.021Z",
+          "action": "APPROVED",
+          "actor": "Chapter Chairman",
+          "note": "Executive verification completed. Excellent preparation."
+        }
+      ],
+      "updatedAt": "2026-10-28T19:06:09.021Z",
+      "reviewComments": "Executive verification completed. Excellent preparation."
+    },
+    {
+      "id": "tsk_1793214484215_hcqy",
+      "title": "Automated Test: Prepare National Science Day Technical Workshop",
+      "description": "Coordinate laboratory venue, student registration desk, and certificates.",
+      "assignedTo": "usr_comm_01",
+      "assignedToName": "Chapter Administrator",
+      "status": "APPROVED",
+      "priority": "high",
+      "dueDate": "2026-11-20",
+      "department": "Technical",
+      "chapterId": "ch_mgr_04",
+      "progress": 100,
+      "createdAt": "2026-10-28T19:08:04.215Z",
+      "history": [
+        {
+          "timestamp": "2026-10-28T19:08:04.232Z",
+          "action": "IN_PROGRESS",
+          "actor": "Committee Member",
+          "note": "Laboratory hall reserved and equipment checklist finalized."
+        },
+        {
+          "timestamp": "2026-10-28T19:08:04.244Z",
+          "action": "SUBMITTED_FOR_REVIEW",
+          "actor": "Committee Member",
+          "note": "All deliverables prepared. Ready for executive review."
+        },
+        {
+          "timestamp": "2026-10-28T19:08:04.263Z",
+          "action": "APPROVED",
+          "actor": "Chapter Chairman",
+          "note": "Executive verification completed. Excellent preparation."
+        }
+      ],
+      "updatedAt": "2026-10-28T19:08:04.263Z",
+      "reviewComments": "Executive verification completed. Excellent preparation."
+    },
+    {
+      "id": "tsk_1793216469906_2t8h",
+      "title": "Automated Test: Prepare National Science Day Technical Workshop",
+      "description": "Coordinate laboratory venue, student registration desk, and certificates.",
+      "assignedTo": "usr_comm_01",
+      "assignedToName": "Chapter Administrator",
+      "status": "APPROVED",
+      "priority": "high",
+      "dueDate": "2026-11-20",
+      "department": "Technical",
+      "chapterId": "ch_mgr_04",
+      "progress": 100,
+      "createdAt": "2026-10-28T19:41:09.906Z",
+      "history": [
+        {
+          "timestamp": "2026-10-28T19:41:09.923Z",
+          "action": "IN_PROGRESS",
+          "actor": "Committee Member",
+          "note": "Laboratory hall reserved and equipment checklist finalized."
+        },
+        {
+          "timestamp": "2026-10-28T19:41:09.937Z",
+          "action": "SUBMITTED_FOR_REVIEW",
+          "actor": "Committee Member",
+          "note": "All deliverables prepared. Ready for executive review."
+        },
+        {
+          "timestamp": "2026-10-28T19:41:09.956Z",
+          "action": "APPROVED",
+          "actor": "Chapter Chairman",
+          "note": "Executive verification completed. Excellent preparation."
+        }
+      ],
+      "updatedAt": "2026-10-28T19:41:09.957Z",
+      "reviewComments": "Executive verification completed. Excellent preparation."
+    },
+    {
+      "id": "tsk_1793216618556_9f2w",
+      "title": "Automated Test: Prepare National Science Day Technical Workshop",
+      "description": "Coordinate laboratory venue, student registration desk, and certificates.",
+      "assignedTo": "usr_comm_01",
+      "assignedToName": "Chapter Administrator",
+      "status": "APPROVED",
+      "priority": "high",
+      "dueDate": "2026-11-20",
+      "department": "Technical",
+      "chapterId": "ch_mgr_04",
+      "progress": 100,
+      "createdAt": "2026-10-28T19:43:38.556Z",
+      "history": [
+        {
+          "timestamp": "2026-10-28T19:43:38.567Z",
+          "action": "IN_PROGRESS",
+          "actor": "Committee Member",
+          "note": "Laboratory hall reserved and equipment checklist finalized."
+        },
+        {
+          "timestamp": "2026-10-28T19:43:38.576Z",
+          "action": "SUBMITTED_FOR_REVIEW",
+          "actor": "Committee Member",
+          "note": "All deliverables prepared. Ready for executive review."
+        },
+        {
+          "timestamp": "2026-10-28T19:43:38.598Z",
+          "action": "APPROVED",
+          "actor": "Chapter Chairman",
+          "note": "Executive verification completed. Excellent preparation."
+        }
+      ],
+      "updatedAt": "2026-10-28T19:43:38.598Z",
+      "reviewComments": "Executive verification completed. Excellent preparation."
+    }
+  ],
+  "weeklyReports": [
+    {
+      "id": "rep_wk_1793216618610",
+      "weekNumber": 45,
+      "period": "03 Nov 2026 - 09 Nov 2026",
+      "chapterId": "ch_mgr_04",
+      "department": "Technical",
+      "totalEvents": 2,
+      "studentHours": 28,
+      "attendeesCount": 165,
+      "summary": "Conducted hands-on robotics workshop and IoT sensor calibration lab.",
+      "highlights": "",
+      "status": "APPROVED",
+      "submittedBy": "Committee Member",
+      "submittedByRole": "committee",
+      "endorsedBy": "Chapter Chairman",
+      "submittedAt": "2026-10-28T19:43:38.610Z",
+      "endorsedAt": "2026-10-28T19:43:38.634Z",
+      "reviewComments": "Approved by Chapter Leadership.",
+      "updatedAt": "2026-10-28T19:43:38.634Z"
+    },
+    {
+      "id": "rep_wk_1793216469968",
+      "weekNumber": 45,
+      "period": "03 Nov 2026 - 09 Nov 2026",
+      "chapterId": "ch_mgr_04",
+      "department": "Technical",
+      "totalEvents": 2,
+      "studentHours": 28,
+      "attendeesCount": 165,
+      "summary": "Conducted hands-on robotics workshop and IoT sensor calibration lab.",
+      "highlights": "",
+      "status": "APPROVED",
+      "submittedBy": "Committee Member",
+      "submittedByRole": "committee",
+      "endorsedBy": "Chapter Chairman",
+      "submittedAt": "2026-10-28T19:41:09.969Z",
+      "endorsedAt": "2026-10-28T19:41:09.990Z",
+      "reviewComments": "Approved by Chapter Leadership.",
+      "updatedAt": "2026-10-28T19:41:09.991Z"
+    },
+    {
+      "id": "rep_wk_1793214484279",
+      "weekNumber": 45,
+      "period": "03 Nov 2026 - 09 Nov 2026",
+      "chapterId": "ch_mgr_04",
+      "department": "Technical",
+      "totalEvents": 2,
+      "studentHours": 28,
+      "attendeesCount": 165,
+      "summary": "Conducted hands-on robotics workshop and IoT sensor calibration lab.",
+      "highlights": "",
+      "status": "APPROVED",
+      "submittedBy": "Committee Member",
+      "submittedByRole": "committee",
+      "endorsedBy": "Chapter Chairman",
+      "submittedAt": "2026-10-28T19:08:04.279Z",
+      "endorsedAt": "2026-10-28T19:08:04.300Z",
+      "reviewComments": "Approved by Chapter Leadership.",
+      "updatedAt": "2026-10-28T19:08:04.300Z"
+    },
+    {
+      "id": "rep_wk_1793214369026",
+      "weekNumber": 45,
+      "period": "03 Nov 2026 - 09 Nov 2026",
+      "chapterId": "ch_mgr_04",
+      "department": "Technical",
+      "totalEvents": 2,
+      "studentHours": 28,
+      "attendeesCount": 165,
+      "summary": "Conducted hands-on robotics workshop and IoT sensor calibration lab.",
+      "highlights": "",
+      "status": "APPROVED",
+      "submittedBy": "Committee Member",
+      "submittedByRole": "committee",
+      "endorsedBy": "Chapter Chairman",
+      "submittedAt": "2026-10-28T19:06:09.026Z",
+      "endorsedAt": "2026-10-28T19:06:09.033Z",
+      "reviewComments": "Approved by Chapter Leadership.",
+      "updatedAt": "2026-10-28T19:06:09.033Z"
+    },
+    {
+      "id": "rep_wk_1793214176396",
+      "weekNumber": 45,
+      "period": "03 Nov 2026 - 09 Nov 2026",
+      "chapterId": "ch_mgr_04",
+      "department": "Technical",
+      "totalEvents": 2,
+      "studentHours": 28,
+      "attendeesCount": 165,
+      "summary": "Conducted hands-on robotics workshop and IoT sensor calibration lab.",
+      "highlights": "",
+      "status": "UNDER_REVIEW",
+      "submittedBy": "Committee Member",
+      "submittedByRole": "committee",
+      "endorsedBy": null,
+      "submittedAt": "2026-10-28T19:02:56.396Z"
+    },
+    {
+      "id": "rep_wk_45",
+      "weekNumber": 45,
+      "period": "Oct 27 - Nov 02, 2026",
+      "department": "All Engineering Disciplines",
+      "totalEvents": 1,
+      "studentHours": 75,
+      "attendeesCount": 65,
+      "summary": "Finalized symposium technical tracks, verified IoT laboratory workbenches, and processed 42 new student registrations.",
+      "roadblocks": "Awaiting venue acoustic test for University Main Auditorium.",
+      "nextSteps": "Complete speaker itinerary and dispatch formal invitations.",
+      "status": "UNDER_REVIEW",
+      "submittedBy": "Committee Member",
+      "submittedByRole": "committee",
+      "reviewComments": "Under active review by Chapter Chairman.",
+      "endorsedBy": null,
+      "endorsedAt": null,
+      "submittedAt": "2026-10-28T12:00:00.000Z"
+    },
+    {
+      "id": "rep_wk_44",
+      "weekNumber": 44,
+      "period": "Oct 20 - Oct 26, 2026",
+      "department": "Mechanical & Computing Sciences",
+      "totalEvents": 2,
+      "studentHours": 180,
+      "attendeesCount": 140,
+      "summary": "Conducted hands-on workshop on Industry 4.0 IoT prototyping and completed initial census verification for 2026-2027 intake.",
+      "roadblocks": "None reported.",
+      "nextSteps": "Publish call for papers for National Symposium 2026.",
+      "status": "APPROVED",
+      "submittedBy": "Committee Member",
+      "submittedByRole": "committee",
+      "reviewComments": "Activity targets successfully completed with strong student turnout.",
+      "endorsedBy": "Chapter Chairman",
+      "endorsedAt": "2026-10-27T11:00:00.000Z",
+      "submittedAt": "2026-10-26T18:00:00.000Z"
+    },
+    {
+      "id": "rep_wk_43",
+      "weekNumber": 43,
+      "period": "Oct 13 - Oct 19, 2026",
+      "department": "Electrical & Electronics",
+      "totalEvents": 1,
+      "studentHours": 120,
+      "attendeesCount": 95,
+      "summary": "Organized technical guest lecture on Renewable Energy Integration & Battery Storage Systems.",
+      "roadblocks": "Minor delay in hardware shipment for demonstration kit.",
+      "nextSteps": "Collate student feedback forms and certificates.",
+      "status": "APPROVED",
+      "submittedBy": "Chapter Chairman",
+      "submittedByRole": "chairman",
+      "reviewComments": "Thorough documentation and timely execution verified.",
+      "endorsedBy": "Chapter Administrator",
+      "endorsedAt": "2026-10-20T10:30:00.000Z",
+      "submittedAt": "2026-10-19T17:30:00.000Z"
+    }
+  ],
+  "communityPosts": [
+    {
+      "id": "post_1793216618647",
+      "title": "IEI Council Notice: Technical Paper Competition 2026",
+      "category": "Official Announcements",
+      "author": "Chapter Chairman",
+      "role": "chairman",
+      "timestamp": "2026-10-28T19:43:38.647Z",
+      "isPinned": true,
+      "likes": 0,
+      "commentsCount": 1,
+      "content": "All student committee members are invited to submit abstracts by next Friday.",
+      "tags": [],
+      "replies": [
+        {
+          "id": "rep_1793216618658",
+          "author": "Committee Member",
+          "role": "committee",
+          "timestamp": "2026-10-28T19:43:38.658Z",
+          "content": "Understood. CSE student team will coordinate submissions for Track 1."
+        }
+      ]
+    },
+    {
+      "id": "post_1793216470002",
+      "title": "IEI Council Notice: Technical Paper Competition 2026",
+      "category": "Official Announcements",
+      "author": "Chapter Chairman",
+      "role": "chairman",
+      "timestamp": "2026-10-28T19:41:10.002Z",
+      "isPinned": true,
+      "likes": 0,
+      "commentsCount": 1,
+      "content": "All student committee members are invited to submit abstracts by next Friday.",
+      "tags": [],
+      "replies": [
+        {
+          "id": "rep_1793216470014",
+          "author": "Committee Member",
+          "role": "committee",
+          "timestamp": "2026-10-28T19:41:10.014Z",
+          "content": "Understood. CSE student team will coordinate submissions for Track 1."
+        }
+      ]
+    },
+    {
+      "id": "post_1793214484313",
+      "title": "IEI Council Notice: Technical Paper Competition 2026",
+      "category": "Official Announcements",
+      "author": "Chapter Chairman",
+      "role": "chairman",
+      "timestamp": "2026-10-28T19:08:04.313Z",
+      "isPinned": true,
+      "likes": 0,
+      "commentsCount": 1,
+      "content": "All student committee members are invited to submit abstracts by next Friday.",
+      "tags": [],
+      "replies": [
+        {
+          "id": "rep_1793214484328",
+          "author": "Committee Member",
+          "role": "committee",
+          "timestamp": "2026-10-28T19:08:04.328Z",
+          "content": "Understood. CSE student team will coordinate submissions for Track 1."
+        }
+      ]
+    },
+    {
+      "id": "post_1793214369036",
+      "title": "IEI Council Notice: Technical Paper Competition 2026",
+      "category": "Official Announcements",
+      "author": "Chapter Chairman",
+      "role": "chairman",
+      "timestamp": "2026-10-28T19:06:09.036Z",
+      "isPinned": true,
+      "likes": 0,
+      "commentsCount": 1,
+      "content": "All student committee members are invited to submit abstracts by next Friday.",
+      "tags": [],
+      "replies": [
+        {
+          "id": "rep_1793214369039",
+          "author": "Committee Member",
+          "role": "committee",
+          "timestamp": "2026-10-28T19:06:09.039Z",
+          "content": "Understood. CSE student team will coordinate submissions for Track 1."
+        }
+      ]
+    },
+    {
+      "id": "post_1793214176417",
+      "title": "IEI Council Notice: Technical Paper Competition 2026",
+      "category": "Official Announcements",
+      "author": "Chapter Chairman",
+      "role": "chairman",
+      "timestamp": "2026-10-28T19:02:56.417Z",
+      "isPinned": true,
+      "likes": 0,
+      "commentsCount": 1,
+      "content": "All student committee members are invited to submit abstracts by next Friday.",
+      "tags": [],
+      "replies": [
+        {
+          "id": "rep_1793214176421",
+          "author": "Committee Member",
+          "role": "committee",
+          "timestamp": "2026-10-28T19:02:56.421Z",
+          "content": "Understood. CSE student team will coordinate submissions for Track 1."
+        }
+      ]
+    },
+    {
+      "id": "post_01",
+      "type": "announcement",
+      "title": "Official Call for Papers — National Engineering Symposium 2026",
+      "category": "Symposium & Papers",
+      "author": "Chapter Chairman",
+      "role": "chairman",
+      "timestamp": "2026-10-26T10:30:00.000Z",
+      "isPinned": true,
+      "likes": 42,
+      "content": "We invite all undergraduate, postgraduate scholars, and faculty mentors of Dr. M.G.R. Educational and Research Institute to submit high-quality research papers for the National Engineering Symposium 2026. Focus tracks include Clean Energy Systems, Autonomous Robotics, and Generative Artificial Intelligence in Manufacturing. Selected papers will be included in the official Chapter proceedings.",
+      "tags": [
+        "Symposium",
+        "CallForPapers",
+        "Research",
+        "MGR_IEI"
+      ],
+      "attachments": [
+        {
+          "name": "MGR_IEI_Symposium_Call_for_Papers_2026.pdf",
+          "size": "1.4 MB",
+          "type": "application/pdf",
+          "url": "/assets/iei-emblem.png"
+        }
+      ],
+      "replies": [
+        {
+          "id": "rep_01",
+          "author": "Committee Member",
+          "role": "committee",
+          "timestamp": "2026-10-26T14:15:00.000Z",
+          "content": "Templates for IEEE-format manuscript submissions have been uploaded to the student drive link."
+        },
+        {
+          "id": "rep_02",
+          "author": "Chapter Administrator",
+          "role": "admin",
+          "timestamp": "2026-10-26T16:00:00.000Z",
+          "content": "Peer review committee assignments will be published by Monday."
+        }
+      ]
+    },
+    {
+      "id": "post_02",
+      "type": "discussion",
+      "title": "Smart Campus 24-Hour Innovation Hackathon: Team Formation & Lab Access",
+      "category": "Hackathons & Competitions",
+      "author": "Committee Member",
+      "role": "committee",
+      "timestamp": "2026-10-27T14:15:00.000Z",
+      "isPinned": false,
+      "likes": 38,
+      "content": "Registrations are open for the inter-departmental Smart Campus Challenge! Inter-disciplinary teams of 3 to 4 students (combining CSE, ECE, and Mechanical) are encouraged. IoT hardware test kits will be issued from the Chapter Secretariat starting Thursday.",
+      "tags": [
+        "Hackathon",
+        "Innovation",
+        "HardwareLab"
+      ],
+      "attachments": [
+        {
+          "name": "Hackathon_Hardware_Kit_List.pdf",
+          "size": "680 KB",
+          "type": "application/pdf",
+          "url": "/assets/iei-emblem.png"
+        }
+      ],
+      "replies": [
+        {
+          "id": "rep_03",
+          "author": "Chapter Chairman",
+          "role": "chairman",
+          "timestamp": "2026-10-27T16:30:00.000Z",
+          "content": "Lab slots in Block IV have been reserved for 24-hour continuous testing over the hackathon weekend."
+        }
+      ]
+    },
+    {
+      "id": "post_03",
+      "type": "announcement",
+      "title": "Weekly Activity Reporting Cycle 45 & Monday 11:59 PM IST Deadline Reminder",
+      "category": "Governance & Deadlines",
+      "author": "Chapter Administrator",
+      "role": "admin",
+      "timestamp": "2026-10-28T09:00:00.000Z",
+      "isPinned": true,
+      "likes": 24,
+      "content": "All committee leads are reminded that Reporting Cycle Week 45 concludes on Monday at 11:59 PM IST. Please ensure all ongoing tasks have their progress percentages updated, roadblock descriptions noted, and weekly documentation submitted on time.",
+      "tags": [
+        "ReportingCycle",
+        "Deadlines",
+        "Governance"
+      ],
+      "attachments": [],
+      "replies": []
+    }
+  ],
+  "messages": [
+    {
+      "id": "msg_01",
+      "senderId": "usr_comm_01",
+      "senderName": "Committee Member",
+      "senderRole": "committee",
+      "recipientId": "usr_admin_01",
+      "content": "Hello Administrator, I have uploaded the draft symposium brochure and updated task #tsk_01 to 65% progress. Kindly review.",
+      "timestamp": "2026-10-28T10:15:00.000Z",
+      "read": true,
+      "attachments": []
+    },
+    {
+      "id": "msg_02",
+      "senderId": "usr_admin_01",
+      "senderName": "Chapter Administrator",
+      "senderRole": "admin",
+      "recipientId": "usr_comm_01",
+      "content": "Received with thanks. The branding typography and official logos align perfectly. Please coordinate with the Chairman for final sign-off.",
+      "timestamp": "2026-10-28T10:30:00.000Z",
+      "read": true,
+      "attachments": []
+    },
+    {
+      "id": "msg_03",
+      "senderId": "usr_chair_01",
+      "senderName": "Chapter Chairman",
+      "senderRole": "chairman",
+      "recipientId": "usr_admin_01",
+      "content": "Administrator, Week 44 report has been reviewed and endorsed. Please update the archival register accordingly.",
+      "timestamp": "2026-10-28T11:45:00.000Z",
+      "read": true,
+      "attachments": []
+    },
+    {
+      "id": "msg_04",
+      "senderId": "usr_auditor_01",
+      "senderName": "Chapter Auditor",
+      "senderRole": "auditor",
+      "recipientId": "usr_admin_01",
+      "content": "Internal audit check for October 2026 activities completed. No discrepancies found in student attendance registers.",
+      "timestamp": "2026-10-28T14:00:00.000Z",
+      "read": false,
+      "attachments": []
+    },
+    {
+      "id": "msg_1793214176428",
+      "senderId": "usr_comm_01",
+      "senderName": "Committee Member",
+      "senderRole": "committee",
+      "recipientId": "usr_admin_01",
+      "content": "Confidential request: Verification of lab consumable budget for next week.",
+      "timestamp": "2026-10-28T19:02:56.428Z",
+      "read": false
+    },
+    {
+      "id": "msg_1793214176432",
+      "senderId": "usr_admin_01",
+      "senderName": "Chapter Administrator",
+      "senderRole": "admin",
+      "recipientId": "usr_comm_01",
+      "content": "Budget has been approved by the Chapter Secretariat. Proceed with procurement.",
+      "timestamp": "2026-10-28T19:02:56.432Z",
+      "read": false
+    },
+    {
+      "id": "msg_1793214369046",
+      "senderId": "usr_comm_01",
+      "senderName": "Committee Member",
+      "senderRole": "committee",
+      "recipientId": "usr_admin_01",
+      "content": "Confidential request: Verification of lab consumable budget for next week.",
+      "timestamp": "2026-10-28T19:06:09.046Z",
+      "read": false
+    },
+    {
+      "id": "msg_1793214369049",
+      "senderId": "usr_admin_01",
+      "senderName": "Chapter Administrator",
+      "senderRole": "admin",
+      "recipientId": "usr_comm_01",
+      "content": "Budget has been approved by the Chapter Secretariat. Proceed with procurement.",
+      "timestamp": "2026-10-28T19:06:09.049Z",
+      "read": false
+    },
+    {
+      "id": "msg_1793214484351",
+      "senderId": "usr_comm_01",
+      "senderName": "Committee Member",
+      "senderRole": "committee",
+      "recipientId": "usr_admin_01",
+      "content": "Confidential request: Verification of lab consumable budget for next week.",
+      "timestamp": "2026-10-28T19:08:04.351Z",
+      "read": false
+    },
+    {
+      "id": "msg_1793214484367",
+      "senderId": "usr_admin_01",
+      "senderName": "Chapter Administrator",
+      "senderRole": "admin",
+      "recipientId": "usr_comm_01",
+      "content": "Budget has been approved by the Chapter Secretariat. Proceed with procurement.",
+      "timestamp": "2026-10-28T19:08:04.367Z",
+      "read": false
+    },
+    {
+      "id": "msg_1793216470030",
+      "senderId": "usr_comm_01",
+      "senderName": "Committee Member",
+      "senderRole": "committee",
+      "recipientId": "usr_admin_01",
+      "content": "Confidential request: Verification of lab consumable budget for next week.",
+      "timestamp": "2026-10-28T19:41:10.030Z",
+      "read": false
+    },
+    {
+      "id": "msg_1793216470045",
+      "senderId": "usr_admin_01",
+      "senderName": "Chapter Administrator",
+      "senderRole": "admin",
+      "recipientId": "usr_comm_01",
+      "content": "Budget has been approved by the Chapter Secretariat. Proceed with procurement.",
+      "timestamp": "2026-10-28T19:41:10.045Z",
+      "read": false
+    },
+    {
+      "id": "msg_1793216618682",
+      "senderId": "usr_comm_01",
+      "senderName": "Committee Member",
+      "senderRole": "committee",
+      "recipientId": "usr_admin_01",
+      "content": "Confidential request: Verification of lab consumable budget for next week.",
+      "timestamp": "2026-10-28T19:43:38.682Z",
+      "read": false
+    },
+    {
+      "id": "msg_1793216618693",
+      "senderId": "usr_admin_01",
+      "senderName": "Chapter Administrator",
+      "senderRole": "admin",
+      "recipientId": "usr_comm_01",
+      "content": "Budget has been approved by the Chapter Secretariat. Proceed with procurement.",
+      "timestamp": "2026-10-28T19:43:38.693Z",
+      "read": false
+    }
+  ],
+  "notifications": [
+    {
+      "id": "notif_01",
+      "type": "task",
+      "title": "Task Milestone Due",
+      "message": "Task \"National Symposium Track Schedules\" is at 65% completion and due in 7 days.",
+      "timestamp": "2026-10-28T10:00:00.000Z",
+      "unread": true,
+      "link": "tasks"
+    },
+    {
+      "id": "notif_02",
+      "type": "reporting",
+      "title": "Weekly Report Cycle 45 Open",
+      "message": "Reporting Week 45 deadline is Monday at 11:59 PM IST.",
+      "timestamp": "2026-10-28T09:00:00.000Z",
+      "unread": true,
+      "link": "weekly-reports"
+    },
+    {
+      "id": "notif_03",
+      "type": "community",
+      "title": "New Announcement Pinned",
+      "message": "Chapter Chairman pinned \"Official Call for Papers — National Engineering Symposium 2026\".",
+      "timestamp": "2026-10-26T10:35:00.000Z",
+      "unread": false,
+      "link": "community"
+    }
+  ],
+  "reportingSettings": {
+    "activeWeek": 46,
+    "period": "10 Nov 2026 - 16 Nov 2026",
+    "deadlineDay": "Monday",
+    "deadlineTime": "23:59:59",
+    "timezone": "Asia/Kolkata",
+    "allowLateSubmissionsWithApproval": true,
+    "autoLockPastReports": true,
+    "lastUpdatedBy": "Chapter Administrator",
+    "lastUpdatedAt": "2026-10-28T19:43:38.920Z"
+  },
+  "auditObservations": [
+    {
+      "id": "obs_1793216618933",
+      "title": "ISO 9001:2015 Operational Documentation Audit",
+      "observation": "Verified weekly report records for Cycles 44-45 against attendee registers. Full compliance observed.",
+      "complianceStatus": "COMPLIANT",
+      "auditorName": "Chapter Auditor",
+      "authorRole": "auditor",
+      "timestamp": "2026-10-28T19:43:38.933Z"
+    },
+    {
+      "id": "obs_1793216470373",
+      "title": "ISO 9001:2015 Operational Documentation Audit",
+      "observation": "Verified weekly report records for Cycles 44-45 against attendee registers. Full compliance observed.",
+      "complianceStatus": "COMPLIANT",
+      "auditorName": "Chapter Auditor",
+      "authorRole": "auditor",
+      "timestamp": "2026-10-28T19:41:10.373Z"
+    },
+    {
+      "id": "obs_1793214484610",
+      "title": "ISO 9001:2015 Operational Documentation Audit",
+      "observation": "Verified weekly report records for Cycles 44-45 against attendee registers. Full compliance observed.",
+      "complianceStatus": "COMPLIANT",
+      "auditorName": "Chapter Auditor",
+      "authorRole": "auditor",
+      "timestamp": "2026-10-28T19:08:04.610Z"
+    },
+    {
+      "id": "obs_1793214369130",
+      "title": "ISO 9001:2015 Operational Documentation Audit",
+      "observation": "Verified weekly report records for Cycles 44-45 against attendee registers. Full compliance observed.",
+      "complianceStatus": "COMPLIANT",
+      "auditorName": "Chapter Auditor",
+      "timestamp": "2026-10-28T19:06:09.130Z"
+    },
+    {
+      "id": "obs_01",
+      "title": "Student Chapter Governance & Activity Audit Clearance",
+      "observation": "Full governance review conducted for the MGR IEI Students Chapter. Active registered student count stands verified at 707. Activity logs for all scheduled events, technical seminars, and symposium milestones are maintained in compliance with institutional guidelines.",
+      "complianceStatus": "COMPLIANT",
+      "auditorName": "Chapter Auditor",
+      "timestamp": "2026-10-28T14:15:00.000Z"
     }
   ],
   "meta": {
-    "initializedAt": "2026-10-27T15:38:07.237Z",
-    "lastModifiedAt": "2026-10-27T17:08:09.898Z",
-    "version": "2.0.0"
+    "initializedAt": "2026-10-28T18:35:13.222Z",
+    "lastModifiedAt": "2026-10-28T19:43:38.935Z",
+    "version": "3.0.0-mgr-iei"
   }
 }

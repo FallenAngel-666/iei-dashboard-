@@ -1,5 +1,5 @@
 /**
- * IEI TVLC Database Migration & Seeding Runner
+ * MGR IEI Students Chapter Database Migration & Seeding Runner
  * Applies schema and imports official seed data into PostgreSQL (Neon / Supabase).
  */
 
@@ -10,7 +10,7 @@ const seedData = require('../seedData');
 
 async function runMigration() {
   console.log('=======================================================');
-  console.log(' IEI TVLC Database Migration & Schema Initializer');
+  console.log(' MGR IEI Students Chapter Database Migration & Schema Initializer');
   console.log('=======================================================');
 
   if (!process.env.DATABASE_URL) {
@@ -50,7 +50,7 @@ async function runMigration() {
   if (count > 0) {
     console.log(`✓ Database already contains ${count} collegiate chapters. Skipping initial seed.`);
   } else {
-    console.log('Database is empty. Populating with official IEI TVLC institutional seed data...');
+    console.log('Database is empty. Populating with official MGR IEI Students Chapter seed data...');
 
     await withTransaction(async (client) => {
       // 3.1 Insert Chapters

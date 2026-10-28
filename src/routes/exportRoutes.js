@@ -1,5 +1,5 @@
 /**
- * IEI TVLC Data Export Routes
+ * MGR IEI Chapter Data Export Routes
  * Generates CSV / Excel-compatible institutional records for chapters, events, and memberships.
  */
 
@@ -62,7 +62,7 @@ router.get('/chapters/csv', auth.authenticateToken, auth.requireRole(['admin', '
     ].join('\r\n');
 
     res.setHeader('Content-Type', 'text/csv; charset=utf-8');
-    res.setHeader('Content-Disposition', `attachment; filename="IEI_TVLC_Student_Chapters_${Date.now()}.csv"`);
+    res.setHeader('Content-Disposition', `attachment; filename="IEI_MGR IEI_Student_Chapters_${Date.now()}.csv"`);
     res.status(200).send('\uFEFF' + csvContent); // Add UTF-8 BOM for Excel compatibility
   } catch (err) {
     res.status(500).json({ success: false, error: 'Failed to export chapters CSV: ' + err.message });
@@ -123,7 +123,7 @@ router.get('/events/csv', auth.authenticateToken, auth.requireRole(['admin', 'au
     ].join('\r\n');
 
     res.setHeader('Content-Type', 'text/csv; charset=utf-8');
-    res.setHeader('Content-Disposition', `attachment; filename="IEI_TVLC_Events_Registry_${Date.now()}.csv"`);
+    res.setHeader('Content-Disposition', `attachment; filename="IEI_MGR IEI_Events_Registry_${Date.now()}.csv"`);
     res.status(200).send('\uFEFF' + csvContent);
   } catch (err) {
     res.status(500).json({ success: false, error: 'Failed to export events CSV: ' + err.message });
@@ -164,7 +164,7 @@ router.get('/membership/csv', auth.authenticateToken, auth.requireRole(['admin',
     ].join('\r\n');
 
     res.setHeader('Content-Type', 'text/csv; charset=utf-8');
-    res.setHeader('Content-Disposition', `attachment; filename="IEI_TVLC_Membership_Trends_${Date.now()}.csv"`);
+    res.setHeader('Content-Disposition', `attachment; filename="IEI_MGR IEI_Membership_Trends_${Date.now()}.csv"`);
     res.status(200).send('\uFEFF' + csvContent);
   } catch (err) {
     res.status(500).json({ success: false, error: 'Failed to export membership CSV: ' + err.message });

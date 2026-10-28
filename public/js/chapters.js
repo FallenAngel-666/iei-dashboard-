@@ -1,5 +1,5 @@
 /**
- * IEI TVLC Student Chapter Management Controller
+ * MGR IEI Chapter Student Chapter Management Controller
  * Handles table view, search, filters, CRUD modals, and census snapshot updates.
  */
 

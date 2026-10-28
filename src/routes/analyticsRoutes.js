@@ -1,5 +1,5 @@
 /**
- * IEI TVLC Analytics Aggregator Routes
+ * MGR IEI Chapter Analytics Aggregator Routes
  * Serves real database-driven statistics and time-series trends.
  * Adheres strictly to institutional data integrity requirements.
  */

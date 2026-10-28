@@ -1,5 +1,5 @@
 /**
- * IEI TVLC Annual Reports & Data Exports Controller
+ * MGR IEI Chapter Annual Reports & Data Exports Controller
  * Generates print-ready formal institutional reports matching the official
  * Annual Activity Report (November 2025 – October 2026) and handles CSV downloads.
  */
@@ -27,11 +27,11 @@ const Reports = {
     const y = overview.selectedYear;
     const inst = overview.institution || {
       name: 'The Institution of Engineers (India)',
-      centre: 'Tiruvallur Local Centre',
+      centre: 'Dr. M.G.R. Educational and Research Institute',
       address: 'Secretariat, Chennai - 600058, Tamil Nadu',
-      website: 'https://ieitvlc.org/',
-      chairman: 'Dr. K. Vijayakumar, FIE',
-      honorarySecretary: 'Dr. C. Arun, MIE'
+      website: 'https://mgriei.org/',
+      coordinator: 'Staff Coordinator',
+      facultyAdvisor: 'Faculty Advisor'
     };
     const rep = overview.officialReportSummary || {};
 
@@ -171,22 +171,22 @@ const Reports = {
           <div class="sign-col">
             <div class="sign-line"></div>
             <div class="sign-title">${App.escapeHtml(inst.honorarySecretary)}</div>
-            <div class="sign-subtitle">Honorary Secretary, IEI TVLC</div>
+            <div class="sign-subtitle">Honorary Secretary, MGR IEI Chapter</div>
           </div>
           <div class="sign-col" style="display: flex; align-items: center; justify-content: center;">
             <div style="border: 2px solid var(--iei-navy); border-radius: 50%; width: 72px; height: 72px; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; color: var(--iei-navy); text-align: center; text-transform: uppercase; padding: 4px;">
-              IEI TVLC<br>OFFICIAL<br>SEAL
+              MGR IEI Chapter<br>OFFICIAL<br>SEAL
             </div>
           </div>
           <div class="sign-col">
             <div class="sign-line"></div>
-            <div class="sign-title">${App.escapeHtml(inst.chairman)}</div>
-            <div class="sign-subtitle">Chairman, IEI TVLC</div>
+            <div class="sign-title">Staff Coordinator</div>
+            <div class="sign-subtitle">Faculty Advisor, MGR IEI</div>
           </div>
         </div>
 
         <div style="margin-top: 30px; font-size: 10px; color: var(--text-muted); text-align: center; border-top: 1px solid var(--border-subtle); padding-top: 10px;">
-          Official System-Generated Document • The Institution of Engineers (India) Tiruvallur Local Centre • Synchronized with Production Database • Generated on ${new Date().toLocaleString()}
+          Official System-Generated Document • The Institution of Engineers (India) Dr. M.G.R. Educational and Research Institute • Synchronized with Production Database • Generated on ${new Date().toLocaleString()}
         </div>
       </div>
     `;

@@ -1,5 +1,5 @@
 /**
- * IEI TVLC Authentication Routes
+ * MGR IEI Chapter Authentication Routes
  */
 
 const express = require('express');
@@ -31,17 +31,11 @@ router.post('/login', authLimiter, async (req, res) => {
     if (user.isActive === false) {
       return res.status(403).json({
         success: false,
-        error: 'This account has been deactivated. Please contact the Centre Administrator.'
+        error: 'This account has been deactivated. Please contact the Chapter Administrator.'
       });
     }
 
-    let isValid = auth.verifyPassword(password, user.passwordHash);
-    // Development-only fallback: only enabled when explicitly permitted outside production
-    if (!isValid && config.NODE_ENV !== 'production' && process.env.ALLOW_DEMO_BYPASS === 'true') {
-      if (user.email === 'example@gmail.com' && (password === 'password' || password === 'TVLC_Staff_2026!')) {
-        isValid = true;
-      }
-    }
+    const isValid = auth.verifyPassword(password, user.passwordHash);
 
     if (!isValid) {
       return res.status(401).json({
@@ -120,11 +114,66 @@ router.get('/me', auth.authenticateToken, async (req, res) => {
         assignedChapterId: user.assignedChapterId || null,
         designation: user.designation,
         department: user.department,
+        phone: user.phone || '',
         createdAt: user.createdAt
       }
     });
   } catch (err) {
     return res.status(500).json({ success: false, error: 'Failed to retrieve profile: ' + err.message });
+  }
+});
+
+// Update Profile
+router.put('/profile', auth.authenticateToken, async (req, res) => {
+  try {
+    const { name, designation, department, phone } = req.body;
+    const updated = await db.updateUserProfile(req.user.id, { name, designation, department, phone });
+    if (!updated) {
+      return res.status(404).json({ success: false, error: 'User not found.' });
+    }
+    await db.logAction('PROFILE_UPDATE', req.user, 'Account Management', `Updated profile credentials for ${updated.name}.`);
+    return res.json({
+      success: true,
+      message: 'Profile updated successfully.',
+      user: {
+        id: updated.id,
+        name: updated.name,
+        email: updated.email,
+        role: updated.role,
+        assignedChapterId: updated.assignedChapterId || null,
+        designation: updated.designation,
+        department: updated.department,
+        phone: updated.phone || ''
+      }
+    });
+  } catch (err) {
+    return res.status(500).json({ success: false, error: 'Failed to update profile: ' + err.message });
+  }
+});
+
+// Change Password
+router.post('/change-password', auth.authenticateToken, async (req, res) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+    if (!currentPassword || !newPassword) {
+      return res.status(400).json({ success: false, error: 'Both current and new password are required.' });
+    }
+    const user = await db.getUserById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ success: false, error: 'User not found.' });
+    }
+    if (!auth.verifyPassword(currentPassword, user.passwordHash)) {
+      return res.status(401).json({ success: false, error: 'Current password does not match.' });
+    }
+    if (newPassword.length < 6) {
+      return res.status(400).json({ success: false, error: 'New password must be at least 6 characters long.' });
+    }
+    const newHash = auth.hashPassword(newPassword);
+    await db.changeUserPassword(req.user.id, newHash);
+    await db.logAction('PASSWORD_CHANGE', req.user, 'Security', `Changed account password.`);
+    return res.json({ success: true, message: 'Password changed successfully.' });
+  } catch (err) {
+    return res.status(500).json({ success: false, error: 'Failed to update password: ' + err.message });
   }
 });
 

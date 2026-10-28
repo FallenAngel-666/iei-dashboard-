@@ -1,11 +1,20 @@
 /**
- * IEI TVLC Main Application Controller
- * Manages dual-face routing (Staff Input Face vs Admin Analytics Face),
- * strict authentication gating, modal dialogs, and toast messages.
+ * ============================================================================
+ * MGR IEI STUDENTS CHAPTER — CENTRAL APPLICATION CONTROLLER
+ * ============================================================================
+ * 
+ * Strict Four-Role System:
+ * 1. Admin/Editor  ('admin')
+ * 2. Chairman      ('chairman')
+ * 3. Committee Member ('committee')
+ * 4. Auditor       ('auditor')
+ * 
+ * Enforces mandatory login before dashboard access, responsive drawer navigation,
+ * strict server-side authorization, and role-specific workspace views.
  */
 
 const App = {
-  activeFace: 'login', // 'login' | 'staff' | 'admin'
+  activeFace: 'login',
   activeView: 'dashboard',
   selectedYear: '2026',
 
@@ -18,26 +27,46 @@ const App = {
       this.showToast('Your session has expired. Please sign in again.', 'warning');
       this.routeToLogin();
     });
+
+    // Initialize Branding
+    if (window.Branding) {
+      Branding.init();
+    }
   },
 
-  checkAuthAndRoute() {
+  /**
+   * Mandatory Authentication Gatekeeper
+   * The dashboard will NEVER open for an unauthenticated visitor.
+   */
+  async checkAuthAndRoute() {
+    const screenLogin = document.getElementById('screen-login');
+    const screenPortal = document.getElementById('screen-portal');
+
     if (!API.isAuthenticated()) {
       this.routeToLogin();
       return;
     }
 
-    const user = API.getCurrentUser();
-    if (!user) {
-      this.routeToLogin();
-      return;
-    }
+    try {
+      const res = await API.getProfile();
+      if (!res.user) {
+        this.routeToLogin();
+        return;
+      }
 
-    // Role-based routing
-    if (user.role === 'staff' || user.role === 'coordinator') {
-      this.showStaffFace();
-    } else {
-      // admin, auditor, etc.
-      this.showAdminFace();
+      // Update cached user with authoritative server role
+      API.setAuth(API.getToken(), res.user);
+
+      // Reveal portal, hide login screen
+      if (screenLogin) screenLogin.style.display = 'none';
+      if (screenPortal) screenPortal.style.display = 'flex';
+
+      this.updateUserUI();
+      this.applyRolePermissions(res.user);
+      this.navigate(this.activeView || 'dashboard');
+    } catch (err) {
+      console.warn('Session verification failed:', err.message);
+      this.routeToLogin();
     }
   },
 
@@ -53,188 +82,129 @@ const App = {
     const passField = document.getElementById('login-gateway-password');
     if (emailField) emailField.value = '';
     if (passField) passField.value = '';
-
-    const errBox = document.getElementById('login-error-alert');
-    if (errBox) {
-      errBox.style.display = 'none';
-      errBox.textContent = '';
-    }
   },
 
-  showStaffFace() {
-    this.activeFace = 'staff';
-    const screenLogin = document.getElementById('screen-login');
-    const screenPortal = document.getElementById('screen-portal');
-    const faceStaff = document.getElementById('face-staff');
-    const faceAdmin = document.getElementById('face-admin');
-
-    if (screenLogin) screenLogin.style.display = 'none';
-    if (screenPortal) screenPortal.style.display = 'block';
-    if (faceStaff) faceStaff.style.display = 'block';
-    if (faceAdmin) faceAdmin.style.display = 'none';
-
-    // Update staff header user pill
-    const user = API.getCurrentUser();
-    const staffUserPill = document.getElementById('staff-user-pill');
-    if (staffUserPill && user) {
-      const isCoordinator = user.role === 'coordinator';
-      staffUserPill.innerHTML = `
-        <div style="text-align: right; margin-right: 8px;">
-          <div style="font-weight: 700; font-size: 13px; color: #FFFFFF;">${App.escapeHtml(user.name)}</div>
-          <div style="font-size: 11px; color: #93C5FD;">${isCoordinator ? 'Collegiate Chapter Coordinator' : 'Staff Data Entry Officer'}</div>
-        </div>
-        <div class="avatar-circle" style="background: var(--iei-crimson);">${user.name.charAt(0)}</div>
-      `;
+  /**
+   * Role-based UI filtering
+   * Admin section only visible to Admin/Editor
+   */
+  applyRolePermissions(user) {
+    const adminNavSection = document.getElementById('nav-section-admin');
+    if (adminNavSection) {
+      adminNavSection.style.display = (user.role === 'admin') ? 'block' : 'none';
     }
 
-    // Notice banner text
-    const noticeBanner = document.querySelector('.staff-notice-banner');
-    if (noticeBanner && user) {
-      if (user.role === 'coordinator') {
-        noticeBanner.innerHTML = `
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink: 0;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-          <div>
-            <strong>Collegiate Chapter Coordinator Mode:</strong> Data entry and activity logging are restricted to your authorized collegiate chapter. Select options from the standardized drop boxes below. All entries are validated against institutional records and reflected immediately.
-          </div>
-        `;
-      } else {
-        noticeBanner.innerHTML = `
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink: 0;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-          <div>
-            <strong>Staff Data Entry Terminal:</strong> Select options from the standardized drop boxes below to record events and collegiate student membership intakes. All entries are validated against institutional records and reflected immediately across official reports.
-          </div>
-        `;
-      }
-    }
-
-    // Admin switch button visibility in staff view
-    const adminBackBtn = document.getElementById('btn-staff-back-to-admin');
-    if (adminBackBtn) {
-      adminBackBtn.style.display = (user && user.role === 'admin') ? 'inline-flex' : 'none';
-    }
-
-    if (window.StaffFace) {
-      StaffFace.load();
-    }
-  },
-
-  showAdminFace() {
-    this.activeFace = 'admin';
-    const screenLogin = document.getElementById('screen-login');
-    const screenPortal = document.getElementById('screen-portal');
-    const faceStaff = document.getElementById('face-staff');
-    const faceAdmin = document.getElementById('face-admin');
-
-    if (screenLogin) screenLogin.style.display = 'none';
-    if (screenPortal) screenPortal.style.display = 'block';
-    if (faceStaff) faceStaff.style.display = 'none';
-    if (faceAdmin) faceAdmin.style.display = 'flex';
-
-    this.updateUserUI();
-    this.navigate(this.activeView || 'dashboard');
-  },
-
-  switchFace(targetFace) {
-    if (targetFace === 'staff') {
-      this.showStaffFace();
-    } else {
-      this.showAdminFace();
+    // Role switcher dropdown update
+    const roleSwitcher = document.getElementById('header-role-switcher');
+    if (roleSwitcher) {
+      roleSwitcher.value = user.role;
     }
   },
 
   bindEvents() {
-    // 1. Gateway Login Form submit
-    const loginForm = document.getElementById('form-gateway-login');
-    if (loginForm) {
-      loginForm.addEventListener('submit', (e) => this.handleGatewayLogin(e));
+    // Form Gateway Login
+    const formLogin = document.getElementById('form-gateway-login');
+    if (formLogin) {
+      formLogin.onsubmit = (e) => {
+        e.preventDefault();
+        this.handleLogin();
+      };
     }
 
-    // 2. Admin Sidebar Navigation click
-    document.querySelectorAll('.nav-item[data-view]').forEach(item => {
+    // Sidebar Navigation Links
+    document.querySelectorAll('.sidebar-nav .nav-item').forEach(item => {
       item.addEventListener('click', (e) => {
         e.preventDefault();
         const view = item.getAttribute('data-view');
-        this.navigate(view);
-
-        // Close mobile drawer if open
-        const sidebar = document.getElementById('app-sidebar');
-        if (sidebar) sidebar.classList.remove('mobile-open');
-      });
-    });
-
-    // 3. Mobile nav toggle
-    const toggle = document.getElementById('mobile-nav-toggle');
-    if (toggle) {
-      toggle.addEventListener('click', () => {
-        const sidebar = document.getElementById('app-sidebar');
-        if (sidebar) sidebar.classList.toggle('mobile-open');
-      });
-    }
-
-    // 4. Global Year Selector change
-    const yearSelect = document.getElementById('global-year-select');
-    if (yearSelect) {
-      yearSelect.addEventListener('change', (e) => {
-        this.selectedYear = e.target.value;
-        this.refreshActiveView();
-      });
-    }
-
-    // 5. Close modal on backdrop click
-    document.querySelectorAll('.modal-backdrop').forEach(modal => {
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-          modal.classList.remove('open');
+        if (view) {
+          this.navigate(view);
+          this.closeMobileNav();
         }
       });
     });
+
+    // Mobile Hamburger Toggle Button
+    const mobileToggle = document.getElementById('mobile-nav-toggle');
+    if (mobileToggle) {
+      mobileToggle.onclick = () => this.toggleMobileNav();
+    }
+
+    // Mobile Nav Backdrop Overlay
+    const backdrop = document.getElementById('mobile-nav-backdrop');
+    if (backdrop) {
+      backdrop.onclick = () => this.closeMobileNav();
+    }
   },
 
-  async handleGatewayLogin(event) {
-    event.preventDefault();
-    const email = document.getElementById('login-gateway-email').value;
-    const pass = document.getElementById('login-gateway-password').value;
+  toggleMobileNav() {
+    const sidebar = document.getElementById('app-sidebar');
+    const backdrop = document.getElementById('mobile-nav-backdrop');
+    if (sidebar) sidebar.classList.toggle('mobile-open');
+    if (backdrop) backdrop.classList.toggle('active');
+  },
+
+  closeMobileNav() {
+    const sidebar = document.getElementById('app-sidebar');
+    const backdrop = document.getElementById('mobile-nav-backdrop');
+    if (sidebar) sidebar.classList.remove('mobile-open');
+    if (backdrop) backdrop.classList.remove('active');
+  },
+
+  async handleLogin() {
+    const email = document.getElementById('login-gateway-email')?.value.trim();
+    const pass = document.getElementById('login-gateway-password')?.value;
     const errBox = document.getElementById('login-error-alert');
     const submitBtn = document.getElementById('btn-gateway-submit');
 
-    if (errBox) {
-      errBox.style.display = 'none';
-      errBox.textContent = '';
+    if (!email || !pass) {
+      if (errBox) {
+        errBox.textContent = 'Please enter both institutional email and password.';
+        errBox.style.display = 'block';
+      }
+      return;
     }
 
+    if (errBox) errBox.style.display = 'none';
     if (submitBtn) {
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Authenticating...';
+      submitBtn.textContent = 'Verifying Credentials...';
     }
 
     try {
       const res = await API.login(email, pass);
-      this.showToast(`Welcome, ${res.user.name}`, 'success');
+      this.showToast(`Welcome back, ${res.user.name} (${res.user.role.toUpperCase()})`, 'success');
 
-      if (res.user.role === 'staff' || res.user.role === 'coordinator') {
-        this.showStaffFace();
-      } else {
-        this.showAdminFace();
-      }
+      const screenLogin = document.getElementById('screen-login');
+      const screenPortal = document.getElementById('screen-portal');
+      if (screenLogin) screenLogin.style.display = 'none';
+      if (screenPortal) screenPortal.style.display = 'flex';
+
+      this.updateUserUI();
+      this.applyRolePermissions(res.user);
+      this.navigate('dashboard');
     } catch (err) {
       if (errBox) {
-        errBox.textContent = err.message || 'Authentication failed. Please verify institutional credentials.';
+        errBox.textContent = err.message || 'Authentication failed. Please check credentials.';
         errBox.style.display = 'block';
       }
-      this.showToast(err.message, 'error');
+      this.showToast(err.message, 'danger');
     } finally {
       if (submitBtn) {
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Sign In to Institutional Portal';
+        submitBtn.textContent = 'Sign In to Chapter Portal';
       }
     }
   },
 
+  /**
+   * 1-Click Quick Access for the Four Authorized Roles
+   */
   async quickLogin(role) {
     const creds = {
-      admin: { email: 'admin@ieitvlc.org', pass: 'IEI_Admin_2026!' },
-      staff: { email: 'staff@ieitvlc.org', pass: 'TVLC_Staff_2026!' },
-      auditor: { email: 'auditor@ieitvlc.org', pass: 'Audit_View_2026!' }
+      admin: { email: 'admin@mgriei.org', pass: 'Admin_MGR_2026!' },
+      chairman: { email: 'chairman@mgriei.org', pass: 'Chairman_MGR_2026!' },
+      committee: { email: 'committee@mgriei.org', pass: 'Committee_MGR_2026!' },
+      auditor: { email: 'auditor@mgriei.org', pass: 'Auditor_MGR_2026!' }
     };
 
     if (!creds[role]) return;
@@ -244,121 +214,112 @@ const App = {
     if (emailField) emailField.value = creds[role].email;
     if (passField) passField.value = creds[role].pass;
 
-    // Direct submit
     const errBox = document.getElementById('login-error-alert');
     if (errBox) errBox.style.display = 'none';
 
     try {
       const res = await API.login(creds[role].email, creds[role].pass);
-      this.showToast(`Signed in successfully as ${res.user.name}.`, 'success');
+      this.showToast(`Signed in as ${res.user.name} [${res.user.role.toUpperCase()}]`, 'success');
 
-      if (res.user.role === 'staff' || res.user.role === 'coordinator') {
-        this.showStaffFace();
-      } else {
-        this.showAdminFace();
-      }
+      const screenLogin = document.getElementById('screen-login');
+      const screenPortal = document.getElementById('screen-portal');
+      if (screenLogin) screenLogin.style.display = 'none';
+      if (screenPortal) screenPortal.style.display = 'flex';
+
+      this.updateUserUI();
+      this.applyRolePermissions(res.user);
+      this.navigate('dashboard');
     } catch (err) {
       if (errBox) {
         errBox.textContent = err.message;
         errBox.style.display = 'block';
       }
-      this.showToast(err.message, 'error');
+      this.showToast(err.message, 'danger');
     }
   },
 
   async handleLogout() {
     await API.logout();
-    this.showToast('You have been signed out from the portal.', 'info');
+    this.showToast('You have been logged out securely.', 'info');
     this.routeToLogin();
   },
 
-  navigate(viewName) {
-    this.activeView = viewName;
+  navigate(viewId) {
+    const user = API.getCurrentUser() || { role: 'committee' };
 
-    // Update nav links active class
-    document.querySelectorAll('.nav-item').forEach(item => {
-      if (item.getAttribute('data-view') === viewName) {
+    // Prevent non-admin users from accessing administration-only views
+    const adminOnlyViews = ['users', 'events', 'reporting-settings', 'audit-logs'];
+    if (adminOnlyViews.includes(viewId) && user.role !== 'admin' && !(user.role === 'auditor' && viewId === 'audit-logs')) {
+      this.showToast('Access restricted to Admin/Editor.', 'warning');
+      viewId = 'dashboard';
+    }
+
+    this.activeView = viewId;
+
+    // Update active state in sidebar
+    document.querySelectorAll('.sidebar-nav .nav-item').forEach(item => {
+      if (item.getAttribute('data-view') === viewId) {
         item.classList.add('active');
       } else {
         item.classList.remove('active');
       }
     });
 
-    // Hide all view containers and show the target view
+    // Hide all view panes, show selected view
     document.querySelectorAll('.view-pane').forEach(pane => {
       pane.style.display = 'none';
     });
-
-    const targetPane = document.getElementById(`view-${viewName}`);
+    const targetPane = document.getElementById(`view-${viewId}`);
     if (targetPane) {
       targetPane.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Show auditor notice banner if in auditor role
-    const user = API.getCurrentUser();
-    let auditBanner = document.getElementById('auditor-notice-banner');
-    if (user && user.role === 'auditor') {
-      if (!auditBanner) {
-        auditBanner = document.createElement('div');
-        auditBanner.id = 'auditor-notice-banner';
-        auditBanner.style.cssText = 'background: #EFF6FF; border: 1px solid #BFDBFE; color: #1E40AF; padding: 10px 16px; border-radius: 6px; margin-bottom: 20px; font-size: 13px; display: flex; align-items: center; gap: 8px; font-weight: 500;';
-        auditBanner.innerHTML = `
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-          <div><strong>Council Auditor Mode:</strong> You are viewing institutional analytics, records, and reports in read-only governance review mode.</div>
-        `;
-        const canvas = document.querySelector('.content-canvas');
-        if (canvas) canvas.insertBefore(auditBanner, canvas.firstChild);
-      } else {
-        auditBanner.style.display = 'flex';
-      }
-    } else if (auditBanner) {
-      auditBanner.style.display = 'none';
+    // Update top header breadcrumb
+    const breadcrumb = document.getElementById('breadcrumb-current');
+    const viewLabels = {
+      dashboard: 'Dashboard Overview',
+      tasks: 'Task Management',
+      'weekly-reports': 'Weekly Reporting',
+      community: 'Shared Community',
+      messages: 'Private Messaging',
+      users: 'User Management',
+      events: 'Announcements & Events',
+      'reporting-settings': 'Reporting Settings',
+      'audit-logs': 'Audit Logs & Security'
+    };
+    if (breadcrumb) {
+      breadcrumb.textContent = viewLabels[viewId] || 'Workspace';
     }
 
-    // Update breadcrumb
-    const bcCurrent = document.getElementById('breadcrumb-current');
-    if (bcCurrent) {
-      const titles = {
-        'dashboard': 'Executive Dashboard',
-        'chapters': 'Student Chapter Management',
-        'events': 'Event Management',
-        'membership-analytics': 'Membership Analytics',
-        'event-analytics': 'Event Analytics',
-        'reports': 'Annual Reports & Exports',
-        'settings': 'Administration & Audit Trail'
-      };
-      bcCurrent.textContent = titles[viewName] || viewName;
-    }
-
-    // Load data for specific view
-    this.refreshActiveView();
-  },
-
-  refreshActiveView() {
-    if (this.activeFace !== 'admin') return;
-
-    switch (this.activeView) {
+    // Trigger module loaders
+    switch (viewId) {
       case 'dashboard':
-        Dashboard.load(this.selectedYear);
+        if (window.PortalModules && PortalModules.dashboard) PortalModules.dashboard.load();
         break;
-      case 'chapters':
-        Chapters.load();
+      case 'tasks':
+        if (window.PortalModules && PortalModules.tasks) PortalModules.tasks.init();
+        break;
+      case 'weekly-reports':
+        if (window.PortalModules && PortalModules.weeklyReports) PortalModules.weeklyReports.init();
+        break;
+      case 'community':
+        if (window.PortalModules && PortalModules.community) PortalModules.community.init();
+        break;
+      case 'messages':
+        if (window.PortalModules && PortalModules.messages) PortalModules.messages.init();
+        break;
+      case 'users':
+        if (window.PortalModules && PortalModules.users) PortalModules.users.init();
         break;
       case 'events':
-        Events.activeFilters.year = this.selectedYear;
-        Events.load();
+        if (window.PortalModules && PortalModules.events) PortalModules.events.init();
         break;
-      case 'membership-analytics':
-        Analytics.loadMembership(this.selectedYear);
+      case 'reporting-settings':
+        if (window.PortalModules && PortalModules.reportingSettings) PortalModules.reportingSettings.init();
         break;
-      case 'event-analytics':
-        Analytics.loadEvents(this.selectedYear);
-        break;
-      case 'reports':
-        Reports.load(this.selectedYear);
-        break;
-      case 'settings':
-        Settings.load();
+      case 'audit-logs':
+        if (window.PortalModules && PortalModules.auditLogs) PortalModules.auditLogs.init();
         break;
     }
   },
@@ -366,96 +327,94 @@ const App = {
   updateUserUI() {
     const user = API.getCurrentUser();
     const userContainer = document.getElementById('header-user-container');
-    const authActions = document.querySelectorAll('.auth-required');
-    const adminActions = document.querySelectorAll('.admin-required');
+    if (!user || !API.isAuthenticated()) return;
 
-    if (user && API.isAuthenticated()) {
-      const isAuditor = user.role === 'auditor';
+    const roleBadges = {
+      admin: { label: '🛡️ Admin / Editor', class: 'badge-primary' },
+      chairman: { label: '👑 Chairman', class: 'badge-gold' },
+      committee: { label: '🎓 Committee Member', class: 'badge-info' },
+      auditor: { label: '📋 Auditor', class: 'badge-warning' }
+    };
+    const badgeInfo = roleBadges[user.role] || { label: user.role.toUpperCase(), class: 'badge-info' };
 
-      if (userContainer) {
-        userContainer.innerHTML = `
-          <!-- Staff Mode Switcher for Admins -->
-          ${user.role === 'admin' ? `
-            <button class="btn btn-outline btn-sm" onclick="App.switchFace('staff')" title="Open Staff Input Face" style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600;">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-              Staff Entry Face
-            </button>
-          ` : ''}
-          <div class="user-profile-badge" onclick="App.navigate('settings')">
-            <div class="avatar-circle">${user.name.charAt(0)}</div>
-            <div class="user-info-text">
-              <span class="user-name">${App.escapeHtml(user.name.split(' ')[0])}</span>
-              <span class="user-role-tag" style="${isAuditor ? 'background:#DBEAFE; color:#1E40AF; font-weight:700;' : ''}">${isAuditor ? 'Auditor (Read-Only)' : user.role}</span>
-            </div>
+    if (userContainer) {
+      userContainer.innerHTML = `
+        <!-- Notifications Bell -->
+        <button class="header-icon-btn" id="btn-header-notifs" title="Chapter Notifications" onclick="PortalModules.notifications.toggleDrawer()">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+          <span class="notif-badge-pill" id="header-notif-badge" style="display: none;">0</span>
+        </button>
+
+        <!-- User Profile Badge -->
+        <div class="user-profile-badge" onclick="PortalModules.account.openModal()" title="View Account Profile">
+          <div class="avatar-circle ${user.role === 'chairman' ? 'avatar-gold' : (user.role === 'admin' ? 'avatar-blue' : '')}">
+            ${user.name.charAt(0)}
           </div>
-          <button class="btn btn-outline btn-sm" onclick="App.handleLogout()" title="Sign Out">Sign Out</button>
-        `;
-      }
+          <div class="user-info-text">
+            <span class="user-name">${this.escapeHtml(user.name)}</span>
+            <span class="user-role-tag">${badgeInfo.label}</span>
+          </div>
+        </div>
 
-      // Hide mutation controls for auditor (Read-Only mode)
-      authActions.forEach(el => {
-        el.style.display = isAuditor ? 'none' : '';
-      });
-      if (user.role === 'admin') {
-        adminActions.forEach(el => el.style.display = '');
-      } else {
-        adminActions.forEach(el => el.style.display = 'none');
-      }
+        <button class="btn btn-outline btn-sm" onclick="App.handleLogout()" title="Sign Out">Sign Out</button>
+      `;
     }
+
+    // Greet user in dashboard hero
+    const greetingEl = document.getElementById('dash-greeting-name');
+    if (greetingEl) greetingEl.textContent = user.name;
+    const greetingRoleEl = document.getElementById('dash-greeting-role');
+    if (greetingRoleEl) greetingRoleEl.textContent = badgeInfo.label;
   },
 
   openModal(modalId) {
     const modal = document.getElementById(modalId);
-    if (modal) modal.classList.add('open');
+    if (modal) {
+      modal.style.display = 'flex';
+      modal.classList.add('open');
+    }
   },
 
   closeModal(modalId) {
     const modal = document.getElementById(modalId);
-    if (modal) modal.classList.remove('open');
-  },
-
-  showToast(message, type = 'info') {
-    const container = document.getElementById('toast-container');
-    if (!container) return;
-
-    const toast = document.createElement('div');
-    toast.className = `toast toast-${type}`;
-    toast.innerHTML = `
-      <div style="flex: 1;">${this.escapeHtml(message)}</div>
-      <button style="background: none; border: none; color: white; cursor: pointer;" onclick="this.parentElement.remove()">&times;</button>
-    `;
-
-    container.appendChild(toast);
-    setTimeout(() => {
-      if (toast.parentElement) toast.remove();
-    }, 4500);
-  },
-
-  formatDate(dateStr) {
-    if (!dateStr) return 'N/A';
-    try {
-      const parts = dateStr.split('-');
-      if (parts.length === 3) {
-        return `${parts[2]}/${parts[1]}/${parts[0]}`;
-      }
-      return dateStr;
-    } catch (e) {
-      return dateStr;
+    if (modal) {
+      modal.style.display = 'none';
+      modal.classList.remove('open');
     }
   },
 
+  showToast(message, type = 'info') {
+    const toast = document.createElement('div');
+    toast.className = `toast-item toast-${type}`;
+    toast.textContent = message;
+
+    let container = document.getElementById('toast-container');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'toast-container';
+      container.className = 'toast-container';
+      document.body.appendChild(container);
+    }
+    container.appendChild(toast);
+
+    setTimeout(() => {
+      toast.classList.add('toast-fade-out');
+      setTimeout(() => toast.remove(), 300);
+    }, 4000);
+  },
+
   escapeHtml(str) {
-    if (str === null || str === undefined) return '';
+    if (!str) return '';
     return String(str)
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;');
+      .replace(/'/g, '&#39;');
   }
 };
 
-// Bootstrap on DOM ready
+// Global bootstrap
 document.addEventListener('DOMContentLoaded', () => {
   App.init();
 });

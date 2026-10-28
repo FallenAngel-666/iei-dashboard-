@@ -1,5 +1,5 @@
 /**
- * IEI TVLC PostgreSQL Client & Connection Pool
+ * MGR IEI Students Chapter PostgreSQL Client & Connection Pool
  * Optimized for serverless environments (Vercel, Neon, Supabase)
  * with automatic SSL configuration and parameterized query protection.
  */

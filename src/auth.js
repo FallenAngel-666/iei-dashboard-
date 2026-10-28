@@ -1,5 +1,5 @@
 /**
- * IEI TVLC Security & Authentication Module
+ * MGR IEI Students Chapter Security & Authentication Module
  * Implements role-based access control (RBAC), password hashing with bcrypt,
  * and signed JWT session token validation.
  */

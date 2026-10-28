@@ -1,5 +1,5 @@
 /**
- * IEI TVLC Defensive Security: In-Memory Sliding-Window Rate Limiter
+ * MGR IEI Chapter Defensive Security: In-Memory Sliding-Window Rate Limiter
  * Protects against brute-force attacks, credential stuffing, and API flooding.
  */
 

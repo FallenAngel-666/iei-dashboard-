@@ -1,10 +1,10 @@
 /**
- * IEI TVLC Secure Administrator Setup Utility
- * Creates or updates an institutional Super Administrator account with a unique password.
+ * MGR IEI Students Chapter Administrator Setup Utility
+ * Creates or updates an institutional Administrator account with a unique password.
  * Works with both PostgreSQL and the local fallback database.
  * 
  * Usage:
- *   node scripts/setup-admin.js --email "admin@ieitvlc.org" --password "YourStrongPassword123!"
+ *   node scripts/setup-admin.js --email "admin@mgriei.org" --password "YourStrongPassword123!"
  *   Or set environment variables: ADMIN_EMAIL, ADMIN_PASSWORD
  */
 
@@ -29,19 +29,19 @@ function parseArgs() {
 
 async function setupAdmin() {
   console.log('=======================================================');
-  console.log(' IEI TVLC Super Administrator Account Setup');
+  console.log(' MGR IEI Students Chapter Administrator Setup');
   console.log('=======================================================');
 
   const cliArgs = parseArgs();
   const email = cliArgs.email || process.env.ADMIN_EMAIL;
   const password = cliArgs.password || process.env.ADMIN_PASSWORD;
-  const name = cliArgs.name || process.env.ADMIN_NAME || 'IEI TVLC Chief Administrator';
+  const name = cliArgs.name || process.env.ADMIN_NAME || 'MGR IEI Chapter Administrator';
 
   if (!email || !password) {
     console.error('[Error] Both email and password are required.');
     console.log('\nUsage Examples:');
-    console.log('  node scripts/setup-admin.js --email "admin@ieitvlc.org" --password "StrongUniquePassword!"');
-    console.log('  ADMIN_EMAIL="admin@ieitvlc.org" ADMIN_PASSWORD="StrongUniquePassword!" node scripts/setup-admin.js');
+    console.log('  node scripts/setup-admin.js --email "admin@mgriei.org" --password "StrongUniquePassword!"');
+    console.log('  ADMIN_EMAIL="admin@mgriei.org" ADMIN_PASSWORD="StrongUniquePassword!" node scripts/setup-admin.js');
     process.exit(1);
   }
 
@@ -70,7 +70,7 @@ async function setupAdmin() {
       const newId = 'usr_admin_' + Date.now();
       await query(`
         INSERT INTO users (id, name, email, password_hash, role, designation, department, is_active, created_at)
-        VALUES ($1, $2, $3, $4, 'admin', 'Centre Administrator & Systems Officer', 'IEI TVLC Secretariat', true, NOW())
+        VALUES ($1, $2, $3, $4, 'admin', 'Centre Administrator & Systems Officer', 'MGR IEI Chapter Secretariat', true, NOW())
       `, [newId, name, email, passwordHash]);
       console.log('✓ Successfully created new Super Administrator account in PostgreSQL.');
     }
@@ -93,8 +93,8 @@ async function setupAdmin() {
         email,
         passwordHash,
         role: 'admin',
-        designation: 'Centre Administrator & Systems Officer',
-        department: 'IEI TVLC Secretariat',
+        designation: 'Chapter Administrator & Systems Officer',
+        department: 'MGR IEI Chapter Secretariat',
         isActive: true,
         createdAt: new Date().toISOString()
       });

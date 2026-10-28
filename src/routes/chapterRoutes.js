@@ -1,5 +1,5 @@
 /**
- * IEI TVLC Student Chapter Management Routes
+ * MGR IEI Chapter Student Chapter Management Routes
  */
 
 const express = require('express');

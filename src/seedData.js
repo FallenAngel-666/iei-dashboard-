@@ -1,7 +1,12 @@
 /**
- * IEI TVLC Official Seed Data
- * Exactly synchronized with the official Annual Activity Report (November 2025 – October 2026)
- * of The Institution of Engineers (India), Tiruvallur Local Centre.
+ * MGR IEI Students Chapter — Official Seed Data
+ * Exclusively for Dr. M.G.R. Educational and Research Institute Students Chapter
+ * 
+ * Strict Four-Role System:
+ * 1. Admin/Editor
+ * 2. Chairman
+ * 3. Committee Member
+ * 4. Auditor
  */
 
 const bcrypt = require('bcryptjs');
@@ -13,634 +18,465 @@ function getHashedPassword(plaintext) {
 const seedUsers = [
   {
     id: 'usr_admin_01',
-    name: 'IEI TVLC Chief Administrator',
-    email: 'admin@ieitvlc.org',
-    passwordHash: getHashedPassword('IEI_Admin_2026!'),
-    role: 'admin', // Full analytics, chapter & event management
-    designation: 'Centre Administrator & Systems Officer',
-    department: 'IEI TVLC Secretariat',
-    createdAt: '2023-01-01T00:00:00.000Z',
+    name: 'Chapter Administrator',
+    email: 'admin@mgriei.org',
+    passwordHash: getHashedPassword('Admin_MGR_2026!'),
+    role: 'admin',
+    designation: 'Admin & Technical Editor',
+    department: 'MGR IEI Students Chapter Secretariat',
+    createdAt: '2025-01-01T00:00:00.000Z',
     isActive: true
   },
   {
-    id: 'usr_staff_01',
-    name: 'IEI TVLC Staff Officer',
-    email: 'staff@ieitvlc.org',
-    passwordHash: getHashedPassword('TVLC_Staff_2026!'),
-    role: 'staff', // Staff face interface: clean input details with drop boxes
-    designation: 'Assistant Secretary & Academic Staff',
-    department: 'Student Chapters & Activity Logging',
-    createdAt: '2023-06-15T00:00:00.000Z',
+    id: 'usr_chair_01',
+    name: 'Chapter Chairman',
+    email: 'chairman@mgriei.org',
+    passwordHash: getHashedPassword('Chairman_MGR_2026!'),
+    role: 'chairman',
+    designation: 'Chairman, Student Executive Committee',
+    department: 'Faculty of Engineering & Technology, Dr. MGR E&RI',
+    createdAt: '2025-01-01T00:00:00.000Z',
+    isActive: true
+  },
+  {
+    id: 'usr_comm_01',
+    name: 'Committee Member',
+    email: 'committee@mgriei.org',
+    passwordHash: getHashedPassword('Committee_MGR_2026!'),
+    role: 'committee',
+    designation: 'Committee Member — Technical & Events',
+    department: 'Mechanical & Computing Sciences, Dr. MGR E&RI',
+    createdAt: '2025-08-01T00:00:00.000Z',
     isActive: true
   },
   {
     id: 'usr_auditor_01',
-    name: 'IEI Council Auditor',
-    email: 'auditor@ieitvlc.org',
-    passwordHash: getHashedPassword('Audit_View_2026!'),
+    name: 'Chapter Auditor',
+    email: 'auditor@mgriei.org',
+    passwordHash: getHashedPassword('Auditor_MGR_2026!'),
     role: 'auditor',
-    designation: 'Institutional Reviewer (Read Only)',
-    department: 'IEI Council Audit Division',
-    createdAt: '2024-01-10T00:00:00.000Z',
-    isActive: true
-  },
-  {
-    id: 'usr_coord_01',
-    name: 'RMK Chapter Coordinator',
-    email: 'coordinator@ieitvlc.org',
-    passwordHash: getHashedPassword('Coordinator_2026!'),
-    role: 'coordinator',
-    assignedChapterId: 'ch_rmk_01',
-    designation: 'Faculty Advisor & Chapter Coordinator',
-    department: 'Electrical and Electronics Engineering',
-    createdAt: '2024-03-01T00:00:00.000Z',
-    isActive: true
-  },
-  {
-    id: 'usr_example_01',
-    name: 'IEI TVLC Staff Officer',
-    email: 'example@gmail.com',
-    passwordHash: getHashedPassword('TVLC_Staff_2026!'),
-    role: 'staff',
-    designation: 'Assistant Secretary & Academic Staff',
-    department: 'Student Chapters & Activity Logging',
-    createdAt: '2023-06-15T00:00:00.000Z',
+    designation: 'Internal Governance & Compliance Reviewer',
+    department: 'Academic Quality & Chapter Audit Committee',
+    createdAt: '2025-01-10T00:00:00.000Z',
     isActive: true
   }
 ];
 
-const seedChapters = [
+const seedChapter = [
   {
-    id: 'ch_mgr_04',
-    chapterName: 'IEI TVLC MGR Student Chapter',
-    collegeName: 'Dr. M.G.R. Educational & Research Institute',
-    collegeCode: 'MGRERI',
-    departments: ['Computer Science & Engineering', 'Mechanical Engineering', 'Civil Engineering', 'E&T Foundation'],
-    studentMembersCount: 707, // Gained in current reporting cycle
-    corporateMembersCount: 30,
-    facultyAdvisors: ['Mr. R. Kalaingnan', 'Mr. U. Siddhartha Nambi', 'Mr. Ashok Kumar'],
-    establishedYear: 2017,
+    id: 'ch_mgr_01',
+    name: 'Dr. M.G.R. Educational and Research Institute Students Chapter',
+    collegeOrChapter: 'Dr. M.G.R. Educational and Research Institute (Deemed to be University)',
+    chapterCode: 'MGR-IEI-SC',
+    department: 'All Engineering & Technology Disciplines',
     status: 'Active',
-    contactEmail: 'iei.chapter@drmgrdu.ac.in',
-    phone: '+91 44 2378 2176',
-    location: 'Maduravoyal, Chennai',
-    updatedAt: '2026-10-27T10:00:00.000Z'
-  },
-  {
-    id: 'ch_saec_15',
-    chapterName: 'IEI TVLC S. A. Student Chapter',
-    collegeName: 'S.A. Engineering College',
-    collegeCode: 'SAEC',
-    departments: ['Mechanical Engineering', 'Computer Science & Engineering', 'ECE'],
-    studentMembersCount: 365, // Gained in current reporting cycle
-    corporateMembersCount: 6,
-    facultyAdvisors: ['Mr. Shiva'],
-    establishedYear: 2024,
-    status: 'Active',
-    contactEmail: 'saec.iei@saec.ac.in',
-    phone: '+91 44 2680 1999',
-    location: 'Thiruverkadu, Chennai',
-    updatedAt: '2026-10-27T10:00:00.000Z'
-  },
-  {
-    id: 'ch_rmkcet_14',
-    chapterName: 'IEI TVLC RMKCET Student Chapter',
-    collegeName: 'R.M.K. College of Engineering and Technology (RMKCET)',
-    collegeCode: 'RMKCET',
-    departments: ['Mechanical Engineering', 'CSE', 'ECE'],
-    studentMembersCount: null, // Unknown / Census Pending in baseline
-    corporateMembersCount: null,
-    facultyAdvisors: ['Dr. C. Arun'],
-    establishedYear: 2024,
-    status: 'Active',
-    contactEmail: 'iei.cet@rmkcet.ac.in',
-    phone: '+91 44 6790 0610',
-    location: 'Pudukuvoyal, Gummidipoondi',
-    updatedAt: '2026-10-27T10:00:00.000Z'
-  },
-  {
-    id: 'ch_prathyusha_02',
-    chapterName: 'IEI TVLC Prathyusha Student Chapter',
-    collegeName: 'Prathyusha Engineering College',
-    collegeCode: 'PITM',
-    departments: ['Electronics & Communication Engineering', 'EEE', 'Civil Engineering', 'Mechanical', 'CSE', 'IT', 'Biotech'],
-    studentMembersCount: null, // Unknown / Census Pending in baseline
-    corporateMembersCount: null,
-    facultyAdvisors: ['Mr. Somasekhar'],
-    establishedYear: 2019,
-    status: 'Active',
-    contactEmail: 'iei.pitm@prathyusha.edu.in',
-    phone: '+91 44 3767 3767',
-    location: 'Aranvoyalkuppam, Poonamallee-Tiruvallur Road',
-    updatedAt: '2026-10-27T10:00:00.000Z'
-  },
-  {
-    id: 'ch_rmk_01',
-    chapterName: 'IEI TVLC RMK Student Chapter',
-    collegeName: 'RMK Engineering College',
-    collegeCode: 'RMKEC',
-    departments: ['EEE', 'EIE', 'CSE', 'Mechanical', 'Civil', 'IT'],
-    studentMembersCount: 1350,
-    corporateMembersCount: 24,
-    facultyAdvisors: ['Dr. Sukhi'],
-    establishedYear: 2018,
-    status: 'Active',
-    contactEmail: 'iei.rmk@rmkec.ac.in',
-    phone: '+91 44 6790 0679',
-    location: 'Kavaraipettai, Tiruvallur Dist',
-    updatedAt: '2026-03-15T10:30:00.000Z'
-  },
-  {
-    id: 'ch_jec_03',
-    chapterName: 'IEI TVLC JEC Student Chapter',
-    collegeName: 'Jaya Engineering College',
-    collegeCode: 'JEC',
-    departments: ['Mechanical Engineering', 'Electrical & Electronics', 'Civil'],
-    studentMembersCount: 450,
-    corporateMembersCount: 1,
-    facultyAdvisors: ['Mr. Kumaran'],
-    establishedYear: 2019,
-    status: 'Active',
-    contactEmail: 'iei.jec@jaya.edu.in',
-    phone: '+91 44 2639 0041',
-    location: 'Thiruninravur, Chennai',
-    updatedAt: '2026-02-18T09:45:00.000Z'
-  },
-  {
-    id: 'ch_stpeters_05',
-    chapterName: 'IEI TVLC St. Peters Student Chapter',
-    collegeName: 'St. Peter’s Engineering College',
-    collegeCode: 'SPEC',
-    departments: ['Civil Engineering', 'Electrical & Electronics Engineering'],
-    studentMembersCount: 200,
-    corporateMembersCount: 15,
-    facultyAdvisors: ['Dr. Parthibhan'],
-    establishedYear: 2020,
-    status: 'Active',
-    contactEmail: 'iei.spec@stpeters.ac.in',
-    phone: '+91 44 2655 8089',
-    location: 'Avadi, Chennai',
-    updatedAt: '2026-01-22T16:15:00.000Z'
-  },
-  {
-    id: 'ch_sriram_eng_06',
-    chapterName: 'IEI TVLC Sri Ram Student Chapter',
-    collegeName: 'Sri Ram Engineering College',
-    collegeCode: 'SREC',
-    departments: ['Mechanical Engineering'],
-    studentMembersCount: 190,
-    corporateMembersCount: 1,
-    facultyAdvisors: ['Dr. S. Ravi'],
-    establishedYear: 2020,
-    status: 'Active',
-    contactEmail: 'sriram.iei@srirangam.edu.in',
-    phone: '+91 44 2768 9364',
-    location: 'Perumalpattu, Tiruvallur',
-    updatedAt: '2026-02-10T12:00:00.000Z'
-  },
-  {
-    id: 'ch_skr_07',
-    chapterName: 'IEI TVLC SKR Student Chapter',
-    collegeName: 'SKR Engineering College',
-    collegeCode: 'SKREC',
-    departments: ['Civil Engineering', 'ECE'],
-    studentMembersCount: 100,
-    corporateMembersCount: 10,
-    facultyAdvisors: ['Mr. Kaliraja'],
     establishedYear: 2021,
-    status: 'Active',
-    contactEmail: 'iei.skr@skrec.ac.in',
-    phone: '+91 44 2627 2008',
-    location: 'Nazarathpet, Poonamallee',
-    updatedAt: '2026-02-28T15:30:00.000Z'
-  },
-  {
-    id: 'ch_veltech_08',
-    chapterName: 'IEI TVLC Vel Tech Student Chapter',
-    collegeName: 'Vel Tech High Tech Dr. Rangarajan Dr. Sakunthala Engineering College',
-    collegeCode: 'VTHT',
-    departments: ['Civil Engineering'],
-    studentMembersCount: 36,
-    corporateMembersCount: 2,
-    facultyAdvisors: ['Dr. D. Shivakumar'],
-    establishedYear: 2021,
-    status: 'Active',
-    contactEmail: 'iei.veltech@veltechhightech.com',
-    phone: '+91 44 2684 0605',
-    location: 'Avadi, Chennai',
-    updatedAt: '2026-03-02T10:10:00.000Z'
-  },
-  {
-    id: 'ch_sriram_09',
-    chapterName: 'IEI Sriram Students Chapter',
-    collegeName: 'Sriram Engineering College',
-    collegeCode: 'SRIRAM',
-    departments: ['CSE', 'Mechanical Engineering'],
-    studentMembersCount: 78,
-    corporateMembersCount: 3,
-    facultyAdvisors: ['Prof. N. Sankar Ram'],
-    establishedYear: 2022,
-    status: 'Active',
-    contactEmail: 'principal@sriramec.edu.in',
-    phone: '+91 44 2768 9364',
-    location: 'Perumalpattu, Veppampattu RS',
-    updatedAt: '2026-03-12T11:45:00.000Z'
-  },
-  {
-    id: 'ch_gsbt_10',
-    chapterName: 'IEI GSBT Students Chapter',
-    collegeName: 'Gojan School of Business and Technology',
-    collegeCode: 'GSBT',
-    departments: ['Various Departments'],
-    studentMembersCount: null,
-    corporateMembersCount: 2,
-    facultyAdvisors: ['Er. Suresh Kumar'],
-    establishedYear: 2022,
-    status: 'Active',
-    contactEmail: 'iei.gsbt@gojaneducation.com',
-    phone: '+91 44 2631 1045',
-    location: 'Redhills, Chennai',
-    updatedAt: '2026-01-15T09:00:00.000Z'
-  },
-  {
-    id: 'ch_spiher_11',
-    chapterName: 'IEI SPIHER Student Chapter',
-    collegeName: "St. Peter's Institute of Higher Education and Research",
-    collegeCode: 'SPIHER',
-    departments: ['ECE', 'Civil Engineering', 'EEE'],
-    studentMembersCount: null,
-    corporateMembersCount: null,
-    facultyAdvisors: [],
-    establishedYear: 2023,
-    status: 'Pending Verification',
-    contactEmail: 'info@spiher.ac.in',
-    phone: '+91 44 2655 8080',
-    location: 'Avadi, Chennai',
-    updatedAt: '2026-01-18T14:00:00.000Z'
-  },
-  {
-    id: 'ch_panimalar_12',
-    chapterName: 'IEI Panimalar Student Chapter',
-    collegeName: 'Panimalar Engineering College',
-    collegeCode: 'PEC',
-    departments: ['CSE', 'Information Technology', 'ECE'],
-    studentMembersCount: null,
-    corporateMembersCount: null,
-    facultyAdvisors: ['Dr. Silas Stephen'],
-    establishedYear: 2023,
-    status: 'Active',
-    contactEmail: 'iei.panimalar@panimalar.ac.in',
-    phone: '+91 44 2649 0404',
-    location: 'Nazarathpet, Poonamallee',
-    updatedAt: '2026-02-04T10:30:00.000Z'
-  },
-  {
-    id: 'ch_rmd_13',
-    chapterName: 'IEI RMD Student Chapter',
-    collegeName: 'RMD Engineering College',
-    collegeCode: 'RMDEC',
-    departments: ['CSE', 'EEE', 'ECE'],
-    studentMembersCount: null,
-    corporateMembersCount: null,
-    facultyAdvisors: ['Dr. Prasanna'],
-    establishedYear: 2023,
-    status: 'Active',
-    contactEmail: 'iei.rmd@rmd.ac.in',
-    phone: '+91 44 6791 9191',
-    location: 'Kavaraipettai, Gummidipoondi',
-    updatedAt: '2026-02-11T16:00:00.000Z'
-  },
-  {
-    id: 'ch_tssc_16',
-    chapterName: 'IEI TSSC Student Chapter',
-    collegeName: 'T. S. Srinivasan Centre for Polytechnic College and Advanced Training',
-    collegeCode: 'CPAT-TSSC',
-    departments: ['Mechanical Engineering', 'Automobile Engineering', 'Advanced Tool Design'],
-    studentMembersCount: null,
-    corporateMembersCount: null,
-    facultyAdvisors: ['Mr. Jayavel'],
-    establishedYear: 2024,
-    status: 'Active',
-    contactEmail: 'cpat@tvsts.com',
-    phone: '+91 44 2625 2147',
-    location: 'Vanagaram Road, Ambattur, Chennai',
-    updatedAt: '2026-01-30T15:00:00.000Z'
-  },
-  {
-    id: 'ch_mgr_et_17',
-    chapterName: 'IEI MGR(E&T) Student Chapter',
-    collegeName: 'Dr. M.G.R Educational and Research Institute (E&T 1st Year)',
-    collegeCode: 'MGR-ET',
-    departments: ['Engineering & Technology Foundation Division (First Year)'],
-    studentMembersCount: null,
-    corporateMembersCount: null,
-    facultyAdvisors: ['Dr. Kannan'],
-    establishedYear: 2025,
-    status: 'Active',
-    contactEmail: 'firstyear.iei@drmgrdu.ac.in',
-    phone: '+91 44 2378 2176',
-    location: 'Maduravoyal Campus, Chennai',
-    updatedAt: '2026-02-05T09:30:00.000Z'
-  },
-  {
-    id: 'ch_velammal_18',
-    chapterName: 'IEI Velamal Student Chapter',
-    collegeName: 'Velammal Engineering College',
-    collegeCode: 'VEC',
-    departments: ['EEE'],
-    studentMembersCount: null,
-    corporateMembersCount: null,
-    facultyAdvisors: ['Mr. Rangarajan'],
-    establishedYear: 2025,
-    status: 'Active',
-    contactEmail: 'iei.eee@velammal.edu.in',
-    phone: '+91 44 2659 1842',
-    location: 'Ambattur-Red Hills Road, Surapet, Chennai',
-    updatedAt: '2026-03-10T14:10:00.000Z'
+    studentMembership: 707,
+    facultyAdvisors: ['Chapter Faculty Advisor', 'Technical Coordinator'],
+    address: 'EVR Periyar Salai (NH4), Maduravoyal, Chennai - 600095, Tamil Nadu',
+    createdAt: '2025-01-01T00:00:00.000Z'
   }
 ];
 
-// Exact Student Membership Growth Records as reported in official report (Nov 2025 – Oct 2026)
-// Total: 1,287 student members gained across 5 reporting institutions
-const seedNewMemberships = [
-  { id: 'nm_report_01', year: 2026, chapterId: 'ch_saec_15', institutionName: 'S.A. Engineering College', studentNew: 365, corporateNew: 2, recordedDate: '2026-10-15' },
-  { id: 'nm_report_02', year: 2026, chapterId: 'ch_rmkcet_14', institutionName: 'R.M.K. College of Engineering and Technology (RMKCET)', studentNew: 91, corporateNew: 1, recordedDate: '2026-10-18' },
-  { id: 'nm_report_03', year: 2026, chapterId: null, institutionName: 'T.J.S. Engineering College', studentNew: 54, corporateNew: 1, recordedDate: '2026-10-20' },
-  { id: 'nm_report_04', year: 2026, chapterId: 'ch_prathyusha_02', institutionName: 'Prathyusha Engineering College', studentNew: 70, corporateNew: 0, recordedDate: '2026-10-22' },
-  { id: 'nm_report_05', year: 2026, chapterId: 'ch_mgr_04', institutionName: 'Dr. M.G.R. Educational & Research Institute', studentNew: 707, corporateNew: 4, recordedDate: '2026-10-25' }
-];
-
-const seedMembershipSnapshots = [
-  // 2024 Historical Baseline
-  { id: 'ms_2024_rmk', year: 2024, chapterId: 'ch_rmk_01', studentCount: 1200, corporateCount: 20, recordedAt: '2024-10-30T00:00:00.000Z' },
-  { id: 'ms_2024_jec', year: 2024, chapterId: 'ch_jec_03', studentCount: 400, corporateCount: 1, recordedAt: '2024-10-30T00:00:00.000Z' },
-  { id: 'ms_2024_stpeters', year: 2024, chapterId: 'ch_stpeters_05', studentCount: 180, corporateCount: 12, recordedAt: '2024-10-30T00:00:00.000Z' },
-  { id: 'ms_2024_srec', year: 2024, chapterId: 'ch_sriram_eng_06', studentCount: 170, corporateCount: 1, recordedAt: '2024-10-30T00:00:00.000Z' },
-  { id: 'ms_2024_skr', year: 2024, chapterId: 'ch_skr_07', studentCount: 90, corporateCount: 8, recordedAt: '2024-10-30T00:00:00.000Z' },
-  { id: 'ms_2024_sriram', year: 2024, chapterId: 'ch_sriram_09', studentCount: 70, corporateCount: 2, recordedAt: '2024-10-30T00:00:00.000Z' },
-  { id: 'ms_2024_veltech', year: 2024, chapterId: 'ch_veltech_08', studentCount: 30, corporateCount: 2, recordedAt: '2024-10-30T00:00:00.000Z' },
-
-  // 2025 Annual Verified Census
-  { id: 'ms_2025_rmk', year: 2025, chapterId: 'ch_rmk_01', studentCount: 1280, corporateCount: 22, recordedAt: '2025-10-30T00:00:00.000Z' },
-  { id: 'ms_2025_jec', year: 2025, chapterId: 'ch_jec_03', studentCount: 420, corporateCount: 1, recordedAt: '2025-10-30T00:00:00.000Z' },
-  { id: 'ms_2025_stpeters', year: 2025, chapterId: 'ch_stpeters_05', studentCount: 190, corporateCount: 14, recordedAt: '2025-10-30T00:00:00.000Z' },
-  { id: 'ms_2025_srec', year: 2025, chapterId: 'ch_sriram_eng_06', studentCount: 180, corporateCount: 1, recordedAt: '2025-10-30T00:00:00.000Z' },
-  { id: 'ms_2025_skr', year: 2025, chapterId: 'ch_skr_07', studentCount: 95, corporateCount: 9, recordedAt: '2025-10-30T00:00:00.000Z' },
-  { id: 'ms_2025_sriram', year: 2025, chapterId: 'ch_sriram_09', studentCount: 75, corporateCount: 3, recordedAt: '2025-10-30T00:00:00.000Z' },
-  { id: 'ms_2025_veltech', year: 2025, chapterId: 'ch_veltech_08', studentCount: 35, corporateCount: 2, recordedAt: '2025-10-30T00:00:00.000Z' },
-
-  // 2026 Verified Reporting Snapshots
-  { id: 'ms_2026_rmk', year: 2026, chapterId: 'ch_rmk_01', studentCount: 1350, corporateCount: 24, recordedAt: '2026-10-26T00:00:00.000Z' },
-  { id: 'ms_2026_mgr', year: 2026, chapterId: 'ch_mgr_04', studentCount: 707, corporateCount: 30, recordedAt: '2026-10-26T00:00:00.000Z' },
-  { id: 'ms_2026_jec', year: 2026, chapterId: 'ch_jec_03', studentCount: 450, corporateCount: 1, recordedAt: '2026-10-26T00:00:00.000Z' },
-  { id: 'ms_2026_saec', year: 2026, chapterId: 'ch_saec_15', studentCount: 365, corporateCount: 6, recordedAt: '2026-10-26T00:00:00.000Z' },
-  { id: 'ms_2026_stpeters', year: 2026, chapterId: 'ch_stpeters_05', studentCount: 200, corporateCount: 15, recordedAt: '2026-10-26T00:00:00.000Z' },
-  { id: 'ms_2026_srec', year: 2026, chapterId: 'ch_sriram_eng_06', studentCount: 190, corporateCount: 1, recordedAt: '2026-10-26T00:00:00.000Z' },
-  { id: 'ms_2026_skr', year: 2026, chapterId: 'ch_skr_07', studentCount: 100, corporateCount: 10, recordedAt: '2026-10-26T00:00:00.000Z' },
-  { id: 'ms_2026_sriram', year: 2026, chapterId: 'ch_sriram_09', studentCount: 78, corporateCount: 3, recordedAt: '2026-10-26T00:00:00.000Z' },
-  { id: 'ms_2026_veltech', year: 2026, chapterId: 'ch_veltech_08', studentCount: 36, corporateCount: 2, recordedAt: '2026-10-26T00:00:00.000Z' }
-];
-
-// Exact 11 Activities from the Official Annual Activity Report (November 2025 – October 2026)
-// Total Participants: 1,019
 const seedEvents = [
   {
-    id: 'ev_act_01',
-    eventNumber: 1,
-    title: 'One-Day Workshop',
-    category: 'Workshop',
-    eventDate: '2025-12-12',
-    eventTime: '09:30 AM',
-    chapterId: null,
-    collegeOrChapter: 'IEI TVLC Central (IEI TNSC Auditorium)',
-    venue: 'IEI TNSC Auditorium',
-    attendeesCount: 45,
-    speakerName: 'Institutional Technical Panel',
-    speakerDesignation: 'Senior Resource Persons',
-    speakerOrg: 'Institution of Engineers (India)',
-    description: 'One-Day Workshop conducted on 12 December 2025 at IEI TNSC Auditorium.',
-    status: 'Completed',
+    id: 'ev_mgr_01',
+    title: 'National Engineering Symposium 2026 — Emerging Horizons in AI & Robotics',
+    category: 'National Symposium',
+    date: '2026-11-18',
+    venue: 'University Main Auditorium, Dr. M.G.R. Educational & Research Institute',
+    attendeesCount: 220,
+    speakerName: 'Distinguished Academician & Industry Fellow',
+    speakerDesignation: 'Keynote Speaker & Research Director',
+    speakerOrg: 'National Academy of Engineering',
+    description: 'Flagship technical symposium featuring technical paper presentations, hardware exhibitions, and guest lectures across multiple engineering departments.',
+    status: 'Scheduled',
     reportingYear: 2026,
     posterUrl: '/assets/iei-emblem.png',
-    reportUrl: '',
-    createdAt: '2025-12-12T10:00:00.000Z'
+    createdAt: '2026-10-15T10:00:00.000Z'
   },
   {
-    id: 'ev_act_02',
-    eventNumber: 2,
-    title: 'Energy Conservation Day',
-    category: 'Statutory Day',
-    eventDate: '2025-12-23',
-    eventTime: '10:00 AM',
-    chapterId: 'ch_rmk_01',
-    collegeOrChapter: 'RMK Engineering College',
-    venue: 'RMK Engineering College',
-    attendeesCount: 120,
-    speakerName: 'Energy Audit Specialists',
-    speakerDesignation: 'Chief Energy Consultants',
-    speakerOrg: 'BEE & IEI TVLC',
-    description: 'Statutory Day observance commemorating Energy Conservation Day at RMK Engineering College.',
+    id: 'ev_mgr_02',
+    title: 'Industry 4.0 & Smart Campus IoT Prototyping Workshop',
+    category: 'Technical Workshop',
+    date: '2026-10-24',
+    venue: 'Embedded Systems Laboratory, Block IV, Dr. MGR Campus',
+    attendeesCount: 95,
+    speakerName: 'IoT Systems Architect',
+    speakerDesignation: 'Senior Technical Lead',
+    speakerOrg: 'Industrial Automation Lab',
+    description: 'Hands-on practical training on sensor telemetry, cloud gateway interfacing, and embedded controllers for undergraduate engineering students.',
     status: 'Completed',
     reportingYear: 2026,
     posterUrl: '/assets/iei-emblem.png',
-    reportUrl: '',
-    createdAt: '2025-12-23T10:00:00.000Z'
+    createdAt: '2026-10-10T09:30:00.000Z'
   },
   {
-    id: 'ev_act_03',
-    eventNumber: 3,
-    title: '49th Technical Lecture',
-    category: 'Technical Lecture',
-    eventDate: '2025-12-29',
-    eventTime: '02:30 PM',
-    chapterId: 'ch_saec_15',
-    collegeOrChapter: 'S.A. Engineering College',
-    venue: 'SA Engineering College',
-    attendeesCount: 260,
-    speakerName: 'Distinguished Engineering Fellow',
-    speakerDesignation: 'Professor & Industrial Consultant',
-    speakerOrg: 'Institution of Engineers (India)',
-    description: '49th Technical Lecture series conducted at SA Engineering College with 260 active student & faculty participants.',
+    id: 'ev_mgr_03',
+    title: 'Engineers’ Day Celebrations & Student Technical Project Exhibition',
+    category: 'Statutory Observance',
+    date: '2026-09-15',
+    venue: 'University Convention Hall, Dr. MGR Campus',
+    attendeesCount: 310,
+    speakerName: 'Dean of Engineering & Technology',
+    speakerDesignation: 'Professor & Dean',
+    speakerOrg: 'Dr. M.G.R. Educational and Research Institute',
+    description: 'Statutory celebration commemorating Sir M. Visvesvaraya with project display, innovation challenge awards, and scholarly presentations.',
     status: 'Completed',
     reportingYear: 2026,
     posterUrl: '/assets/iei-emblem.png',
-    reportUrl: '',
-    createdAt: '2025-12-29T10:00:00.000Z'
+    createdAt: '2026-09-10T11:00:00.000Z'
+  }
+];
+
+const seedTasks = [
+  {
+    id: 'tsk_01',
+    title: 'Finalize National Symposium Technical Track Schedules & Speaker Liaison',
+    description: 'Review submitted paper abstracts, finalize track chairs, and confirm audio-visual requirements for the main auditorium.',
+    assignedTo: 'usr_comm_01',
+    assignedToName: 'Committee Member',
+    status: 'IN_PROGRESS',
+    priority: 'urgent',
+    dueDate: '2026-11-05',
+    department: 'Computer Science & Engineering',
+    progress: 65,
+    reviewComments: '',
+    history: [
+      { timestamp: '2026-10-20T10:00:00.000Z', action: 'ASSIGNED', actor: 'Chapter Chairman', note: 'Task created and assigned to Committee Member.' },
+      { timestamp: '2026-10-25T14:30:00.000Z', action: 'IN_PROGRESS', actor: 'Committee Member', note: 'Progress updated to 65%. 18 abstract submissions processed.' }
+    ],
+    createdAt: '2026-10-20T10:00:00.000Z'
   },
   {
-    id: 'ev_act_04',
-    eventNumber: 4,
-    title: '50th Technical Lecture',
-    category: 'Technical Lecture',
-    eventDate: '2026-01-29',
-    eventTime: '03:00 PM',
-    chapterId: null,
-    collegeOrChapter: 'IEI TVLC Online Platform',
-    venue: 'Online',
-    attendeesCount: 14,
-    speakerName: 'Keynote Speaker',
-    speakerDesignation: 'Principal Specialist',
-    speakerOrg: 'Engineering Technology Consortium',
-    description: 'Golden Jubilee 50th Technical Lecture conducted via virtual interactive conference.',
-    status: 'Completed',
-    reportingYear: 2026,
-    posterUrl: '/assets/iei-emblem.png',
-    reportUrl: '',
-    createdAt: '2026-01-29T10:00:00.000Z'
+    id: 'tsk_02',
+    title: 'Industry 4.0 Lab Kit & Sensor Inventory Verification',
+    description: 'Inspect received microcontroller kits, test telemetry breadboards, and catalog component count for workshop attendees.',
+    assignedTo: 'usr_comm_01',
+    assignedToName: 'Committee Member',
+    status: 'SUBMITTED_FOR_REVIEW',
+    priority: 'high',
+    dueDate: '2026-11-08',
+    department: 'Mechanical Engineering',
+    progress: 90,
+    reviewComments: 'Awaiting final sign-off from Chairman on component return policy.',
+    history: [
+      { timestamp: '2026-10-22T09:00:00.000Z', action: 'ASSIGNED', actor: 'Chapter Chairman', note: 'Task initialized.' },
+      { timestamp: '2026-10-26T17:00:00.000Z', action: 'SUBMITTED_FOR_REVIEW', actor: 'Committee Member', note: 'All 30 lab kits verified and submitted for Chairman review.' }
+    ],
+    createdAt: '2026-10-22T09:00:00.000Z'
   },
   {
-    id: 'ev_act_05',
-    eventNumber: 5,
-    title: '51st Technical Lecture',
-    category: 'Technical Lecture',
-    eventDate: '2026-02-07',
-    eventTime: '11:00 AM',
-    chapterId: null,
-    collegeOrChapter: 'Baettr India Pvt. Ltd. (Industrial Centre)',
-    venue: 'Baettr India Pvt. Ltd.',
-    attendeesCount: 20,
-    speakerName: 'Industrial Technical Director',
-    speakerDesignation: 'Head of Advanced Manufacturing',
-    speakerOrg: 'Baettr India Pvt. Ltd.',
-    description: '51st Technical Lecture conducted on-site at Baettr India Pvt. Ltd. focusing on heavy wind turbine casting & precision engineering.',
-    status: 'Completed',
-    reportingYear: 2026,
-    posterUrl: '/assets/iei-emblem.png',
-    reportUrl: '',
-    createdAt: '2026-02-07T10:00:00.000Z'
+    id: 'tsk_03',
+    title: 'Smart Campus 24-Hour Innovation Hackathon Guidelines & Rubric',
+    description: 'Draft problem statements covering energy efficiency, campus mobility, and digital waste management; prepare judging rubric.',
+    assignedTo: 'usr_chair_01',
+    assignedToName: 'Chapter Chairman',
+    status: 'ASSIGNED',
+    priority: 'normal',
+    dueDate: '2026-11-15',
+    department: 'Faculty of Engineering',
+    progress: 20,
+    reviewComments: '',
+    history: [
+      { timestamp: '2026-10-24T11:00:00.000Z', action: 'ASSIGNED', actor: 'Chapter Administrator', note: 'Task scheduled under Chapter Annual Plan.' }
+    ],
+    createdAt: '2026-10-24T11:00:00.000Z'
   },
   {
-    id: 'ev_act_06',
-    eventNumber: 6,
-    title: 'World Water Day',
-    category: 'Statutory Day',
-    eventDate: '2026-03-20',
-    eventTime: '10:00 AM',
-    chapterId: null,
-    collegeOrChapter: 'IEI TVLC Online Platform',
-    venue: 'Online',
-    attendeesCount: 75,
-    speakerName: 'Water Resources Advisory Panel',
-    speakerDesignation: 'Chief Environmental Engineers',
-    speakerOrg: 'State Water Authority & IEI',
-    description: 'Statutory Day celebration of World Water Day with 75 participants discussing sustainable water architecture and water conservation.',
-    status: 'Completed',
-    reportingYear: 2026,
-    posterUrl: '/assets/iei-emblem.png',
-    reportUrl: '',
-    createdAt: '2026-03-20T10:00:00.000Z'
+    id: 'tsk_04',
+    title: 'Engineers’ Day 2026 Post-Event Report & Photographic Documentation',
+    description: 'Compile event attendance records, photographic evidence, and participant feedback for Chapter archive.',
+    assignedTo: 'usr_comm_01',
+    assignedToName: 'Committee Member',
+    status: 'APPROVED',
+    priority: 'high',
+    dueDate: '2026-10-24',
+    department: 'Secretariat & Media Committee',
+    progress: 100,
+    reviewComments: 'Excellent compilation. Approved for archival and audit ledger.',
+    history: [
+      { timestamp: '2026-09-18T10:00:00.000Z', action: 'ASSIGNED', actor: 'Chapter Chairman', note: 'Documentation task created.' },
+      { timestamp: '2026-09-24T16:00:00.000Z', action: 'SUBMITTED_FOR_REVIEW', actor: 'Committee Member', note: 'Report uploaded.' },
+      { timestamp: '2026-09-26T12:00:00.000Z', action: 'APPROVED', actor: 'Chapter Chairman', note: 'Documentation approved.' }
+    ],
+    createdAt: '2026-09-18T10:00:00.000Z'
   },
   {
-    id: 'ev_act_07',
-    eventNumber: 7,
-    title: '52nd Technical Lecture',
-    category: 'Technical Lecture',
-    eventDate: '2026-04-10',
-    eventTime: '02:00 PM',
-    chapterId: 'ch_mgr_04',
-    collegeOrChapter: 'Dr. M.G.R. Educational & Research Institute',
-    venue: 'CAR Lab, Dr. M.G.R. Educational & Research Institute',
-    attendeesCount: 25,
-    speakerName: 'Automotive Research Specialist',
-    speakerDesignation: 'Lead Investigator',
-    speakerOrg: 'Centre for Advanced Research (CAR Lab)',
-    description: '52nd Technical Lecture conducted at CAR Lab, Dr. M.G.R. Educational & Research Institute.',
-    status: 'Completed',
-    reportingYear: 2026,
-    posterUrl: '/assets/iei-emblem.png',
-    reportUrl: '',
-    createdAt: '2026-04-10T10:00:00.000Z'
+    id: 'tsk_05',
+    title: 'Chapter Member Directory Reconciliation & Identity Card Dispatch',
+    description: 'Cross-check active student chapter membership registrations against University department rolls and prepare digital verification badges.',
+    assignedTo: 'usr_comm_01',
+    assignedToName: 'Committee Member',
+    status: 'REVISION_REQUESTED',
+    priority: 'urgent',
+    dueDate: '2026-11-10',
+    department: 'All Engineering Departments',
+    progress: 75,
+    reviewComments: 'Please recheck Section B roll numbers for 3rd year ECE students before final approval.',
+    history: [
+      { timestamp: '2026-10-18T10:00:00.000Z', action: 'ASSIGNED', actor: 'Chapter Administrator', note: 'Annual reconciliation task created.' },
+      { timestamp: '2026-10-27T15:00:00.000Z', action: 'SUBMITTED_FOR_REVIEW', actor: 'Committee Member', note: 'First draft submitted.' },
+      { timestamp: '2026-10-28T11:30:00.000Z', action: 'REVISION_REQUESTED', actor: 'Chapter Chairman', note: 'Revision requested for Section B roll numbers.' }
+    ],
+    createdAt: '2026-10-18T10:00:00.000Z'
+  }
+];
+
+const seedWeeklyReports = [
+  {
+    id: 'rep_wk_45',
+    weekNumber: 45,
+    period: 'Oct 27 - Nov 02, 2026',
+    department: 'All Engineering Disciplines',
+    totalEvents: 1,
+    studentHours: 75,
+    attendeesCount: 65,
+    summary: 'Finalized symposium technical tracks, verified IoT laboratory workbenches, and processed 42 new student registrations.',
+    roadblocks: 'Awaiting venue acoustic test for University Main Auditorium.',
+    nextSteps: 'Complete speaker itinerary and dispatch formal invitations.',
+    status: 'UNDER_REVIEW',
+    submittedBy: 'Committee Member',
+    submittedByRole: 'committee',
+    reviewComments: 'Under active review by Chapter Chairman.',
+    endorsedBy: null,
+    endorsedAt: null,
+    submittedAt: '2026-10-28T12:00:00.000Z'
   },
   {
-    id: 'ev_act_08',
-    eventNumber: 8,
-    title: 'World Environment Day',
-    category: 'Statutory Day',
-    eventDate: '2026-06-29',
-    eventTime: '08:30 AM',
-    chapterId: null,
-    collegeOrChapter: 'IEI TVLC Field Observance (Tower Park)',
-    venue: 'Tower Park, Anna Nagar',
-    attendeesCount: 25,
-    speakerName: 'Environmental Ecology Panel',
-    speakerDesignation: 'Senior Fellows',
-    speakerOrg: 'IEI TVLC Environmental Division',
-    description: 'Statutory Day observance of World Environment Day conducted at Tower Park, Anna Nagar.',
-    status: 'Completed',
-    reportingYear: 2026,
-    posterUrl: '/assets/iei-emblem.png',
-    reportUrl: '',
-    createdAt: '2026-06-29T10:00:00.000Z'
+    id: 'rep_wk_44',
+    weekNumber: 44,
+    period: 'Oct 20 - Oct 26, 2026',
+    department: 'Mechanical & Computing Sciences',
+    totalEvents: 2,
+    studentHours: 180,
+    attendeesCount: 140,
+    summary: 'Conducted hands-on workshop on Industry 4.0 IoT prototyping and completed initial census verification for 2026-2027 intake.',
+    roadblocks: 'None reported.',
+    nextSteps: 'Publish call for papers for National Symposium 2026.',
+    status: 'APPROVED',
+    submittedBy: 'Committee Member',
+    submittedByRole: 'committee',
+    reviewComments: 'Activity targets successfully completed with strong student turnout.',
+    endorsedBy: 'Chapter Chairman',
+    endorsedAt: '2026-10-27T11:00:00.000Z',
+    submittedAt: '2026-10-26T18:00:00.000Z'
   },
   {
-    id: 'ev_act_09',
-    eventNumber: 9,
-    title: '53rd Technical Lecture',
-    category: 'Technical Lecture',
-    eventDate: '2026-07-30',
-    eventTime: '03:00 PM',
-    chapterId: null,
-    collegeOrChapter: 'IEI TVLC Online Platform',
-    venue: 'Online',
-    attendeesCount: 30,
-    speakerName: 'Subject Matter Expert',
-    speakerDesignation: 'Research Lead',
-    speakerOrg: 'Institution of Engineers (India)',
-    description: '53rd Technical Lecture session conducted online addressing next-gen engineering paradigms.',
-    status: 'Completed',
-    reportingYear: 2026,
-    posterUrl: '/assets/iei-emblem.png',
-    reportUrl: '',
-    createdAt: '2026-07-30T10:00:00.000Z'
+    id: 'rep_wk_43',
+    weekNumber: 43,
+    period: 'Oct 13 - Oct 19, 2026',
+    department: 'Electrical & Electronics',
+    totalEvents: 1,
+    studentHours: 120,
+    attendeesCount: 95,
+    summary: 'Organized technical guest lecture on Renewable Energy Integration & Battery Storage Systems.',
+    roadblocks: 'Minor delay in hardware shipment for demonstration kit.',
+    nextSteps: 'Collate student feedback forms and certificates.',
+    status: 'APPROVED',
+    submittedBy: 'Chapter Chairman',
+    submittedByRole: 'chairman',
+    reviewComments: 'Thorough documentation and timely execution verified.',
+    endorsedBy: 'Chapter Administrator',
+    endorsedAt: '2026-10-20T10:30:00.000Z',
+    submittedAt: '2026-10-19T17:30:00.000Z'
+  }
+];
+
+const seedCommunityPosts = [
+  {
+    id: 'post_01',
+    type: 'announcement',
+    title: 'Official Call for Papers — National Engineering Symposium 2026',
+    category: 'Symposium & Papers',
+    author: 'Chapter Chairman',
+    role: 'chairman',
+    timestamp: '2026-10-26T10:30:00.000Z',
+    isPinned: true,
+    likes: 42,
+    content: 'We invite all undergraduate, postgraduate scholars, and faculty mentors of Dr. M.G.R. Educational and Research Institute to submit high-quality research papers for the National Engineering Symposium 2026. Focus tracks include Clean Energy Systems, Autonomous Robotics, and Generative Artificial Intelligence in Manufacturing. Selected papers will be included in the official Chapter proceedings.',
+    tags: ['Symposium', 'CallForPapers', 'Research', 'MGR_IEI'],
+    attachments: [
+      {
+        name: 'MGR_IEI_Symposium_Call_for_Papers_2026.pdf',
+        size: '1.4 MB',
+        type: 'application/pdf',
+        url: '/assets/iei-emblem.png'
+      }
+    ],
+    replies: [
+      {
+        id: 'rep_01',
+        author: 'Committee Member',
+        role: 'committee',
+        timestamp: '2026-10-26T14:15:00.000Z',
+        content: 'Templates for IEEE-format manuscript submissions have been uploaded to the student drive link.'
+      },
+      {
+        id: 'rep_02',
+        author: 'Chapter Administrator',
+        role: 'admin',
+        timestamp: '2026-10-26T16:00:00.000Z',
+        content: 'Peer review committee assignments will be published by Monday.'
+      }
+    ]
   },
   {
-    id: 'ev_act_10',
-    eventNumber: 10,
-    title: '54th Technical Lecture',
-    category: 'Technical Lecture',
-    eventDate: '2026-08-31',
-    eventTime: '03:00 PM',
-    chapterId: null,
-    collegeOrChapter: 'IEI TVLC Online Platform',
-    venue: 'Online',
-    attendeesCount: 55,
-    speakerName: 'Industrial Systems Specialist',
-    speakerDesignation: 'Senior Consulting Engineer',
-    speakerOrg: 'IEI TVLC',
-    description: '54th Technical Lecture conducted online with 55 attendees.',
-    status: 'Completed',
-    reportingYear: 2026,
-    posterUrl: '/assets/iei-emblem.png',
-    reportUrl: '',
-    createdAt: '2026-08-31T10:00:00.000Z'
+    id: 'post_02',
+    type: 'discussion',
+    title: 'Smart Campus 24-Hour Innovation Hackathon: Team Formation & Lab Access',
+    category: 'Hackathons & Competitions',
+    author: 'Committee Member',
+    role: 'committee',
+    timestamp: '2026-10-27T14:15:00.000Z',
+    isPinned: false,
+    likes: 38,
+    content: 'Registrations are open for the inter-departmental Smart Campus Challenge! Inter-disciplinary teams of 3 to 4 students (combining CSE, ECE, and Mechanical) are encouraged. IoT hardware test kits will be issued from the Chapter Secretariat starting Thursday.',
+    tags: ['Hackathon', 'Innovation', 'HardwareLab'],
+    attachments: [
+      {
+        name: 'Hackathon_Hardware_Kit_List.pdf',
+        size: '680 KB',
+        type: 'application/pdf',
+        url: '/assets/iei-emblem.png'
+      }
+    ],
+    replies: [
+      {
+        id: 'rep_03',
+        author: 'Chapter Chairman',
+        role: 'chairman',
+        timestamp: '2026-10-27T16:30:00.000Z',
+        content: 'Lab slots in Block IV have been reserved for 24-hour continuous testing over the hackathon weekend.'
+      }
+    ]
   },
   {
-    id: 'ev_act_11',
-    eventNumber: 11,
-    title: '59th Engineers’ Day Celebration 2026 (Three-Day Technical Fest)',
-    category: 'Statutory Day',
-    eventDate: '2026-09-24',
-    eventTime: '09:00 AM',
-    chapterId: 'ch_mgr_04',
-    collegeOrChapter: 'Multi-Institutional Hub (RMKCET, Amrita, Dr. MGR)',
-    venue: 'RMK College of Engineering and Technology; Amrita Vishwa Vidyapeetham; Dr. M.G.R. Educational & Research Institute',
-    attendeesCount: 350,
-    speakerName: 'Dr. G. Saravanan, FIE & Dr. G.P. Ramesh, FIE',
-    speakerDesignation: 'Chairman & Honorary Secretary',
-    speakerOrg: 'The Institution of Engineers (India) TVLC',
-    description: 'Grand three-day Engineers’ Day Celebration 2026 & Technical Fest conducted across RMK College of Engineering and Technology, Amrita Vishwa Vidyapeetham, and Dr. M.G.R. Educational & Research Institute. Total 350 delegates participated.',
-    status: 'Completed',
-    reportingYear: 2026,
-    posterUrl: '/assets/iei-emblem.png',
-    reportUrl: '',
-    createdAt: '2026-09-24T10:00:00.000Z'
+    id: 'post_03',
+    type: 'announcement',
+    title: 'Weekly Activity Reporting Cycle 45 & Monday 11:59 PM IST Deadline Reminder',
+    category: 'Governance & Deadlines',
+    author: 'Chapter Administrator',
+    role: 'admin',
+    timestamp: '2026-10-28T09:00:00.000Z',
+    isPinned: true,
+    likes: 24,
+    content: 'All committee leads are reminded that Reporting Cycle Week 45 concludes on Monday at 11:59 PM IST. Please ensure all ongoing tasks have their progress percentages updated, roadblock descriptions noted, and weekly documentation submitted on time.',
+    tags: ['ReportingCycle', 'Deadlines', 'Governance'],
+    attachments: [],
+    replies: []
+  }
+];
+
+const seedMessages = [
+  {
+    id: 'msg_01',
+    senderId: 'usr_comm_01',
+    senderName: 'Committee Member',
+    senderRole: 'committee',
+    recipientId: 'usr_admin_01',
+    content: 'Hello Administrator, I have uploaded the draft symposium brochure and updated task #tsk_01 to 65% progress. Kindly review.',
+    timestamp: '2026-10-28T10:15:00.000Z',
+    read: true,
+    attachments: []
+  },
+  {
+    id: 'msg_02',
+    senderId: 'usr_admin_01',
+    senderName: 'Chapter Administrator',
+    senderRole: 'admin',
+    recipientId: 'usr_comm_01',
+    content: 'Received with thanks. The branding typography and official logos align perfectly. Please coordinate with the Chairman for final sign-off.',
+    timestamp: '2026-10-28T10:30:00.000Z',
+    read: true,
+    attachments: []
+  },
+  {
+    id: 'msg_03',
+    senderId: 'usr_chair_01',
+    senderName: 'Chapter Chairman',
+    senderRole: 'chairman',
+    recipientId: 'usr_admin_01',
+    content: 'Administrator, Week 44 report has been reviewed and endorsed. Please update the archival register accordingly.',
+    timestamp: '2026-10-28T11:45:00.000Z',
+    read: true,
+    attachments: []
+  },
+  {
+    id: 'msg_04',
+    senderId: 'usr_auditor_01',
+    senderName: 'Chapter Auditor',
+    senderRole: 'auditor',
+    recipientId: 'usr_admin_01',
+    content: 'Internal audit check for October 2026 activities completed. No discrepancies found in student attendance registers.',
+    timestamp: '2026-10-28T14:00:00.000Z',
+    read: false,
+    attachments: []
+  }
+];
+
+const seedNotifications = [
+  {
+    id: 'notif_01',
+    type: 'task',
+    title: 'Task Milestone Due',
+    message: 'Task "National Symposium Track Schedules" is at 65% completion and due in 7 days.',
+    timestamp: '2026-10-28T10:00:00.000Z',
+    unread: true,
+    link: 'tasks'
+  },
+  {
+    id: 'notif_02',
+    type: 'reporting',
+    title: 'Weekly Report Cycle 45 Open',
+    message: 'Reporting Week 45 deadline is Monday at 11:59 PM IST.',
+    timestamp: '2026-10-28T09:00:00.000Z',
+    unread: true,
+    link: 'weekly-reports'
+  },
+  {
+    id: 'notif_03',
+    type: 'community',
+    title: 'New Announcement Pinned',
+    message: 'Chapter Chairman pinned "Official Call for Papers — National Engineering Symposium 2026".',
+    timestamp: '2026-10-26T10:35:00.000Z',
+    unread: false,
+    link: 'community'
+  }
+];
+
+const seedReportingSettings = {
+  activeWeek: 45,
+  period: 'Oct 27 - Nov 02, 2026',
+  deadlineDay: 'Monday',
+  deadlineTime: '23:59:59',
+  timezone: 'Asia/Kolkata',
+  allowLateSubmissionsWithApproval: true,
+  autoLockPastReports: true,
+  lastUpdatedBy: 'Chapter Administrator',
+  lastUpdatedAt: '2026-10-28T08:00:00.000Z'
+};
+
+const seedAuditObservations = [
+  {
+    id: 'obs_01',
+    title: 'Student Chapter Governance & Activity Audit Clearance',
+    observation: 'Full governance review conducted for the MGR IEI Students Chapter. Active registered student count stands verified at 707. Activity logs for all scheduled events, technical seminars, and symposium milestones are maintained in compliance with institutional guidelines.',
+    complianceStatus: 'COMPLIANT',
+    auditorName: 'Chapter Auditor',
+    timestamp: '2026-10-28T14:15:00.000Z'
   }
 ];
 
 module.exports = {
   seedUsers,
-  seedChapters,
-  seedMembershipSnapshots,
-  seedNewMemberships,
-  seedEvents
+  seedChapter,
+  seedEvents,
+  seedTasks,
+  seedWeeklyReports,
+  seedCommunityPosts,
+  seedMessages,
+  seedNotifications,
+  seedReportingSettings,
+  seedAuditObservations
 };

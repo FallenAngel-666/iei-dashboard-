@@ -1,5 +1,5 @@
 /**
- * IEI TVLC Event Management Routes
+ * MGR IEI Chapter Event Management Routes
  * Handles Technical Lectures, Statutory Days, Seminars, and Competitions.
  * Supports secure, validated object storage for posters and private technical reports.
  */
@@ -138,8 +138,8 @@ router.get('/:id/report-download', auth.authenticateToken, async (req, res) => {
   }
 });
 
-// CREATE new event
-router.post('/', auth.authenticateToken, auth.requireRole(['admin', 'staff', 'coordinator']), handleUpload, async (req, res) => {
+// CREATE new event / announcement (Admin & Chairman)
+router.post('/', auth.authenticateToken, auth.requireRole(['admin', 'chairman']), handleUpload, async (req, res) => {
   const { title, category, eventDate } = req.body;
 
   if (!title || !category || !eventDate) {
@@ -149,20 +149,7 @@ router.post('/', auth.authenticateToken, auth.requireRole(['admin', 'staff', 'co
     });
   }
 
-  // Coordinator scope check
-  if (req.user.role === 'coordinator' || req.user.assignedChapterId) {
-    if (req.body.chapterId && req.body.chapterId !== req.user.assignedChapterId) {
-      return res.status(403).json({
-        success: false,
-        error: 'Access denied. You can only schedule events for your assigned collegiate chapter.'
-      });
-    }
-  }
-
   const payload = { ...req.body };
-  if ((req.user.role === 'coordinator' || req.user.assignedChapterId) && !payload.chapterId) {
-    payload.chapterId = req.user.assignedChapterId;
-  }
 
   try {
     if (req.files && req.files['poster']) {
@@ -189,8 +176,8 @@ router.post('/', auth.authenticateToken, auth.requireRole(['admin', 'staff', 'co
   }
 });
 
-// UPDATE event
-router.put('/:id', auth.authenticateToken, auth.requireRole(['admin', 'staff', 'coordinator']), handleUpload, async (req, res) => {
+// UPDATE event (Admin & Chairman)
+router.put('/:id', auth.authenticateToken, auth.requireRole(['admin', 'chairman']), handleUpload, async (req, res) => {
   try {
     const existing = await db.getEventById(req.params.id);
     if (!existing) {
@@ -198,22 +185,6 @@ router.put('/:id', auth.authenticateToken, auth.requireRole(['admin', 'staff', '
         success: false,
         error: `Event with ID '${req.params.id}' not found.`
       });
-    }
-
-    // Coordinator scope check
-    if (req.user.role === 'coordinator' || req.user.assignedChapterId) {
-      if (existing.chapterId !== req.user.assignedChapterId) {
-        return res.status(403).json({
-          success: false,
-          error: 'Access denied. You can only modify events affiliated with your assigned collegiate chapter.'
-        });
-      }
-      if (req.body.chapterId && req.body.chapterId !== req.user.assignedChapterId) {
-        return res.status(403).json({
-          success: false,
-          error: 'Access denied. Cannot reassign event to another chapter.'
-        });
-      }
     }
 
     const payload = { ...req.body };
