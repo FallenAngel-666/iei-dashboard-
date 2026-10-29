@@ -36,7 +36,7 @@ app.use(helmet({
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://cdn.jsdelivr.net"],
       fontSrc: ["'self'", "https://fonts.gstatic.com", "data:"],
       imgSrc: ["'self'", "data:", "blob:", "https://*"],
-      connectSrc: ["'self'"],
+      connectSrc: ["'self'", "https://*.vercel.app", "https://*.mgriei.org"],
       objectSrc: ["'none'"],
       baseUri: ["'self'"],
       frameAncestors: ["'self'"]
@@ -45,20 +45,44 @@ app.use(helmet({
   crossOriginEmbedderPolicy: false
 }));
 
-// Hardened CORS policy: Whitelists authorized institutional origins
-const allowedOrigins = [
-  'https://mgriei.org',
-  'https://www.mgriei.org',
-  'http://localhost:3000',
-  'http://127.0.0.1:3000'
-];
-
+// Hardened CORS policy: Supports Localhost (all ports), Local Network, Vercel deployments, and Institutional domains
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin) || config.NODE_ENV !== 'production') {
+    // 1. Allow direct/same-origin/mobile requests with no origin header
+    if (!origin) return callback(null, true);
+
+    // 2. Allow localhost and 127.0.0.1 on any port (3000, 5000, etc.)
+    if (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)) {
       return callback(null, true);
     }
-    return callback(new Error('Cross-Origin Request Blocked: Origin not authorized by MGR IEI security policy.'));
+
+    // 3. Allow local network IP addresses (192.168.x.x, 10.x.x.x, 172.16-31.x.x)
+    if (/^https?:\/\/(192\.168\.\d+\.\d+|10\.\d+\.\d+\.\d+|172\.(1[6-9]|2\d|3[01])\.\d+\.\d+)(:\d+)?$/.test(origin)) {
+      return callback(null, true);
+    }
+
+    // 4. Allow all Vercel deployments (*.vercel.app)
+    if (/^https:\/\/.*\.vercel\.app$/.test(origin)) {
+      return callback(null, true);
+    }
+
+    // 5. Allow official institutional domains (*.mgriei.org)
+    if (/^https?:\/\/(.*\.)?mgriei\.org$/.test(origin)) {
+      return callback(null, true);
+    }
+
+    // 6. In non-production environments, allow origin
+    if (config.NODE_ENV !== 'production') {
+      return callback(null, true);
+    }
+
+    // 7. Custom allowed origin via environment variable
+    if (process.env.ALLOWED_ORIGIN && origin === process.env.ALLOWED_ORIGIN) {
+      return callback(null, true);
+    }
+
+    // Decline gracefully without crashing or throwing an error
+    return callback(null, false);
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
