@@ -6,8 +6,8 @@
 const path = require('path');
 
 const isVercel = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
-const baseDataDir = isVercel ? '/tmp/data' : path.join(__dirname, '..', 'data');
-const baseUploadsDir = isVercel ? '/tmp/uploads' : path.join(__dirname, '..', 'uploads');
+const baseDataDir = isVercel ? '/tmp/data' : (process.env.DATA_DIR || path.join(__dirname, '..', 'data'));
+const baseUploadsDir = isVercel ? '/tmp/uploads' : (process.env.UPLOADS_DIR || path.join(__dirname, '..', 'uploads'));
 
 module.exports = {
   PORT: process.env.PORT || 3000,
