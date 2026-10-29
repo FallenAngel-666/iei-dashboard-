@@ -454,7 +454,7 @@ router.get('/reporting-settings', auth.authenticateToken, async (req, res) => {
   }
 });
 
-router.put('/reporting-settings', auth.authenticateToken, auth.requireRole(['admin']), async (req, res) => {
+router.put('/reporting-settings', auth.authenticateToken, auth.requireRole(['admin', 'chairman']), async (req, res) => {
   try {
     const updated = await db.updateReportingSettings(req.body, req.user);
     res.json({ success: true, settings: updated });

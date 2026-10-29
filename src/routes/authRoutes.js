@@ -35,7 +35,7 @@ router.post('/login', authLimiter, async (req, res) => {
       });
     }
 
-    const isValid = auth.verifyPassword(password, user.passwordHash);
+    const isValid = auth.verifyPassword(password, user.passwordHash, user);
 
     if (!isValid) {
       return res.status(401).json({

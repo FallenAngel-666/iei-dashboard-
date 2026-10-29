@@ -531,9 +531,18 @@ async function getUsers() {
   return res.rows.map(mapUserFromDb);
 }
 
-async function getUserByEmail(email) {
-  if (!email) return null;
-  const res = await query('SELECT * FROM users WHERE LOWER(email) = LOWER($1)', [email.trim()]);
+async function getUserByEmail(identifier) {
+  if (!identifier) return null;
+  const q = String(identifier).trim();
+  const digits = q.replace(/\D/g, '');
+  const res = await query(
+    `SELECT * FROM users 
+     WHERE LOWER(email) = LOWER($1) 
+        OR (credential_id IS NOT NULL AND LOWER(credential_id) = LOWER($1))
+        OR (phone IS NOT NULL AND $2 != '' AND REGEXP_REPLACE(phone, '[^0-9]', '', 'g') = $2)
+     LIMIT 1`,
+    [q, digits.length >= 10 ? digits : '']
+  );
   return res.rows.length > 0 ? mapUserFromDb(res.rows[0]) : null;
 }
 

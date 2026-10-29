@@ -119,7 +119,7 @@ const App = {
     const navSettings = document.querySelector('.sidebar-nav .nav-item[data-view="reporting-settings"]');
     const navAudit = document.querySelector('.sidebar-nav .nav-item[data-view="audit-logs"]');
 
-    if (user.role === 'admin') {
+    if (user.role === 'admin' || user.role === 'chairman') {
       if (adminNavSection) adminNavSection.style.display = 'block';
       if (navUsers) navUsers.style.display = 'flex';
       if (navEvents) navEvents.style.display = 'flex';
@@ -133,7 +133,7 @@ const App = {
       if (navSettings) navSettings.style.display = 'none';
       if (navAudit) navAudit.style.display = 'flex';
     } else {
-      // Chairman & Committee Member do not see Administration group
+      // Committee Members do not see Administration group
       if (adminNavSection) adminNavSection.style.display = 'none';
     }
 
@@ -322,10 +322,10 @@ const App = {
   navigate(viewId) {
     const user = API.getCurrentUser() || { role: 'committee' };
 
-    // Prevent non-admin users from accessing administration-only views
+    // Prevent committee users from accessing administration views
     const adminOnlyViews = ['users', 'events', 'reporting-settings', 'audit-logs'];
-    if (adminOnlyViews.includes(viewId) && user.role !== 'admin' && !(user.role === 'auditor' && viewId === 'audit-logs')) {
-      this.showToast('Access restricted to Admin/Editor.', 'warning');
+    if (adminOnlyViews.includes(viewId) && user.role !== 'admin' && user.role !== 'chairman' && !(user.role === 'auditor' && viewId === 'audit-logs')) {
+      this.showToast('Access restricted to Admin and Chairman leadership.', 'warning');
       viewId = 'dashboard';
     }
 

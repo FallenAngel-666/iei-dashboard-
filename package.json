@@ -8,8 +8,9 @@
     "dev": "node server.js",
     "test": "node test/mgr-portal-verification-suite.js",
     "test:users": "node test/verify-user-management.js",
+    "test:members": "node test/test-enrolled-members.js",
     "test:prod": "node test/final-production-suite.js",
-    "test:all": "node test/mgr-portal-verification-suite.js && node test/verify-user-management.js && node test/final-production-suite.js"
+    "test:all": "node test/mgr-portal-verification-suite.js && node test/verify-user-management.js && node test/test-enrolled-members.js && node test/final-production-suite.js"
   },
   "keywords": [
     "iei",

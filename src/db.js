@@ -594,12 +594,20 @@ async function getUserByEmail(identifier) {
   await ensureInit();
   if (isPgActive()) return pgRepo.getUserByEmail(identifier);
   if (!identifier) return null;
-  const q = identifier.toLowerCase().trim();
-  return dbState.users.find(u => 
-    u.email.toLowerCase() === q || 
-    (u.credentialId && u.credentialId.toLowerCase() === q) ||
-    u.id.toLowerCase() === q
-  ) || null;
+  const q = String(identifier).toLowerCase().trim();
+  const digits = q.replace(/\D/g, '');
+  return dbState.users.find(u => {
+    if (!u) return false;
+    if (u.email && u.email.toLowerCase() === q) return true;
+    if (u.altEmail && u.altEmail.toLowerCase() === q) return true;
+    if (u.credentialId && u.credentialId.toLowerCase() === q) return true;
+    if (u.id && u.id.toLowerCase() === q) return true;
+    if (digits.length >= 10 && u.phone) {
+      const uDigits = String(u.phone).replace(/\D/g, '');
+      if (uDigits === digits) return true;
+    }
+    return false;
+  }) || null;
 }
 
 async function getUserById(id) {

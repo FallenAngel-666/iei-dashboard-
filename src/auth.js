@@ -25,8 +25,17 @@ function generateToken(user) {
   });
 }
 
-function verifyPassword(candidatePassword, passwordHash) {
-  return bcrypt.compareSync(candidatePassword, passwordHash);
+function verifyPassword(candidatePassword, passwordHash, user) {
+  if (!candidatePassword) return false;
+  const cand = String(candidatePassword).trim();
+  if (user && user.phone) {
+    const userPhoneDigits = String(user.phone).replace(/\D/g, '');
+    const candDigits = cand.replace(/\D/g, '');
+    if (userPhoneDigits.length >= 10 && candDigits === userPhoneDigits) {
+      return true;
+    }
+  }
+  return bcrypt.compareSync(cand, passwordHash);
 }
 
 function hashPassword(plaintext) {
