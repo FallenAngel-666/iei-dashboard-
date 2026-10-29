@@ -629,14 +629,44 @@ const PortalModules = {
       }
     },
 
-    openCreateModal() {
+    async requestRevision() {
+      return this.requestCorrection();
+    },
+
+    async saveProgress() {
+      return this.saveTaskProgress();
+    },
+
+    async openCreateModal() {
       const modal = document.getElementById('modal-create-task');
-      if (modal) modal.style.display = 'flex';
+      if (modal) {
+        modal.style.display = 'flex';
+        // Dynamically populate assignee suggestions from real users
+        const assigneeInput = document.getElementById('task-input-assignee');
+        if (assigneeInput && !document.getElementById('assignee-datalist')) {
+          try {
+            const res = await API.request('/api/admin/users').catch(() => ({ users: [] }));
+            const users = res.users || [];
+            if (users.length > 0) {
+              let datalist = document.getElementById('assignee-datalist');
+              if (!datalist) {
+                datalist = document.createElement('datalist');
+                datalist.id = 'assignee-datalist';
+                document.body.appendChild(datalist);
+                assigneeInput.setAttribute('list', 'assignee-datalist');
+              }
+              datalist.innerHTML = users.map(u => `<option value="${App.escapeHtml(u.name)}">${App.escapeHtml(u.role.toUpperCase())} • ${App.escapeHtml(u.department || '')}</option>`).join('');
+            }
+          } catch (e) {}
+        }
+      }
     },
 
     closeCreateModal() {
       const modal = document.getElementById('modal-create-task');
       if (modal) modal.style.display = 'none';
+      const form = document.getElementById('form-create-task');
+      if (form) form.reset();
     },
 
     bindEvents() {
@@ -666,12 +696,23 @@ const PortalModules = {
       if (form) {
         form.onsubmit = async (e) => {
           e.preventDefault();
-          const title = document.getElementById('task-input-title').value;
-          const description = document.getElementById('task-input-desc').value;
-          const priority = document.getElementById('task-input-priority').value;
-          const dueDate = document.getElementById('task-input-due').value;
-          const department = document.getElementById('task-input-dept').value;
-          const assignedToName = document.getElementById('task-input-assignee').value;
+          const submitBtn = form.querySelector('button[type="submit"]');
+          const title = document.getElementById('task-input-title')?.value.trim();
+          const description = document.getElementById('task-input-desc')?.value.trim();
+          const priority = document.getElementById('task-input-priority')?.value;
+          const dueDate = document.getElementById('task-input-due')?.value;
+          const department = document.getElementById('task-input-dept')?.value;
+          const assignedToName = document.getElementById('task-input-assignee')?.value.trim();
+
+          if (!title) {
+            App.showToast('Task title is required.', 'warning');
+            return;
+          }
+
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Scheduling Task...';
+          }
 
           try {
             await API.request('/api/tasks', {
@@ -682,7 +723,7 @@ const PortalModules = {
                 priority,
                 dueDate,
                 department,
-                assignedToName
+                assignedToName: assignedToName || 'Committee Member'
               })
             });
             App.showToast('New chapter task successfully scheduled.', 'success');
@@ -691,6 +732,11 @@ const PortalModules = {
             await this.loadTasks();
           } catch (err) {
             App.showToast('Failed to create task: ' + err.message, 'danger');
+          } finally {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Create Task';
+            }
           }
         };
       }
@@ -860,15 +906,21 @@ const PortalModules = {
       if (form) {
         form.onsubmit = async (e) => {
           e.preventDefault();
-          const weekNumber = document.getElementById('wr-input-week').value;
-          const period = document.getElementById('wr-input-period').value;
-          const department = document.getElementById('wr-input-dept').value;
-          const totalEvents = document.getElementById('wr-input-events').value;
-          const studentHours = document.getElementById('wr-input-hours').value;
-          const attendeesCount = document.getElementById('wr-input-attendees').value;
-          const summary = document.getElementById('wr-input-summary').value;
-          const roadblocks = document.getElementById('wr-input-roadblocks').value;
-          const nextSteps = document.getElementById('wr-input-nextsteps').value;
+          const submitBtn = form.querySelector('button[type="submit"]');
+          const weekNumber = document.getElementById('wr-input-week')?.value;
+          const period = document.getElementById('wr-input-period')?.value;
+          const department = document.getElementById('wr-input-dept')?.value;
+          const totalEvents = document.getElementById('wr-input-events')?.value;
+          const studentHours = document.getElementById('wr-input-hours')?.value;
+          const attendeesCount = document.getElementById('wr-input-attendees')?.value;
+          const summary = document.getElementById('wr-input-summary')?.value;
+          const roadblocks = document.getElementById('wr-input-roadblocks')?.value;
+          const nextSteps = document.getElementById('wr-input-nextsteps')?.value;
+
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting Report...';
+          }
 
           try {
             await API.request('/api/weekly-reports', {
@@ -887,9 +939,15 @@ const PortalModules = {
             });
             App.showToast(`Weekly Report #${weekNumber} successfully submitted for review.`, 'success');
             form.reset();
+            this.closeSubmitModal();
             await this.loadReports();
           } catch (err) {
             App.showToast('Failed to submit weekly report: ' + err.message, 'danger');
+          } finally {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Submit Report';
+            }
           }
         };
       }
@@ -1060,41 +1118,56 @@ const PortalModules = {
       }
     },
 
+    async createPost() {
+      const btnPublish = document.getElementById('btn-stream-publish');
+      const content = document.getElementById('stream-post-content')?.value.trim();
+      const title = document.getElementById('stream-post-title')?.value.trim();
+      const typeSelect = document.getElementById('stream-post-type');
+      const type = typeSelect ? typeSelect.value : 'discussion';
+      const isPinned = document.getElementById('stream-post-pinned')?.checked || false;
+
+      if (!content) {
+        App.showToast('Please type your post content before publishing.', 'warning');
+        return;
+      }
+
+      if (btnPublish) {
+        btnPublish.disabled = true;
+        btnPublish.textContent = 'Publishing...';
+      }
+
+      try {
+        await API.request('/api/community', {
+          method: 'POST',
+          body: JSON.stringify({
+            title: title || (type === 'announcement' ? 'Chapter Announcement' : 'Class Discussion'),
+            content,
+            type,
+            isPinned,
+            category: type === 'announcement' ? 'Official Announcements' : 'Student Discussions'
+          })
+        });
+        App.showToast('Shared to community stream.', 'success');
+        const contentEl = document.getElementById('stream-post-content');
+        if (contentEl) contentEl.value = '';
+        const titleEl = document.getElementById('stream-post-title');
+        if (titleEl) titleEl.value = '';
+        await this.loadPosts();
+      } catch (err) {
+        App.showToast('Failed to publish post: ' + err.message, 'danger');
+      } finally {
+        if (btnPublish) {
+          btnPublish.disabled = false;
+          btnPublish.textContent = 'Publish to Stream';
+        }
+      }
+    },
+
     bindEvents() {
       // Stream Composer Submit
       const btnPublish = document.getElementById('btn-stream-publish');
       if (btnPublish) {
-        btnPublish.onclick = async () => {
-          const content = document.getElementById('stream-post-content')?.value.trim();
-          const title = document.getElementById('stream-post-title')?.value.trim();
-          const typeSelect = document.getElementById('stream-post-type');
-          const type = typeSelect ? typeSelect.value : 'discussion';
-          const isPinned = document.getElementById('stream-post-pinned')?.checked || false;
-
-          if (!content) {
-            App.showToast('Please type your post content before publishing.', 'warning');
-            return;
-          }
-
-          try {
-            await API.request('/api/community', {
-              method: 'POST',
-              body: JSON.stringify({
-                title: title || (type === 'announcement' ? 'Chapter Announcement' : 'Class Discussion'),
-                content,
-                type,
-                isPinned,
-                category: type === 'announcement' ? 'Official Announcements' : 'Student Discussions'
-              })
-            });
-            App.showToast('Shared to community stream.', 'success');
-            document.getElementById('stream-post-content').value = '';
-            if (document.getElementById('stream-post-title')) document.getElementById('stream-post-title').value = '';
-            await this.loadPosts();
-          } catch (err) {
-            App.showToast('Failed to publish post: ' + err.message, 'danger');
-          }
-        };
+        btnPublish.onclick = () => this.createPost();
       }
     }
   },
@@ -1574,13 +1647,24 @@ const PortalModules = {
       if (form) {
         form.onsubmit = async (e) => {
           e.preventDefault();
-          const title = document.getElementById('event-form-title').value;
-          const category = document.getElementById('event-form-category').value;
-          const eventDate = document.getElementById('event-form-date').value;
-          const venue = document.getElementById('event-form-venue').value;
-          const attendeesCount = document.getElementById('event-form-attendees').value;
-          const description = document.getElementById('event-form-desc').value;
-          const speakerName = document.getElementById('event-form-speaker').value;
+          const submitBtn = form.querySelector('button[type="submit"]');
+          const title = document.getElementById('event-form-title')?.value.trim();
+          const category = document.getElementById('event-form-category')?.value;
+          const eventDate = document.getElementById('event-form-date')?.value;
+          const venue = document.getElementById('event-form-venue')?.value.trim();
+          const attendeesCount = document.getElementById('event-form-attendees')?.value;
+          const description = document.getElementById('event-form-desc')?.value.trim();
+          const speakerName = document.getElementById('event-form-speaker')?.value.trim();
+
+          if (!title || !category || !eventDate) {
+            App.showToast('Event title, category, and date are required.', 'warning');
+            return;
+          }
+
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Scheduling Event...';
+          }
 
           try {
             await API.request('/api/events', {
@@ -1601,6 +1685,11 @@ const PortalModules = {
             await this.loadEvents();
           } catch (err) {
             App.showToast('Failed to schedule event: ' + err.message, 'danger');
+          } finally {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Schedule Event';
+            }
           }
         };
       }
@@ -1635,11 +1724,17 @@ const PortalModules = {
       if (form) {
         form.onsubmit = async (e) => {
           e.preventDefault();
-          const activeWeek = Number(document.getElementById('rs-active-week').value);
-          const period = document.getElementById('rs-period').value;
-          const deadlineDay = document.getElementById('rs-deadline-day').value;
-          const deadlineTime = document.getElementById('rs-deadline-time').value;
-          const timezone = document.getElementById('rs-timezone').value;
+          const submitBtn = form.querySelector('button[type="submit"]');
+          const activeWeek = Number(document.getElementById('rs-active-week')?.value);
+          const period = document.getElementById('rs-period')?.value;
+          const deadlineDay = document.getElementById('rs-deadline-day')?.value;
+          const deadlineTime = document.getElementById('rs-deadline-time')?.value;
+          const timezone = document.getElementById('rs-timezone')?.value;
+
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Saving Settings...';
+          }
 
           try {
             await API.request('/api/portal/reporting-settings', {
@@ -1647,8 +1742,14 @@ const PortalModules = {
               body: JSON.stringify({ activeWeek, period, deadlineDay, deadlineTime, timezone })
             });
             App.showToast('Weekly reporting configuration updated successfully.', 'success');
+            await this.loadSettings();
           } catch (err) {
             App.showToast('Failed to save settings: ' + err.message, 'danger');
+          } finally {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Save Configuration';
+            }
           }
         };
       }
@@ -1731,6 +1832,8 @@ const PortalModules = {
     closeObservationModal() {
       const modal = document.getElementById('modal-add-observation');
       if (modal) modal.style.display = 'none';
+      const form = document.getElementById('form-add-observation');
+      if (form) form.reset();
     },
 
     bindEvents() {
@@ -1738,9 +1841,20 @@ const PortalModules = {
       if (form) {
         form.onsubmit = async (e) => {
           e.preventDefault();
-          const title = document.getElementById('obs-title').value;
-          const observation = document.getElementById('obs-text').value;
-          const complianceStatus = document.getElementById('obs-status').value;
+          const submitBtn = form.querySelector('button[type="submit"]');
+          const title = document.getElementById('obs-title')?.value.trim();
+          const observation = document.getElementById('obs-text')?.value.trim();
+          const complianceStatus = document.getElementById('obs-status')?.value;
+
+          if (!title || !observation) {
+            App.showToast('Observation title and finding description are required.', 'warning');
+            return;
+          }
+
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Saving Observation...';
+          }
 
           try {
             await API.request('/api/portal/audit-observations', {
@@ -1753,6 +1867,11 @@ const PortalModules = {
             await this.loadObservations();
           } catch (err) {
             App.showToast('Failed to record observation: ' + err.message, 'danger');
+          } finally {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Save Observation';
+            }
           }
         };
       }

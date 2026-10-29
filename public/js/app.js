@@ -149,6 +149,12 @@ const App = {
     if (btnSubmitReport) {
       btnSubmitReport.style.display = (user.role !== 'auditor') ? 'inline-flex' : 'none';
     }
+
+    // Log Compliance Observation (+ Log Compliance Observation) for Auditor & Admin only
+    const btnOpenLogObs = document.getElementById('btn-open-log-obs');
+    if (btnOpenLogObs) {
+      btnOpenLogObs.style.display = (user.role === 'auditor' || user.role === 'admin') ? 'inline-flex' : 'none';
+    }
   },
 
   bindEvents() {

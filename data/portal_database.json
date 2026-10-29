@@ -4,7 +4,7 @@
       "id": "usr_admin_01",
       "name": "Chapter Administrator",
       "email": "admin@mgriei.org",
-      "passwordHash": "$2b$10$SlHgOBubQk5nnjE9V/a94eBwDDM38X59H2HUZztzktnvIl6N3pE7y",
+      "passwordHash": "$2b$10$wul5MKTtgrob1vD3zJllSOhdQzYNkgxZlLM5DGL/k4aPSAO1qLi6O",
       "role": "admin",
       "designation": "Admin & Technical Editor",
       "department": "MGR IEI Students Chapter Secretariat",
@@ -15,7 +15,7 @@
       "id": "usr_chair_01",
       "name": "Chapter Chairman",
       "email": "chairman@mgriei.org",
-      "passwordHash": "$2b$10$sKownc2losyWAIaAZxFen.tXu2ZsonV.784/e1huKn.McpBrjV2va",
+      "passwordHash": "$2b$10$Flqn6zSf26TVBht6WZa.oe4KY0pBsTh70UorySxLao2Y1U9P4ZMj2",
       "role": "chairman",
       "designation": "Chairman, Student Executive Committee",
       "department": "Faculty of Engineering & Technology, Dr. MGR E&RI",
@@ -26,7 +26,7 @@
       "id": "usr_comm_01",
       "name": "Committee Member",
       "email": "committee@mgriei.org",
-      "passwordHash": "$2b$10$CNBf0a/znpuuAVkCZAzdpu16MsUwDE1scxUI9Rm5c6VUmdpHs5IQC",
+      "passwordHash": "$2b$10$OCtSz4gyBnL4jXuEmxwuROcjKTkLy3VRyqBiVyWWbcBq570uRnQLi",
       "role": "committee",
       "designation": "Committee Member — Technical & Events",
       "department": "Mechanical & Computing Sciences, Dr. MGR E&RI",
@@ -37,7 +37,7 @@
       "id": "usr_auditor_01",
       "name": "Chapter Auditor",
       "email": "auditor@mgriei.org",
-      "passwordHash": "$2b$10$YoXFgof/VcpreLXyd3PjQueWxjLMGOwUWNVVY1tg6SZIyp1GIcdNG",
+      "passwordHash": "$2b$10$hTcoo3lwZnlO7cJDyV9NFOOPPF3CPmtiYIZVvFkdxHf3JzW9qnyG6",
       "role": "auditor",
       "designation": "Internal Governance & Compliance Reviewer",
       "department": "Academic Quality & Chapter Audit Committee",
@@ -520,12 +520,12 @@
       "performedBy": "System Bootstrap",
       "target": "MGR IEI Students Chapter Database",
       "details": "Initialized secure database for Dr. M.G.R. Educational and Research Institute Students Chapter with 4 strict roles (Admin/Editor, Chairman, Committee Member, Auditor).",
-      "timestamp": "2026-10-29T14:15:45.609Z"
+      "timestamp": "2026-10-29T14:48:08.370Z"
     }
   ],
   "meta": {
-    "initializedAt": "2026-10-29T14:15:45.611Z",
-    "lastModifiedAt": "2026-10-29T14:15:45.613Z",
+    "initializedAt": "2026-10-29T14:48:08.372Z",
+    "lastModifiedAt": "2026-10-29T14:48:08.373Z",
     "version": "3.0.0-mgr-iei"
   }
 }
