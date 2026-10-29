@@ -3749,3 +3749,119 @@ body {
     font-size: 16px; /* Prevents auto-zoom on iOS */
   }
 }
+
+/* ==========================================================================
+   ANALYTICS & STUDENT WORK PROGRESS GRAPHS (STAFF & AUDITOR)
+   ========================================================================== */
+
+.dash-analytics-container {
+  animation: fadeIn 0.3s ease;
+}
+
+.analytics-charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.chart-card-box {
+  background: var(--bg-surface-alt, #F8FAFC);
+  border: 1px solid var(--border-color, #E2E8F0);
+  border-radius: var(--radius-lg, 12px);
+  padding: 20px;
+}
+
+.chart-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.chart-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--iei-navy-blue, #101B63);
+  margin: 0;
+}
+
+.progress-stacked-bar {
+  display: flex;
+  height: 20px;
+  background: #E2E8F0;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.ps-bar {
+  height: 100%;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ps-approved { background: #059669; }
+.ps-review { background: #D97706; }
+.ps-inprogress { background: #2563EB; }
+.ps-assigned { background: #94A3B8; }
+
+.chart-legend-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 13px;
+  color: var(--text-secondary, #475569);
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-green { background: #059669; }
+.dot-gold { background: #D97706; }
+.dot-blue { background: #2563EB; }
+.dot-slate { background: #94A3B8; }
+
+.dept-bars-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dept-bar-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dept-bar-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-primary, #1E293B);
+}
+
+.dept-bar-track {
+  height: 10px;
+  background: #E2E8F0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.dept-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #101B63, #211E8A);
+  border-radius: 999px;
+  transition: width 0.6s ease;
+}

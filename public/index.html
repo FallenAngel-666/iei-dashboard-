@@ -284,6 +284,79 @@
 
           </div>
 
+          <!-- Leadership & Auditor Analytics: Student Work Progress & Graphical Distribution -->
+          <div id="dash-analytics-section" class="dash-analytics-container" style="display: none; margin-top: 24px;">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title-group">
+                  <h3>Student Committee Work Progress &amp; Performance Analytics</h3>
+                  <p>Executive governance and audit breakdown of student committee deliverables, milestone completion, and reporting</p>
+                </div>
+                <span class="badge badge-primary">Staff &amp; Auditor Oversight</span>
+              </div>
+              <div class="card-body">
+                
+                <!-- Graphical Analytics Charts Strip -->
+                <div class="analytics-charts-grid">
+                  
+                  <!-- Chart 1: Task Status Distribution -->
+                  <div class="chart-card-box">
+                    <div class="chart-header-row">
+                      <h4 class="chart-card-title">Chapter Task Completion Distribution</h4>
+                      <span id="analytics-completion-rate" class="badge badge-success">0% Complete</span>
+                    </div>
+                    <div class="progress-stacked-bar" id="analytics-stacked-bar">
+                      <div id="ps-bar-approved" class="ps-bar ps-approved" style="width: 0%;" title="Approved"></div>
+                      <div id="ps-bar-review" class="ps-bar ps-review" style="width: 0%;" title="Awaiting Review"></div>
+                      <div id="ps-bar-inprogress" class="ps-bar ps-inprogress" style="width: 0%;" title="In Progress"></div>
+                      <div id="ps-bar-assigned" class="ps-bar ps-assigned" style="width: 0%;" title="Assigned"></div>
+                    </div>
+                    <div class="chart-legend-row">
+                      <span class="legend-item"><span class="legend-dot dot-green"></span> Approved (<strong id="analytics-count-approved">0</strong>)</span>
+                      <span class="legend-item"><span class="legend-dot dot-gold"></span> Review (<strong id="analytics-count-review">0</strong>)</span>
+                      <span class="legend-item"><span class="legend-dot dot-blue"></span> Active (<strong id="analytics-count-inprogress">0</strong>)</span>
+                      <span class="legend-item"><span class="legend-dot dot-slate"></span> Assigned (<strong id="analytics-count-assigned">0</strong>)</span>
+                    </div>
+                  </div>
+
+                  <!-- Chart 2: Departmental Progress Bars -->
+                  <div class="chart-card-box">
+                    <div class="chart-header-row">
+                      <h4 class="chart-card-title">Departmental Work Progress</h4>
+                    </div>
+                    <div id="analytics-dept-bars" class="dept-bars-list">
+                      <p class="text-muted" style="padding: 12px 0;">Loading departmental metrics...</p>
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- Student Committee Performance & Deliverables Table -->
+                <div style="margin-top: 24px;">
+                  <h4 style="font-size: 16px; font-weight: 700; color: var(--iei-navy-blue); margin-bottom: 12px;">Student Committee Member Work Progress</h4>
+                  <div class="table-responsive">
+                    <table class="data-table">
+                      <thead>
+                        <tr>
+                          <th>Committee Member</th>
+                          <th>Department</th>
+                          <th>Assigned Tasks</th>
+                          <th>Completed &amp; Approved</th>
+                          <th>Work Progress</th>
+                          <th>Weekly Report Status</th>
+                        </tr>
+                      </thead>
+                      <tbody id="analytics-student-table-body">
+                        <tr><td colspan="6" class="text-center py-4 text-muted">Loading student work progress...</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
         </div>
 
 

@@ -119,6 +119,109 @@ const PortalModules = {
           }
         }
 
+        // Student Work Progress & Analytics (for Admin, Chairman, and Auditor)
+        const isLeadershipOrAuditor = user.role === 'admin' || user.role === 'chairman' || user.role === 'auditor';
+        const analyticsSection = document.getElementById('dash-analytics-section');
+
+        if (analyticsSection) {
+          if (!isLeadershipOrAuditor) {
+            analyticsSection.style.display = 'none';
+          } else {
+            analyticsSection.style.display = 'block';
+            try {
+              const pRes = await API.request('/api/analytics/student-progress');
+              if (pRes && pRes.success) {
+                // 1. Overall Completion Rate Badge
+                const compEl = document.getElementById('analytics-completion-rate');
+                if (compEl) compEl.textContent = `${pRes.overallCompletionRate}% Overall`;
+
+                // 2. Stacked Bar Widths & Legend Counts
+                const total = pRes.totalTasks || 1;
+                const dist = pRes.statusDistribution || {};
+                const appPct = Math.round(((dist.APPROVED || 0) / total) * 100);
+                const revPct = Math.round(((dist.SUBMITTED_FOR_REVIEW || 0) / total) * 100);
+                const inPct = Math.round(((dist.IN_PROGRESS || 0) / total) * 100);
+                const asgPct = Math.max(0, 100 - (appPct + revPct + inPct));
+
+                const barApp = document.getElementById('ps-bar-approved');
+                const barRev = document.getElementById('ps-bar-review');
+                const barIn = document.getElementById('ps-bar-inprogress');
+                const barAsg = document.getElementById('ps-bar-assigned');
+                if (barApp) barApp.style.width = appPct + '%';
+                if (barRev) barRev.style.width = revPct + '%';
+                if (barIn) barIn.style.width = inPct + '%';
+                if (barAsg) barAsg.style.width = asgPct + '%';
+
+                const cntApp = document.getElementById('analytics-count-approved');
+                const cntRev = document.getElementById('analytics-count-review');
+                const cntIn = document.getElementById('analytics-count-inprogress');
+                const cntAsg = document.getElementById('analytics-count-assigned');
+                if (cntApp) cntApp.textContent = dist.APPROVED || 0;
+                if (cntRev) cntRev.textContent = dist.SUBMITTED_FOR_REVIEW || 0;
+                if (cntIn) cntIn.textContent = dist.IN_PROGRESS || 0;
+                if (cntAsg) cntAsg.textContent = dist.ASSIGNED || 0;
+
+                // 3. Departmental Progress Bars
+                const deptContainer = document.getElementById('analytics-dept-bars');
+                if (deptContainer) {
+                  const depts = pRes.deptProgress || [];
+                  if (depts.length === 0) {
+                    deptContainer.innerHTML = `<p class="text-muted" style="padding: 12px 0;">No active department milestones.</p>`;
+                  } else {
+                    deptContainer.innerHTML = depts.map(d => `
+                      <div class="dept-bar-row">
+                        <div class="dept-bar-header">
+                          <span>${App.escapeHtml(d.department)}</span>
+                          <span>${d.avgProgress}% (${d.completedTasks}/${d.totalTasks} Done)</span>
+                        </div>
+                        <div class="dept-bar-track">
+                          <div class="dept-bar-fill" style="width: ${d.avgProgress}%;"></div>
+                        </div>
+                      </div>
+                    `).join('');
+                  }
+                }
+
+                // 4. Student Committee Performance Table
+                const studentTbody = document.getElementById('analytics-student-table-body');
+                if (studentTbody) {
+                  const students = pRes.studentBreakdown || [];
+                  if (students.length === 0) {
+                    studentTbody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-muted">No student committee members on record.</td></tr>`;
+                  } else {
+                    studentTbody.innerHTML = students.map(s => `
+                      <tr>
+                        <td>
+                          <div style="font-weight: 700; color: var(--iei-navy-blue); font-size: 14.5px;">${App.escapeHtml(s.name)}</div>
+                          <div style="font-family: monospace; font-size: 12.5px; color: var(--iei-royal-blue); font-weight: 600;">${App.escapeHtml(s.id)}</div>
+                        </td>
+                        <td><span style="font-size: 13.5px; color: var(--text-secondary);">${App.escapeHtml(s.department)}</span></td>
+                        <td><strong>${s.totalTasks}</strong> tasks</td>
+                        <td><span class="badge ${s.completedTasks > 0 ? 'badge-success' : 'badge-gold'}">${s.completedTasks} Approved</span></td>
+                        <td style="min-width: 140px;">
+                          <div style="display: flex; align-items: center; gap: 8px;">
+                            <div style="flex: 1; height: 8px; background: #E2E8F0; border-radius: 999px; overflow: hidden;">
+                              <div style="height: 100%; width: ${s.avgProgress}%; background: ${s.avgProgress >= 80 ? '#059669' : (s.avgProgress >= 40 ? '#2563EB' : '#D97706')}; border-radius: 999px;"></div>
+                            </div>
+                            <span style="font-size: 12.5px; font-weight: 700;">${s.avgProgress}%</span>
+                          </div>
+                        </td>
+                        <td>
+                          <span class="badge ${s.reportStatus === 'APPROVED' ? 'badge-success' : (s.reportStatus === 'REVISION_REQUESTED' ? 'badge-danger' : 'badge-gold')}">
+                            ${s.reportStatus}
+                          </span>
+                        </td>
+                      </tr>
+                    `).join('');
+                  }
+                }
+              }
+            } catch (err) {
+              console.warn('Student progress analytics error:', err);
+            }
+          }
+        }
+
       } catch (err) {
         console.warn('Dashboard data fetch note:', err);
         const taskSpotlight = document.getElementById('dash-task-spotlight');
