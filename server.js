@@ -230,7 +230,16 @@ if (require.main === module) {
   });
 
   server.on('error', (err) => {
-    console.error('[Server Listen Error]:', err);
+    if (err.code === 'EADDRINUSE') {
+      console.error(`\n⚠️  PORT ${PORT} IS ALREADY IN USE.`);
+      console.error(`Another Node process is already running and occupying port ${PORT}.`);
+      console.error(`To free port ${PORT}, run in PowerShell:`);
+      console.error(`   Stop-Process -Id (Get-NetTCPConnection -LocalPort ${PORT}).OwningProcess -Force`);
+      console.error(`Or run on a different port:`);
+      console.error(`   $env:PORT=3001; npm start\n`);
+    } else {
+      console.error('[Server Listen Error]:', err);
+    }
   });
 }
 
