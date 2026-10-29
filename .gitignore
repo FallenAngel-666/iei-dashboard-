@@ -32,3 +32,8 @@ data/*.bak
 .DS_Store
 Thumbs.db
 Desktop.ini
+
+# Local Backups & Archive Bundles
+backups/
+*.bundle
+*.tar.gz
