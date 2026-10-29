@@ -18,24 +18,61 @@
 
 const assert = require('assert');
 const http = require('http');
+const app = require('../server');
 
 const BASE_URL = 'http://127.0.0.1:3000';
+let serverInstance = null;
+let activePipe = null;
+let usePipe = false;
+
+function setupServer() {
+  return new Promise((resolve) => {
+    const testReq = http.get('http://127.0.0.1:3000/api/health', () => {
+      resolve();
+    });
+    testReq.on('error', () => {
+      activePipe = `\\\\.\\pipe\\mgr-test-suite-${Date.now()}`;
+      usePipe = true;
+      serverInstance = app.listen(activePipe, () => {
+        resolve();
+      });
+    });
+  });
+}
 
 function makeRequest(method, path, body = null, token = null) {
   return new Promise((resolve, reject) => {
-    const url = new URL(path, BASE_URL);
     const headers = { 'Content-Type': 'application/json' };
     if (token) headers['Authorization'] = `Bearer ${token}`;
 
-    const req = http.request(url, { method, headers }, (res) => {
-      let data = '';
-      res.on('data', chunk => data += chunk);
-      res.on('end', () => {
-        let json = null;
-        try { json = JSON.parse(data); } catch (e) { json = data; }
-        resolve({ status: res.statusCode, headers: res.headers, body: json });
+    let req;
+    if (usePipe) {
+      req = http.request({
+        socketPath: activePipe,
+        path: path,
+        method: method,
+        headers: headers
+      }, (res) => {
+        let data = '';
+        res.on('data', chunk => data += chunk);
+        res.on('end', () => {
+          let json = null;
+          try { json = JSON.parse(data); } catch (e) { json = data; }
+          resolve({ status: res.statusCode, headers: res.headers, body: json });
+        });
       });
-    });
+    } else {
+      const url = new URL(path, BASE_URL);
+      req = http.request(url, { method, headers }, (res) => {
+        let data = '';
+        res.on('data', chunk => data += chunk);
+        res.on('end', () => {
+          let json = null;
+          try { json = JSON.parse(data); } catch (e) { json = data; }
+          resolve({ status: res.statusCode, headers: res.headers, body: json });
+        });
+      });
+    }
 
     req.on('error', reject);
     if (body) req.write(JSON.stringify(body));
@@ -44,6 +81,7 @@ function makeRequest(method, path, body = null, token = null) {
 }
 
 async function runTestSuite() {
+  await setupServer();
   console.log('\n====================================================================');
   console.log('🏛️  MGR IEI STUDENTS CHAPTER — MASTER VERIFICATION TEST SUITE');
   console.log('   Dr. M.G.R. Educational and Research Institute (NAAC A+ / ISO 9001)');
@@ -406,6 +444,10 @@ async function runTestSuite() {
   console.log('\n--------------------------------------------------------------------');
   console.log(`Test Execution Finished: ${passed} Passed, ${failed} Failed`);
   console.log('--------------------------------------------------------------------\n');
+
+  if (serverInstance) {
+    serverInstance.close();
+  }
 
   if (failed > 0) {
     process.exit(1);

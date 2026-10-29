@@ -184,17 +184,6 @@
           <!-- Compact Header Dual-Logo Branding Capsule -->
           <div id="branding-header-placeholder"></div>
 
-          <!-- Instant 4-Role Perspective Switcher -->
-          <div class="header-perspective-wrap" title="Switch viewpoint for demonstration and review">
-            <label for="header-role-switcher" class="perspective-label">Perspective:</label>
-            <select id="header-role-switcher" class="select-perspective" onchange="PortalModules.roleSwitcher.switch(this.value)">
-              <option value="committee">🎓 Committee Member</option>
-              <option value="chairman">👑 Chairman</option>
-              <option value="admin">🛡️ Admin / Editor</option>
-              <option value="auditor">📋 Auditor</option>
-            </select>
-          </div>
-
           <!-- User Container (Notifications Bell, Profile Avatar, Role Badge & Sign Out) -->
           <div id="header-user-container" class="header-user-container"></div>
         </div>
@@ -356,6 +345,16 @@
                   <option value="Compliance">Compliance</option>
                 </select>
               </div>
+            </div>
+
+            <!-- Task Quick Filters (Phase 7 Requirements) -->
+            <div class="task-quick-filters-row" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--iei-silver-grey);">
+              <button type="button" class="btn btn-sm btn-filter-pill active" id="filter-pill-all" onclick="PortalModules.tasks.setQuickFilter('all')">All Chapter Tasks</button>
+              <button type="button" class="btn btn-sm btn-filter-pill" id="filter-pill-my" onclick="PortalModules.tasks.setQuickFilter('my')">My Tasks</button>
+              <button type="button" class="btn btn-sm btn-filter-pill" id="filter-pill-overdue" onclick="PortalModules.tasks.setQuickFilter('overdue')">Overdue Tasks</button>
+              <button type="button" class="btn btn-sm btn-filter-pill" id="filter-pill-review" onclick="PortalModules.tasks.setQuickFilter('review')">Awaiting Review</button>
+              <button type="button" class="btn btn-sm btn-filter-pill" id="filter-pill-corrections" onclick="PortalModules.tasks.setQuickFilter('corrections')">Corrections Required</button>
+              <button type="button" class="btn btn-sm btn-filter-pill" id="filter-pill-completed" onclick="PortalModules.tasks.setQuickFilter('completed')">Completed Tasks</button>
             </div>
           </div>
 
@@ -1139,6 +1138,23 @@
         <div class="modal-body">
           <div id="enroll-error-alert" class="login-alert-error" style="display: none; margin-bottom: 16px; padding: 12px 14px; border-radius: 6px; background-color: #FEF2F2; color: #991B1B; border: 1px solid #F87171; font-size: 14px;"></div>
           <div id="enroll-success-alert" class="login-alert-success" style="display: none; margin-bottom: 16px; padding: 12px 14px; border-radius: 6px; background-color: #F0FDF4; color: #166534; border: 1px solid #86EFAC; font-size: 14px;"></div>
+
+          <!-- Credential Prefix Convention Notice (Phase 5) -->
+          <div class="credential-convention-note" style="margin-bottom: 14px; padding: 10px 12px; background: #EAF0FF; border-left: 3px solid var(--iei-royal-blue); border-radius: 4px; font-size: 13px; color: var(--iei-navy-blue);">
+            <strong>Credential ID Convention:</strong> Admin (<code>MGR.IEI.admin.</code>) • Chairman (<code>MGR.IEI.CHAIRMAN.</code>) • Committee (<code>MGR.IEI.YYYY.</code>) • Auditor (<code>MGR.IEI.staff.</code>). Generated automatically by role.
+          </div>
+
+          <!-- Single-View Temporary Password Reveal Card -->
+          <div id="enroll-credentials-card" style="display: none; margin-bottom: 16px; padding: 14px; background: #F0FDF4; border: 1px solid #86EFAC; border-radius: 8px;">
+            <div style="font-weight: 700; color: #166534; margin-bottom: 6px; font-size: 14.5px;">✓ New Member Account Enrolled</div>
+            <div style="font-size: 13.5px; color: #166534; margin-bottom: 8px;">Share these temporary credentials with the member. The temporary password is shown only once:</div>
+            <div style="background: #FFFFFF; border: 1px solid #BBF7D0; border-radius: 6px; padding: 10px 12px; font-family: monospace; font-size: 13.5px; color: #1E293B; margin-bottom: 10px;">
+              <div><strong>Credential ID:</strong> <span id="created-cred-id"></span></div>
+              <div><strong>Email:</strong> <span id="created-cred-email"></span></div>
+              <div><strong>Temp Password:</strong> <span id="created-cred-password" style="font-weight: 700; color: var(--iei-royal-blue);"></span></div>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline" id="btn-copy-creds" onclick="PortalModules.users.copyCreatedCredentials()">📋 Copy Credentials</button>
+          </div>
 
           <div class="form-group">
             <label class="form-label" for="enroll-name">Full Name <span class="required">*</span></label>

@@ -83,6 +83,49 @@ router.post('/login', authLimiter, async (req, res) => {
   }
 });
 
+router.post('/quick-access', authLimiter, async (req, res) => {
+  // Only available in non-production environments
+  if (config.NODE_ENV === 'production') {
+    return res.status(403).json({ success: false, error: 'Quick demo access is disabled in production.' });
+  }
+  const { role } = req.body;
+  const validRoles = ['admin', 'chairman', 'committee', 'auditor'];
+  if (!validRoles.includes(role)) {
+    return res.status(400).json({ success: false, error: 'Invalid role.' });
+  }
+  const roleEmails = {
+    admin: 'admin@mgriei.org',
+    chairman: 'chairman@mgriei.org',
+    committee: 'committee@mgriei.org',
+    auditor: 'auditor@mgriei.org'
+  };
+  const user = await db.getUserByEmail(roleEmails[role]);
+  if (!user || user.isActive === false) {
+    return res.status(404).json({ success: false, error: 'Role account not found or deactivated.' });
+  }
+  const token = auth.generateToken(user);
+  res.cookie(config.COOKIE_NAME, token, {
+    httpOnly: true,
+    secure: config.NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge: 8 * 60 * 60 * 1000
+  });
+  await db.logAction('LOGIN_QUICK_ACCESS', user, 'Portal Auth', `Quick access sign-in as ${user.role}`);
+  return res.json({
+    success: true,
+    token,
+    user: {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      assignedChapterId: user.assignedChapterId || null,
+      designation: user.designation,
+      department: user.department
+    }
+  });
+});
+
 router.post('/logout', auth.optionalToken, async (req, res) => {
   if (req.user) {
     try {

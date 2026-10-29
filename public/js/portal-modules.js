@@ -132,10 +132,73 @@ const PortalModules = {
     currentTasks: [],
     viewMode: 'kanban',
     searchTerm: '',
+    quickFilter: 'all',
+    priorityFilter: 'all',
+    deptFilter: 'all',
 
     async init() {
       await this.loadTasks();
       this.bindEvents();
+    },
+
+    setQuickFilter(filterKey) {
+      this.quickFilter = filterKey;
+      const pills = ['all', 'my', 'overdue', 'review', 'corrections', 'completed'];
+      pills.forEach(p => {
+        const el = document.getElementById(`filter-pill-${p}`);
+        if (el) {
+          if (p === filterKey) el.classList.add('active');
+          else el.classList.remove('active');
+        }
+      });
+      if (this.viewMode === 'list') {
+        this.renderListView();
+      } else {
+        this.renderKanban();
+      }
+    },
+
+    getFilteredTasks() {
+      const user = API.getCurrentUser() || {};
+      const now = new Date();
+      return this.currentTasks.filter(t => {
+        // Quick filter
+        if (this.quickFilter === 'my') {
+          const isMy = t.assignedTo === user.id || t.assignedToName === user.name;
+          if (!isMy) return false;
+        } else if (this.quickFilter === 'overdue') {
+          const isOverdue = new Date(t.dueDate) < now && t.status !== 'APPROVED';
+          if (!isOverdue) return false;
+        } else if (this.quickFilter === 'review') {
+          if (t.status !== 'SUBMITTED_FOR_REVIEW') return false;
+        } else if (this.quickFilter === 'corrections') {
+          if (t.status !== 'REVISION_REQUESTED') return false;
+        } else if (this.quickFilter === 'completed') {
+          if (t.status !== 'APPROVED') return false;
+        }
+
+        // Priority filter
+        if (this.priorityFilter && this.priorityFilter !== 'all') {
+          if ((t.priority || '').toLowerCase() !== this.priorityFilter.toLowerCase()) return false;
+        }
+
+        // Department filter
+        if (this.deptFilter && this.deptFilter !== 'all') {
+          if (t.department !== this.deptFilter) return false;
+        }
+
+        // Search filter
+        if (this.searchTerm) {
+          const q = this.searchTerm.toLowerCase();
+          const matches = (t.title && t.title.toLowerCase().includes(q)) ||
+            (t.assignedToName && t.assignedToName.toLowerCase().includes(q)) ||
+            (t.department && t.department.toLowerCase().includes(q)) ||
+            (t.description && t.description.toLowerCase().includes(q));
+          if (!matches) return false;
+        }
+
+        return true;
+      });
     },
 
     setViewMode(mode) {
@@ -193,8 +256,9 @@ const PortalModules = {
         if (columns[k]) columns[k].innerHTML = '';
       });
 
+      const filtered = this.getFilteredTasks();
       const grouped = { ASSIGNED: [], IN_PROGRESS: [], SUBMITTED_FOR_REVIEW: [], APPROVED: [] };
-      this.currentTasks.forEach(t => {
+      filtered.forEach(t => {
         let statusKey = t.status || 'ASSIGNED';
         if (statusKey === 'REVISION_REQUESTED') statusKey = 'SUBMITTED_FOR_REVIEW';
         if (!grouped[statusKey]) statusKey = 'ASSIGNED';
@@ -239,18 +303,10 @@ const PortalModules = {
       const tbody = document.getElementById('tasks-list-table-body');
       if (!tbody) return;
 
-      let tasks = this.currentTasks;
-      if (this.searchTerm) {
-        const q = this.searchTerm.toLowerCase();
-        tasks = tasks.filter(t => 
-          (t.title && t.title.toLowerCase().includes(q)) ||
-          (t.assignedToName && t.assignedToName.toLowerCase().includes(q)) ||
-          (t.department && t.department.toLowerCase().includes(q))
-        );
-      }
+      const tasks = this.getFilteredTasks();
 
       if (tasks.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-muted">No chapter tasks found.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-muted">No chapter tasks match the current filter criteria.</td></tr>`;
         return;
       }
 
@@ -469,6 +525,28 @@ const PortalModules = {
     },
 
     bindEvents() {
+      const searchInput = document.getElementById('task-search-input');
+      if (searchInput) {
+        searchInput.oninput = (e) => {
+          this.searchTerm = e.target.value.trim();
+          this.viewMode === 'list' ? this.renderListView() : this.renderKanban();
+        };
+      }
+      const prioritySelect = document.getElementById('task-filter-priority');
+      if (prioritySelect) {
+        prioritySelect.onchange = (e) => {
+          this.priorityFilter = e.target.value;
+          this.viewMode === 'list' ? this.renderListView() : this.renderKanban();
+        };
+      }
+      const deptSelect = document.getElementById('task-filter-category');
+      if (deptSelect) {
+        deptSelect.onchange = (e) => {
+          this.deptFilter = e.target.value;
+          this.viewMode === 'list' ? this.renderListView() : this.renderKanban();
+        };
+      }
+
       const form = document.getElementById('form-create-task');
       if (form) {
         form.onsubmit = async (e) => {
@@ -1073,7 +1151,7 @@ const PortalModules = {
                 </div>
                 <div>
                   <strong style="color: var(--iei-navy); font-weight: 700; font-size: 14.5px;">${App.escapeHtml(u.name)}</strong>
-                  <div class="text-muted" style="font-size: 13px;">ID: ${App.escapeHtml(u.id)}</div>
+                  <div style="font-family: monospace; font-size: 12.5px; color: var(--iei-royal-blue); font-weight: 600;">${App.escapeHtml(u.credentialId || u.id)}</div>
                 </div>
               </div>
             </td>
@@ -1202,6 +1280,26 @@ const PortalModules = {
       if (form) form.reset();
       const errBox = document.getElementById('enroll-error-alert');
       if (errBox) errBox.style.display = 'none';
+      const credsCard = document.getElementById('enroll-credentials-card');
+      if (credsCard) credsCard.style.display = 'none';
+      const submitBtn = document.getElementById('btn-submit-enroll');
+      if (submitBtn) {
+        submitBtn.style.display = 'inline-block';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Enroll Member';
+      }
+    },
+
+    copyCreatedCredentials() {
+      const credId = document.getElementById('created-cred-id')?.textContent || '';
+      const email = document.getElementById('created-cred-email')?.textContent || '';
+      const pass = document.getElementById('created-cred-password')?.textContent || '';
+      const text = `MGR IEI Students Chapter Portal Credentials:\nCredential ID: ${credId}\nInstitutional Email: ${email}\nInitial Password: ${pass}\nPortal Gateway: ${window.location.origin}`;
+      navigator.clipboard.writeText(text).then(() => {
+        App.showToast('Credentials copied to clipboard.', 'success');
+      }).catch(() => {
+        App.showToast('Select and copy credentials above.', 'info');
+      });
     },
 
     bindEvents() {
@@ -1219,7 +1317,7 @@ const PortalModules = {
           const designation = document.getElementById('enroll-designation').value.trim();
           const department = document.getElementById('enroll-dept').value.trim();
           const passwordInput = document.getElementById('enroll-password');
-          const password = passwordInput && passwordInput.value.trim() ? passwordInput.value.trim() : 'MGR_Member_2026!';
+          const password = passwordInput && passwordInput.value.trim() ? passwordInput.value.trim() : '';
 
           if (!name || !email) {
             if (errBox) {
@@ -1235,13 +1333,25 @@ const PortalModules = {
           }
 
           try {
-            await API.request('/api/admin/users', {
+            const res = await API.request('/api/admin/users', {
               method: 'POST',
               body: JSON.stringify({ name, email, role, designation, department, password })
             });
             App.showToast(`Account for ${name} created successfully.`, 'success');
+
+            // Reveal generated temporary credentials once to Administrator
+            const credsCard = document.getElementById('enroll-credentials-card');
+            if (credsCard) {
+              const credIdEl = document.getElementById('created-cred-id');
+              const credEmailEl = document.getElementById('created-cred-email');
+              const credPassEl = document.getElementById('created-cred-password');
+              if (credIdEl) credIdEl.textContent = res.user?.credentialId || res.user?.id || 'MGR.IEI...';
+              if (credEmailEl) credEmailEl.textContent = res.user?.email || email;
+              if (credPassEl) credPassEl.textContent = res.temporaryPassword || password;
+              credsCard.style.display = 'block';
+            }
             form.reset();
-            this.closeEnrollModal();
+            if (submitBtn) submitBtn.style.display = 'none';
             await this.loadUsers();
           } catch (err) {
             if (errBox) {
@@ -1507,30 +1617,16 @@ const PortalModules = {
   // 10. INSTANT 4-ROLE PERSPECTIVE SWITCHER
   // ==========================================
   roleSwitcher: {
-    roles: [
-      { key: 'admin', email: 'admin@mgriei.org', pass: 'Admin_MGR_2026!', label: '🛡️ Admin / Editor' },
-      { key: 'chairman', email: 'chairman@mgriei.org', pass: 'Chairman_MGR_2026!', label: '👑 Chairman' },
-      { key: 'committee', email: 'committee@mgriei.org', pass: 'Committee_MGR_2026!', label: '🎓 Committee Member' },
-      { key: 'auditor', email: 'auditor@mgriei.org', pass: 'Auditor_MGR_2026!', label: '📋 Auditor' }
-    ],
-
     async switchRole(roleKey) {
-      const match = this.roles.find(r => r.key === roleKey);
-      if (!match) return;
-
-      App.showToast(`Switching view to ${match.label}...`, 'info');
       try {
-        const res = await API.request('/api/auth/login', {
-          method: 'POST',
-          body: JSON.stringify({ email: match.email, password: match.pass })
-        });
+        const res = await API.quickAccess(roleKey);
         API.setAuth(res.token, res.user);
         App.updateUserUI();
         App.applyRolePermissions(res.user);
         App.navigate('dashboard');
-        App.showToast(`Switched active perspective to: ${res.user.name}`, 'success');
+        App.showToast(`Perspective switched to: ${res.user.name} (${res.user.role.toUpperCase()})`, 'success');
       } catch (err) {
-        App.showToast('Role switch failed: ' + err.message, 'danger');
+        App.showToast('Perspective switch restricted: ' + err.message, 'warning');
       }
     }
   },

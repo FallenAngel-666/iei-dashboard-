@@ -5,48 +5,74 @@
  */
 
 const http = require('http');
+const app = require('../server');
 
 const BASE_URL = 'http://localhost:3000';
+let serverInstance = null;
+let activePipe = null;
+let usePipe = false;
+
+function setupServer() {
+  return new Promise((resolve) => {
+    const testReq = http.get('http://127.0.0.1:3000/api/health', () => {
+      resolve();
+    });
+    testReq.on('error', () => {
+      activePipe = `\\\\.\\pipe\\mgr-user-verify-${Date.now()}`;
+      usePipe = true;
+      serverInstance = app.listen(activePipe, () => {
+        resolve();
+      });
+    });
+  });
+}
 
 function request(method, path, data = null, token = null) {
   return new Promise((resolve, reject) => {
-    const url = new URL(path, BASE_URL);
-    const options = {
-      hostname: url.hostname,
-      port: url.port,
-      path: url.pathname + url.search,
-      method: method,
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
+    const headers = { 'Content-Type': 'application/json' };
+    if (token) headers['Authorization'] = `Bearer ${token}`;
 
-    if (token) {
-      options.headers['Authorization'] = `Bearer ${token}`;
-    }
-
-    const req = http.request(options, (res) => {
-      let body = '';
-      res.on('data', chunk => body += chunk);
-      res.on('end', () => {
-        try {
-          const parsed = JSON.parse(body);
-          resolve({ status: res.statusCode, body: parsed });
-        } catch (e) {
-          resolve({ status: res.statusCode, raw: body });
-        }
+    let req;
+    if (usePipe) {
+      req = http.request({
+        socketPath: activePipe,
+        path: path,
+        method: method,
+        headers: headers
+      }, (res) => {
+        let body = '';
+        res.on('data', chunk => body += chunk);
+        res.on('end', () => {
+          try {
+            resolve({ status: res.statusCode, body: JSON.parse(body) });
+          } catch (e) {
+            resolve({ status: res.statusCode, raw: body });
+          }
+        });
       });
-    });
+    } else {
+      const url = new URL(path, BASE_URL);
+      req = http.request(url, { method, headers }, (res) => {
+        let body = '';
+        res.on('data', chunk => body += chunk);
+        res.on('end', () => {
+          try {
+            resolve({ status: res.statusCode, body: JSON.parse(body) });
+          } catch (e) {
+            resolve({ status: res.statusCode, raw: body });
+          }
+        });
+      });
+    }
 
     req.on('error', reject);
-    if (data) {
-      req.write(JSON.stringify(data));
-    }
+    if (data) req.write(JSON.stringify(data));
     req.end();
   });
 }
 
 async function run() {
+  await setupServer();
   console.log('====================================================');
   console.log('🧪 MGR IEI USER MANAGEMENT DEEP AUDIT & TEST SUITE');
   console.log('====================================================\n');
@@ -180,6 +206,10 @@ async function run() {
   console.log('\n----------------------------------------------------');
   console.log(`Deep User Management Audit Finished: ${passed} Passed, ${failed} Failed`);
   console.log('----------------------------------------------------');
+
+  if (serverInstance) {
+    serverInstance.close();
+  }
 
   if (failed > 0) process.exit(1);
 }

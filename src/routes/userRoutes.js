@@ -50,19 +50,25 @@ router.post('/users', auth.authenticateToken, auth.requireRole(['admin']), async
     const validRoles = ['admin', 'chairman', 'committee', 'auditor'];
     const assignedRole = validRoles.includes(role) ? role : 'committee';
 
+    const crypto = require('crypto');
+    const tempPassword = password || `MGR_${crypto.randomBytes(3).toString('hex')}!2026`;
+
     const newUser = await db.createUser({
       name,
       email,
       role: assignedRole,
       designation: designation || 'Student Committee Member',
       department: department || 'Dr. M.G.R. Educational and Research Institute',
-      password: password || 'MGR_Member_2026!'
+      password: tempPassword
     }, req.user);
 
     res.status(201).json({
       success: true,
+      message: `Account for ${newUser.name} created successfully.`,
+      temporaryPassword: tempPassword,
       user: {
         id: newUser.id,
+        credentialId: newUser.credentialId || newUser.id,
         name: newUser.name,
         email: newUser.email,
         role: newUser.role,

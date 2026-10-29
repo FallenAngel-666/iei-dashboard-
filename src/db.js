@@ -66,6 +66,16 @@ async function saveDatabase() {
   }
 }
 
+let initPromise = null;
+
+async function ensureInit() {
+  if (isPgActive()) return;
+  if (!initPromise) {
+    initPromise = initDatabase();
+  }
+  return initPromise;
+}
+
 async function initDatabase(forceReseed = false) {
   if (isPgActive()) {
     try {
@@ -555,9 +565,11 @@ async function getAuditLogs(limit = 100) {
 }
 
 async function getUsers() {
+  await ensureInit();
   if (isPgActive()) return pgRepo.getUsers();
   return dbState.users.map(u => ({
     id: u.id,
+    credentialId: u.credentialId || u.id,
     name: u.name,
     email: u.email,
     role: u.role,
@@ -568,15 +580,22 @@ async function getUsers() {
   }));
 }
 
-async function getUserByEmail(email) {
-  if (isPgActive()) return pgRepo.getUserByEmail(email);
-  if (!email) return null;
-  return dbState.users.find(u => u.email.toLowerCase() === email.toLowerCase().trim()) || null;
+async function getUserByEmail(identifier) {
+  await ensureInit();
+  if (isPgActive()) return pgRepo.getUserByEmail(identifier);
+  if (!identifier) return null;
+  const q = identifier.toLowerCase().trim();
+  return dbState.users.find(u => 
+    u.email.toLowerCase() === q || 
+    (u.credentialId && u.credentialId.toLowerCase() === q) ||
+    u.id.toLowerCase() === q
+  ) || null;
 }
 
 async function getUserById(id) {
+  await ensureInit();
   if (isPgActive()) return pgRepo.getUserById(id);
-  return dbState.users.find(u => u.id === id) || null;
+  return dbState.users.find(u => u.id === id || (u.credentialId && u.credentialId.toLowerCase() === id.toLowerCase().trim())) || null;
 }
 
 // ---------------- Production Analytics Aggregator ----------------
@@ -1062,14 +1081,28 @@ async function addAuditObservation(obs, user) {
 }
 
 async function createUser(userData, creator) {
+  await ensureInit();
   if (isPgActive()) return pgRepo.createUser(userData, creator);
   const bcrypt = require('bcryptjs');
+
+  const role = userData.role || 'committee';
+  const year = new Date().getFullYear();
+  let credentialPrefix = 'MGR.IEI.';
+  if (role === 'admin') credentialPrefix = 'MGR.IEI.admin.';
+  else if (role === 'chairman') credentialPrefix = 'MGR.IEI.CHAIRMAN.';
+  else if (role === 'auditor') credentialPrefix = 'MGR.IEI.staff.';
+  else credentialPrefix = `MGR.IEI.${year}.`;
+
+  const existingWithPrefix = (dbState.users || []).filter(u => u.credentialId && u.credentialId.startsWith(credentialPrefix)).length + 1;
+  const credentialId = userData.credentialId || `${credentialPrefix}${String(existingWithPrefix).padStart(2, '0')}`;
+
   const newUser = {
     id: `usr_${Date.now()}`,
+    credentialId,
     name: userData.name,
     email: userData.email.toLowerCase(),
     passwordHash: bcrypt.hashSync(userData.password || 'MGR_Member_2026!', 10),
-    role: userData.role || 'committee',
+    role: role,
     designation: userData.designation || 'Student Committee Member',
     department: userData.department || 'Dr. MGR E&RI',
     createdAt: new Date().toISOString(),
@@ -1077,7 +1110,7 @@ async function createUser(userData, creator) {
   };
   if (!dbState.users) dbState.users = [];
   dbState.users.push(newUser);
-  await logAction('USER_ENROLLED', creator, 'User Administration', `Created new account for ${newUser.name} (${newUser.email}) with role ${newUser.role}`);
+  await logAction('USER_ENROLLED', creator, 'User Administration', `Created new account for ${newUser.name} (${newUser.email}, ${credentialId}) with role ${newUser.role}`);
   await saveDatabase();
   return newUser;
 }

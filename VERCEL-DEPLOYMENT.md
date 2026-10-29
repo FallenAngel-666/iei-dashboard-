@@ -1,231 +1,130 @@
-# IEI TVLC Portal — Vercel & Managed Cloud Production Deployment Guide
+# MGR IEI Students Chapter — Vercel & Managed Cloud Production Deployment Guide
+## Dr. M.G.R. Educational and Research Institute • The Institution of Engineers (India)
 
-This guide provides end-to-end instructions for deploying the **Institution of Engineers (India), Tiruvallur Local Centre (IEI TVLC) Staff Administration and Analytics Portal** to **Vercel** backed by a **Managed PostgreSQL Database** (Neon or Supabase) and **Cloud Object Storage** (Supabase Storage).
-
----
-
-## 🏛️ Architecture Overview
-
-In a serverless platform like Vercel, server processes are stateless and ephemeral, and the local filesystem is read-only (except `/tmp`). To run seamlessly in production while keeping local development friction-free, the portal uses a **dual-engine architecture**:
-
-```
-                         ┌────────────────────────────────────────┐
-                         │   Vercel Serverless Function           │
-                         │   api/index.js (Express Application)   │
-                         └──────────────────┬─────────────────────┘
-                                            │
-                   ┌────────────────────────┴────────────────────────┐
-                   │                                                 │
-          DATABASE_URL present?                             SUPABASE_URL present?
-         ┌─────────┴─────────┐                             ┌─────────┴─────────┐
-        YES                  NO                           YES                  NO
-         │                   │                             │                   │
-         ▼                   ▼                             ▼                   ▼
-┌──────────────────┐ ┌───────────────┐           ┌──────────────────┐ ┌───────────────┐
-│ Managed Postgres │ │  Local JSON   │           │ Supabase Storage │ │  Local Disk   │
-│ (Neon/Supabase)  │ │   Database    │           │ (Public Posters/ │ │   Uploads     │
-│ Production Pool  │ │ (Local Dev)   │           │ Private Reports) │ │  (Local Dev)  │
-└──────────────────┘ └───────────────┘           └──────────────────┘ └───────────────┘
-```
-
-1. **Serverless Routing (`vercel.json` + `api/index.js`):** All incoming API traffic (`/api/*`), uploads (`/uploads/*`), and direct page refreshes (`/*`) route into the Express serverless handler without 404s.
-2. **Managed PostgreSQL (`src/db/`):** Persistent storage using `pg` with connection pooling, parameterized queries, and automatic SSL detection.
-3. **Cloud Object Storage (`src/storage/`):** File uploads (event posters and post-event technical reports) are validated using **magic-byte inspection** and stored in cloud buckets. Technical reports are stored in a private bucket and served via authenticated, short-lived signed URLs.
-4. **Offline Local Dev Fallback:** When `DATABASE_URL` is not set, the application automatically falls back to `data/portal_database.json` and local disk uploads, ensuring 100% test compatibility offline.
+This comprehensive guide details the exact procedures for deploying the **MGR IEI Students Chapter — Student Committee & Staff Portal** to production on Vercel with persistent managed PostgreSQL (Neon / Supabase) and persistent object storage.
 
 ---
 
-## 🚀 Step-by-Step Deployment Instructions
+## 1. Production Architecture Overview
 
-### Step 1: Provision a Managed PostgreSQL Database
+The portal uses a hardened, serverless-ready Node.js/Express architecture:
 
-You can use any PostgreSQL provider. Two recommended free/low-cost options:
-
-#### Option A: Neon Serverless Postgres (Recommended)
-1. Visit [neon.tech](https://neon.tech/) and create a free account.
-2. Create a new project: `iei-tvlc-portal`.
-3. In the Neon Dashboard, copy the connection string under **Connection Details**:
-   ```
-   postgresql://[user]:[password]@[endpoint].neon.tech/neondb?sslmode=require
-   ```
-
-#### Option B: Supabase PostgreSQL
-1. Visit [supabase.com](https://supabase.com/) and create a project.
-2. Navigate to **Project Settings > Database > Connection String > URI**.
-3. Copy the pooled connection string (Port 6543 or 5432 with SSL).
-
----
-
-### Step 2: Run Database Migrations & Initial Data Seeding
-
-The repository includes an automated migration runner (`src/db/migrate.js`) that creates the schema, tables, foreign keys, and seeds the official baseline data (18 collegiate chapters, 11 official 2025-2026 activities, membership snapshots, and baseline accounts).
-
-Run the migration against your managed database:
-
-```bash
-# In Windows PowerShell:
-$env:DATABASE_URL="postgresql://username:password@your-db-host.neon.tech/neondb?sslmode=require"
-npm run db:migrate
-
-# In Linux/macOS Bash:
-DATABASE_URL="postgresql://username:password@your-db-host.neon.tech/neondb?sslmode=require" npm run db:migrate
 ```
-
-**Expected output:**
-```
-=======================================================
- IEI TVLC Database Migration & Seeding Runner
-=======================================================
-✓ Connected to PostgreSQL server.
-✓ Database schema applied successfully.
-✓ 18 collegiate chapters synchronized.
-✓ 11 institutional activities recorded.
-✓ 4 historical membership snapshots verified.
-✓ 5 membership intake records logged.
-✓ System users synchronized.
-Migration complete! System is ready for production.
+                      ┌───────────────────────────────────────────────┐
+                      │              Vercel Edge Network              │
+                      │   HTTPS / CDN Caching / DDoS Mitigation       │
+                      └──────────────────────┬────────────────────────┘
+                                             │
+                                             ▼
+                      ┌───────────────────────────────────────────────┐
+                      │             Vercel Serverless Function        │
+                      │         (Express 5.x / api/index.js)          │
+                      │    - Helmet Security Headers & Strict CSP     │
+                      │    - Rate Limiting (authLimiter)              │
+                      │    - Authoritative 4-Role RBAC Middleware     │
+                      │    - Dual-Transport JWT (Cookie + Bearer)     │
+                      └──────────────┬─────────────────┬──────────────┘
+                                     │                 │
+                   PostgreSQL / SSL  │                 │ REST API / S3
+                                     ▼                 ▼
+             ┌───────────────────────────────┐  ┌───────────────────────────────┐
+             │    Managed PostgreSQL DB      │  │     Cloud Object Storage      │
+             │   (Neon / Supabase / AWS)     │  │   (Supabase Storage / S3)     │
+             │  - Strict 4-Role Constraints  │  │  - Posters & Reports          │
+             │  - Asia/Kolkata Cycle Ledger  │  │  - Task / Stream Attachments  │
+             │  - Tamper-Evident Audit Trail │  │  - Anti-Execution Download    │
+             └───────────────────────────────┘  └───────────────────────────────┘
 ```
 
 ---
 
-### Step 3: Configure Super Administrator Credentials
+## 2. Prerequisites & Required Accounts
 
-To eliminate hardcoded demonstration passwords in production, run the admin setup script:
-
-```bash
-# In Windows PowerShell:
-$env:DATABASE_URL="postgresql://username:password@your-db-host.neon.tech/neondb?sslmode=require"
-node scripts/setup-admin.js --email "admin@ieitvlc.org" --password "YourStrongUniquePassword123!"
-
-# In Linux/macOS Bash:
-DATABASE_URL="..." node scripts/setup-admin.js --email "admin@ieitvlc.org" --password "YourStrongUniquePassword123!"
-```
-
-This updates the administrative password hash in PostgreSQL securely with bcrypt (10 rounds).
+Before deploying, ensure you have:
+1. **GitHub / GitLab account:** For hosting the private repository.
+2. **Vercel account:** [vercel.com](https://vercel.com) (Hobby or Pro plan; standard serverless functions fully supported).
+3. **Managed PostgreSQL Database:** [Neon](https://neon.tech) or [Supabase](https://supabase.com) (Free or Paid tier; connection pooling enabled).
+4. **Cloud Storage Bucket:** Supabase Storage or AWS S3 bucket for task/report attachments.
 
 ---
 
-### Step 4: Set Up Cloud Object Storage (Supabase Storage)
+## 3. Environment Variables Configuration
 
-1. Open your **Supabase Dashboard** and navigate to **Storage**.
-2. **Create Poster Bucket:**
-   * Name: `iei-tvlc-posters`
-   * Public bucket: **ON** (Event posters are publicly visible)
-   * Allowed MIME types: `image/jpeg, image/png, image/webp`
-   * Max file size: `5MB`
-3. **Create Report Bucket:**
-   * Name: `iei-tvlc-reports`
-   * Public bucket: **OFF (Private)** (Confidential event reports require authenticated access)
-   * Allowed MIME types: `application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/msword`
-   * Max file size: `15MB`
-4. Copy your **Supabase URL** and **Service Role API Key** from **Project Settings > API**.
+Configure the following environment variables in your **Vercel Project Settings → Environment Variables**:
+
+| Variable Name | Required? | Example / Default Value | Purpose |
+| :--- | :---: | :--- | :--- |
+| `NODE_ENV` | **Yes** | `production` | Enforces production security, disables debug endpoints |
+| `JWT_SECRET` | **Yes** | `[Generate 64+ char random string]` | Signs and verifies session tokens |
+| `DATABASE_URL` | **Yes** | `postgresql://user:pwd@ep-xy.neon.tech/mgr_iei?sslmode=require` | Managed PostgreSQL connection string |
+| `PORT` | No | `3000` (Defaults to Vercel internal port) | Express server port |
+| `SUPABASE_URL` | Optional | `https://your-proj.supabase.co` | Cloud storage integration |
+| `SUPABASE_SERVICE_KEY` | Optional | `eyJh...` | Cloud storage private access key |
+| `ADMIN_EMAIL` | Optional | `admin@mgriei.org` | Initial administrator account email |
+| `ADMIN_PASSWORD` | Optional | `[StrongUniquePassword123!]` | Initial administrator account password |
+
+> [!IMPORTANT]
+> Never commit actual values for `JWT_SECRET`, `DATABASE_URL`, or `SUPABASE_SERVICE_KEY` to Git. Keep them strictly in Vercel environment variables or local `.env` (which is excluded by `.gitignore`).
 
 ---
 
-### Step 5: Push Repository to GitHub / GitLab
+## 4. Step-by-Step Deployment Instructions
 
-1. In the project directory, check that `.gitignore` is present:
+### Step 4.1: Prepare Managed PostgreSQL Database
+1. Create a new PostgreSQL database on Neon or Supabase named `mgr_iei_portal`.
+2. Copy the pooled connection string (`postgresql://...`).
+3. Run the automated database schema migration from your local machine:
    ```bash
-   git status
+   DATABASE_URL="your-connection-string" node src/db/migrate.js
    ```
-2. Initialize and commit:
+4. Seed or create your initial Administrator account:
    ```bash
-   git init
-   git add .
-   git commit -m "feat: configure IEI TVLC portal for Vercel deployment with PostgreSQL and cloud storage"
+   DATABASE_URL="your-connection-string" node scripts/setup-admin.js --email "admin@mgriei.org" --password "YourStrongUniquePassword123!"
    ```
-3. Create a private repository on GitHub (`iei-tvlc-admin-portal`) and push:
+
+### Step 4.2: Connect Git Repository to Vercel
+1. Push your project to a private Git repository:
    ```bash
-   git remote add origin https://github.com/your-org/iei-tvlc-admin-portal.git
+   git remote add origin https://github.com/your-org/mgr-iei-student-chapter.git
    git branch -M main
    git push -u origin main
    ```
+2. In the Vercel Dashboard, click **Add New... → Project**.
+3. Import the `mgr-iei-student-chapter` repository.
+4. Set Framework Preset: **Other**.
+5. Keep Build Command empty (standard Node.js application).
+6. Under **Environment Variables**, paste the production values documented in Section 3.
+7. Click **Deploy**.
 
----
-
-### Step 6: Deploy to Vercel
-
-1. Log into [vercel.com](https://vercel.com/) and click **Add New > Project**.
-2. Select your `iei-tvlc-admin-portal` repository.
-3. Configure the project:
-   * **Framework Preset:** `Other` (or auto-detected Node.js).
-   * **Root Directory:** `./`
-   * **Build Command:** Leave blank or default.
-   * **Output Directory:** Leave blank or default.
-4. Add the following **Environment Variables** in the Vercel deployment wizard:
-
-| Variable Name | Example Value | Description |
-|---|---|---|
-| `NODE_ENV` | `production` | Enables strict production guards |
-| `JWT_SECRET` | `a_64_char_random_hex_string_here` | Cryptographic secret for signing tokens |
-| `SESSION_SECRET` | `a_32_char_random_session_secret` | Session secret |
-| `DATABASE_URL` | `postgresql://user:pass@ep-xyz.neon.tech/neondb?sslmode=require` | Managed PostgreSQL connection string |
-| `SUPABASE_URL` | `https://xyzcompany.supabase.co` | Supabase project endpoint |
-| `SUPABASE_SERVICE_ROLE_KEY` | `eyJhbGciOi...` | Supabase service role key (backend only) |
-| `SUPABASE_POSTERS_BUCKET` | `iei-tvlc-posters` | Public poster bucket name |
-| `SUPABASE_REPORTS_BUCKET` | `iei-tvlc-reports` | Private report bucket name |
-| `ADMIN_EMAIL` | `admin@ieitvlc.org` | Initial administrator email |
-| `ADMIN_PASSWORD` | `YourStrongAdminPassword!` | Initial administrator password |
-
-5. Click **Deploy**.
-
----
-
-### Step 7: Verify Production Deployment
-
-Once the Vercel build succeeds:
-
-1. **Verify Health Endpoint:**
-   Visit: `https://<your-project>.vercel.app/api/health`
-   Ensure the response returns:
+### Step 4.3: Verify Deployment Health
+Once the deployment finishes:
+1. Navigate to `https://your-deployment.vercel.app/api/health`.
+   Verify the response:
    ```json
    {
      "status": "ONLINE",
-     "engine": "Managed PostgreSQL",
-     "institution": "IEI TVLC",
-     "stats": {
-       "registeredChapters": 18,
-       "eventsLogged": 11
-     }
+     "engine": "Managed PostgreSQL (Serverless)",
+     "institution": "MGR IEI Students Chapter",
+     "fullName": "The Institution of Engineers (India) — Dr. M.G.R. Educational and Research Institute Students Chapter"
    }
    ```
-2. **Verify Security Gate:**
-   Open `https://<your-project>.vercel.app/`. Ensure that unauthenticated visitors see only the Login Gateway.
-3. **Verify Staff Login:**
-   Log in with `example@gmail.com` or `staff@ieitvlc.org`. The Staff Data Entry Terminal loads immediately with standardized drop boxes.
-4. **Verify Admin Login:**
-   Log in with `admin@ieitvlc.org` and your configured password. The Executive Dashboard loads with 6 KPI cards, Chart.js visualizations, and full CRUD capabilities.
-5. **Verify Direct SPA Navigation:**
-   Refresh the browser while on any tab or modal. Verify no 404 error is returned.
-6. **Verify Report Download Security:**
-   Navigate to an event with a report attached. Verify that clicking the report generates an authenticated download link, and that accessing `/api/events/:id/report-download` without a token returns HTTP 401.
+2. Navigate to `https://your-deployment.vercel.app/`.
+   - The login gateway displays the official IEI Royal Charter Emblem and Dr. MGR University Chapter Logo.
+   - Test sign-in using your configured Admin credentials.
+   - Verify that all 9 views load smoothly and access control blocks unauthorized operations.
 
 ---
 
-## 🔒 Production Security Measures
+## 5. Security Checklist Before Going Live
 
-- **No Hardcoded Passwords in Production:** In `NODE_ENV=production`, demonstration passwords are fully disabled; all authentication checks pass through bcrypt password hash verification in PostgreSQL.
-- **Magic-Byte Binary Inspection:** File uploads are checked for binary file signatures (JPEG `FF D8 FF`, PNG `89 50 4E 47`, WebP `RIFF...WEBP`, PDF `%PDF`, DOCX `PK\x03\x04`, DOC `D0 CF 11 E0`) to prevent extension spoofing and webshell execution.
-- **Short-Lived Signed URLs:** Confidential technical reports stored in Supabase Storage are private. Access is mediated through `GET /api/events/:id/report-download`, which generates a time-limited signed URL (default 15 minutes) only for authenticated users.
-- **Role-Based Access Control (RBAC):** Every API endpoint is guarded on the server by `authenticateToken` and `requireRole(...)`. JavaScript UI hiding is never used as an authorization gate.
-- **IDOR Protections:** Chapter Coordinators can only modify data and submit records for their assigned collegiate chapter. Cross-chapter access is blocked with HTTP 403.
-- **Rate Limiting:** Authentication routes are guarded with sliding-window rate limiting (10 attempts / 15 minutes) with `X-RateLimit-*` response headers.
-- **Security Headers:** Global headers (`X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `X-XSS-Protection`) are applied in both `vercel.json` and Express middleware.
-
----
-
-## 🛠️ Local Development & Testing
-
-Local development remains 100% functional without cloud credentials:
-
-```bash
-# 1. Install dependencies
-npm install
-
-# 2. Run the 88-point automated test suite (runs in-memory, no external network needed)
-npm test
-
-# 3. Start local development server
-npm start
-# Portal is accessible at: http://localhost:3000
-```
+- [x] Strict 4-Role RBAC enforced on server and database.
+- [x] Zero TVLC/TWC organizational remnants or external affiliations.
+- [x] Mandatory authentication before dashboard access.
+- [x] Passwords securely hashed with bcrypt (salt rounds = 10).
+- [x] Rate limiting active on authentication endpoints.
+- [x] Helmet security headers and strict Content Security Policy active.
+- [x] Anti-MIME sniffing (`X-Content-Type-Options: nosniff`) enabled on static files.
+- [x] Direct download (`Content-Disposition: attachment`) enforced on reports to prevent browser execution.
+- [x] Zero plain-text passwords or service keys exposed in browser code.
+- [x] Audit log captures all governance and administrative actions.
+- [x] Automated test suites passing 100%.

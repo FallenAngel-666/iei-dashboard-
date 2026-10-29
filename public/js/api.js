@@ -87,6 +87,17 @@ const API = {
     return res;
   },
 
+  async quickAccess(role) {
+    const res = await this.request('/api/auth/quick-access', {
+      method: 'POST',
+      body: JSON.stringify({ role })
+    });
+    if (res.token && res.user) {
+      this.setAuth(res.token, res.user);
+    }
+    return res;
+  },
+
   async logout() {
     try {
       await this.request('/api/auth/logout', { method: 'POST' });

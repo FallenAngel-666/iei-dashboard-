@@ -93,12 +93,6 @@ const App = {
     if (adminNavSection) {
       adminNavSection.style.display = (user.role === 'admin') ? 'block' : 'none';
     }
-
-    // Role switcher dropdown update
-    const roleSwitcher = document.getElementById('header-role-switcher');
-    if (roleSwitcher) {
-      roleSwitcher.value = user.role;
-    }
   },
 
   bindEvents() {
@@ -200,25 +194,14 @@ const App = {
    * 1-Click Quick Access for the Four Authorized Roles
    */
   async quickLogin(role) {
-    const creds = {
-      admin: { email: 'admin@mgriei.org', pass: 'Admin_MGR_2026!' },
-      chairman: { email: 'chairman@mgriei.org', pass: 'Chairman_MGR_2026!' },
-      committee: { email: 'committee@mgriei.org', pass: 'Committee_MGR_2026!' },
-      auditor: { email: 'auditor@mgriei.org', pass: 'Auditor_MGR_2026!' }
-    };
-
-    if (!creds[role]) return;
-
-    const emailField = document.getElementById('login-gateway-email');
-    const passField = document.getElementById('login-gateway-password');
-    if (emailField) emailField.value = creds[role].email;
-    if (passField) passField.value = creds[role].pass;
+    const validRoles = ['admin', 'chairman', 'committee', 'auditor'];
+    if (!validRoles.includes(role)) return;
 
     const errBox = document.getElementById('login-error-alert');
     if (errBox) errBox.style.display = 'none';
 
     try {
-      const res = await API.login(creds[role].email, creds[role].pass);
+      const res = await API.quickAccess(role);
       this.showToast(`Signed in as ${res.user.name} [${res.user.role.toUpperCase()}]`, 'success');
 
       const screenLogin = document.getElementById('screen-login');
@@ -231,7 +214,7 @@ const App = {
       this.navigate('dashboard');
     } catch (err) {
       if (errBox) {
-        errBox.textContent = err.message;
+        errBox.textContent = err.message || 'Quick access is disabled or unavailable.';
         errBox.style.display = 'block';
       }
       this.showToast(err.message, 'danger');
