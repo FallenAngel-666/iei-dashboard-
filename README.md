@@ -187,3 +187,5 @@ SUCCESS RATE: 100.0%
 * **Privilege Guard:** Role alteration and member enrollment are restricted exclusively to `admin` sessions (`auth.requireRole(['admin'])`).
 * **Security Headers:** All responses include `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `X-XSS-Protection: 1; mode=block`, and strict CORS policies.
 * **Data Sanitization:** All incoming text is sanitized to prevent stored XSS attacks in classroom stream comments and message threads.
+#   i e i - d a s h b o a r d -  
+ 
