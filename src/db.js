@@ -94,6 +94,16 @@ async function initDatabase(forceReseed = false) {
 
   ensureDirectories();
   
+  // On Vercel / serverless cold-start, hydrate ephemeral /tmp storage from bundled snapshot
+  if (!fs.existsSync(config.DB_FILE) && fs.existsSync(config.ORIGINAL_DB_FILE)) {
+    try {
+      fs.copyFileSync(config.ORIGINAL_DB_FILE, config.DB_FILE);
+      console.log('[DB] Hydrated ephemeral serverless storage with bundled MGR IEI database snapshot.');
+    } catch (e) {
+      console.warn('[DB] Could not copy original database snapshot to /tmp:', e.message);
+    }
+  }
+
   if (!forceReseed && fs.existsSync(config.DB_FILE)) {
     try {
       const raw = fs.readFileSync(config.DB_FILE, 'utf-8');
