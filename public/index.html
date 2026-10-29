@@ -37,8 +37,8 @@
 
         <form id="form-gateway-login">
           <div class="form-group">
-            <label class="form-label" for="login-gateway-email">Institutional Email Address <span class="required">*</span></label>
-            <input type="email" id="login-gateway-email" class="input-control" required placeholder="name@mgriei.org" autocomplete="email">
+            <label class="form-label" for="login-gateway-email">Institutional Email or Credential ID <span class="required">*</span></label>
+            <input type="text" id="login-gateway-email" class="input-control" required placeholder="name@mgriei.org or MGR.IEI..." autocomplete="username">
           </div>
           <div class="form-group">
             <label class="form-label" for="login-gateway-password">Password <span class="required">*</span></label>
@@ -48,30 +48,6 @@
             Sign In to Chapter Portal
           </button>
         </form>
-
-        <!-- 1-Click Quick Access for the Four Authorized Roles -->
-        <div class="quick-roles-section">
-          <div class="quick-roles-title">Authorized Roles — 1-Click Sign In</div>
-          <div class="quick-roles-grid">
-            <button type="button" class="role-quick-btn" onclick="App.quickLogin('admin')">
-              <span class="btn-role-label">🛡️ Admin / Editor</span>
-              <span class="btn-role-sub">Full Governance &amp; Config</span>
-            </button>
-            <button type="button" class="role-quick-btn" onclick="App.quickLogin('chairman')">
-              <span class="btn-role-label">👑 Chairman</span>
-              <span class="btn-role-sub">Executive Oversight &amp; Review</span>
-            </button>
-            <button type="button" class="role-quick-btn" onclick="App.quickLogin('committee')">
-              <span class="btn-role-label">🎓 Committee Member</span>
-              <span class="btn-role-sub">Task &amp; Reporting Terminal</span>
-            </button>
-            <button type="button" class="role-quick-btn" onclick="App.quickLogin('auditor')">
-              <span class="btn-role-label">📋 Auditor</span>
-              <span class="btn-role-sub">Compliance &amp; Observation Log</span>
-            </button>
-          </div>
-        </div>
-
       </div>
 
       <!-- Institutional Accreditation Footer -->
@@ -184,8 +160,18 @@
           <!-- Compact Header Dual-Logo Branding Capsule -->
           <div id="branding-header-placeholder"></div>
 
-          <!-- User Container (Notifications Bell, Profile Avatar, Role Badge & Sign Out) -->
+          <!-- User Container (Notifications Bell, Profile Avatar, Role Badge) -->
           <div id="header-user-container" class="header-user-container"></div>
+
+          <!-- Fixed Dedicated Logout Button in Header -->
+          <button id="btn-header-logout" class="btn-header-logout" onclick="App.handleLogout()" title="Sign Out of MGR IEI Portal" style="display: none;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            <span>Sign Out</span>
+          </button>
         </div>
       </header>
 
@@ -273,7 +259,9 @@
               </div>
               <div class="card-body">
                 <div id="dash-task-spotlight" class="spotlight-tasks-list">
-                  <div class="loading-placeholder">Loading assigned tasks...</div>
+                  <div class="empty-state-card">
+                    <p>No active tasks assigned to you. All chapter assignments are up to date.</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -289,7 +277,7 @@
               </div>
               <div class="card-body">
                 <div id="dash-announcements-container" class="spotlight-announcements-list">
-                  <div class="loading-placeholder">Loading announcements...</div>
+                  <p class="text-muted" style="padding: 16px;">No announcements posted for this cycle.</p>
                 </div>
               </div>
             </div>
@@ -429,7 +417,7 @@
                   </tr>
                 </thead>
                 <tbody id="tasks-list-table-body">
-                  <tr><td colspan="9" class="text-center py-4 text-muted">Loading tasks...</td></tr>
+                  <tr><td colspan="7" class="text-center py-4 text-muted">No chapter tasks match the current filter criteria.</td></tr>
                 </tbody>
               </table>
             </div>
@@ -486,7 +474,7 @@
                   </tr>
                 </thead>
                 <tbody id="weekly-reports-table-body">
-                  <tr><td colspan="8" class="text-center py-4 text-muted">Loading weekly reports...</td></tr>
+                  <tr><td colspan="7" class="text-center py-4 text-muted">No weekly reports on file.</td></tr>
                 </tbody>
               </table>
             </div>
@@ -574,7 +562,9 @@
 
               <!-- Stream Feed Thread Container -->
               <div id="community-stream-container" class="classroom-posts-thread">
-                <div class="loading-placeholder">Loading chapter stream...</div>
+                <div class="empty-state-luxury">
+                  <p>No community posts found in this stream. Use the composer above to share with the chapter.</p>
+                </div>
               </div>
 
             </div>
@@ -604,9 +594,7 @@
               <div class="messenger-sidebar-header">
                 <h4>Chapter Contacts</h4>
               </div>
-              <div id="msg-contacts-list" class="messenger-contacts-list">
-                <div class="loading-placeholder">Loading contacts...</div>
-              </div>
+              <div id="msg-contacts-list" class="messenger-contacts-list"></div>
             </div>
 
             <!-- Right Active Thread Pane -->
@@ -674,7 +662,7 @@
                   </tr>
                 </thead>
                 <tbody id="users-table-body">
-                  <tr><td colspan="7" class="text-center py-4 text-muted">Loading users...</td></tr>
+                  <tr><td colspan="7" class="text-center py-4 text-muted">No chapter members enrolled yet.</td></tr>
                 </tbody>
               </table>
             </div>
@@ -700,7 +688,7 @@
           </div>
 
           <div id="events-grid-container" class="events-grid">
-            <div class="loading-placeholder">Loading chapter events...</div>
+            <p class="text-muted" style="padding: 24px;">No upcoming chapter events scheduled.</p>
           </div>
 
         </div>
@@ -796,7 +784,7 @@
             </div>
             <div class="card-body">
               <div id="audit-observations-list" class="observations-list">
-                <div class="loading-placeholder">Loading observations...</div>
+                <p class="text-muted" style="padding: 16px;">No audit observations recorded for this cycle.</p>
               </div>
             </div>
           </div>
@@ -821,7 +809,7 @@
                   </tr>
                 </thead>
                 <tbody id="audit-logs-table-body">
-                  <tr><td colspan="5" class="text-center py-4 text-muted">Loading audit records...</td></tr>
+                  <tr><td colspan="5" class="text-center py-4 text-muted">No audit log records recorded yet.</td></tr>
                 </tbody>
               </table>
             </div>

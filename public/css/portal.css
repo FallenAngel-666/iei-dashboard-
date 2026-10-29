@@ -575,6 +575,53 @@ body {
   letter-spacing: 0.03em;
 }
 
+/* User Header Container */
+.header-user-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* Fixed Dedicated Logout Button in Header */
+.btn-header-logout {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 15px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #DC2626;
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(220, 38, 38, 0.08);
+  position: relative;
+  z-index: 50;
+  outline: none;
+}
+
+.btn-header-logout:hover {
+  background: #DC2626;
+  color: #FFFFFF;
+  border-color: #DC2626;
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.28);
+  transform: translateY(-1px);
+}
+
+.btn-header-logout:active {
+  transform: translateY(0);
+}
+
+.btn-header-logout svg {
+  flex-shrink: 0;
+  stroke: currentColor;
+}
+
 /* Main Body Canvas */
 .content-canvas {
   flex: 1;

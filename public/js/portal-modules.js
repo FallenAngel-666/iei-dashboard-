@@ -121,6 +121,18 @@ const PortalModules = {
 
       } catch (err) {
         console.warn('Dashboard data fetch note:', err);
+        const taskSpotlight = document.getElementById('dash-task-spotlight');
+        if (taskSpotlight) {
+          taskSpotlight.innerHTML = `
+            <div class="empty-state-card">
+              <p>No active tasks assigned to you. All chapter assignments are up to date.</p>
+            </div>
+          `;
+        }
+        const announcementsContainer = document.getElementById('dash-announcements-container');
+        if (announcementsContainer) {
+          announcementsContainer.innerHTML = `<p class="text-muted" style="padding: 16px;">No announcements posted for this cycle.</p>`;
+        }
       }
     }
   },
@@ -227,13 +239,13 @@ const PortalModules = {
       try {
         const res = await API.request('/api/tasks');
         this.currentTasks = res.tasks || [];
-        if (this.viewMode === 'list') {
-          this.renderListView();
-        } else {
-          this.renderKanban();
-        }
+        this.renderKanban();
+        this.renderListView();
       } catch (err) {
         console.error('Failed to load tasks:', err);
+        this.currentTasks = [];
+        this.renderKanban();
+        this.renderListView();
       }
     },
 
@@ -626,6 +638,10 @@ const PortalModules = {
         }
       } catch (err) {
         console.error('Failed to load weekly reports:', err);
+        const tbody = document.getElementById('weekly-reports-table-body');
+        if (tbody) {
+          tbody.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-muted">No weekly reports on file.</td></tr>`;
+        }
       }
     },
 
@@ -796,6 +812,14 @@ const PortalModules = {
         this.renderStream();
       } catch (err) {
         console.error('Failed to load community stream:', err);
+        const container = document.getElementById('community-stream-container');
+        if (container) {
+          container.innerHTML = `
+            <div class="empty-state-luxury">
+              <p>No community posts found in this stream. Use the composer above to share with the chapter.</p>
+            </div>
+          `;
+        }
       }
     },
 
@@ -1058,6 +1082,14 @@ const PortalModules = {
         threadEl.scrollTop = threadEl.scrollHeight;
       } catch (err) {
         console.error('Failed to load messages:', err);
+        const threadEl = document.getElementById('msg-thread-stream');
+        if (threadEl) {
+          threadEl.innerHTML = `
+            <div class="empty-state-luxury">
+              <p>Direct communication channel open with ${App.escapeHtml(this.contacts.find(c => c.id === this.selectedContactId)?.name || 'Member')}. Type a message below.</p>
+            </div>
+          `;
+        }
       }
     },
 
@@ -1411,6 +1443,8 @@ const PortalModules = {
         `).join('');
       } catch (err) {
         console.error('Failed to load events:', err);
+        const container = document.getElementById('events-grid-container');
+        if (container) container.innerHTML = `<p class="text-muted" style="padding: 24px;">No upcoming chapter events scheduled.</p>`;
       }
     },
 
@@ -1534,6 +1568,11 @@ const PortalModules = {
         const tbody = document.getElementById('audit-logs-table-body');
         if (!tbody) return;
 
+        if (logs.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-muted">No audit log records recorded yet.</td></tr>`;
+          return;
+        }
+
         tbody.innerHTML = logs.map(l => `
           <tr>
             <td><strong style="color: var(--iei-navy-blue);">${App.escapeHtml(l.action)}</strong></td>
@@ -1545,6 +1584,8 @@ const PortalModules = {
         `).join('');
       } catch (err) {
         console.error('Failed to load audit logs:', err);
+        const tbody = document.getElementById('audit-logs-table-body');
+        if (tbody) tbody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-muted">No audit log records recorded yet.</td></tr>`;
       }
     },
 
@@ -1574,6 +1615,8 @@ const PortalModules = {
         `).join('');
       } catch (err) {
         console.error('Failed to load audit observations:', err);
+        const container = document.getElementById('audit-observations-list');
+        if (container) container.innerHTML = `<p class="text-muted" style="padding: 16px;">No audit observations recorded for this cycle.</p>`;
       }
     },
 

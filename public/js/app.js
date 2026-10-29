@@ -64,6 +64,14 @@ const App = {
       this.updateUserUI();
       this.applyRolePermissions(res.user);
       this.navigate(this.activeView || 'dashboard');
+
+      // Pre-warm module records in background for instant view switching
+      if (window.PortalModules) {
+        if (PortalModules.tasks) PortalModules.tasks.loadTasks().catch(() => {});
+        if (PortalModules.weeklyReports) PortalModules.weeklyReports.loadReports().catch(() => {});
+        if (PortalModules.community) PortalModules.community.loadPosts().catch(() => {});
+        if (PortalModules.events) PortalModules.events.loadEvents().catch(() => {});
+      }
     } catch (err) {
       console.warn('Session verification failed:', err.message);
       this.routeToLogin();
@@ -77,11 +85,21 @@ const App = {
     if (screenLogin) screenLogin.style.display = 'flex';
     if (screenPortal) screenPortal.style.display = 'none';
 
+    // Hide fixed header logout button
+    const logoutBtn = document.getElementById('btn-header-logout');
+    if (logoutBtn) logoutBtn.style.display = 'none';
+
     // Reset login form fields
     const emailField = document.getElementById('login-gateway-email');
     const passField = document.getElementById('login-gateway-password');
     if (emailField) emailField.value = '';
     if (passField) passField.value = '';
+
+    // Close any open modals
+    document.querySelectorAll('.modal').forEach(m => {
+      m.style.display = 'none';
+      m.classList.remove('open');
+    });
   },
 
   /**
@@ -127,6 +145,15 @@ const App = {
     const backdrop = document.getElementById('mobile-nav-backdrop');
     if (backdrop) {
       backdrop.onclick = () => this.closeMobileNav();
+    }
+
+    // Fixed Header Logout Button
+    const logoutBtn = document.getElementById('btn-header-logout');
+    if (logoutBtn) {
+      logoutBtn.onclick = (e) => {
+        e.preventDefault();
+        this.handleLogout();
+      };
     }
   },
 
@@ -176,6 +203,14 @@ const App = {
       this.updateUserUI();
       this.applyRolePermissions(res.user);
       this.navigate('dashboard');
+
+      // Pre-warm module records in background for instant view switching
+      if (window.PortalModules) {
+        if (PortalModules.tasks) PortalModules.tasks.loadTasks().catch(() => {});
+        if (PortalModules.weeklyReports) PortalModules.weeklyReports.loadReports().catch(() => {});
+        if (PortalModules.community) PortalModules.community.loadPosts().catch(() => {});
+        if (PortalModules.events) PortalModules.events.loadEvents().catch(() => {});
+      }
     } catch (err) {
       if (errBox) {
         errBox.textContent = err.message || 'Authentication failed. Please check credentials.';
@@ -212,6 +247,14 @@ const App = {
       this.updateUserUI();
       this.applyRolePermissions(res.user);
       this.navigate('dashboard');
+
+      // Pre-warm module records in background for instant view switching
+      if (window.PortalModules) {
+        if (PortalModules.tasks) PortalModules.tasks.loadTasks().catch(() => {});
+        if (PortalModules.weeklyReports) PortalModules.weeklyReports.loadReports().catch(() => {});
+        if (PortalModules.community) PortalModules.community.loadPosts().catch(() => {});
+        if (PortalModules.events) PortalModules.events.loadEvents().catch(() => {});
+      }
     } catch (err) {
       if (errBox) {
         errBox.textContent = err.message || 'Quick access is disabled or unavailable.';
@@ -222,7 +265,12 @@ const App = {
   },
 
   async handleLogout() {
-    await API.logout();
+    try {
+      await API.logout();
+    } catch (err) {
+      console.warn('Logout API notice:', err);
+    }
+    API.clearAuth();
     this.showToast('You have been logged out securely.', 'info');
     this.routeToLogin();
   },
@@ -338,10 +386,12 @@ const App = {
             <span class="user-role-tag">${badgeInfo.label}</span>
           </div>
         </div>
-
-        <button class="btn btn-outline btn-sm" onclick="App.handleLogout()" title="Sign Out">Sign Out</button>
       `;
     }
+
+    // Reveal fixed header logout button
+    const logoutBtn = document.getElementById('btn-header-logout');
+    if (logoutBtn) logoutBtn.style.display = 'inline-flex';
 
     // Greet user in dashboard hero
     const greetingEl = document.getElementById('dash-greeting-name');
