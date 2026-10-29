@@ -250,6 +250,30 @@
       "department": "Computer Science & Engineering",
       "createdAt": "2026-10-29T13:14:59.438Z",
       "isActive": true
+    },
+    {
+      "id": "usr_1793280184274",
+      "credentialId": "MGR.IEI.2026.10",
+      "name": "Priya Sundaram",
+      "email": "priya_1793280184273@mgriei.org",
+      "passwordHash": "$2b$10$wN99AgsRHkFtil4COEW5K.J20ziKwtdreNHDZ.3xr8OaTklMbcLUa",
+      "role": "committee",
+      "designation": "Technical Secretary",
+      "department": "Electrical & Electronics",
+      "createdAt": "2026-10-29T13:23:04.355Z",
+      "isActive": true
+    },
+    {
+      "id": "usr_1793280185692",
+      "credentialId": "MGR.IEI.2026.11",
+      "name": "Student Technical Coordinator",
+      "email": "coordinator_1793280185690@mgriei.org",
+      "passwordHash": "$2b$10$mYMda.shc73JsFrXJuNGveQ7E85rDWLksH/evflE17U0/kjvK0Hzy",
+      "role": "auditor",
+      "designation": "Web & Systems Lead",
+      "department": "Computer Science & Engineering",
+      "createdAt": "2026-10-29T13:23:05.772Z",
+      "isActive": true
     }
   ],
   "chapters": [
@@ -321,6 +345,195 @@
     }
   ],
   "auditLogs": [
+    {
+      "id": "log_1793280185891_hr2mg",
+      "action": "USER_STATUS_TOGGLED",
+      "performedBy": "Chapter Administrator",
+      "role": "admin",
+      "target": "User Administration",
+      "details": "Activated account for Student Technical Coordinator",
+      "timestamp": "2026-10-29T13:23:05.891Z"
+    },
+    {
+      "id": "log_1793280185881_2287c",
+      "action": "USER_STATUS_TOGGLED",
+      "performedBy": "Chapter Administrator",
+      "role": "admin",
+      "target": "User Administration",
+      "details": "Deactivated account for Student Technical Coordinator",
+      "timestamp": "2026-10-29T13:23:05.881Z"
+    },
+    {
+      "id": "log_1793280185872_yup9b",
+      "action": "USER_ROLE_CHANGED",
+      "performedBy": "Chapter Administrator",
+      "role": "admin",
+      "target": "User Administration",
+      "details": "Changed role of Student Technical Coordinator from committee to auditor",
+      "timestamp": "2026-10-29T13:23:05.872Z"
+    },
+    {
+      "id": "log_1793280185868_sr7cx",
+      "action": "LOGIN",
+      "performedBy": "Student Technical Coordinator",
+      "role": "committee",
+      "target": "Portal Auth",
+      "details": "User signed into staff administration portal.",
+      "timestamp": "2026-10-29T13:23:05.868Z"
+    },
+    {
+      "id": "log_1793280185772_9flgx",
+      "action": "USER_ENROLLED",
+      "performedBy": "Chapter Administrator",
+      "role": "admin",
+      "target": "User Administration",
+      "details": "Created new account for Student Technical Coordinator (coordinator_1793280185690@mgriei.org, MGR.IEI.2026.11) with role committee",
+      "timestamp": "2026-10-29T13:23:05.772Z"
+    },
+    {
+      "id": "log_1793280185680_5vbs0",
+      "action": "LOGIN",
+      "performedBy": "Committee Member",
+      "role": "committee",
+      "target": "Portal Auth",
+      "details": "User signed into staff administration portal.",
+      "timestamp": "2026-10-29T13:23:05.680Z"
+    },
+    {
+      "id": "log_1793280185584_rpfnk",
+      "action": "LOGIN",
+      "performedBy": "Chapter Administrator",
+      "role": "admin",
+      "target": "Portal Auth",
+      "details": "User signed into staff administration portal.",
+      "timestamp": "2026-10-29T13:23:05.584Z"
+    },
+    {
+      "id": "log_1793280184371_kk2sh",
+      "action": "AUDIT_OBSERVATION_RECORDED",
+      "performedBy": "Chapter Auditor",
+      "role": "auditor",
+      "target": "Audit Ledger",
+      "details": "Recorded audit observation: ISO 9001:2015 Operational Documentation Audit",
+      "timestamp": "2026-10-29T13:23:04.371Z"
+    },
+    {
+      "id": "log_1793280184364_vstwl",
+      "action": "REPORTING_SETTINGS_UPDATED",
+      "performedBy": "Chapter Administrator",
+      "role": "admin",
+      "target": "Governance Settings",
+      "details": "Updated Reporting Cycle Week 46 configuration",
+      "timestamp": "2026-10-29T13:23:04.364Z"
+    },
+    {
+      "id": "log_1793280184355_y9vho",
+      "action": "USER_ENROLLED",
+      "performedBy": "Chapter Administrator",
+      "role": "admin",
+      "target": "User Administration",
+      "details": "Created new account for Priya Sundaram (priya_1793280184273@mgriei.org, MGR.IEI.2026.10) with role committee",
+      "timestamp": "2026-10-29T13:23:04.355Z"
+    },
+    {
+      "id": "log_1793280184247_yge69",
+      "action": "COMMUNITY_POST_CREATED",
+      "performedBy": "Chapter Chairman",
+      "role": "chairman",
+      "target": "Community",
+      "details": "Published announcement: IEI Council Notice: Technical Paper Competition 2026",
+      "timestamp": "2026-10-29T13:23:04.247Z"
+    },
+    {
+      "id": "log_1793280184240_fc465",
+      "action": "WEEKLY_REPORT_ENDORSED",
+      "performedBy": "Chapter Chairman",
+      "role": "chairman",
+      "target": "Governance",
+      "details": "Endorsed Weekly Report #45",
+      "timestamp": "2026-10-29T13:23:04.240Z"
+    },
+    {
+      "id": "log_1793280184227_686pl",
+      "action": "WEEKLY_REPORT_SUBMITTED",
+      "performedBy": "Committee Member",
+      "role": "committee",
+      "target": "Weekly Reporting",
+      "details": "Submitted Activity Report for Week 45 (UNDER_REVIEW)",
+      "timestamp": "2026-10-29T13:23:04.227Z"
+    },
+    {
+      "id": "log_1793280184218_rrtm4",
+      "action": "TASK_UPDATED",
+      "performedBy": "Chapter Chairman",
+      "role": "chairman",
+      "target": "Task Management",
+      "details": "Updated task: Automated Test: Prepare National Science Day Technical Workshop -> APPROVED",
+      "timestamp": "2026-10-29T13:23:04.218Z"
+    },
+    {
+      "id": "log_1793280184197_if0c2",
+      "action": "TASK_UPDATED",
+      "performedBy": "Committee Member",
+      "role": "committee",
+      "target": "Task Management",
+      "details": "Updated task: Automated Test: Prepare National Science Day Technical Workshop -> SUBMITTED_FOR_REVIEW",
+      "timestamp": "2026-10-29T13:23:04.197Z"
+    },
+    {
+      "id": "log_1793280184183_2a2gy",
+      "action": "TASK_UPDATED",
+      "performedBy": "Committee Member",
+      "role": "committee",
+      "target": "Task Management",
+      "details": "Updated task: Automated Test: Prepare National Science Day Technical Workshop -> IN_PROGRESS",
+      "timestamp": "2026-10-29T13:23:04.183Z"
+    },
+    {
+      "id": "log_1793280184175_7xjoh",
+      "action": "TASK_CREATED",
+      "performedBy": "Chapter Administrator",
+      "role": "admin",
+      "target": "Task Management",
+      "details": "Created task: Automated Test: Prepare National Science Day Technical Workshop",
+      "timestamp": "2026-10-29T13:23:04.175Z"
+    },
+    {
+      "id": "log_1793280184073_f6quf",
+      "action": "LOGIN",
+      "performedBy": "Chapter Auditor",
+      "role": "auditor",
+      "target": "Portal Auth",
+      "details": "User signed into staff administration portal.",
+      "timestamp": "2026-10-29T13:23:04.073Z"
+    },
+    {
+      "id": "log_1793280183985_s6ln8",
+      "action": "LOGIN",
+      "performedBy": "Committee Member",
+      "role": "committee",
+      "target": "Portal Auth",
+      "details": "User signed into staff administration portal.",
+      "timestamp": "2026-10-29T13:23:03.985Z"
+    },
+    {
+      "id": "log_1793280183889_l9fqv",
+      "action": "LOGIN",
+      "performedBy": "Chapter Chairman",
+      "role": "chairman",
+      "target": "Portal Auth",
+      "details": "User signed into staff administration portal.",
+      "timestamp": "2026-10-29T13:23:03.889Z"
+    },
+    {
+      "id": "log_1793280183792_jy1vm",
+      "action": "LOGIN",
+      "performedBy": "Chapter Administrator",
+      "role": "admin",
+      "target": "Portal Auth",
+      "details": "User signed into staff administration portal.",
+      "timestamp": "2026-10-29T13:23:03.792Z"
+    },
     {
       "id": "log_1793279699559_efvo8",
       "action": "USER_STATUS_TOGGLED",
@@ -2650,9 +2863,65 @@
       ],
       "updatedAt": "2026-10-29T13:14:58.030Z",
       "reviewComments": "Executive verification completed. Excellent preparation."
+    },
+    {
+      "id": "tsk_1793280184170_unmy",
+      "title": "Automated Test: Prepare National Science Day Technical Workshop",
+      "description": "Coordinate laboratory venue, student registration desk, and certificates.",
+      "assignedTo": "usr_comm_01",
+      "assignedToName": "Chapter Administrator",
+      "status": "APPROVED",
+      "priority": "high",
+      "dueDate": "2026-11-20",
+      "department": "Technical",
+      "chapterId": "ch_mgr_04",
+      "progress": 100,
+      "createdAt": "2026-10-29T13:23:04.170Z",
+      "history": [
+        {
+          "timestamp": "2026-10-29T13:23:04.178Z",
+          "action": "IN_PROGRESS",
+          "actor": "Committee Member",
+          "note": "Laboratory hall reserved and equipment checklist finalized."
+        },
+        {
+          "timestamp": "2026-10-29T13:23:04.186Z",
+          "action": "SUBMITTED_FOR_REVIEW",
+          "actor": "Committee Member",
+          "note": "All deliverables prepared. Ready for executive review."
+        },
+        {
+          "timestamp": "2026-10-29T13:23:04.208Z",
+          "action": "APPROVED",
+          "actor": "Chapter Chairman",
+          "note": "Executive verification completed. Excellent preparation."
+        }
+      ],
+      "updatedAt": "2026-10-29T13:23:04.208Z",
+      "reviewComments": "Executive verification completed. Excellent preparation."
     }
   ],
   "weeklyReports": [
+    {
+      "id": "rep_wk_1793280184221",
+      "weekNumber": 45,
+      "period": "03 Nov 2026 - 09 Nov 2026",
+      "chapterId": "ch_mgr_04",
+      "department": "Technical",
+      "totalEvents": 2,
+      "studentHours": 28,
+      "attendeesCount": 165,
+      "summary": "Conducted hands-on robotics workshop and IoT sensor calibration lab.",
+      "highlights": "",
+      "status": "APPROVED",
+      "submittedBy": "Committee Member",
+      "submittedByRole": "committee",
+      "endorsedBy": "Chapter Chairman",
+      "submittedAt": "2026-10-29T13:23:04.221Z",
+      "endorsedAt": "2026-10-29T13:23:04.235Z",
+      "reviewComments": "Approved by Chapter Leadership.",
+      "updatedAt": "2026-10-29T13:23:04.235Z"
+    },
     {
       "id": "rep_wk_1793279698035",
       "weekNumber": 45,
@@ -2929,6 +3198,28 @@
     }
   ],
   "communityPosts": [
+    {
+      "id": "post_1793280184241",
+      "title": "IEI Council Notice: Technical Paper Competition 2026",
+      "category": "Official Announcements",
+      "author": "Chapter Chairman",
+      "role": "chairman",
+      "timestamp": "2026-10-29T13:23:04.241Z",
+      "isPinned": true,
+      "likes": 0,
+      "commentsCount": 1,
+      "content": "All student committee members are invited to submit abstracts by next Friday.",
+      "tags": [],
+      "replies": [
+        {
+          "id": "rep_1793280184250",
+          "author": "Committee Member",
+          "role": "committee",
+          "timestamp": "2026-10-29T13:23:04.250Z",
+          "content": "Understood. CSE student team will coordinate submissions for Track 1."
+        }
+      ]
+    },
     {
       "id": "post_1793279698048",
       "title": "IEI Council Notice: Technical Paper Competition 2026",
@@ -3531,6 +3822,26 @@
       "content": "Budget has been approved by the Chapter Secretariat. Proceed with procurement.",
       "timestamp": "2026-10-29T13:14:58.065Z",
       "read": false
+    },
+    {
+      "id": "msg_1793280184260",
+      "senderId": "usr_comm_01",
+      "senderName": "Committee Member",
+      "senderRole": "committee",
+      "recipientId": "usr_admin_01",
+      "content": "Confidential request: Verification of lab consumable budget for next week.",
+      "timestamp": "2026-10-29T13:23:04.260Z",
+      "read": false
+    },
+    {
+      "id": "msg_1793280184267",
+      "senderId": "usr_admin_01",
+      "senderName": "Chapter Administrator",
+      "senderRole": "admin",
+      "recipientId": "usr_comm_01",
+      "content": "Budget has been approved by the Chapter Secretariat. Proceed with procurement.",
+      "timestamp": "2026-10-29T13:23:04.267Z",
+      "read": false
     }
   ],
   "notifications": [
@@ -3571,9 +3882,18 @@
     "allowLateSubmissionsWithApproval": true,
     "autoLockPastReports": true,
     "lastUpdatedBy": "Chapter Administrator",
-    "lastUpdatedAt": "2026-10-29T13:14:58.155Z"
+    "lastUpdatedAt": "2026-10-29T13:23:04.364Z"
   },
   "auditObservations": [
+    {
+      "id": "obs_1793280184371",
+      "title": "ISO 9001:2015 Operational Documentation Audit",
+      "observation": "Verified weekly report records for Cycles 44-45 against attendee registers. Full compliance observed.",
+      "complianceStatus": "COMPLIANT",
+      "auditorName": "Chapter Auditor",
+      "authorRole": "auditor",
+      "timestamp": "2026-10-29T13:23:04.371Z"
+    },
     {
       "id": "obs_1793279698160",
       "title": "ISO 9001:2015 Operational Documentation Audit",
@@ -3674,7 +3994,7 @@
   ],
   "meta": {
     "initializedAt": "2026-10-28T18:35:13.222Z",
-    "lastModifiedAt": "2026-10-29T13:14:59.650Z",
+    "lastModifiedAt": "2026-10-29T13:23:05.983Z",
     "version": "3.0.0-mgr-iei"
   }
 }

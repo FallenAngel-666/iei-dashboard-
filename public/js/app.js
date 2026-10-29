@@ -104,12 +104,50 @@ const App = {
 
   /**
    * Role-based UI filtering
-   * Admin section only visible to Admin/Editor
+   * Customizes menus, toolbars, and permitted action buttons for the 4 roles:
+   * 1. Admin/Editor  ('admin')
+   * 2. Chairman      ('chairman')
+   * 3. Committee Member ('committee')
+   * 4. Auditor       ('auditor')
    */
   applyRolePermissions(user) {
+    if (!user || !user.role) return;
+
     const adminNavSection = document.getElementById('nav-section-admin');
-    if (adminNavSection) {
-      adminNavSection.style.display = (user.role === 'admin') ? 'block' : 'none';
+    const navUsers = document.querySelector('.sidebar-nav .nav-item[data-view="users"]');
+    const navEvents = document.querySelector('.sidebar-nav .nav-item[data-view="events"]');
+    const navSettings = document.querySelector('.sidebar-nav .nav-item[data-view="reporting-settings"]');
+    const navAudit = document.querySelector('.sidebar-nav .nav-item[data-view="audit-logs"]');
+
+    if (user.role === 'admin') {
+      if (adminNavSection) adminNavSection.style.display = 'block';
+      if (navUsers) navUsers.style.display = 'flex';
+      if (navEvents) navEvents.style.display = 'flex';
+      if (navSettings) navSettings.style.display = 'flex';
+      if (navAudit) navAudit.style.display = 'flex';
+    } else if (user.role === 'auditor') {
+      // Auditor has access to Audit Logs & Security
+      if (adminNavSection) adminNavSection.style.display = 'block';
+      if (navUsers) navUsers.style.display = 'none';
+      if (navEvents) navEvents.style.display = 'none';
+      if (navSettings) navSettings.style.display = 'none';
+      if (navAudit) navAudit.style.display = 'flex';
+    } else {
+      // Chairman & Committee Member do not see Administration group
+      if (adminNavSection) adminNavSection.style.display = 'none';
+    }
+
+    // Role-specific action controls:
+    // Create Task (+ Create New Task) only for Admin and Chairman
+    const btnCreateTask = document.getElementById('btn-open-create-task');
+    if (btnCreateTask) {
+      btnCreateTask.style.display = (user.role === 'admin' || user.role === 'chairman') ? 'inline-flex' : 'none';
+    }
+
+    // Submit Weekly Report (+ Submit Weekly Report) hidden for Auditor (read-only)
+    const btnSubmitReport = document.getElementById('btn-open-submit-report');
+    if (btnSubmitReport) {
+      btnSubmitReport.style.display = (user.role !== 'auditor') ? 'inline-flex' : 'none';
     }
   },
 
